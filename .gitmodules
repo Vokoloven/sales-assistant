@@ -1,0 +1,4 @@
+[submodule "src/submodules"]
+	path = src/submodules
+	url = https://gitlab.com/public-stud-prog/public-common.git
+	ignore = dirty
