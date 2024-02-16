@@ -1,27 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Navigate} from 'react-router-dom';
+import { Suspense} from 'react';
+import {AuthRoutes} from 'submodules/enums/routes/auth-routes.enum';
 import './design/settings/reset.scss';
 
+
+// const Login = lazy(() => import('pages/Login/Login'));
+
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return   <>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Navigate
+        replace={true}
+        to={AuthRoutes.Login}
+      />
+      <Routes>
+        {/* <Route
+          path={AuthRoutes.Login}
+          element={<Login />}
+        ></Route> */}
+      </Routes>
+    </Suspense>
+  </>;
 }
 
 export default App;
