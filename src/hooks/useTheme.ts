@@ -11,7 +11,13 @@ type ThemeMode = {
 }[keyof typeof ThemeConfig];
 
 const {Dark, Light, Name} = ThemeConfig;
-const html = document.querySelector('html');
+
+const html = document.querySelector('html')!;
+
+export const getTheme = () => {
+  const theme = html.dataset[Name] as ThemeMode;
+  return theme;
+};
 
 export const useTheme = () => {
   const storageTheme = useRef<ThemeMode | null>(localStorage.getItem(Name) as ThemeMode);
@@ -23,7 +29,7 @@ export const useTheme = () => {
     }
   });
 
-  const themeHandle = () => {
+  const themeSwitcher = () => {
     if (theme === Light) {
       setTheme(Dark);
     } else {
@@ -32,7 +38,7 @@ export const useTheme = () => {
   };
 
   useEffect(() => {
-    html!.dataset[Name] = theme;
+    html.dataset[Name] = theme;
 
     if (storageTheme.current === theme) {
       return;
@@ -41,5 +47,5 @@ export const useTheme = () => {
     localStorage.setItem(Name, JSON.stringify(theme) as ThemeMode);
   }, [theme]);
 
-  return {themeHandle};
+  return {themeSwitcher};
 };

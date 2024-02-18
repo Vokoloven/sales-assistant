@@ -7,6 +7,7 @@ import {useTheme} from './hooks/useTheme';
 
 const Login = lazy(() => import('@/pages/Login/Login'));
 const Feed = lazy(() => import('@/pages/Feed/Feed'));
+const NotFound = lazy(() => import('@/components/NotFound/NotFound'));
 
 function App() {
   useTheme();
@@ -29,7 +30,7 @@ function App() {
           />
           <Route
             path={AuthRoutes.NotFound}
-            element={<Feed />}
+            element={<NotFound />}
           />
         </Routes>
       </Suspense>
