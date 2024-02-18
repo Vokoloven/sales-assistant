@@ -1,0 +1,63 @@
+@import '@/design/index.scss';
+
+.section {
+  display: flex;
+
+  height: 100vh;
+}
+
+.heading {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 38.4px;
+  margin-bottom: 50px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aside {
+  @include box(320px, 440px);
+  width: 440px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 0 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.background {
+  flex: 1;
+  position: relative;
+}
+
+.background::after {
+  content: '';
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-image: url('../../design/images/login-background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.logo {
+  width: 200px;
+  aspect-ratio: 4/1;
+  margin-bottom: 50px;
+
+  background-image: url('../../design/images/abcloudz-logo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}

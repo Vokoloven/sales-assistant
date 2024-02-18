@@ -1,23 +1,32 @@
 @font-face {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   src: url(../fonts/poppins-regular.eot);
-  src: url(../fonts/poppins-regular.eot) format("embedded-opentype"), url(../fonts/poppins-regular.otf) format("otf"),
-    url(../fonts/poppins-regular.svg) format("svg"), url(../fonts/poppins-regular.woff) format("woff"),
-    url(../fonts/poppins-regular.woff2) format("woff2");
+  src:
+    url(../fonts/poppins-regular.eot) format('embedded-opentype'),
+    url(../fonts/poppins-regular.otf) format('otf'),
+    url(../fonts/poppins-regular.svg) format('svg'),
+    url(../fonts/poppins-regular.woff) format('woff'),
+    url(../fonts/poppins-regular.woff2) format('woff2');
 }
 
 @font-face {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   src: url(../fonts/poppins-bold.eot);
-  src: url(../fonts/poppins-bold.eot) format("embedded-opentype"), url(../fonts/poppins-bold.otf) format("otf"),
-    url(../fonts/poppins-bold.svg) format("svg"), url(../fonts/poppins-bold.woff) format("woff"),
-    url(../fonts/poppins-bold.woff2) format("woff2");
+  src:
+    url(../fonts/poppins-bold.eot) format('embedded-opentype'),
+    url(../fonts/poppins-bold.otf) format('otf'),
+    url(../fonts/poppins-bold.svg) format('svg'),
+    url(../fonts/poppins-bold.woff) format('woff'),
+    url(../fonts/poppins-bold.woff2) format('woff2');
 }
 
 @font-face {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   src: url(../fonts/poppins-medium.eot);
-  src: url(../fonts/poppins-medium.eot) format("embedded-opentype"), url(../fonts/poppins-medium.otf) format("otf"),
-    url(../fonts/poppins-medium.svg) format("svg"), url(../fonts/poppins-medium.woff) format("woff"),
-    url(../fonts/poppins-medium.woff2) format("woff2");
+  src:
+    url(../fonts/poppins-medium.eot) format('embedded-opentype'),
+    url(../fonts/poppins-medium.otf) format('otf'),
+    url(../fonts/poppins-medium.svg) format('svg'),
+    url(../fonts/poppins-medium.woff) format('woff'),
+    url(../fonts/poppins-medium.woff2) format('woff2');
 }
