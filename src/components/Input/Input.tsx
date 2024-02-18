@@ -1,11 +1,10 @@
 import type { UseFormRegister, FieldValues, Path } from 'react-hook-form';
 
-import { TCombineGeneralValidatorResult } from '@/utils/validators/types/composeValidators';
+import type { TCombineGeneralValidatorResult } from '@/utils/validators/types/composeValidators';
+import type { TValidatorReturn } from '@/utils/validators/types/validator';
 
 import { InputType } from './constants';
 import styles from './Input.module.scss';
-
-const { input } = styles;
 
 interface IProps<T extends FieldValues> {
   placeholder?: string;
@@ -17,7 +16,7 @@ interface IProps<T extends FieldValues> {
   type: (typeof InputType)[keyof typeof InputType];
   register: UseFormRegister<T>;
   errorMessage: string | undefined;
-  validate: () => TCombineGeneralValidatorResult;
+  validate: TValidatorReturn<TCombineGeneralValidatorResult>;
 }
 
 const Input = <T extends FieldValues>({
@@ -32,17 +31,24 @@ const Input = <T extends FieldValues>({
   validate,
 }: IProps<T>) => {
   return (
-    <div>
-      {label && <label htmlFor={id}>{label}</label>}
+    <div className={styles.inputWrapper}>
+      {label && (
+        <label className={styles.inputLabel} htmlFor={id}>
+          {label}
+        </label>
+      )}
       <input
-        className={input}
+        className={styles.input}
         id={id}
         type={type}
         {...register(name, validate())}
         disabled={isDisabled}
         autoFocus={hasAutoFocus}
+        autoComplete="off"
       />
-      {errorMessage && <span>{errorMessage}</span>}
+      {errorMessage && (
+        <span className={styles.inputTextError}>{errorMessage}</span>
+      )}
     </div>
   );
 };

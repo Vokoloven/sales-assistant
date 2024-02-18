@@ -1,8 +1,8 @@
 export const StringLength = {
   EmailMinLength: 8,
-  EmailMaxLength: 20,
+  EmailMaxLength: 50,
   PasswordMinLength: 8,
-  PasswordMaxLength: 30,
+  PasswordMaxLength: 50,
 } as const;
 
 export const EmailRegex =

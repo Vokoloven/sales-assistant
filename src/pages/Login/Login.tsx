@@ -1,33 +1,16 @@
-import { useForm } from 'react-hook-form';
-import type { SubmitHandler } from 'react-hook-form';
-
 import Input from '@/components/Input/Input';
+import { useLoginForm } from '@/hooks/useLoginForm';
+import type { ILoginForm } from '@/hooks/useLoginForm';
 import { validator } from '@/utils/validators/validator';
 
 import styles from './Login.module.scss';
-
-export interface IForm {
-  email: string;
-  password: string;
-}
 
 const { section, aside, form, background, logo, heading } = styles;
 
 const { email, password } = validator();
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IForm>({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
-
-  const onSubmit: SubmitHandler<IForm> = (data) => console.log(data);
+  const { errors, handleSubmit, onSubmit, register } = useLoginForm();
 
   return (
     <section className={section}>
@@ -35,17 +18,17 @@ const Login = () => {
         <div className={logo}></div>
         <h1 className={heading}>Log in</h1>
         <form className={form} onSubmit={handleSubmit(onSubmit)}>
-          <Input<IForm>
+          <Input<ILoginForm>
             id="email"
             name="email"
             type="email"
             register={register}
-            label="Email"
+            label="Login"
             hasAutoFocus
             errorMessage={errors.email?.message}
             validate={email}
           />
-          <Input<IForm>
+          <Input<ILoginForm>
             id="password"
             name="password"
             type="password"
