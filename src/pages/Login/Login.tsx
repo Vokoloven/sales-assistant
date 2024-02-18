@@ -1,8 +1,10 @@
 import Button from '@/components/Button/Button';
 import {ButtonType} from '@/components/Button/constants';
+import {InputType} from '@/components/Input/constants';
 import Input from '@/components/Input/Input';
 import {useLoginForm} from '@/hooks/useLoginForm';
 import type {ILoginForm} from '@/hooks/useLoginForm';
+import {useTheme} from '@/hooks/useTheme';
 import {validator} from '@/utils/validators/validator';
 
 import styles from './Login.module.scss';
@@ -10,7 +12,8 @@ import styles from './Login.module.scss';
 const {email, password} = validator();
 
 const Login = () => {
-  const {errors, handleSubmit, onSubmit, register, isValid} = useLoginForm();
+  useTheme();
+  const {errors, handleSubmit, onSubmit, register, isValid, isDirtyPassword, togglePasswordVisibility} = useLoginForm();
 
   return (
     <section className={styles.section}>
@@ -24,21 +27,21 @@ const Login = () => {
           <Input<ILoginForm>
             id="email"
             name="email"
-            type="text"
+            type={InputType.Email}
             register={register}
             label="Login"
-            hasAutoFocus
             errorMessage={errors.email?.message}
             validate={email}
           />
           <Input<ILoginForm>
             id="password"
             name="password"
-            type="password"
+            type={InputType.Password}
             register={register}
             label="Password"
             errorMessage={errors.password?.message}
             validate={password}
+            passwordVisibility={{isDirty: isDirtyPassword, toggler: togglePasswordVisibility}}
           />
           <Button
             text="Sign in"

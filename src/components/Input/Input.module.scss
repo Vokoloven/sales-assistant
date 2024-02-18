@@ -12,7 +12,9 @@
   }
 
   &Wrapper {
-    margin-bottom: 16px;
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
   }
 
   &Label {
@@ -26,5 +28,27 @@
 
     @include font(14px, $fontColor: $Error600);
     @include ellipsis;
+  }
+
+  &Box {
+    position: relative;
+  }
+
+  &PasswordToggler {
+    position: absolute;
+    display: block;
+
+    width: 100%;
+    max-width: 24px;
+    aspect-ratio: 1;
+
+    top: 50%;
+    right: 0;
+
+    transform: translate(-50%, -50%);
+
+    background-image: url("../../design/images/icons/eye.svg");
+
+    cursor: pointer;
   }
 }
