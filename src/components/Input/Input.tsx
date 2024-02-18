@@ -1,9 +1,9 @@
-import type { UseFormRegister, FieldValues, Path } from 'react-hook-form';
+import type {UseFormRegister, FieldValues, Path} from 'react-hook-form';
 
-import type { TCombineGeneralValidatorResult } from '@/utils/validators/types/composeValidators';
-import type { TValidatorReturn } from '@/utils/validators/types/validator';
+import type {TCombineGeneralValidatorResult} from '@/utils/validators/types/composeValidators';
+import type {TValidatorReturn} from '@/utils/validators/types/validator';
 
-import { InputType } from './constants';
+import {InputType} from './constants';
 import styles from './Input.module.scss';
 
 interface IProps<T extends FieldValues> {
@@ -33,7 +33,10 @@ const Input = <T extends FieldValues>({
   return (
     <div className={styles.inputWrapper}>
       {label && (
-        <label className={styles.inputLabel} htmlFor={id}>
+        <label
+          className={styles.inputLabel}
+          htmlFor={id}
+        >
           {label}
         </label>
       )}
@@ -46,9 +49,7 @@ const Input = <T extends FieldValues>({
         autoFocus={hasAutoFocus}
         autoComplete="off"
       />
-      {errorMessage && (
-        <span className={styles.inputTextError}>{errorMessage}</span>
-      )}
+      {errorMessage && <span className={styles.inputTextError}>{errorMessage}</span>}
     </div>
   );
 };

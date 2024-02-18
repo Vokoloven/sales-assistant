@@ -1,12 +1,11 @@
-import { composeValidators } from './composeValidators';
-import { StringLength } from './constants';
-import { EmailRegex } from './constants';
-import { required, minLength, maxLength, pattern } from './generalValidators';
-import type { TCombineGeneralValidatorResult } from './types/composeValidators';
-import type { TValidatorReturn } from './types/validator';
+import {composeValidators} from './composeValidators';
+import {StringLength} from './constants';
+import {EmailRegex} from './constants';
+import {required, minLength, maxLength, pattern} from './generalValidators';
+import type {TCombineGeneralValidatorResult} from './types/composeValidators';
+import type {TValidatorReturn} from './types/validator';
 
-const { EmailMaxLength, EmailMinLength, PasswordMaxLength, PasswordMinLength } =
-  StringLength;
+const {EmailMaxLength, EmailMinLength, PasswordMaxLength, PasswordMinLength} = StringLength;
 
 type TValidator = () => {
   email: TValidatorReturn<TCombineGeneralValidatorResult>;
@@ -16,7 +15,7 @@ type TValidator = () => {
 export const validator: TValidator = () => {
   const email: TValidatorReturn<TCombineGeneralValidatorResult> = () =>
     composeValidators(
-      required({ value: true, message: 'This field is required' }),
+      required({value: true, message: 'This field is required'}),
       minLength({
         value: EmailMinLength,
         message: `This input must be at least ${EmailMinLength} characters long`,
@@ -33,7 +32,7 @@ export const validator: TValidator = () => {
 
   const password: TValidatorReturn<TCombineGeneralValidatorResult> = () =>
     composeValidators(
-      required({ value: true, message: 'This field is required' }),
+      required({value: true, message: 'This field is required'}),
       minLength({
         value: PasswordMinLength,
         message: `This input must be at least ${PasswordMinLength} characters long`,
@@ -44,5 +43,5 @@ export const validator: TValidator = () => {
       }),
     );
 
-  return { email, password };
+  return {email, password};
 };

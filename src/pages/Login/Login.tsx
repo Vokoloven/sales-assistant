@@ -1,21 +1,24 @@
 import Input from '@/components/Input/Input';
-import { useLoginForm } from '@/hooks/useLoginForm';
-import type { ILoginForm } from '@/hooks/useLoginForm';
-import { validator } from '@/utils/validators/validator';
+import {useLoginForm} from '@/hooks/useLoginForm';
+import type {ILoginForm} from '@/hooks/useLoginForm';
+import {validator} from '@/utils/validators/validator';
 
 import styles from './Login.module.scss';
 
-const { email, password } = validator();
+const {email, password} = validator();
 
 const Login = () => {
-  const { errors, handleSubmit, onSubmit, register } = useLoginForm();
+  const {errors, handleSubmit, onSubmit, register} = useLoginForm();
 
   return (
     <section className={styles.section}>
       <div className={styles.sectionAside}>
         <div className={styles.sectionLogo}></div>
         <h1 className={styles.sectioHeading}>Log in</h1>
-        <form className={styles.sectionForm} onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className={styles.sectionForm}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <Input<ILoginForm>
             id="email"
             name="email"

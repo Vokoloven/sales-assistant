@@ -1,5 +1,5 @@
-import { useForm } from 'react-hook-form';
-import type { SubmitHandler } from 'react-hook-form';
+import {useForm} from 'react-hook-form';
+import type {SubmitHandler} from 'react-hook-form';
 
 export interface ILoginForm {
   email: string;
@@ -10,7 +10,7 @@ export const useLoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
   } = useForm<ILoginForm>({
     defaultValues: {
       email: '',
@@ -20,5 +20,5 @@ export const useLoginForm = () => {
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => console.log(data);
 
-  return { onSubmit, register, handleSubmit, errors };
+  return {onSubmit, register, handleSubmit, errors};
 };

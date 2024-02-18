@@ -1,7 +1,17 @@
 {
-  "printWidth": 80,
-  "tabWidth": 2,
   "singleQuote": true,
-  "semi": true,
-  "trailingComma": "all"
+  "bracketSpacing": false,
+  "arrowParens": "always",
+  "printWidth": 120,
+  "jsxBracketSameLine": false,
+  "singleAttributePerLine": true,
+  "overrides": [
+    {
+      "files": "*.scss",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ],
+  "quoteProps": "preserve"
 }

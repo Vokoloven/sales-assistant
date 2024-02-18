@@ -1,4 +1,4 @@
-@import '@/design/index.scss';
+@import "@/design/index.scss";
 
 .section {
   display: flex;
@@ -34,7 +34,7 @@
     position: relative;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
 
       top: 0;
@@ -42,7 +42,7 @@
       right: 0;
       bottom: 0;
 
-      background-image: url('../../design/images/login-background.png');
+      background-image: url("../../design/images/login-background.png");
       background-repeat: no-repeat;
       background-size: cover;
     }
@@ -53,7 +53,7 @@
     aspect-ratio: 4/1;
     margin-bottom: 50px;
 
-    background-image: url('../../design/images/abcloudz-logo.png');
+    background-image: url("../../design/images/abcloudz-logo.png");
     background-repeat: no-repeat;
     background-size: contain;
   }

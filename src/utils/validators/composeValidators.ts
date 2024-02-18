@@ -1,11 +1,6 @@
-import type {
-  TCombineGeneralValidator,
-  TCombineGeneralValidatorResult,
-} from './types/composeValidators';
+import type {TCombineGeneralValidator, TCombineGeneralValidatorResult} from './types/composeValidators';
 
-type TComposeValidator = (
-  ...validators: Array<TCombineGeneralValidator>
-) => TCombineGeneralValidatorResult;
+type TComposeValidator = (...validators: Array<TCombineGeneralValidator>) => TCombineGeneralValidatorResult;
 
 export const composeValidators: TComposeValidator = (...validators) =>
-  validators.reduce((result, validator) => ({ ...result, ...validator }), {});
+  validators.reduce((result, validator) => ({...result, ...validator}), {});
