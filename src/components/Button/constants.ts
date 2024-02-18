@@ -4,6 +4,10 @@ export const ButtonType = {
   Button: 'button',
 } as const;
 
-export const Color = {
+export const ButtonColor = {
   Primary: 'primary',
-};
+} as const;
+
+export const ButtonSize = {
+  FillWidth: 'fullWidth',
+} as const;

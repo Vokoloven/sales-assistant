@@ -1,5 +1,6 @@
 import type {UseFormRegister, FieldValues, Path} from 'react-hook-form';
 
+import {KeyExtractor} from '@/utils/types/keyExtractor';
 import type {TCombineGeneralValidatorResult} from '@/utils/validators/types/composeValidators';
 import type {TValidatorReturn} from '@/utils/validators/types/validator';
 
@@ -13,10 +14,14 @@ interface IProps<T extends FieldValues> {
   id: string;
   name: Path<T>;
   label: string;
-  type: (typeof InputType)[keyof typeof InputType];
+  type: KeyExtractor<typeof InputType>;
   register: UseFormRegister<T>;
   errorMessage: string | undefined;
   validate: TValidatorReturn<TCombineGeneralValidatorResult>;
+  passwordVisibility?: {
+    isDirty: boolean | undefined;
+    toggler: (id: string) => void;
+  };
 }
 
 const Input = <T extends FieldValues>({
@@ -29,6 +34,7 @@ const Input = <T extends FieldValues>({
   isDisabled = false,
   errorMessage,
   validate,
+  passwordVisibility,
 }: IProps<T>) => {
   return (
     <div className={styles.inputWrapper}>
@@ -40,15 +46,23 @@ const Input = <T extends FieldValues>({
           {label}
         </label>
       )}
-      <input
-        className={styles.input}
-        id={id}
-        type={type}
-        {...register(name, validate())}
-        disabled={isDisabled}
-        autoFocus={hasAutoFocus}
-        autoComplete="off"
-      />
+      <div className={styles.inputBox}>
+        <input
+          className={styles.input}
+          id={id}
+          type={type}
+          {...register(name, validate())}
+          disabled={isDisabled}
+          autoFocus={hasAutoFocus}
+          autoComplete="off"
+        />
+        {passwordVisibility?.isDirty && (
+          <span
+            onClick={() => passwordVisibility.toggler(id)}
+            className={styles.inputPasswordToggler}
+          ></span>
+        )}
+      </div>
       {errorMessage && <span className={styles.inputTextError}>{errorMessage}</span>}
     </div>
   );

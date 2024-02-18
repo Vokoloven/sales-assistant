@@ -1,12 +1,40 @@
-import {ButtonType} from './constants';
+import classnames from 'classnames';
 
-type KeyExtractor<T> = T[keyof T];
+import type {KeyExtractor} from '@/utils/types/keyExtractor';
+
+import styles from './Button.module.scss';
+import {ButtonType, ButtonColor, ButtonSize} from './constants';
 
 interface Button {
-  type: KeyExtractor<typeof ButtonType>;
-  children: React.ReactNode;
+  text: string;
+  onClick?: () => void;
+  isDisabled?: boolean;
+  type?: KeyExtractor<typeof ButtonType>;
+  color?: KeyExtractor<typeof ButtonColor>;
+  size?: KeyExtractor<typeof ButtonSize>;
 }
 
-export const Button = ({type = ButtonType.Button, children}: Button) => {
-  return <button type={type}>{children}</button>;
+const Button = ({
+  text,
+  onClick,
+  isDisabled = false,
+  color = ButtonColor.Primary,
+  type = ButtonType.Button,
+  size = ButtonSize.FillWidth,
+}: Button) => {
+  const buttonClasses = classnames(styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`]);
+
+  return (
+    <button
+      onClick={onClick}
+      className={buttonClasses}
+      type={type}
+      disabled={isDisabled}
+      aria-label={text}
+    >
+      {<span className={styles.buttonErrorMessage}>{text}</span>}
+    </button>
+  );
 };
+
+export default Button;
