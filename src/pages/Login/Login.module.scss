@@ -4,57 +4,57 @@
   display: flex;
 
   height: 100vh;
-}
 
-.heading {
-  @include font(32px, 500, 38.4px);
+  &Heading {
+    @include font(32px, 500, 38.4px);
 
-  margin-bottom: 50px;
+    margin-bottom: 50px;
 
-  @include ellipsis;
-}
+    @include ellipsis;
+  }
 
-.aside {
-  @include box(320px, 440px);
-  width: 440px;
+  &Aside {
+    @include box(320px, 440px);
+    width: 440px;
 
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
-  padding: 0 20px;
-}
+    padding: 0 20px;
+  }
 
-.form {
-  display: flex;
-  flex-direction: column;
-}
+  &Form {
+    display: flex;
+    flex-direction: column;
+  }
 
-.background {
-  flex: 1;
-  position: relative;
-}
+  &Background {
+    flex: 1;
+    position: relative;
 
-.background::after {
-  content: '';
-  position: absolute;
+    &::after {
+      content: '';
+      position: absolute;
 
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
 
-  background-image: url('../../design/images/login-background.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+      background-image: url('../../design/images/login-background.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
 
-.logo {
-  max-width: 300px;
-  aspect-ratio: 4/1;
-  margin-bottom: 50px;
+  &Logo {
+    max-width: 300px;
+    aspect-ratio: 4/1;
+    margin-bottom: 50px;
 
-  background-image: url('../../design/images/abcloudz-logo.png');
-  background-repeat: no-repeat;
-  background-size: contain;
+    background-image: url('../../design/images/abcloudz-logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
 }

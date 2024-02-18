@@ -5,19 +5,17 @@ import { validator } from '@/utils/validators/validator';
 
 import styles from './Login.module.scss';
 
-const { section, aside, form, background, logo, heading } = styles;
-
 const { email, password } = validator();
 
 const Login = () => {
   const { errors, handleSubmit, onSubmit, register } = useLoginForm();
 
   return (
-    <section className={section}>
-      <div className={aside}>
-        <div className={logo}></div>
-        <h1 className={heading}>Log in</h1>
-        <form className={form} onSubmit={handleSubmit(onSubmit)}>
+    <section className={styles.section}>
+      <div className={styles.sectionAside}>
+        <div className={styles.sectionLogo}></div>
+        <h1 className={styles.sectioHeading}>Log in</h1>
+        <form className={styles.sectionForm} onSubmit={handleSubmit(onSubmit)}>
           <Input<ILoginForm>
             id="email"
             name="email"
@@ -40,7 +38,7 @@ const Login = () => {
           <button type="submit">Sign in</button>
         </form>
       </div>
-      <div className={background}></div>
+      <div className={styles.sectionBackground}></div>
     </section>
   );
 };
