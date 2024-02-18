@@ -1,3 +1,5 @@
+import Button from '@/components/Button/Button';
+import {ButtonType} from '@/components/Button/constants';
 import Input from '@/components/Input/Input';
 import {useLoginForm} from '@/hooks/useLoginForm';
 import type {ILoginForm} from '@/hooks/useLoginForm';
@@ -8,7 +10,7 @@ import styles from './Login.module.scss';
 const {email, password} = validator();
 
 const Login = () => {
-  const {errors, handleSubmit, onSubmit, register} = useLoginForm();
+  const {errors, handleSubmit, onSubmit, register, isValid} = useLoginForm();
 
   return (
     <section className={styles.section}>
@@ -22,7 +24,7 @@ const Login = () => {
           <Input<ILoginForm>
             id="email"
             name="email"
-            type="email"
+            type="text"
             register={register}
             label="Login"
             hasAutoFocus
@@ -38,7 +40,11 @@ const Login = () => {
             errorMessage={errors.password?.message}
             validate={password}
           />
-          <button type="submit">Sign in</button>
+          <Button
+            text="Sign in"
+            type={ButtonType.Submit}
+            isDisabled={!isValid}
+          />
         </form>
       </div>
       <div className={styles.sectionBackground}></div>

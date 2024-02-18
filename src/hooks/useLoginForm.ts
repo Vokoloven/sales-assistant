@@ -10,8 +10,9 @@ export const useLoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: {errors},
+    formState: {errors, isValid},
   } = useForm<ILoginForm>({
+    mode: 'all',
     defaultValues: {
       email: '',
       password: '',
@@ -20,5 +21,5 @@ export const useLoginForm = () => {
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => console.log(data);
 
-  return {onSubmit, register, handleSubmit, errors};
+  return {onSubmit, register, handleSubmit, errors, isValid};
 };
