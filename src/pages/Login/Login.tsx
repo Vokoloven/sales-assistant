@@ -14,7 +14,7 @@ const Login = () => {
     <section className={styles.section}>
       <div className={styles.sectionAside}>
         <div className={styles.sectionLogo}></div>
-        <h1 className={styles.sectioHeading}>Log in</h1>
+        <h1 className={styles.sectionHeading}>Log in</h1>
         <form
           className={styles.sectionForm}
           onSubmit={handleSubmit(onSubmit)}
