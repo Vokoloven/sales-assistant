@@ -6,17 +6,17 @@
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: $mainFontFamily;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.4;
-  color: var(--mainColor);
-  background-color: var(--bodyBg);
+  color: $Gray800;
+  background-color: $White;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: color-mix(in srgb, var(--black) 0, transparent);
 }
 
-[tabindex="-1"]:focus:not(:focus-visible) {
+[tabindex='-1']:focus:not(:focus-visible) {
   outline: 0 !important;
 }
 
@@ -171,7 +171,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 1em;
 }
 
@@ -254,16 +254,16 @@ select {
 }
 
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+[type='button'],
+[type='reset'],
+[type='submit'] {
   -webkit-appearance: button;
 }
 
 button:not(:disabled),
-[type="button"]:not(:disabled),
-[type="reset"]:not(:disabled),
-[type="submit"]:not(:disabled) {
+[type='button']:not(:disabled),
+[type='reset']:not(:disabled),
+[type='submit']:not(:disabled) {
   cursor: pointer;
 }
 
@@ -272,10 +272,10 @@ button:not(:disabled),
   border-style: none;
 }
 
-input[type="date"],
-input[type="time"],
-input[type="datetime-local"],
-input[type="month"] {
+input[type='date'],
+input[type='time'],
+input[type='datetime-local'],
+input[type='month'] {
   -webkit-appearance: textfield;
 }
 
@@ -291,7 +291,7 @@ fieldset {
   border: 0;
 }
 
-[type="search"] {
+[type='search'] {
   outline-offset: -2px;
   -webkit-appearance: textfield;
 }

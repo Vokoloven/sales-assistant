@@ -1,0 +1,30 @@
+@import '@/design/index.scss';
+
+.input {
+  width: 100%;
+  padding: 18px 12px;
+
+  border: 1px solid $Gray400;
+  border-radius: 8px;
+
+  &:focus {
+    outline-color: $BlueA300;
+  }
+
+  &Wrapper {
+    margin-bottom: 16px;
+  }
+
+  &Label {
+    display: block;
+    @include font($lineHeight: 24px);
+    @include ellipsis;
+  }
+
+  &TextError {
+    display: block;
+
+    @include font(14px, $fontColor: $Error600);
+    @include ellipsis;
+  }
+}
