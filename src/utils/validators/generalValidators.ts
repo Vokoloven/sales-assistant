@@ -1,6 +1,6 @@
 import type {TRequired, TMaxLength, TMinLength, TPattern} from './types/generalValidators';
+import type {KeyExtractor} from '../types/keyExtractor';
 
-type KeyExtractor<T> = T[keyof T];
 type TGeneralValidator<T> = (obj: KeyExtractor<T>) => T;
 
 export const required: TGeneralValidator<TRequired> = ({value, message}) => ({
