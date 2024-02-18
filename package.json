@@ -25,7 +25,11 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "prettier": "prettier src --ext .js,.jsx,.ts,.tsx",
+    "prettier:write": "prettier --write src --ext .js,.jsx,.ts,.tsx"
   },
   "eslintConfig": {
     "extends": [

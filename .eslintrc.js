@@ -70,7 +70,7 @@ module.exports = {
     'require-jsdoc': 'off',
     'max-len': [
       1,
-      120,
+      135,
       4,
       { ignoreComments: true, ignoreUrls: true, ignoreStrings: true },
     ],
