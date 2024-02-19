@@ -3,8 +3,8 @@ import {ButtonType} from '@/components/Button/constants';
 import {InputType} from '@/components/Input/constants';
 import Input from '@/components/Input/Input';
 import {useLoginForm} from '@/hooks/useLoginForm';
-import type {ILoginForm} from '@/hooks/useLoginForm';
 import {useTheme} from '@/hooks/useTheme';
+import {ILoginRequestDTO} from '@/submodules/interfaces/dto/auth/iadmin-login-request.interface';
 import {validator} from '@/utils/validators/validator';
 
 import styles from './Login.module.scss';
@@ -24,7 +24,7 @@ const Login = () => {
           className={styles.sectionForm}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <Input<ILoginForm>
+          <Input<ILoginRequestDTO>
             id="email"
             name="email"
             type={InputType.Email}
@@ -33,7 +33,7 @@ const Login = () => {
             errorMessage={errors.email?.message}
             validate={email}
           />
-          <Input<ILoginForm>
+          <Input<ILoginRequestDTO>
             id="password"
             name="password"
             type={InputType.Password}
