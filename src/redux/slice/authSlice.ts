@@ -1,4 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {persistReducer} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 import type {ILoginResponseDTO} from '@/submodules/interfaces/dto/auth/ilogin-response.interfaces';
 
@@ -15,6 +17,11 @@ const initialState: UsersState = {
   data: null,
   error: null,
   loading: 'idle',
+};
+
+const authConfig = {
+  key: 'auth',
+  storage: storage,
 };
 
 export const authSlice = createSlice({
@@ -36,3 +43,5 @@ export const authSlice = createSlice({
     });
   },
 });
+
+export const persistedAuth = persistReducer(authConfig, authSlice.reducer);
