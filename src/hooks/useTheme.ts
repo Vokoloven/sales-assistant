@@ -20,7 +20,7 @@ export const getTheme = () => {
 };
 
 export const useTheme = () => {
-  const storageTheme = useRef<ThemeMode | null>(localStorage.getItem(Name) as ThemeMode);
+  const storageTheme = useRef<ThemeMode | null>(JSON.parse(localStorage.getItem(Name) as ThemeMode));
   const [theme, setTheme] = useState<ThemeMode>(() => {
     if (!storageTheme.current) {
       return Light;
