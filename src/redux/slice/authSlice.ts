@@ -1,16 +1,19 @@
 import {createSlice} from '@reduxjs/toolkit';
 
+import type {ILoginResponseDTO} from '@/submodules/interfaces/dto/auth/ilogin-response.interfaces';
+
+import type {ILoginResponseFullDTO} from '../thunk/authThunk';
 import {loginUserByEmail} from '../thunk/authThunk';
 
 interface UsersState {
-  user: object;
-  error: object;
+  data: Partial<ILoginResponseDTO> | null;
+  error: Partial<Pick<ILoginResponseFullDTO, 'error'>> | null;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 const initialState: UsersState = {
-  user: {},
-  error: {},
+  data: null,
+  error: null,
   loading: 'idle',
 };
 
@@ -24,11 +27,12 @@ export const authSlice = createSlice({
     });
     builder.addCase(loginUserByEmail.fulfilled, (state, action) => {
       state.loading = 'succeeded';
-      state.user = {...action.payload};
+      state.error = null;
+      state.data = {...action.payload};
     });
     builder.addCase(loginUserByEmail.rejected, (state, action) => {
       state.loading = 'failed';
-      state.error = {...action.payload!};
+      state.error = {...(action.payload as Partial<Pick<ILoginResponseFullDTO, 'error'>>)};
     });
   },
 });
