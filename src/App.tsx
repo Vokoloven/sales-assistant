@@ -4,6 +4,8 @@ import {Routes, Route, Navigate} from 'react-router-dom';
 import {AuthRoutes} from '@/submodules/enums/routes/auth-routes.enum';
 
 import {useRefresh} from './hooks/useRefresh';
+import {ProtectedRouteType} from './routes/constants';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 const Login = lazy(() => import('@/pages/Login/Login'));
 const Feed = lazy(() => import('@/pages/Feed/Feed'));
@@ -24,14 +26,22 @@ function App() {
               />
             }
           />
-
           <Route
+            index
             path={AuthRoutes.Login}
-            element={<Login />}
+            element={
+              <ProtectedRoute type={ProtectedRouteType.Public}>
+                <Login />
+              </ProtectedRoute>
+            }
           />
           <Route
             path={AuthRoutes.Feed}
-            element={<Feed />}
+            element={
+              <ProtectedRoute type={ProtectedRouteType.Private}>
+                <Feed />
+              </ProtectedRoute>
+            }
           />
           <Route
             path={AuthRoutes.NotFound}
