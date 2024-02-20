@@ -48,10 +48,10 @@ export const loginUserByEmail = createAsyncThunk<
   {
     condition: (_, {getState}) => {
       const {
-        auth: {user},
+        auth: {isAuthorized},
       } = getState() as {auth: IAuthState};
 
-      if (user) {
+      if (isAuthorized) {
         return false;
       }
     },
@@ -88,10 +88,10 @@ export const refreshUser = createAsyncThunk<
   {
     condition: (_, {getState}) => {
       const {
-        auth: {user},
+        auth: {isAuthorized},
       } = getState() as {auth: IAuthState};
 
-      if (!user) {
+      if (!isAuthorized) {
         return false;
       }
     },
