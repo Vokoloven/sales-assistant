@@ -1,19 +1,19 @@
 import {useForm} from 'react-hook-form';
 import type {SubmitHandler} from 'react-hook-form';
+import {useDispatch} from 'react-redux';
 
 import {InputType} from '@/components/Input/constants';
-
-export interface ILoginForm {
-  email: string;
-  password: string;
-}
+import type {AppDispatch} from '@/redux/store';
+import {loginUserByEmail} from '@/redux/thunk/authThunk';
+import {ILoginRequestDTO} from '@/submodules/interfaces/dto/auth/iadmin-login-request.interface';
 
 export const useLoginForm = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const {
     register,
     handleSubmit,
     formState: {errors, isValid, dirtyFields},
-  } = useForm<ILoginForm>({
+  } = useForm<ILoginRequestDTO>({
     mode: 'all',
     defaultValues: {
       email: '',
@@ -31,7 +31,7 @@ export const useLoginForm = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<ILoginForm> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<ILoginRequestDTO> = (data) => dispatch(loginUserByEmail(data));
 
   const isDirtyPassword = dirtyFields?.password;
 
