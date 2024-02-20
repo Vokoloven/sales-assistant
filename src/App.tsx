@@ -14,11 +14,17 @@ function App() {
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
-        <Navigate
-          replace={true}
-          to={AuthRoutes.Login}
-        />
         <Routes>
+          <Route
+            path="/"
+            element={
+              <Navigate
+                to={AuthRoutes.Login}
+                replace
+              />
+            }
+          />
+
           <Route
             path={AuthRoutes.Login}
             element={<Login />}
