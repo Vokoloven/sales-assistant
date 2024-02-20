@@ -2,19 +2,22 @@ import {createSlice} from '@reduxjs/toolkit';
 import {persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import {loginUserByEmail} from '../thunk/authThunk';
 import type {ILoginResponseFullDTO} from '../thunk/authThunk';
+import {loginUserByEmail} from '../thunk/authThunk';
+import {refreshUser} from '../thunk/authThunk';
 
 export interface IAuthState {
-  data: ILoginResponseFullDTO['data'];
+  user: ILoginResponseFullDTO['data'];
   error: ILoginResponseFullDTO['error'] | unknown;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+  isAuthorized: boolean;
 }
 
 const initialState: IAuthState = {
-  data: null,
+  user: null,
   error: null,
   loading: 'idle',
+  isAuthorized: false,
 };
 
 const authConfig = {
@@ -33,33 +36,34 @@ export const authSlice = createSlice({
     builder.addCase(loginUserByEmail.fulfilled, (state, {payload}) => {
       state.loading = 'succeeded';
       state.error = null;
+      state.isAuthorized = true;
       if (payload) {
-        state.data = {...payload};
+        state.user = {...payload};
       }
     });
-    builder.addCase(loginUserByEmail.rejected, (state, action) => {
+    builder.addCase(loginUserByEmail.rejected, (state, {payload}) => {
       state.loading = 'failed';
-      state.data = null;
-      if (action.payload) {
-        state.error = action.payload;
-      } else {
-        state.error = action.error.message;
+      state.user = null;
+      state.error = payload;
+      state.isAuthorized = false;
+    });
+    builder.addCase(refreshUser.pending, (state) => {
+      state.loading = 'pending';
+    });
+    builder.addCase(refreshUser.fulfilled, (state, {payload}) => {
+      state.loading = 'succeeded';
+      state.error = null;
+      state.isAuthorized = true;
+      if (payload) {
+        state.user = {...payload};
       }
     });
-    // builder.addCase(refreshUser.pending, (state) => {
-    //   state.loading = 'pending';
-    // });
-    // builder.addCase(refreshUser.fulfilled, (state, action) => {
-    //   state.loading = 'succeeded';
-    //   state.error = null;
-    //   if (action.payload) {
-    //     state.data = {...action.payload};
-    //   }
-    // });
-    // builder.addCase(refreshUser.rejected, (state, action) => {
-    //   state.loading = 'failed';
-    //   state.error = action.payload;
-    // });
+    builder.addCase(refreshUser.rejected, (state, {payload}) => {
+      state.loading = 'failed';
+      state.user = null;
+      state.isAuthorized = false;
+      state.error = payload;
+    });
   },
 });
 

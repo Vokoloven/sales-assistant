@@ -7,7 +7,6 @@ import type {ILoginRequestDTO} from '@/submodules/interfaces/dto/auth/iadmin-log
 
 import type {IAuthState} from '../slice/authSlice';
 
-// import type {IAuthState} from '../slice/authSlice';
 export interface ILoginResponseFullDTO {
   success: boolean;
   statusCode: number;
@@ -27,16 +26,17 @@ export const loginUserByEmail = createAsyncThunk<
   {rejectValue: ILoginResponseFullDTO['error'] | unknown}
 >(
   'auth/loginUserByEmail',
-  async (data, {rejectWithValue}) => {
+  async (dto, {rejectWithValue}) => {
     try {
-      const response = auth.login<ILoginResponseFullDTO>(data);
+      const response = auth.login<ILoginResponseFullDTO>(dto);
 
-      const result = await response;
+      const {data, success, error} = await response;
 
-      if (!result.success) {
-        throw {...result};
+      if (!success) {
+        throw {...error};
       }
-      return result.data;
+
+      return data;
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
@@ -48,36 +48,52 @@ export const loginUserByEmail = createAsyncThunk<
   {
     condition: (_, {getState}) => {
       const {
-        auth: {loading},
+        auth: {user},
       } = getState() as {auth: IAuthState};
 
-      if (loading === 'succeeded' || loading === 'pending') {
+      if (user) {
         return false;
       }
     },
   },
 );
 
-// export const refreshUser = createAsyncThunk(
-//   'auth/refreshUser',
-//   async (data: ILoginRequestDTO, {fulfillWithValue, rejectWithValue}) => {
-//     try {
-//       const response = auth.PUT<ILoginRequestDTO, ILoginResponseFullDTO>({
-//         data,
-//         url: `${BaseRoutes.BaseUrl}${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.Login}`,
-//       });
+export const refreshUser = createAsyncThunk<
+  ILoginResponseFullDTO['data'],
+  void,
+  {rejectValue: ILoginResponseFullDTO['error'] | unknown; state: {auth: IAuthState}}
+>(
+  'auth/refreshUser',
+  async (_, {rejectWithValue, getState}) => {
+    try {
+      const state = getState();
 
-//       const result = await response;
+      const response = auth.refresh<ILoginResponseFullDTO>({token: state.auth.user!.access.refreshToken});
 
-//       if (!result.success) {
-//         return rejectWithValue(result.error);
-//       }
+      const {data, success, error} = await response;
 
-//       return fulfillWithValue(result.data);
-//     } catch (error) {
-//       if (error instanceof Error) {
-//         return rejectWithValue(error.message);
-//       }
-//     }
-//   },
-// );
+      if (!success) {
+        throw {...error};
+      }
+
+      return data;
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+
+      return rejectWithValue(error);
+    }
+  },
+  {
+    condition: (_, {getState}) => {
+      const {
+        auth: {user},
+      } = getState() as {auth: IAuthState};
+
+      if (!user) {
+        return false;
+      }
+    },
+  },
+);
