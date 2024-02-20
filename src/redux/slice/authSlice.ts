@@ -2,18 +2,16 @@ import {createSlice} from '@reduxjs/toolkit';
 import {persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import type {ILoginResponseDTO} from '@/submodules/interfaces/dto/auth/ilogin-response.interfaces';
-
-import type {ILoginResponseFullDTO} from '../thunk/authThunk';
 import {loginUserByEmail} from '../thunk/authThunk';
+import type {ILoginResponseFullDTO} from '../thunk/authThunk';
 
-interface UsersState {
-  data: Partial<ILoginResponseDTO> | null;
-  error: Partial<Pick<ILoginResponseFullDTO, 'error'>> | null;
+export interface IAuthState {
+  data: ILoginResponseFullDTO['data'];
+  error: ILoginResponseFullDTO['error'] | unknown;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
-const initialState: UsersState = {
+const initialState: IAuthState = {
   data: null,
   error: null,
   loading: 'idle',
@@ -32,15 +30,36 @@ export const authSlice = createSlice({
     builder.addCase(loginUserByEmail.pending, (state) => {
       state.loading = 'pending';
     });
-    builder.addCase(loginUserByEmail.fulfilled, (state, action) => {
+    builder.addCase(loginUserByEmail.fulfilled, (state, {payload}) => {
       state.loading = 'succeeded';
       state.error = null;
-      state.data = {...action.payload};
+      if (payload) {
+        state.data = {...payload};
+      }
     });
     builder.addCase(loginUserByEmail.rejected, (state, action) => {
       state.loading = 'failed';
-      state.error = {...(action.payload as Partial<Pick<ILoginResponseFullDTO, 'error'>>)};
+      state.data = null;
+      if (action.payload) {
+        state.error = action.payload;
+      } else {
+        state.error = action.error.message;
+      }
     });
+    // builder.addCase(refreshUser.pending, (state) => {
+    //   state.loading = 'pending';
+    // });
+    // builder.addCase(refreshUser.fulfilled, (state, action) => {
+    //   state.loading = 'succeeded';
+    //   state.error = null;
+    //   if (action.payload) {
+    //     state.data = {...action.payload};
+    //   }
+    // });
+    // builder.addCase(refreshUser.rejected, (state, action) => {
+    //   state.loading = 'failed';
+    //   state.error = action.payload;
+    // });
   },
 });
 
