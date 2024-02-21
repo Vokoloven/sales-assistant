@@ -14,8 +14,7 @@
   }
 
   &Aside {
-    @include box(320px, 440px);
-    width: 440px;
+    @include box(320px, 440px, 440px);
 
     display: flex;
     justify-content: center;

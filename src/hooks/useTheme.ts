@@ -6,7 +6,7 @@ const ThemeConfig = {
   Dark: 'dark',
 } as const;
 
-type ThemeMode = {
+type TThemeMode = {
   [K in keyof typeof ThemeConfig]: (typeof ThemeConfig)[K] extends 'light' | 'dark' ? (typeof ThemeConfig)[K] : never;
 }[keyof typeof ThemeConfig];
 
@@ -15,13 +15,13 @@ const {Dark, Light, Name} = ThemeConfig;
 const html = document.querySelector('html')!;
 
 export const getTheme = () => {
-  const theme = html.dataset[Name] as ThemeMode;
+  const theme = html.dataset[Name] as TThemeMode;
   return theme;
 };
 
 export const useTheme = () => {
-  const storageTheme = useRef<ThemeMode | null>(JSON.parse(localStorage.getItem(Name) as ThemeMode));
-  const [theme, setTheme] = useState<ThemeMode>(() => {
+  const storageTheme = useRef<TThemeMode | null>(JSON.parse(localStorage.getItem(Name) as TThemeMode));
+  const [theme, setTheme] = useState<TThemeMode>(() => {
     if (!storageTheme.current) {
       return Light;
     } else {
@@ -44,7 +44,7 @@ export const useTheme = () => {
       return;
     }
 
-    localStorage.setItem(Name, JSON.stringify(theme) as ThemeMode);
+    localStorage.setItem(Name, JSON.stringify(theme) as TThemeMode);
   }, [theme]);
 
   return {themeSwitcher};

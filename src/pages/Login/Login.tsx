@@ -13,7 +13,7 @@ const {email, password} = validator();
 
 const Login = () => {
   useTheme();
-  const {errors, handleSubmit, onSubmit, register, isValid, isDirtyPassword, togglePasswordVisibility} = useLoginForm();
+  const {errors, handleSubmit, onSubmit, register, isValid, isDirtyPassword} = useLoginForm();
 
   return (
     <section className={styles.section}>
@@ -41,7 +41,7 @@ const Login = () => {
             label="Password"
             errorMessage={errors.password?.message}
             validate={password}
-            passwordVisibility={{isDirty: isDirtyPassword, toggler: togglePasswordVisibility}}
+            isDirtyPassword={isDirtyPassword}
           />
           <Button
             text="Sign in"
