@@ -5,17 +5,24 @@
 
   height: 100vh;
 
+  &.dark {
+    background-color: $Black;
+  }
+
   &Heading {
     @include font(32px, 500, 38.4px);
 
     margin-bottom: 50px;
 
     @include ellipsis;
+
+    &.dark {
+      color: $Gray600;
+    }
   }
 
   &Aside {
-    @include box(320px, 440px);
-    width: 440px;
+    @include box($mobileWidth, $mobileMediumWidth, $mobileMediumWidth);
 
     display: flex;
     justify-content: center;
@@ -32,6 +39,10 @@
   &Background {
     flex: 1;
     position: relative;
+
+    &.dark {
+      filter: brightness(0.5);
+    }
 
     &::after {
       content: "";

@@ -1,0 +1,88 @@
+@import "@/design/index.scss";
+
+.section {
+  display: flex;
+  height: 100vh;
+
+  overflow-x: hidden;
+
+  &Menu {
+    @include box(0);
+    height: 100%;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 12px 16px;
+
+    z-index: 1;
+    word-wrap: break-word;
+
+    @include transition(left);
+    @include maxQuery(360px) {
+      @include box(0, 280px, 280px);
+    }
+
+    &.collapsed {
+      left: -$mobileWidth;
+
+      @include transition(left);
+    }
+
+    &.dark {
+      background-color: $Black;
+    }
+  }
+
+  &Main {
+    flex: 1;
+    background-color: $Gray100;
+    margin-left: $mobileWidth;
+
+    @include transition(margin-left);
+
+    @include maxQuery(360px) {
+      margin-left: 280px;
+      overflow-x: hidden;
+    }
+
+    &.collapsed {
+      margin-left: 0;
+
+      @include transition(margin-left);
+    }
+
+    &.dark {
+      background-color: $Gray900;
+    }
+  }
+
+  &Header {
+    padding: 12px 8px;
+
+    &Box {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &MenuButton {
+      height: 48px;
+      padding: 12px;
+
+      &.collapsed {
+        @include maxQuery(425px) {
+          &:last-child {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  &Icon {
+    fill: $Gray800;
+    &.dark {
+      fill: $White;
+    }
+  }
+}

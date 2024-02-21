@@ -1,11 +1,15 @@
+import classnames from 'classnames';
 import type {UseFormRegister, FieldValues, Path} from 'react-hook-form';
 
+import {getTheme} from '@/hooks/useTheme';
 import {KeyExtractor} from '@/utils/types/keyExtractor';
 import type {TCombineGeneralValidatorResult} from '@/utils/validators/types/composeValidators';
 import type {TValidatorReturn} from '@/utils/validators/types/validator';
 
 import {InputType} from './constants';
 import styles from './Input.module.scss';
+import ButtonIcon from '../ButtonIcon/ButtonIcon';
+import {IconAppName} from '../Icons/constants';
 
 interface IProps<T extends FieldValues> {
   placeholder?: string;
@@ -18,11 +22,18 @@ interface IProps<T extends FieldValues> {
   register: UseFormRegister<T>;
   errorMessage: string | undefined;
   validate: TValidatorReturn<TCombineGeneralValidatorResult>;
-  passwordVisibility?: {
-    isDirty: boolean | undefined;
-    toggler: (id: string) => void;
-  };
+  isDirtyPassword?: boolean;
 }
+
+const togglePasswordVisibility = (id: string) => {
+  const input = document.getElementById(id) as HTMLInputElement;
+
+  if (input.type === InputType.Password) {
+    input.type = InputType.Text;
+  } else {
+    input.type = InputType.Password;
+  }
+};
 
 const Input = <T extends FieldValues>({
   label,
@@ -34,13 +45,15 @@ const Input = <T extends FieldValues>({
   isDisabled = false,
   errorMessage,
   validate,
-  passwordVisibility,
+  isDirtyPassword,
 }: IProps<T>) => {
+  const theme = getTheme();
+
   return (
     <div className={styles.inputWrapper}>
       {label && (
         <label
-          className={styles.inputLabel}
+          className={classnames(styles.inputLabel, styles[`${theme}`])}
           htmlFor={id}
         >
           {label}
@@ -48,7 +61,7 @@ const Input = <T extends FieldValues>({
       )}
       <div className={styles.inputBox}>
         <input
-          className={styles.input}
+          className={classnames(styles.input, styles[`${theme}`])}
           id={id}
           type={type}
           {...register(name, validate())}
@@ -56,11 +69,12 @@ const Input = <T extends FieldValues>({
           autoFocus={hasAutoFocus}
           autoComplete="off"
         />
-        {passwordVisibility?.isDirty && (
-          <span
-            onClick={() => passwordVisibility.toggler(id)}
-            className={styles.inputPasswordToggler}
-          ></span>
+        {isDirtyPassword && (
+          <ButtonIcon
+            icon={IconAppName.ShowPassword}
+            iconProps={{className: styles.inputPasswordToggler}}
+            onClick={() => togglePasswordVisibility(id)}
+          />
         )}
       </div>
       {errorMessage && <span className={styles.inputTextError}>{errorMessage}</span>}

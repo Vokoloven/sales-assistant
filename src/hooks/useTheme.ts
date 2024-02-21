@@ -1,6 +1,6 @@
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect} from 'react';
 
-const ThemeConfig = {
+export const ThemeConfig = {
   Name: 'theme',
   Light: 'light',
   Dark: 'dark',
@@ -11,39 +11,41 @@ type ThemeMode = {
 }[keyof typeof ThemeConfig];
 
 const {Dark, Light, Name} = ThemeConfig;
-
-const html = document.querySelector('html')!;
+const html = document.querySelector('html') as HTMLElement;
 
 export const getTheme = () => {
   const theme = html.dataset[Name] as ThemeMode;
+
   return theme;
 };
 
 export const useTheme = () => {
-  const storageTheme = useRef<ThemeMode | null>(JSON.parse(localStorage.getItem(Name) as ThemeMode));
   const [theme, setTheme] = useState<ThemeMode>(() => {
-    if (!storageTheme.current) {
-      return Light;
+    const localStorageTheme = localStorage.getItem(Name);
+
+    if (localStorageTheme) {
+      const theme = JSON.parse(localStorageTheme) as ThemeMode;
+
+      return theme;
     } else {
-      return storageTheme.current!;
+      return Light;
     }
   });
 
   const themeSwitcher = () => {
-    if (theme === Light) {
-      setTheme(Dark);
-    } else {
-      setTheme(Light);
-    }
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === Light ? Dark : Light;
+
+      html.dataset[Name] = newTheme;
+      return newTheme;
+    });
   };
 
   useEffect(() => {
     html.dataset[Name] = theme;
+  }, []);
 
-    if (storageTheme.current === theme) {
-      return;
-    }
-
+  useEffect(() => {
     localStorage.setItem(Name, JSON.stringify(theme) as ThemeMode);
   }, [theme]);
 

@@ -8,7 +8,12 @@
   border-radius: 8px;
 
   &:focus {
-    outline-color: $BlueA300;
+    outline: none;
+  }
+
+  &.dark {
+    background-color: $Black;
+    color: $White;
   }
 
   &Wrapper {
@@ -21,6 +26,10 @@
     display: block;
     @include font($lineHeight: 24px);
     @include ellipsis;
+
+    &.dark {
+      color: $Gray600;
+    }
   }
 
   &TextError {
@@ -46,9 +55,5 @@
     right: 0;
 
     transform: translate(-50%, -50%);
-
-    background-image: url("../../design/images/icons/eye.svg");
-
-    cursor: pointer;
   }
 }
