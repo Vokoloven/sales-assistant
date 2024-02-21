@@ -1,9 +1,27 @@
+@import "@/design/index.scss";
+
 .button {
   padding: 0;
   border: none;
   background-color: inherit;
+  border-radius: 8px;
+  background-color: transparent;
 
+  &:hover {
+    background-color: $BlueA100;
+  }
   &:focus {
+    background-color: $BlueA300;
     outline: none;
+  }
+
+  &.dark {
+    &:hover {
+      background-color: $BlueA800;
+    }
+    &:focus {
+      background-color: $BlueA600;
+      outline: none;
+    }
   }
 }

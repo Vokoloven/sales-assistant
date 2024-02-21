@@ -13,9 +13,9 @@ import {validator} from '@/utils/validators/validator';
 import styles from './Login.module.scss';
 
 const {email, password} = validator();
-const theme = getTheme();
 
 const Login = () => {
+  const theme = getTheme();
   const {errors, handleSubmit, onSubmit, register, isValid, isDirtyPassword} = useLoginForm();
 
   return (

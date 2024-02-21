@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 
+import {getTheme} from '@/hooks/useTheme';
 import {KeyExtractor} from '@/utils/types/keyExtractor';
 
 import styles from './ButtonIcon.module.scss';
@@ -18,13 +19,14 @@ interface IProps {
 }
 
 const ButtonIcon = ({className, icon, iconProps, onClick, type = ButtonType.Button}: IProps) => {
+  const theme = getTheme();
   const Icon: TIconComponent = Icons[icon];
 
   return (
     <button
       type={type}
       onClick={onClick}
-      className={classnames(className, styles.button)}
+      className={classnames(className, styles.button, styles[`${theme}`])}
     >
       <Icon {...iconProps} />
     </button>

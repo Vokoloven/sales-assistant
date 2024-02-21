@@ -15,8 +15,6 @@ interface Button {
   size?: KeyExtractor<typeof ButtonSize>;
 }
 
-const theme = getTheme();
-
 const Button = ({
   text,
   onClick,
@@ -25,6 +23,7 @@ const Button = ({
   type = ButtonType.Button,
   size = ButtonSize.FillWidth,
 }: Button) => {
+  const theme = getTheme();
   const buttonClasses = classnames(
     styles.button,
     styles[`${color}`],

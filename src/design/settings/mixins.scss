@@ -5,9 +5,9 @@
   width: 100%;
 }
 
-@mixin box($min: 320px, $max: 320px, $width: 320px) {
-  max-width: $max;
-  min-width: $min;
+@mixin box($minWidth: $mobileWidth, $maxWidth: $mobileWidth, $width: $mobileWidth) {
+  min-width: $minWidth;
+  max-width: $maxWidth;
   width: $width;
 }
 
@@ -24,8 +24,12 @@
   white-space: nowrap;
 }
 
-@mixin darkColors($bg: $Black, $bc: $Gray600, $clr: $White) {
+@mixin darkColors($bg: $Black, $bc: $BlueA600, $clr: $White) {
   background-color: $bg;
   border-color: $bc;
   color: $clr;
+}
+
+@mixin transition($prop, $time: 0.5s, $action: ease-in-out) {
+  transition: $prop $time $action;
 }

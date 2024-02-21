@@ -35,8 +35,6 @@ const togglePasswordVisibility = (id: string) => {
   }
 };
 
-const theme = getTheme();
-
 const Input = <T extends FieldValues>({
   label,
   type,
@@ -49,6 +47,8 @@ const Input = <T extends FieldValues>({
   validate,
   isDirtyPassword,
 }: IProps<T>) => {
+  const theme = getTheme();
+
   return (
     <div className={styles.inputWrapper}>
       {label && (
