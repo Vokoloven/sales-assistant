@@ -1,6 +1,6 @@
 import {IconAppName} from './constants';
 import {makeIcon} from './makeIcon';
-import {Eye} from './sources/Eye';
+import {IconInstance} from './sources/sources';
 import type {TIconComponent} from './types/icon';
 
 type TIcon = {
@@ -8,7 +8,11 @@ type TIcon = {
 };
 
 const Icons: TIcon = {
-  [IconAppName.SHOW_PASSWORD]: makeIcon(Eye),
+  [IconAppName.ShowPassword]: makeIcon(IconInstance.Eye),
+  [IconAppName.Menu]: makeIcon(IconInstance.Menu),
+  [IconAppName.CollapseMenu]: makeIcon(IconInstance.CollapseMenu),
+  [IconAppName.Moon]: makeIcon(IconInstance.Moon),
+  [IconAppName.Sun]: makeIcon(IconInstance.Sun),
 };
 
 export default Icons;

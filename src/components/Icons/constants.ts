@@ -1,6 +1,14 @@
 export enum IconInstanceName {
-  EYE = 'Eye',
+  Eye = 'Eye',
+  Menu = 'Menu',
+  CollapseMenu = 'CollapseMenu',
+  Sun = 'Sun',
+  Moon = 'Moon',
 }
 export enum IconAppName {
-  SHOW_PASSWORD = 'ShowPassword',
+  ShowPassword = 'ShowPassword',
+  Menu = 'Menu',
+  CollapseMenu = 'CollapseMenu',
+  Sun = 'Sun',
+  Moon = 'Moon',
 }

@@ -4,6 +4,7 @@ import {Routes, Route, Navigate} from 'react-router-dom';
 import {AuthRoutes} from '@/submodules/enums/routes/auth-routes.enum';
 
 import {useRefresh} from './hooks/useRefresh';
+import {useTheme} from './hooks/useTheme';
 import {ProtectedRouteType} from './routes/constants';
 import ProtectedRoute from './routes/ProtectedRoute';
 
@@ -12,6 +13,7 @@ const Feed = lazy(() => import('@/pages/Feed/Feed'));
 const NotFound = lazy(() => import('@/components/NotFound/NotFound'));
 
 function App() {
+  useTheme();
   useRefresh();
   return (
     <>

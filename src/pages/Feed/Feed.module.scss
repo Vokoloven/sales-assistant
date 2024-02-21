@@ -2,22 +2,56 @@
 
 .section {
   display: flex;
-
   height: 100vh;
 
   &Menu {
-    @include box;
+    @include box($min: 0);
+    height: 100%;
 
+    position: fixed;
+    top: 0;
+    left: 0;
     padding: 12px 16px;
+
+    overflow-x: hidden;
+    z-index: 1;
+    word-wrap: break-word;
+
+    transition: left 0.5s ease-in-out;
+
+    &.collapsed {
+      left: -320px;
+
+      transition: left 0.5s ease-in-out;
+    }
   }
 
   &Main {
     flex: 1;
     background-color: $Gray100;
+    margin-left: 320px;
+
+    transition: margin-left 0.5s ease-in-out;
+
+    &FullWidth {
+      margin-left: 0;
+
+      transition: margin-left 0.5s ease-in-out;
+    }
   }
 
   &Header {
-    display: flex;
-    justify-content: space-around;
+    padding: 12px 8px;
+
+    &Box {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &MenuButton {
+      height: 48px;
+
+      padding: 12px;
+    }
   }
 }

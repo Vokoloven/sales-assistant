@@ -1,5 +1,7 @@
+import classnames from 'classnames';
 import type {UseFormRegister, FieldValues, Path} from 'react-hook-form';
 
+import {getTheme} from '@/hooks/useTheme';
 import {KeyExtractor} from '@/utils/types/keyExtractor';
 import type {TCombineGeneralValidatorResult} from '@/utils/validators/types/composeValidators';
 import type {TValidatorReturn} from '@/utils/validators/types/validator';
@@ -33,6 +35,8 @@ const togglePasswordVisibility = (id: string) => {
   }
 };
 
+const theme = getTheme();
+
 const Input = <T extends FieldValues>({
   label,
   type,
@@ -49,7 +53,7 @@ const Input = <T extends FieldValues>({
     <div className={styles.inputWrapper}>
       {label && (
         <label
-          className={styles.inputLabel}
+          className={classnames(styles.inputLabel, styles[`${theme}`])}
           htmlFor={id}
         >
           {label}
@@ -57,7 +61,7 @@ const Input = <T extends FieldValues>({
       )}
       <div className={styles.inputBox}>
         <input
-          className={styles.input}
+          className={classnames(styles.input, styles[`${theme}`])}
           id={id}
           type={type}
           {...register(name, validate())}
@@ -67,7 +71,7 @@ const Input = <T extends FieldValues>({
         />
         {isDirtyPassword && (
           <ButtonIcon
-            icon={IconAppName.SHOW_PASSWORD}
+            icon={IconAppName.ShowPassword}
             iconProps={{className: styles.inputPasswordToggler}}
             onClick={() => togglePasswordVisibility(id)}
           />

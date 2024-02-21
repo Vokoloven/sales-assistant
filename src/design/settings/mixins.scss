@@ -23,3 +23,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+@mixin darkColors($bg: $Black, $bc: $Gray600, $clr: $White) {
+  background-color: $bg;
+  border-color: $bc;
+  color: $clr;
+}

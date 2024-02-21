@@ -13,6 +13,10 @@
     background-color: $White;
     border-color: $BlueA300;
 
+    &.dark {
+      @include darkColors;
+    }
+
     &:disabled {
       @include font($fontColor: $Gray400);
     }
@@ -31,7 +35,7 @@
     max-width: 100%;
   }
 
-  &ErrorMessage {
+  &Text {
     display: block;
     @include ellipsis;
   }

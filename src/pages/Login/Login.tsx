@@ -1,25 +1,28 @@
+import classnames from 'classnames';
+import classNames from 'classnames';
+
 import Button from '@/components/Button/Button';
 import {ButtonType} from '@/components/Button/constants';
 import {InputType} from '@/components/Input/constants';
 import Input from '@/components/Input/Input';
 import {useLoginForm} from '@/hooks/useLoginForm';
-import {useTheme} from '@/hooks/useTheme';
+import {getTheme} from '@/hooks/useTheme';
 import {ILoginRequestDTO} from '@/submodules/interfaces/dto/auth/iadmin-login-request.interface';
 import {validator} from '@/utils/validators/validator';
 
 import styles from './Login.module.scss';
 
 const {email, password} = validator();
+const theme = getTheme();
 
 const Login = () => {
-  useTheme();
   const {errors, handleSubmit, onSubmit, register, isValid, isDirtyPassword} = useLoginForm();
 
   return (
-    <section className={styles.section}>
+    <section className={classnames(styles.section, styles[`${theme}`])}>
       <div className={styles.sectionAside}>
         <div className={styles.sectionLogo}></div>
-        <h1 className={styles.sectionHeading}>Log in</h1>
+        <h1 className={classNames(styles.sectionHeading, styles[`${theme}`])}>Log in</h1>
         <form
           className={styles.sectionForm}
           onSubmit={handleSubmit(onSubmit)}
@@ -50,7 +53,7 @@ const Login = () => {
           />
         </form>
       </div>
-      <div className={styles.sectionBackground}></div>
+      <div className={classnames(styles.sectionBackground, styles[`${theme}`])}></div>
     </section>
   );
 };
