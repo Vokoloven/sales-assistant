@@ -16,37 +16,43 @@ const Login = () => {
   return (
     <section className={styles.section}>
       <div className={styles.sectionAside}>
-        <div className={styles.sectionLogo}></div>
-        <h1 className={styles.sectionHeading}>Log in</h1>
-        <form
-          className={styles.sectionForm}
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <Input<ILoginRequestDTO>
-            id="email"
-            name="email"
-            type={InputType.Email}
-            register={register}
-            label="Login"
-            errorMessage={errors.email?.message}
-            validate={email}
-          />
-          <Input<ILoginRequestDTO>
-            id="password"
-            name="password"
-            type={InputType.Password}
-            register={register}
-            label="Password"
-            errorMessage={errors.password?.message}
-            validate={password}
-            isDirtyPassword={isDirtyPassword}
-          />
-          <Button
-            text="Sign in"
-            type={ButtonType.Submit}
-            isDisabled={!isValid}
-          />
-        </form>
+        <div className={styles.sectionBox}>
+          <div className={styles.sectionLogo}></div>
+        </div>
+        <div className={styles.sectionBox}>
+          <h1 className={styles.sectionHeading}>Log in</h1>
+        </div>
+        <div className={styles.sectionBox}>
+          <form
+            className={styles.sectionForm}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Input<ILoginRequestDTO>
+              id="email"
+              name="email"
+              type={InputType.Email}
+              register={register}
+              label="Login"
+              errorMessage={errors.email?.message}
+              validate={email}
+            />
+            <Input<ILoginRequestDTO>
+              id="password"
+              name="password"
+              type={InputType.Password}
+              register={register}
+              label="Password"
+              errorMessage={errors.password?.message}
+              validate={password}
+              isDirtyPassword={isDirtyPassword}
+            />
+            <Button
+              text="Sign in"
+              type={ButtonType.Submit}
+              isDisabled={!isValid}
+            />
+          </form>
+        </div>
       </div>
       <div className={styles.sectionBackground}></div>
     </section>

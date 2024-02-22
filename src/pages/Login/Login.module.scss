@@ -5,22 +5,30 @@
 
   height: 100vh;
 
-  &Heading {
-    @include font(32px, 500, 38.4px);
-
-    margin-bottom: 50px;
-
-    @include ellipsis;
-  }
-
   &Aside {
     @include box($mobileS, $mobileM, $mobileM);
 
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding: 0 10px;
+  }
 
-    padding: 0 20px;
+  &Box {
+    padding: 10px;
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &Heading {
+    @include font(32px, 500, 38.4px);
+
+    margin: 0;
+
+    @include ellipsis;
   }
 
   &Form {
@@ -50,7 +58,6 @@
   &Logo {
     max-width: 300px;
     aspect-ratio: 4/1;
-    margin-bottom: 50px;
 
     background-image: url("../../design/images/abcloudz-logo.png");
     background-repeat: no-repeat;
