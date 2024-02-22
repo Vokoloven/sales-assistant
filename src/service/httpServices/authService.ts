@@ -1,4 +1,4 @@
-import {AppRoutes} from '@/AppRoutes';
+import {FetchRoutes} from '@/FetchRoutes';
 import {AuthRoutes} from '@/submodules/enums/routes/auth-routes.enum';
 import {BaseRoutes} from '@/submodules/enums/routes/base-routes.enum';
 import type {ILoginRequestDTO} from '@/submodules/interfaces/dto/auth/iadmin-login-request.interface';
@@ -10,7 +10,7 @@ export const authService = () => {
   const login = async <T>(dto: ILoginRequestDTO): Promise<T> => {
     try {
       const response = await fetch(
-        `${AppRoutes.BaseUrl}${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.Login}`,
+        `${FetchRoutes.BaseUrl}${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.Login}`,
         {
           method: HTTP_Methods.POST,
           headers: Headers.ContentType,
@@ -27,7 +27,7 @@ export const authService = () => {
   const refresh = async <T>(dto: ITokenRequestDTO): Promise<T> => {
     try {
       const response = await fetch(
-        `${AppRoutes.BaseUrl}${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.RefreshToken}`,
+        `${FetchRoutes.BaseUrl}${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.RefreshToken}`,
         {
           method: HTTP_Methods.PUT,
           headers: Headers.ContentType,

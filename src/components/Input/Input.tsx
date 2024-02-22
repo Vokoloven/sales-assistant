@@ -1,7 +1,5 @@
-import classnames from 'classnames';
 import type {UseFormRegister, FieldValues, Path} from 'react-hook-form';
 
-import {getTheme} from '@/hooks/useTheme';
 import {KeyExtractor} from '@/utils/types/keyExtractor';
 import type {TCombineGeneralValidatorResult} from '@/utils/validators/types/composeValidators';
 import type {TValidatorReturn} from '@/utils/validators/types/validator';
@@ -47,13 +45,11 @@ const Input = <T extends FieldValues>({
   validate,
   isDirtyPassword,
 }: IProps<T>) => {
-  const theme = getTheme();
-
   return (
     <div className={styles.inputWrapper}>
       {label && (
         <label
-          className={classnames(styles.inputLabel, styles[`${theme}`])}
+          className={styles.inputLabel}
           htmlFor={id}
         >
           {label}
@@ -61,7 +57,7 @@ const Input = <T extends FieldValues>({
       )}
       <div className={styles.inputBox}>
         <input
-          className={classnames(styles.input, styles[`${theme}`])}
+          className={styles.input}
           id={id}
           type={type}
           {...register(name, validate())}

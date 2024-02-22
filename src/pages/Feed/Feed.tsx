@@ -15,7 +15,7 @@ const Feed = () => {
 
   return (
     <section className={styles.section}>
-      <div className={classnames(styles.sectionMenu, {[`${styles.collapsed}`]: collapsed}, styles[`${theme}`])}>
+      <div className={classnames(styles.sectionMenu, {[`${styles.collapsed}`]: collapsed})}>
         <div className={styles.sectionMenuContent}>
           <Button
             type="button"
@@ -23,19 +23,19 @@ const Feed = () => {
           />
         </div>
       </div>
-      <div className={classnames(styles.sectionMain, {[`${styles.collapsed}`]: collapsed}, styles[`${theme}`])}>
+      <div className={classnames(styles.sectionMain, {[`${styles.collapsed}`]: collapsed})}>
         <div className={styles.sectionHeader}>
           <div className={styles.sectionHeaderBox}>
             <ButtonIcon
               onClick={() => setCollapsed((prevCollapsed) => !prevCollapsed)}
               icon={collapsed ? IconAppName.Menu : IconAppName.CollapseMenu}
-              iconProps={{className: classnames(styles.sectionIcon, styles[`${theme}`])}}
+              iconProps={{className: styles.sectionIcon}}
               className={styles.sectionHeaderMenuButton}
             />
             <ButtonIcon
               onClick={themeSwitcher}
               icon={theme === ThemeConfig.Light ? IconAppName.Moon : IconAppName.Sun}
-              iconProps={{className: classnames(styles.sectionIcon, styles[`${theme}`])}}
+              iconProps={{className: styles.sectionIcon}}
               className={classnames(styles.sectionHeaderMenuButton, {[`${styles.collapsed}`]: !collapsed})}
             />
           </div>

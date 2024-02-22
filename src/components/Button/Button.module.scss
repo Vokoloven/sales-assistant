@@ -13,18 +13,6 @@
     background-color: $White;
     border-color: $BlueA300;
 
-    &.dark {
-      @include darkColors;
-
-      &:not(:disabled):hover {
-        background-color: $BlueA800;
-      }
-
-      &:not(:disabled):focus {
-        background-color: $BlueA600;
-      }
-    }
-
     &:disabled {
       @include font($fontColor: $Gray400);
     }
@@ -46,5 +34,21 @@
   &Text {
     display: block;
     @include ellipsis;
+  }
+}
+
+html[data-theme="dark"] {
+  .button {
+    &.primary {
+      @include darkColors;
+
+      &:not(:disabled):hover {
+        background-color: $BlueA800;
+      }
+
+      &:not(:disabled):focus {
+        background-color: $BlueA600;
+      }
+    }
   }
 }
