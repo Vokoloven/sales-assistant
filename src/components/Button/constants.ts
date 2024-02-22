@@ -10,4 +10,5 @@ export const ButtonColor = {
 
 export const ButtonSize = {
   FillWidth: "fullWidth",
+  Small: "small",
 } as const;

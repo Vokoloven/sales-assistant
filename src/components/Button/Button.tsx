@@ -12,17 +12,19 @@ interface Button {
   type?: KeyExtractor<typeof ButtonType>;
   color?: KeyExtractor<typeof ButtonColor>;
   size?: KeyExtractor<typeof ButtonSize>;
+  classname?: string;
 }
 
 const Button = ({
   text,
   onClick,
   isDisabled = false,
+  classname,
   color = ButtonColor.Primary,
   type = ButtonType.Button,
   size = ButtonSize.FillWidth,
 }: Button) => {
-  const buttonClasses = classnames(styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`]);
+  const buttonClasses = classnames(classname, styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`]);
 
   return (
     <button
@@ -32,7 +34,7 @@ const Button = ({
       disabled={isDisabled}
       aria-label={text}
     >
-      {<span className={styles.Text}>{text}</span>}
+      {<span className={styles.buttonText}>{text}</span>}
     </button>
   );
 };

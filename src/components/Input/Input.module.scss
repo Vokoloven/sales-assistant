@@ -19,14 +19,14 @@
 
   &Label {
     display: block;
-    @include font($lineHeight: 24px);
+    @include font($lh: 24px);
     @include ellipsis;
   }
 
   &TextError {
     display: block;
 
-    @include font(14px, $fontColor: $Error600);
+    @include font(14px, $fclr: $Error600);
     @include ellipsis;
   }
 

@@ -14,7 +14,7 @@
   }
 
   &Aside {
-    @include box($mobileWidth, $mobileMediumWidth, $mobileMediumWidth);
+    @include box($mobileS, $mobileM, $mobileM);
 
     display: flex;
     justify-content: center;

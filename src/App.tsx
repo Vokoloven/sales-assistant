@@ -9,7 +9,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 
 const Login = lazy(() => import("@/pages/Login/Login"));
 const Feed = lazy(() => import("@/pages/Feed/Feed"));
-const NotFound = lazy(() => import("@/components/NotFound/NotFound"));
+const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
 
 function App() {
   useTheme();

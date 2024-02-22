@@ -5,17 +5,17 @@
   width: 100%;
 }
 
-@mixin box($minWidth: $mobileWidth, $maxWidth: $mobileWidth, $width: $mobileWidth) {
+@mixin box($minWidth: $mobileS, $maxWidth: $mobileS, $width: $mobileS) {
   min-width: $minWidth;
   max-width: $maxWidth;
   width: $width;
 }
 
-@mixin font($fontSize: 16px, $fontWeight: 400, $lineHeight: 22.4px, $fontColor: $Gray800) {
-  font-size: $fontSize;
-  font-weight: $fontWeight;
-  line-height: calc($lineHeight / $fontSize);
-  color: $fontColor;
+@mixin font($fs: 16px, $fw: 400, $lh: 22.4px, $fclr: $Gray800) {
+  font-size: $fs;
+  font-weight: $fw;
+  line-height: calc($lh / $fs);
+  color: $fclr;
 }
 
 @mixin ellipsis {

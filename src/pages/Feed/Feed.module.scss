@@ -24,7 +24,7 @@
     }
 
     &.collapsed {
-      left: -$mobileWidth;
+      left: -$mobileS;
 
       @include transition(left);
     }
@@ -33,7 +33,7 @@
   &Main {
     flex: 1;
     background-color: $Gray100;
-    margin-left: $mobileWidth;
+    margin-left: $mobileS;
 
     @include transition(margin-left);
 

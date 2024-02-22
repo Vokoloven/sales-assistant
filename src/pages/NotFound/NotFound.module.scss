@@ -1,0 +1,56 @@
+@import "@/design/index.scss";
+
+.section {
+  display: flex;
+  justify-content: center;
+
+  height: 100vh;
+
+  max-width: 600px;
+  margin: 0 auto;
+
+  padding: 10px;
+
+  &Title {
+    @include font($fs: 40px, $fclr: $Gray800, $lh: 20px);
+    margin-bottom: 40px;
+  }
+
+  &Heading {
+    @include font($fs: 30px, $fclr: $Gray800, $lh: 20px);
+    margin-bottom: 40px;
+  }
+
+  &Description {
+    @include font($fclr: $Gray800);
+    margin-bottom: 40px;
+  }
+
+  &Box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+
+    text-align: center;
+
+    color: $White;
+  }
+}
+
+html[data-theme="dark"] {
+  .section {
+    &Title {
+      @include font($fs: 40px, $fclr: $White, $lh: 40px);
+    }
+
+    &Heading {
+      @include font($fs: 30px, $fclr: $White, $lh: 40px);
+    }
+
+    &Description {
+      @include font($fclr: $White);
+    }
+  }
+}

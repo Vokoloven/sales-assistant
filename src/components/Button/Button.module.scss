@@ -6,7 +6,7 @@
   border-radius: 8px;
   border-width: 2px;
   border-style: solid;
-  @include font($fontWeight: 500, $lineHeight: 24px);
+  @include font($fw: 500, $lh: 24px);
   text-align: center;
 
   &.primary {
@@ -14,7 +14,7 @@
     border-color: $BlueA300;
 
     &:disabled {
-      @include font($fontColor: $Gray400);
+      @include font($fclr: $Gray400);
     }
 
     &:not(:disabled):hover {
@@ -29,6 +29,11 @@
   &.fullWidth {
     width: 100%;
     max-width: 100%;
+  }
+
+  &.small {
+    width: 100%;
+    max-width: 320px;
   }
 
   &Text {
