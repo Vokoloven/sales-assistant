@@ -1,8 +1,7 @@
 import {lazy, Suspense} from 'react';
 import {Routes, Route, Navigate} from 'react-router-dom';
 
-import {AuthRoutes} from '@/submodules/enums/routes/auth-routes.enum';
-
+import {AppRoutes} from './AppRoutes';
 import {useRefresh} from './hooks/useRefresh';
 import {useTheme} from './hooks/useTheme';
 import {ProtectedRouteType} from './routes/constants';
@@ -23,14 +22,14 @@ function App() {
             path="/"
             element={
               <Navigate
-                to={AuthRoutes.Login}
+                to={AppRoutes.Login}
                 replace
               />
             }
           />
           <Route
             index
-            path={AuthRoutes.Login}
+            path={AppRoutes.Login}
             element={
               <ProtectedRoute type={ProtectedRouteType.Public}>
                 <Login />
@@ -38,7 +37,7 @@ function App() {
             }
           />
           <Route
-            path={AuthRoutes.Feed}
+            path={AppRoutes.Feed}
             element={
               <ProtectedRoute type={ProtectedRouteType.Private}>
                 <Feed />
@@ -46,7 +45,7 @@ function App() {
             }
           />
           <Route
-            path={AuthRoutes.NotFound}
+            path={AppRoutes.NotFound}
             element={<NotFound />}
           />
         </Routes>

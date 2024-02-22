@@ -1,8 +1,8 @@
 import {useSelector} from 'react-redux';
 import {Navigate, Outlet} from 'react-router-dom';
 
+import {AppRoutes} from '@/AppRoutes';
 import {authSelector} from '@/redux/selector/authSelector';
-import {AuthRoutes} from '@/submodules/enums/routes/auth-routes.enum';
 import {KeyExtractor} from '@/utils/types/keyExtractor';
 
 import {ProtectedRouteType} from './constants';
@@ -18,14 +18,14 @@ const ProtectedRoute = ({children, type}: IProps) => {
   if (type === ProtectedRouteType.Private && !isAuthorized) {
     return (
       <Navigate
-        to={`/${AuthRoutes.Login}`}
+        to={`/${AppRoutes.Login}`}
         replace
       />
     );
   } else if (type === ProtectedRouteType.Public && isAuthorized) {
     return (
       <Navigate
-        to={`/${AuthRoutes.Feed}`}
+        to={`/${AppRoutes.Feed}`}
         replace
       />
     );
