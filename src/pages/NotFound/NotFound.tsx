@@ -12,17 +12,25 @@ const NotFound = () => {
   return (
     <section className={styles.section}>
       <div className={styles.sectionBox}>
-        <p className={styles.sectionTitle}>Oops!</p>
-        <h1 className={styles.sectionHeading}>404 - Page not found</h1>
-        <p className={styles.sectionDescription}>
-          The page you are looking for might have been removed had its name changed or temporarily unavailable
-        </p>
-        <Button
-          classname={styles.sectionButton}
-          size={ButtonSize.Small}
-          text="Go to home page"
-          onClick={() => navigate(AppRoutes.BaseUrl, {replace: true})}
-        />
+        <div className={styles.sectionCover}>
+          <p className={styles.sectionTitle}>Oops!</p>
+        </div>
+        <div className={styles.sectionCover}>
+          <h1 className={styles.sectionHeading}>404 - Page not found</h1>
+        </div>
+        <div className={styles.sectionCover}>
+          <p className={styles.sectionDescription}>
+            The page you are looking for might have been removed had its name changed or temporarily unavailable
+          </p>
+        </div>
+        <div className={styles.sectionCover}>
+          <Button
+            classname={styles.sectionButton}
+            size={ButtonSize.Small}
+            text="Go to home page"
+            onClick={() => navigate(AppRoutes.BaseUrl, {replace: true})}
+          />
+        </div>
       </div>
     </section>
   );
