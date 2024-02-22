@@ -1,10 +1,10 @@
-import {FetchRoutes} from '@/FetchRoutes';
-import {AuthRoutes} from '@/submodules/enums/routes/auth-routes.enum';
-import {BaseRoutes} from '@/submodules/enums/routes/base-routes.enum';
-import type {ILoginRequestDTO} from '@/submodules/interfaces/dto/auth/iadmin-login-request.interface';
-import type {ITokenRequestDTO} from '@/submodules/interfaces/dto/auth/irefresh-token-request.interface';
+import {FetchRoutes} from "@/FetchRoutes";
+import {AuthRoutes} from "@/submodules/enums/routes/auth-routes.enum";
+import {BaseRoutes} from "@/submodules/enums/routes/base-routes.enum";
+import type {ILoginRequestDTO} from "@/submodules/interfaces/dto/auth/iadmin-login-request.interface";
+import type {ITokenRequestDTO} from "@/submodules/interfaces/dto/auth/irefresh-token-request.interface";
 
-import {HTTP_Methods, Headers} from '../constants';
+import {HTTP_Methods, Headers} from "../constants";
 
 export const authService = () => {
   const login = async <T>(dto: ILoginRequestDTO): Promise<T> => {
@@ -20,7 +20,7 @@ export const authService = () => {
 
       return await response.json();
     } catch (error) {
-      throw new Error('Unknown error occurred');
+      throw new Error("Unknown error occurred");
     }
   };
 
@@ -37,7 +37,7 @@ export const authService = () => {
 
       return await response.json();
     } catch (error) {
-      throw new Error('Unknown error occurred');
+      throw new Error("Unknown error occurred");
     }
   };
 

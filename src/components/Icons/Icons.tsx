@@ -1,7 +1,7 @@
-import {IconAppName} from './constants';
-import {makeIcon} from './makeIcon';
-import {IconInstance} from './sources/sources';
-import type {TIconComponent} from './types/icon';
+import {IconAppName} from "./constants";
+import {makeIcon} from "./makeIcon";
+import {IconInstance} from "./sources/sources";
+import type {TIconComponent} from "./types/icon";
 
 type TIcon = {
   [K in (typeof IconAppName)[keyof typeof IconAppName]]: TIconComponent;

@@ -1,12 +1,12 @@
-import Button from '@/components/Button/Button';
-import {ButtonType} from '@/components/Button/constants';
-import {InputType} from '@/components/Input/constants';
-import Input from '@/components/Input/Input';
-import {useLoginForm} from '@/hooks/useLoginForm';
-import {ILoginRequestDTO} from '@/submodules/interfaces/dto/auth/iadmin-login-request.interface';
-import {validator} from '@/utils/validators/validator';
+import Button from "@/components/Button/Button";
+import {ButtonType} from "@/components/Button/constants";
+import {InputType} from "@/components/Input/constants";
+import Input from "@/components/Input/Input";
+import {useLoginForm} from "@/hooks/useLoginForm";
+import {ILoginRequestDTO} from "@/submodules/interfaces/dto/auth/iadmin-login-request.interface";
+import {validator} from "@/utils/validators/validator";
 
-import styles from './Login.module.scss';
+import styles from "./Login.module.scss";
 
 const {email, password} = validator();
 

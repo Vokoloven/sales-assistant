@@ -1,7 +1,7 @@
-import {configureStore} from '@reduxjs/toolkit';
-import {persistStore} from 'redux-persist';
+import {configureStore} from "@reduxjs/toolkit";
+import {persistStore} from "redux-persist";
 
-import {persistedAuth} from './slice/authSlice';
+import {persistedAuth} from "./slice/authSlice";
 
 export const store = configureStore({
   reducer: {

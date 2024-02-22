@@ -1,17 +1,17 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect} from "react";
 
 export const ThemeConfig = {
-  Name: 'theme',
-  Light: 'light',
-  Dark: 'dark',
+  Name: "theme",
+  Light: "light",
+  Dark: "dark",
 } as const;
 
 type ThemeMode = {
-  [K in keyof typeof ThemeConfig]: (typeof ThemeConfig)[K] extends 'light' | 'dark' ? (typeof ThemeConfig)[K] : never;
+  [K in keyof typeof ThemeConfig]: (typeof ThemeConfig)[K] extends "light" | "dark" ? (typeof ThemeConfig)[K] : never;
 }[keyof typeof ThemeConfig];
 
 const {Dark, Light, Name} = ThemeConfig;
-const html = document.querySelector('html') as HTMLElement;
+const html = document.querySelector("html") as HTMLElement;
 
 export const getTheme = () => {
   const theme = html.dataset[Name] as ThemeMode;

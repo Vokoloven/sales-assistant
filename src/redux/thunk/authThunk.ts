@@ -1,11 +1,11 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import {createAsyncThunk} from "@reduxjs/toolkit";
 
-import {authService} from '@/service/httpServices/authService';
-import type {IAccountDTO} from '@/submodules/interfaces/dto/account/iaccount.interface';
-import type {IAccessDTO} from '@/submodules/interfaces/dto/auth/iaccess.interface';
-import type {ILoginRequestDTO} from '@/submodules/interfaces/dto/auth/iadmin-login-request.interface';
+import {authService} from "@/service/httpServices/authService";
+import type {IAccountDTO} from "@/submodules/interfaces/dto/account/iaccount.interface";
+import type {IAccessDTO} from "@/submodules/interfaces/dto/auth/iaccess.interface";
+import type {ILoginRequestDTO} from "@/submodules/interfaces/dto/auth/iadmin-login-request.interface";
 
-import type {IAuthState} from '../slice/authSlice';
+import type {IAuthState} from "../slice/authSlice";
 
 export interface ILoginResponseFullDTO {
   success: boolean;
@@ -21,11 +21,11 @@ export interface ILoginResponseFullDTO {
 const auth = authService();
 
 export const loginUserByEmail = createAsyncThunk<
-  ILoginResponseFullDTO['data'],
+  ILoginResponseFullDTO["data"],
   ILoginRequestDTO,
-  {rejectValue: ILoginResponseFullDTO['error'] | unknown}
+  {rejectValue: ILoginResponseFullDTO["error"] | unknown}
 >(
-  'auth/loginUserByEmail',
+  "auth/loginUserByEmail",
   async (dto, {rejectWithValue}) => {
     try {
       const response = auth.login<ILoginResponseFullDTO>(dto);
@@ -59,11 +59,11 @@ export const loginUserByEmail = createAsyncThunk<
 );
 
 export const refreshUser = createAsyncThunk<
-  ILoginResponseFullDTO['data'],
+  ILoginResponseFullDTO["data"],
   void,
-  {rejectValue: ILoginResponseFullDTO['error'] | unknown; state: {auth: IAuthState}}
+  {rejectValue: ILoginResponseFullDTO["error"] | unknown; state: {auth: IAuthState}}
 >(
-  'auth/refreshUser',
+  "auth/refreshUser",
   async (_, {rejectWithValue, getState}) => {
     try {
       const state = getState();

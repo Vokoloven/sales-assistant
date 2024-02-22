@@ -1,13 +1,13 @@
-import type {UseFormRegister, FieldValues, Path} from 'react-hook-form';
+import type {UseFormRegister, FieldValues, Path} from "react-hook-form";
 
-import {KeyExtractor} from '@/utils/types/keyExtractor';
-import type {TCombineGeneralValidatorResult} from '@/utils/validators/types/composeValidators';
-import type {TValidatorReturn} from '@/utils/validators/types/validator';
+import {KeyExtractor} from "@/utils/types/keyExtractor";
+import type {TCombineGeneralValidatorResult} from "@/utils/validators/types/composeValidators";
+import type {TValidatorReturn} from "@/utils/validators/types/validator";
 
-import {InputType} from './constants';
-import styles from './Input.module.scss';
-import ButtonIcon from '../ButtonIcon/ButtonIcon';
-import {IconAppName} from '../Icons/constants';
+import {InputType} from "./constants";
+import styles from "./Input.module.scss";
+import ButtonIcon from "../ButtonIcon/ButtonIcon";
+import {IconAppName} from "../Icons/constants";
 
 interface IProps<T extends FieldValues> {
   placeholder?: string;

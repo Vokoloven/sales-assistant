@@ -1,9 +1,9 @@
-import classnames from 'classnames';
+import classnames from "classnames";
 
-import type {KeyExtractor} from '@/utils/types/keyExtractor';
+import type {KeyExtractor} from "@/utils/types/keyExtractor";
 
-import styles from './Button.module.scss';
-import {ButtonType, ButtonColor, ButtonSize} from './constants';
+import styles from "./Button.module.scss";
+import {ButtonType, ButtonColor, ButtonSize} from "./constants";
 
 interface Button {
   text: string;

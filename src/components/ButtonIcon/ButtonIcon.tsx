@@ -1,12 +1,12 @@
-import classnames from 'classnames';
+import classnames from "classnames";
 
-import {KeyExtractor} from '@/utils/types/keyExtractor';
+import {KeyExtractor} from "@/utils/types/keyExtractor";
 
-import styles from './ButtonIcon.module.scss';
-import {ButtonType} from '../Button/constants';
-import {IconAppName} from '../Icons/constants';
-import Icons from '../Icons/Icons';
-import type {TIconComponent, IIconProps} from '../Icons/types/icon';
+import styles from "./ButtonIcon.module.scss";
+import {ButtonType} from "../Button/constants";
+import {IconAppName} from "../Icons/constants";
+import Icons from "../Icons/Icons";
+import type {TIconComponent, IIconProps} from "../Icons/types/icon";
 
 interface IProps {
   icon: KeyExtractor<typeof IconAppName>;

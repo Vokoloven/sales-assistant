@@ -1,13 +1,13 @@
 export const ButtonType = {
-  Submit: 'submit',
-  Reset: 'reset',
-  Button: 'button',
+  Submit: "submit",
+  Reset: "reset",
+  Button: "button",
 } as const;
 
 export const ButtonColor = {
-  Primary: 'primary',
+  Primary: "primary",
 } as const;
 
 export const ButtonSize = {
-  FillWidth: 'fullWidth',
+  FillWidth: "fullWidth",
 } as const;

@@ -1,6 +1,6 @@
 export const AppRoutes = {
-  BaseUrl: '/',
-  Login: 'login',
-  Feed: 'feed',
-  NotFound: '*',
+  BaseUrl: "/",
+  Login: "login",
+  Feed: "feed",
+  NotFound: "*",
 } as const;

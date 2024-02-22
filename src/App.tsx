@@ -1,15 +1,15 @@
-import {lazy, Suspense} from 'react';
-import {Routes, Route, Navigate} from 'react-router-dom';
+import {lazy, Suspense} from "react";
+import {Routes, Route, Navigate} from "react-router-dom";
 
-import {AppRoutes} from './AppRoutes';
-import {useRefresh} from './hooks/useRefresh';
-import {useTheme} from './hooks/useTheme';
-import {ProtectedRouteType} from './routes/constants';
-import ProtectedRoute from './routes/ProtectedRoute';
+import {AppRoutes} from "./AppRoutes";
+import {useRefresh} from "./hooks/useRefresh";
+import {useTheme} from "./hooks/useTheme";
+import {ProtectedRouteType} from "./routes/constants";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
-const Login = lazy(() => import('@/pages/Login/Login'));
-const Feed = lazy(() => import('@/pages/Feed/Feed'));
-const NotFound = lazy(() => import('@/components/NotFound/NotFound'));
+const Login = lazy(() => import("@/pages/Login/Login"));
+const Feed = lazy(() => import("@/pages/Feed/Feed"));
+const NotFound = lazy(() => import("@/components/NotFound/NotFound"));
 
 function App() {
   useTheme();
