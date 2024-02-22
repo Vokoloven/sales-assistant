@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 
-import {getTheme} from '@/hooks/useTheme';
 import type {KeyExtractor} from '@/utils/types/keyExtractor';
 
 import styles from './Button.module.scss';
@@ -23,14 +22,7 @@ const Button = ({
   type = ButtonType.Button,
   size = ButtonSize.FillWidth,
 }: Button) => {
-  const theme = getTheme();
-  const buttonClasses = classnames(
-    styles.button,
-    styles[`${color}`],
-    styles[`${type}`],
-    styles[`${size}`],
-    styles[`${theme}`],
-  );
+  const buttonClasses = classnames(styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`]);
 
   return (
     <button

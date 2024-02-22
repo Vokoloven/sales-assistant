@@ -5,20 +5,12 @@
 
   height: 100vh;
 
-  &.dark {
-    background-color: $Black;
-  }
-
   &Heading {
     @include font(32px, 500, 38.4px);
 
     margin-bottom: 50px;
 
     @include ellipsis;
-
-    &.dark {
-      color: $Gray600;
-    }
   }
 
   &Aside {
@@ -39,10 +31,6 @@
   &Background {
     flex: 1;
     position: relative;
-
-    &.dark {
-      filter: brightness(0.5);
-    }
 
     &::after {
       content: "";
@@ -67,5 +55,21 @@
     background-image: url("../../design/images/abcloudz-logo.png");
     background-repeat: no-repeat;
     background-size: contain;
+  }
+}
+
+html[data-theme="dark"] {
+  .section {
+    background-color: $Black;
+
+    &Heading {
+      color: $Gray600;
+    }
+
+    &Background {
+      &::after {
+        filter: brightness(0.5);
+      }
+    }
   }
 }

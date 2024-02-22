@@ -28,10 +28,6 @@
 
       @include transition(left);
     }
-
-    &.dark {
-      background-color: $Black;
-    }
   }
 
   &Main {
@@ -50,10 +46,6 @@
       margin-left: 0;
 
       @include transition(margin-left);
-    }
-
-    &.dark {
-      background-color: $Gray900;
     }
   }
 
@@ -81,7 +73,20 @@
 
   &Icon {
     fill: $Gray800;
-    &.dark {
+  }
+}
+
+html[data-theme="dark"] {
+  .section {
+    &Menu {
+      background-color: $Black;
+    }
+
+    &Main {
+      background-color: $Gray900;
+    }
+
+    &Icon {
       fill: $White;
     }
   }
