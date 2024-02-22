@@ -6,21 +6,39 @@
   height: 100vh;
 
   &Aside {
-    @include box($mobileS, $mobileM, $mobileM);
+    @include mobile {
+      padding: 0 16px;
+    }
+
+    @include box($mobileS, 440px, 440px);
 
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 0 10px;
+    padding: 0 60px;
+
+    &Content {
+      @include mobile {
+        margin: 0 -8px;
+      }
+
+      margin: 0 -30px;
+    }
   }
 
   &Box {
-    padding: 10px;
-    width: 100%;
-
-    &:not(:last-child) {
-      margin-bottom: 30px;
+    @include mobile {
+      padding: 10px 4px;
     }
+
+    padding: 10px 15px;
+  }
+
+  &Wrapper {
+    @include mobile {
+      padding: 10px 4px;
+    }
+    padding: 10px 15px;
   }
 
   &Heading {
@@ -32,6 +50,12 @@
   }
 
   &Form {
+    @include mobile {
+      padding: 10px 4px;
+    }
+
+    padding: 10px 15px;
+
     display: flex;
     flex-direction: column;
   }
@@ -56,12 +80,23 @@
   }
 
   &Logo {
-    max-width: 300px;
+    position: relative;
+    width: 100%;
     aspect-ratio: 4/1;
 
-    background-image: url("../../design/images/abcloudz-logo.png");
-    background-repeat: no-repeat;
-    background-size: contain;
+    &::after {
+      content: "";
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      background-image: url("../../design/images/abcloudz-logo.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
   }
 }
 
