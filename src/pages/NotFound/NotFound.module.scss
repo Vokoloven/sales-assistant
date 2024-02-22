@@ -9,22 +9,7 @@
   max-width: 600px;
   margin: 0 auto;
 
-  padding: 10px;
-
-  &Title {
-    @include font($fs: 40px, $fclr: $Gray800, $lh: 20px);
-    margin-bottom: 40px;
-  }
-
-  &Heading {
-    @include font($fs: 30px, $fclr: $Gray800, $lh: 20px);
-    margin-bottom: 40px;
-  }
-
-  &Description {
-    @include font($fclr: $Gray800);
-    margin-bottom: 40px;
-  }
+  padding: 0 10px;
 
   &Box {
     display: flex;
@@ -33,9 +18,35 @@
     flex-direction: column;
     width: 100%;
 
+    margin: 0 -10px;
+
     text-align: center;
 
     color: $White;
+  }
+
+  &Cover {
+    padding: 10px;
+    width: 100%;
+  }
+
+  &Title {
+    @include font($fs: 40px, $fclr: $Gray800, $lh: 20px);
+    margin: 0;
+    @include ellipsis;
+  }
+
+  &Heading {
+    @include font($fs: 20px, $fclr: $Gray800, $lh: 20px);
+    margin: 0;
+    @include ellipsis;
+  }
+
+  &Description {
+    @include font($fclr: $Gray800);
+    margin: 0;
+
+    word-wrap: break-word;
   }
 }
 
@@ -46,7 +57,7 @@ html[data-theme="dark"] {
     }
 
     &Heading {
-      @include font($fs: 30px, $fclr: $White, $lh: 40px);
+      @include font($fs: 20px, $fclr: $White, $lh: 40px);
     }
 
     &Description {
