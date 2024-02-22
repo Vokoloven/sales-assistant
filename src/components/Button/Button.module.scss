@@ -45,7 +45,11 @@
 html[data-theme="dark"] {
   .button {
     &.primary {
-      @include darkColors($clr: $Gray400);
+      @include darkColors($clr: $White);
+
+      &:disabled {
+        @include darkColors($clr: $Gray400);
+      }
 
       &:not(:disabled):hover {
         background-color: $BlueA800;

@@ -18,12 +18,12 @@ const Login = () => {
       <div className={styles.sectionAside}>
         <div className={styles.sectionAsideContent}>
           <div className={styles.sectionBox}>
-            <div className={styles.sectionWrapper}>
+            <div className={styles.sectionCover}>
               <div className={styles.sectionLogo}></div>
             </div>
           </div>
           <div className={styles.sectionBox}>
-            <div className={styles.sectionWrapper}>
+            <div className={styles.sectionCover}>
               <h1 className={styles.sectionHeading}>Log in</h1>
             </div>
           </div>
