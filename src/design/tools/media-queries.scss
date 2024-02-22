@@ -1,5 +1,5 @@
-@mixin maxQuery($maxWidth) {
-  @media screen and (max-width: $maxWidth) {
+@mixin mobile {
+  @media screen and (max-width: $mobileL) {
     @content;
   }
 }

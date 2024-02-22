@@ -6,6 +6,10 @@
 
   overflow-x: hidden;
 
+  &Box {
+    margin: 0 -10px;
+  }
+
   &Menu {
     @include box(0);
     height: 100%;
@@ -19,14 +23,15 @@
     word-wrap: break-word;
 
     @include transition(left);
-    @include maxQuery(360px) {
-      @include box(0, 280px, 280px);
-    }
 
     &.collapsed {
       left: -$mobileS;
 
       @include transition(left);
+    }
+
+    &Content {
+      padding: 0 10px;
     }
   }
 
@@ -36,11 +41,6 @@
     margin-left: $mobileS;
 
     @include transition(margin-left);
-
-    @include maxQuery(360px) {
-      margin-left: 280px;
-      overflow-x: hidden;
-    }
 
     &.collapsed {
       margin-left: 0;
@@ -62,11 +62,6 @@
       padding: 12px;
 
       &.collapsed {
-        @include maxQuery(425px) {
-          &:last-child {
-            display: none;
-          }
-        }
       }
     }
   }

@@ -16,11 +16,13 @@ const Feed = () => {
   return (
     <section className={styles.section}>
       <div className={classnames(styles.sectionMenu, {[`${styles.collapsed}`]: collapsed})}>
-        <div className={styles.sectionMenuContent}>
-          <Button
-            type="button"
-            text="New Chat"
-          />
+        <div className={styles.sectionBox}>
+          <div className={styles.sectionMenuContent}>
+            <Button
+              type="button"
+              text="New Chat"
+            />
+          </div>
         </div>
       </div>
       <div className={classnames(styles.sectionMain, {[`${styles.collapsed}`]: collapsed})}>
