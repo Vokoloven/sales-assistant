@@ -24,7 +24,7 @@ const ButtonIcon = ({className, icon, iconProps, onClick, type = ButtonType.Butt
     <button
       type={type}
       onClick={onClick}
-      className={classnames(className, styles.button)}
+      className={classnames(styles.button, className)}
     >
       <Icon {...iconProps} />
     </button>

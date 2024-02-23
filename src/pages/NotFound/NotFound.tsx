@@ -11,26 +11,26 @@ const NotFound = () => {
 
   return (
     <section className={styles.section}>
-      <div className={styles.sectionContent}>
-        <div className={styles.sectionBox}>
-          <div className={styles.sectionCover}>
+      <div className={styles.sectionBox}>
+        <div className={styles.sectionBoxOuter}>
+          <div className={styles.sectionBoxInner}>
             <p className={styles.sectionTitle}>Oops!</p>
           </div>
         </div>
-        <div className={styles.sectionBox}>
-          <div className={styles.sectionCover}>
+        <div className={styles.sectionBoxOuter}>
+          <div className={styles.sectionBoxInner}>
             <h1 className={styles.sectionHeading}>404 - Page not found</h1>
           </div>
         </div>
-        <div className={styles.sectionBox}>
-          <div className={styles.sectionCover}>
+        <div className={styles.sectionBoxOuter}>
+          <div className={styles.sectionBoxInner}>
             <p className={styles.sectionDescription}>
               The page you are looking for might have been removed had its name changed or temporarily unavailable
             </p>
           </div>
         </div>
-        <div className={styles.sectionBox}>
-          <div className={styles.sectionCover}>
+        <div className={styles.sectionBoxOuter}>
+          <div className={styles.sectionBoxInner}>
             <Button
               classname={styles.sectionButton}
               size={ButtonSize.Small}

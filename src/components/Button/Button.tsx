@@ -24,7 +24,7 @@ const Button = ({
   type = ButtonType.Button,
   size = ButtonSize.FillWidth,
 }: Button) => {
-  const buttonClasses = classnames(classname, styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`]);
+  const buttonClasses = classnames(styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`], classname);
 
   return (
     <button

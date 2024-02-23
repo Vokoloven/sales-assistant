@@ -5,7 +5,7 @@
   width: 100%;
 }
 
-@mixin box($minWidth: $mobileS, $maxWidth: $mobileS, $width: $mobileS) {
+@mixin box($minWidth: $mobileS, $maxWidth: $mobileS, $width: 100%) {
   min-width: $minWidth;
   max-width: $maxWidth;
   width: $width;
