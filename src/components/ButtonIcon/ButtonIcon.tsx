@@ -1,6 +1,6 @@
 import classnames from "classnames";
 
-import {KeyExtractor} from "@/utils/types/keyExtractor";
+import {KeyExtractor} from "utils/types/keyExtractor";
 
 import styles from "./ButtonIcon.module.scss";
 import {ButtonType} from "../Button/constants";

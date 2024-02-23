@@ -1,11 +1,11 @@
 import {useSelector} from "react-redux";
 import {Navigate, Outlet} from "react-router-dom";
 
-import {AppRoutes} from "@/AppRoutes";
-import {authSelector} from "@/redux/selector/authSelector";
-import {KeyExtractor} from "@/utils/types/keyExtractor";
+import {AppRoutes} from "AppRoutes";
+import {KeyExtractor} from "utils/types/keyExtractor";
 
 import {ProtectedRouteType} from "./constants";
+import {authSelector} from "../redux/selector/authSelector";
 
 interface IProps {
   children?: React.ReactNode;

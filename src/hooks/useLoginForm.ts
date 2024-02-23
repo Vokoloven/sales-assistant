@@ -2,9 +2,10 @@ import {useForm} from "react-hook-form";
 import type {SubmitHandler} from "react-hook-form";
 import {useDispatch} from "react-redux";
 
-import type {AppDispatch} from "@/redux/store";
-import {loginUserByEmail} from "@/redux/thunk/authThunk";
-import {ILoginRequestDTO} from "@/submodules/interfaces/dto/auth/iadmin-login-request.interface";
+import type {AppDispatch} from "redux/store";
+import {ILoginRequestDTO} from "submodules/interfaces/dto/auth/iadmin-login-request.interface";
+
+import {loginUserByEmail} from "../redux/thunk/authThunk";
 
 export const useLoginForm = () => {
   const dispatch = useDispatch<AppDispatch>();

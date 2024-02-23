@@ -1,9 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 
-import {authService} from "@/service/httpServices/authService";
-import type {IAccountDTO} from "@/submodules/interfaces/dto/account/iaccount.interface";
-import type {IAccessDTO} from "@/submodules/interfaces/dto/auth/iaccess.interface";
-import type {ILoginRequestDTO} from "@/submodules/interfaces/dto/auth/iadmin-login-request.interface";
+import {authService} from "service/httpServices/authService";
+import type {IAccountDTO} from "submodules/interfaces/dto/account/iaccount.interface";
+import type {IAccessDTO} from "submodules/interfaces/dto/auth/iaccess.interface";
+import type {ILoginRequestDTO} from "submodules/interfaces/dto/auth/iadmin-login-request.interface";
 
 import type {IAuthState} from "../slice/authSlice";
 
