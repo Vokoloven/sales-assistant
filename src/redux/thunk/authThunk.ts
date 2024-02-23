@@ -71,7 +71,6 @@ export const refreshUser = createAsyncThunk<
   async (_, {rejectWithValue}) => {
     try {
       const accessLocalStorage = getLocalStorage("access");
-      console.log(accessLocalStorage);
 
       if (accessLocalStorage) {
         const response = auth.refresh<ILoginResponseFullDTO>({token: accessLocalStorage.refreshToken});
