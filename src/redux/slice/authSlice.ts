@@ -44,8 +44,8 @@ export const authSlice = createSlice({
     builder.addCase(refreshUser.fulfilled, (state, {payload}) => {
       state.loading = "succeeded";
       state.error = null;
-      state.isAuthorized = true;
       state.user = payload;
+      payload ? (state.isAuthorized = true) : (state.isAuthorized = false);
     });
     builder.addCase(refreshUser.rejected, (state, {payload}) => {
       state.loading = "failed";
