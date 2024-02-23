@@ -1,6 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {persistReducer} from "redux-persist";
-import storage from "redux-persist/lib/storage";
 
 import type {ILoginResponseFullDTO} from "../thunk/authThunk";
 import {loginUserByEmail} from "../thunk/authThunk";
@@ -18,11 +16,6 @@ const initialState: IAuthState = {
   error: null,
   loading: "idle",
   isAuthorized: false,
-};
-
-const authConfig = {
-  key: "auth",
-  storage: storage,
 };
 
 export const authSlice = createSlice({
@@ -51,8 +44,8 @@ export const authSlice = createSlice({
     builder.addCase(refreshUser.fulfilled, (state, {payload}) => {
       state.loading = "succeeded";
       state.error = null;
-      state.isAuthorized = true;
       state.user = payload;
+      state.isAuthorized = true;
     });
     builder.addCase(refreshUser.rejected, (state, {payload}) => {
       state.loading = "failed";
@@ -62,5 +55,3 @@ export const authSlice = createSlice({
     });
   },
 });
-
-export const persistedAuth = persistReducer(authConfig, authSlice.reducer);

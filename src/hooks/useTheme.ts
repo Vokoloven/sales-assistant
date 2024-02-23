@@ -1,17 +1,20 @@
 import {useState, useEffect} from "react";
 
+import {queryLocalStorage} from "utils/queryLocalStorage/queryLocalStorage";
+import {FilterKeys} from "utils/types/filterKeys";
+
 export const ThemeConfig = {
   Name: "theme",
   Light: "light",
   Dark: "dark",
 } as const;
 
-type ThemeMode = {
-  [K in keyof typeof ThemeConfig]: (typeof ThemeConfig)[K] extends "light" | "dark" ? (typeof ThemeConfig)[K] : never;
-}[keyof typeof ThemeConfig];
+type ThemeMode = FilterKeys<typeof ThemeConfig, "light" | "dark">;
 
 const {Dark, Light, Name} = ThemeConfig;
 const html = document.querySelector("html") as HTMLElement;
+
+const {getLocalStorage, setLocalStorage} = queryLocalStorage<typeof Name, ThemeMode>();
 
 export const getTheme = () => {
   const theme = html.dataset[Name] as ThemeMode;
@@ -21,12 +24,10 @@ export const getTheme = () => {
 
 export const useTheme = () => {
   const [theme, setTheme] = useState<ThemeMode>(() => {
-    const localStorageTheme = localStorage.getItem(Name);
+    const themeLocalStorage = getLocalStorage(Name);
 
-    if (localStorageTheme) {
-      const theme = JSON.parse(localStorageTheme) as ThemeMode;
-
-      return theme;
+    if (themeLocalStorage === Light || themeLocalStorage === Dark) {
+      return themeLocalStorage;
     } else {
       return Light;
     }
@@ -46,7 +47,7 @@ export const useTheme = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(Name, JSON.stringify(theme) as ThemeMode);
+    setLocalStorage(Name, theme);
   }, [theme]);
 
   return {themeSwitcher};

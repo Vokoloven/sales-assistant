@@ -4,6 +4,7 @@ import {authService} from "service/httpServices/authService";
 import type {IAccountDTO} from "submodules/interfaces/dto/account/iaccount.interface";
 import type {IAccessDTO} from "submodules/interfaces/dto/auth/iaccess.interface";
 import type {ILoginRequestDTO} from "submodules/interfaces/dto/auth/iadmin-login-request.interface";
+import {queryLocalStorage} from "utils/queryLocalStorage/queryLocalStorage";
 
 import type {IAuthState} from "../slice/authSlice";
 
@@ -19,6 +20,7 @@ export interface ILoginResponseFullDTO {
 }
 
 const auth = authService();
+const {getLocalStorage, setLocalStorage} = queryLocalStorage<"access", IAccessDTO>();
 
 export const loginUserByEmail = createAsyncThunk<
   ILoginResponseFullDTO["data"],
@@ -35,6 +37,8 @@ export const loginUserByEmail = createAsyncThunk<
       if (!success) {
         throw {...error};
       }
+
+      setLocalStorage("access", data!.access);
 
       return data;
     } catch (error) {
@@ -64,19 +68,22 @@ export const refreshUser = createAsyncThunk<
   {rejectValue: ILoginResponseFullDTO["error"] | unknown; state: {auth: IAuthState}}
 >(
   "auth/refreshUser",
-  async (_, {rejectWithValue, getState}) => {
+  async (_, {rejectWithValue}) => {
     try {
-      const state = getState();
+      const accessLocalStorage = getLocalStorage("access");
 
-      const response = auth.refresh<ILoginResponseFullDTO>({token: state.auth.user!.access.refreshToken});
+      if (accessLocalStorage) {
+        const response = auth.refresh<ILoginResponseFullDTO>({token: accessLocalStorage.refreshToken});
 
-      const {data, success, error} = await response;
+        const {data, success, error} = await response;
 
-      if (!success) {
-        throw {...error};
+        if (!success) {
+          throw {...error};
+        }
+
+        return data;
       }
-
-      return data;
+      return null;
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
@@ -86,12 +93,10 @@ export const refreshUser = createAsyncThunk<
     }
   },
   {
-    condition: (_, {getState}) => {
-      const {
-        auth: {isAuthorized},
-      } = getState() as {auth: IAuthState};
+    condition: () => {
+      const accessLocalStorage = getLocalStorage("access");
 
-      if (!isAuthorized) {
+      if (!accessLocalStorage) {
         return false;
       }
     },
