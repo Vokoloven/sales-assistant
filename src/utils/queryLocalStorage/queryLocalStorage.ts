@@ -9,8 +9,13 @@ export const queryLocalStorage = <K extends string, T>() => {
     const value = localStorage.getItem(key);
 
     if (value) {
-      const parsedValue = JSON.parse(value) as T;
-      return parsedValue;
+      try {
+        const parsedValue = JSON.parse(value) as T;
+        return parsedValue;
+      } catch (error) {
+        console.error("Error parsing value from local storage:", error);
+        return null;
+      }
     }
 
     return null;

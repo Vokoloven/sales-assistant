@@ -26,7 +26,7 @@ export const useTheme = () => {
   const [theme, setTheme] = useState<ThemeMode>(() => {
     const themeLocalStorage = getLocalStorage(Name);
 
-    if (themeLocalStorage) {
+    if (themeLocalStorage === Light || themeLocalStorage === Dark) {
       return themeLocalStorage;
     } else {
       return Light;
