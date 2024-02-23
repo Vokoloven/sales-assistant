@@ -29,8 +29,8 @@ export const authSlice = createSlice({
     builder.addCase(loginUserByEmail.fulfilled, (state, {payload}) => {
       state.loading = "succeeded";
       state.error = null;
-      state.isAuthorized = true;
       state.user = payload;
+      state.isAuthorized = true;
     });
     builder.addCase(loginUserByEmail.rejected, (state, {payload}) => {
       state.loading = "failed";
@@ -50,8 +50,8 @@ export const authSlice = createSlice({
     builder.addCase(refreshUser.rejected, (state, {payload}) => {
       state.loading = "failed";
       state.user = null;
-      state.isAuthorized = false;
       state.error = payload;
+      state.isAuthorized = false;
     });
   },
 });

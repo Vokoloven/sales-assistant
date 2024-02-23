@@ -20,7 +20,7 @@ export interface ILoginResponseFullDTO {
 }
 
 const auth = authService();
-const {getLocalStorage, setLocalStorage} = queryLocalStorage<"access", IAccessDTO>();
+const {getLocalStorage, setLocalStorage, removeLocalStorage} = queryLocalStorage<"access", IAccessDTO>();
 
 export const loginUserByEmail = createAsyncThunk<
   ILoginResponseFullDTO["data"],
@@ -78,6 +78,7 @@ export const refreshUser = createAsyncThunk<
         const {data, success, error} = await response;
 
         if (!success) {
+          removeLocalStorage("access");
           throw {...error};
         }
 
@@ -92,6 +93,7 @@ export const refreshUser = createAsyncThunk<
       return rejectWithValue(error);
     }
   },
+
   {
     condition: () => {
       const accessLocalStorage = getLocalStorage("access");
