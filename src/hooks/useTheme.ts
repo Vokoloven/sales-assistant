@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 
 import {queryLocalStorage} from "utils/queryLocalStorage/queryLocalStorage";
+import {FilterKeys} from "utils/types/filterKeys";
 
 export const ThemeConfig = {
   Name: "theme",
@@ -8,9 +9,7 @@ export const ThemeConfig = {
   Dark: "dark",
 } as const;
 
-type ThemeMode = {
-  [K in keyof typeof ThemeConfig]: (typeof ThemeConfig)[K] extends "light" | "dark" ? (typeof ThemeConfig)[K] : never;
-}[keyof typeof ThemeConfig];
+type ThemeMode = FilterKeys<typeof ThemeConfig, "light" | "dark">;
 
 const {Dark, Light, Name} = ThemeConfig;
 const html = document.querySelector("html") as HTMLElement;
