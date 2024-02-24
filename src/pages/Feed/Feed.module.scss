@@ -11,7 +11,7 @@
   }
 
   &Sidebar {
-    @include mobile($mobileML) {
+    @include mobile($mobileM) {
       max-width: $mobileSS;
     }
     @include box(0, $mobileS);
@@ -28,7 +28,7 @@
     @include transition(left);
 
     &.collapsed {
-      @include mobile($mobileML) {
+      @include mobile($mobileM) {
         left: -$mobileSS;
       }
 
@@ -56,7 +56,7 @@
   }
 
   &Content {
-    @include mobile($mobileML) {
+    @include mobile($mobileM) {
       margin-left: $mobileSS;
     }
 
@@ -107,7 +107,7 @@
           @include laptop {
             &:nth-child(2) {
               flex: 1;
-              display: block;
+              display: initial;
             }
           }
 

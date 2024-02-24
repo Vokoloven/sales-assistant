@@ -37,6 +37,8 @@ export const useTheme = () => {
     setTheme((prevTheme) => {
       const newTheme = prevTheme === Light ? Dark : Light;
 
+      setLocalStorage(Name, newTheme);
+
       html.dataset[Name] = newTheme;
       return newTheme;
     });
@@ -45,10 +47,6 @@ export const useTheme = () => {
   useEffect(() => {
     html.dataset[Name] = theme;
   }, []);
-
-  useEffect(() => {
-    setLocalStorage(Name, theme);
-  }, [theme]);
 
   return {themeSwitcher};
 };
