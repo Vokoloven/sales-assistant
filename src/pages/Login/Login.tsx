@@ -16,18 +16,18 @@ const Login = () => {
   return (
     <section className={styles.section}>
       <div className={styles.sectionAside}>
-        <div className={styles.sectionAsideContent}>
-          <div className={styles.sectionBox}>
-            <div className={styles.sectionCover}>
+        <div className={styles.sectionAsideBox}>
+          <div className={styles.sectionAsideBoxOuter}>
+            <div className={styles.sectionAsideBoxInner}>
               <div className={styles.sectionLogo}></div>
             </div>
           </div>
-          <div className={styles.sectionBox}>
-            <div className={styles.sectionCover}>
+          <div className={styles.sectionAsideBoxOuter}>
+            <div className={styles.sectionAsideBoxInner}>
               <h1 className={styles.sectionHeading}>Log in</h1>
             </div>
           </div>
-          <div className={styles.sectionBox}>
+          <div className={styles.sectionAsideBoxOuter}>
             <form
               className={styles.sectionForm}
               onSubmit={handleSubmit(onSubmit)}

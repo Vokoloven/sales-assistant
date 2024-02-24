@@ -1,4 +1,5 @@
 import {CollapseMenu} from "./CollapseMenu";
+import {Cross} from "./Cross";
 import {Eye} from "./Eye";
 import {Menu} from "./Menu";
 import {Moon} from "./Moon";
@@ -16,4 +17,5 @@ export const IconInstance: TIconInstance = {
   CollapseMenu,
   Sun,
   Moon,
+  Cross,
 };

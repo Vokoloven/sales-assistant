@@ -13,6 +13,7 @@ const Icons: TIcon = {
   [IconAppName.CollapseMenu]: makeIcon(IconInstance.CollapseMenu),
   [IconAppName.Moon]: makeIcon(IconInstance.Moon),
   [IconAppName.Sun]: makeIcon(IconInstance.Sun),
+  [IconAppName.Cross]: makeIcon(IconInstance.Cross),
 };
 
 export default Icons;

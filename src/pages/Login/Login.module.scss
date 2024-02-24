@@ -10,35 +10,35 @@
       padding: 0 16px;
     }
 
-    @include box($mobileS, 440px, 440px);
+    @include box($mobileS, 440px);
 
     display: flex;
     justify-content: center;
     flex-direction: column;
     padding: 0 60px;
 
-    &Content {
+    &Box {
       @include mobile {
         margin: 0 -8px;
       }
 
       margin: 0 -30px;
-    }
-  }
 
-  &Box {
-    @include mobile {
-      padding: 10px 4px;
-    }
+      &Outer {
+        @include mobile {
+          padding: 10px 4px;
+        }
 
-    padding: 10px 15px;
-  }
+        padding: 10px 15px;
+      }
 
-  &Cover {
-    @include mobile {
-      padding: 10px 4px;
+      &Inner {
+        @include mobile {
+          padding: 10px 4px;
+        }
+        padding: 10px 15px;
+      }
     }
-    padding: 10px 15px;
   }
 
   &Heading {

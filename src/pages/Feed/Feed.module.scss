@@ -6,12 +6,19 @@
 
   overflow-x: hidden;
 
+  &Button {
+    margin-right: 8px;
+  }
+
   &Box {
     margin: 0 -10px;
   }
 
-  &Menu {
-    @include box(0);
+  &Sidebar {
+    @include mobile($mobileM) {
+      max-width: $mobileSS;
+    }
+    @include box(0, $mobileS);
     height: 100%;
 
     position: fixed;
@@ -25,18 +32,45 @@
     @include transition(left);
 
     &.collapsed {
+      @include mobile($mobileM) {
+        left: -$mobileSS;
+      }
+
       left: -$mobileS;
 
       @include transition(left);
     }
 
-    &Content {
-      padding: 0 10px;
+    &Box {
+      margin: -6px -8px;
+
+      &Outer {
+        width: 100%;
+        padding: 3px 4px;
+      }
+
+      &Inner {
+        padding: 3px 4px;
+      }
+    }
+
+    &IconButton {
+      padding: 12px;
     }
   }
 
-  &Main {
+  &Content {
+    @include mobile($mobileM) {
+      margin-left: $mobileSS;
+    }
+
+    padding: 8px 0;
+
+    display: flex;
+    flex-direction: column;
     flex: 1;
+    min-height: 100%;
+
     background-color: $Gray100;
     margin-left: $mobileS;
 
@@ -50,39 +84,60 @@
   }
 
   &Header {
-    padding: 12px 8px;
+    padding: 8px;
 
     &Box {
       display: flex;
       justify-content: space-between;
+      margin: -4px;
+
+      &Outer {
+        padding: 2px;
+
+        &:nth-child(2) {
+          display: none;
+        }
+
+        &:nth-child(2) > .sectionHeaderBoxInner {
+          display: flex;
+          justify-content: center;
+        }
+
+        @include tablet {
+          &:last-child {
+            display: none;
+          }
+        }
+
+        &.collapsed {
+          @include laptop {
+            &:nth-child(2) {
+              flex: 1;
+              display: initial;
+            }
+          }
+
+          &:last-child {
+            display: initial;
+          }
+        }
+      }
+
+      &Inner {
+        padding: 2px;
+      }
     }
-
-    &MenuButton {
-      height: 48px;
-      padding: 12px;
-
-      // &.collapsed {
-      // }
-    }
-  }
-
-  &Icon {
-    fill: $Gray800;
   }
 }
 
 html[data-theme="dark"] {
   .section {
-    &Menu {
+    &Sidebar {
       background-color: $Black;
     }
 
-    &Main {
+    &Content {
       background-color: $Gray900;
-    }
-
-    &Icon {
-      fill: $White;
     }
   }
 }
