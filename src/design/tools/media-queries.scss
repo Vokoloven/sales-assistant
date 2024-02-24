@@ -9,3 +9,9 @@
     @content;
   }
 }
+
+@mixin laptop($maxWidth: $laptop) {
+  @media screen and (max-width: $laptop) {
+    @content;
+  }
+}

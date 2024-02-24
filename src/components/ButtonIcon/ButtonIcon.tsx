@@ -14,19 +14,26 @@ interface IProps {
   className?: string;
   iconProps?: IIconProps;
   type?: KeyExtractor<typeof ButtonType>;
+  ariaLabel?: string;
   onClick?: () => void;
 }
 
-const ButtonIcon = ({className, icon, iconProps, onClick, type = ButtonType.Button}: IProps) => {
+const ButtonIcon = ({className, icon, iconProps, onClick, ariaLabel, type = ButtonType.Button}: IProps) => {
   const Icon: TIconComponent = Icons[icon];
+
+  const {className: classNameIcon, ...iconPropsRest} = iconProps ?? {};
 
   return (
     <button
       type={type}
       onClick={onClick}
       className={classnames(styles.button, className)}
+      aria-label={ariaLabel}
     >
-      <Icon {...iconProps} />
+      <Icon
+        {...iconPropsRest}
+        className={classnames(styles.buttonIcon, classNameIcon)}
+      />
     </button>
   );
 };

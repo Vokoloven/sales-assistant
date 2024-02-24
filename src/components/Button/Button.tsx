@@ -4,6 +4,9 @@ import type {KeyExtractor} from "utils/types/keyExtractor";
 
 import styles from "./Button.module.scss";
 import {ButtonType, ButtonColor, ButtonSize} from "./constants";
+import {IconAppName} from "../Icons/constants";
+import Icons from "../Icons/Icons";
+import type {TIconComponent, IIconProps} from "../Icons/types/icon";
 
 interface Button {
   text: string;
@@ -13,17 +16,32 @@ interface Button {
   color?: KeyExtractor<typeof ButtonColor>;
   size?: KeyExtractor<typeof ButtonSize>;
   classname?: string;
+  iconBefore?: KeyExtractor<typeof IconAppName>;
+  iconBeforeProps?: IIconProps;
+  iconBeforeClassname?: string;
+  iconAfter?: KeyExtractor<typeof IconAppName>;
+  iconAfterProps?: IIconProps;
+  iconAfterClassname?: string;
 }
 
 const Button = ({
   text,
   onClick,
-  isDisabled = false,
   classname,
+  iconAfter,
+  iconBefore,
+  iconBeforeProps,
+  iconAfterProps,
+  iconAfterClassname,
+  iconBeforeClassname,
+  isDisabled = false,
   color = ButtonColor.Primary,
   type = ButtonType.Button,
   size = ButtonSize.FillWidth,
 }: Button) => {
+  const IconBefore: TIconComponent | undefined = iconBefore && Icons[iconBefore];
+  const IconAfter: TIconComponent | undefined = iconAfter && Icons[iconAfter];
+
   const buttonClasses = classnames(styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`], classname);
 
   return (
@@ -32,9 +50,18 @@ const Button = ({
       className={buttonClasses}
       type={type}
       disabled={isDisabled}
-      aria-label={text}
     >
-      {<span className={styles.buttonText}>{text}</span>}
+      {IconBefore && (
+        <div className={classnames(styles.buttonIcon, iconBeforeClassname)}>
+          <IconBefore {...iconBeforeProps} />
+        </div>
+      )}
+      <span className={styles.buttonText}>{text}</span>
+      {IconAfter && (
+        <div className={classnames(styles.buttonIcon, iconAfterClassname)}>
+          <IconAfter {...iconAfterProps} />
+        </div>
+      )}
     </button>
   );
 };

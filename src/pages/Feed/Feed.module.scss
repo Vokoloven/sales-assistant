@@ -10,7 +10,7 @@
     margin: 0 -10px;
   }
 
-  &Menu {
+  &Sidebar {
     @include mobile($mobileML) {
       max-width: $mobileSS;
     }
@@ -49,14 +49,22 @@
         padding: 8px 4px;
       }
     }
+
+    &IconButton {
+      padding: 12px;
+    }
   }
 
-  &Main {
+  &Content {
     @include mobile($mobileML) {
       margin-left: $mobileSS;
     }
 
+    display: flex;
+    flex-direction: column;
     flex: 1;
+    min-height: 100%;
+
     background-color: $Gray100;
     margin-left: $mobileS;
 
@@ -80,6 +88,15 @@
       &Outer {
         padding: 8px 2px 4px;
 
+        &:nth-child(2) {
+          display: none;
+        }
+
+        &:nth-child(2) > .sectionHeaderBoxInner {
+          display: flex;
+          justify-content: center;
+        }
+
         @include tablet {
           &:last-child {
             display: none;
@@ -87,6 +104,13 @@
         }
 
         &.collapsed {
+          @include laptop {
+            &:nth-child(2) {
+              flex: 1;
+              display: block;
+            }
+          }
+
           &:last-child {
             display: initial;
           }
@@ -97,29 +121,17 @@
         padding: 8px 2px 4px;
       }
     }
-
-    &MenuButton {
-      padding: 12px;
-    }
-  }
-
-  &Icon {
-    fill: $Gray800;
   }
 }
 
 html[data-theme="dark"] {
   .section {
-    &Menu {
+    &Sidebar {
       background-color: $Black;
     }
 
-    &Main {
+    &Content {
       background-color: $Gray900;
-    }
-
-    &Icon {
-      fill: $White;
     }
   }
 }

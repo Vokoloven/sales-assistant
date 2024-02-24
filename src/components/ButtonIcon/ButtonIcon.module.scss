@@ -3,9 +3,10 @@
 .button {
   padding: 0;
   border: none;
-  background-color: inherit;
-  border-radius: 8px;
   background-color: transparent;
+  border-radius: 8px;
+
+  line-height: 0px;
 
   &:hover {
     background-color: $BlueA100;
@@ -13,6 +14,10 @@
   &:focus {
     background-color: $BlueA300;
     outline: none;
+  }
+
+  &Icon {
+    fill: $Gray800;
   }
 }
 
@@ -24,6 +29,10 @@ html[data-theme="dark"] {
     &:focus {
       background-color: $BlueA600;
       outline: none;
+    }
+
+    &Icon {
+      fill: $White;
     }
   }
 }

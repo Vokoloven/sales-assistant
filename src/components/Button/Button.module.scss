@@ -1,7 +1,11 @@
 @import "design/index.scss";
 
 .button {
-  padding: 12px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px 16px;
 
   border-radius: 8px;
   border-width: 2px;
@@ -33,12 +37,26 @@
 
   &.small {
     width: 100%;
+    max-width: 140px;
+  }
+
+  &.medium {
+    width: 100%;
     max-width: 320px;
   }
 
   &Text {
     display: block;
     @include ellipsis;
+  }
+
+  &Icon {
+    fill: $Gray800;
+
+    line-height: 0;
+
+    flex-shrink: 0;
+    flex-grow: 0;
   }
 }
 
@@ -58,6 +76,10 @@ html[data-theme="dark"] {
       &:not(:disabled):focus {
         background-color: $BlueA600;
       }
+    }
+
+    &Icon {
+      fill: $White;
     }
   }
 }

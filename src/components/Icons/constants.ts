@@ -4,6 +4,7 @@ export enum IconInstanceName {
   CollapseMenu = "CollapseMenu",
   Sun = "Sun",
   Moon = "Moon",
+  Cross = "Cross",
 }
 export enum IconAppName {
   ShowPassword = "ShowPassword",
@@ -11,4 +12,5 @@ export enum IconAppName {
   CollapseMenu = "CollapseMenu",
   Sun = "Sun",
   Moon = "Moon",
+  Cross = "Cross",
 }
