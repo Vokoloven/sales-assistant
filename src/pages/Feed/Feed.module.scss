@@ -20,7 +20,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    padding: 0 16px;
+    padding: 12px 16px;
 
     z-index: 1;
     word-wrap: break-word;
@@ -38,15 +38,15 @@
     }
 
     &Box {
-      margin: 0 -8px;
+      margin: -6px -8px;
 
       &Outer {
         width: 100%;
-        padding: 8px 4px;
+        padding: 3px 4px;
       }
 
       &Inner {
-        padding: 8px 4px;
+        padding: 3px 4px;
       }
     }
 
