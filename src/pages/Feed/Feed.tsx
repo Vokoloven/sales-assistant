@@ -23,7 +23,7 @@ const Feed = () => {
               <Button
                 text="New Chat"
                 iconBefore={IconAppName.Cross}
-                iconBeforeClassname={styles.sectionHeaderBoxInnerButton}
+                iconBeforeClassname={styles.sectionButton}
               />
             </div>
           </div>
@@ -48,7 +48,7 @@ const Feed = () => {
                 <Button
                   size={ButtonSize.Small}
                   text="New Chat"
-                  iconBeforeClassname={styles.sectionHeaderBoxInnerButton}
+                  iconBeforeClassname={styles.sectionButton}
                   iconBefore={IconAppName.Cross}
                 />
               </div>

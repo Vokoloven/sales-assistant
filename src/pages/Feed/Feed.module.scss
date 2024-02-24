@@ -6,6 +6,10 @@
 
   overflow-x: hidden;
 
+  &Button {
+    margin-right: 8px;
+  }
+
   &Box {
     margin: 0 -10px;
   }
@@ -60,6 +64,8 @@
       margin-left: $mobileSS;
     }
 
+    padding: 8px 0;
+
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -78,15 +84,15 @@
   }
 
   &Header {
-    padding: 0 8px;
+    padding: 8px;
 
     &Box {
       display: flex;
       justify-content: space-between;
-      margin: 0 -4px;
+      margin: -4px;
 
       &Outer {
-        padding: 8px 2px 4px;
+        padding: 2px;
 
         &:nth-child(2) {
           display: none;
@@ -118,7 +124,7 @@
       }
 
       &Inner {
-        padding: 8px 2px 4px;
+        padding: 2px;
       }
     }
   }
