@@ -1,57 +1,52 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-import type {ILoginResponseFullDTO} from "../thunk/authThunk";
-import {loginUserByEmail} from "../thunk/authThunk";
-import {refreshUser} from "../thunk/authThunk";
+import type {IAccountDTO} from "submodules/interfaces/dto/account/iaccount.interface";
+import type {IAccessDTO} from "submodules/interfaces/dto/auth/iaccess.interface";
 
-export interface IAuthState {
-  user: ILoginResponseFullDTO["data"];
-  error: ILoginResponseFullDTO["error"] | unknown;
-  loading: "idle" | "pending" | "succeeded" | "failed";
-  isAuthorized: boolean;
+import {loginApi} from "../api/authApi";
+import {recoverUserApi} from "../api/authApi";
+import {localStorageService} from "../service/localStorageService";
+import {RootState} from "../store";
+
+type Nullable<T> = T | null;
+
+export const InitialState = {
+  Access: "access",
+  Account: "account",
+} as const;
+
+export interface IInitialState {
+  [InitialState.Access]: Nullable<IAccessDTO>;
+  [InitialState.Account]: Nullable<IAccountDTO>;
 }
 
-const initialState: IAuthState = {
-  user: null,
-  error: null,
-  loading: "idle",
-  isAuthorized: false,
-};
+const {setLocalStorage, removeLocalStorage} = localStorageService<typeof InitialState.Access, IAccessDTO>();
 
-export const authSlice = createSlice({
+const slice = createSlice({
   name: "auth",
-  initialState,
-  reducers: {},
+  initialState: {account: null, access: null} as IInitialState,
+  reducers: {
+    logOut: (state) => {
+      state[InitialState.Access] = null;
+      state[InitialState.Account] = null;
+      removeLocalStorage(InitialState.Access);
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(loginUserByEmail.pending, (state) => {
-      state.loading = "pending";
+    builder.addMatcher(loginApi.endpoints.login.matchFulfilled, (state, {payload}) => {
+      setLocalStorage(InitialState.Access, payload.data.access);
+      state[InitialState.Account] = payload.data.account;
+      state[InitialState.Access] = payload.data.access;
     });
-    builder.addCase(loginUserByEmail.fulfilled, (state, {payload}) => {
-      state.loading = "succeeded";
-      state.error = null;
-      state.user = payload;
-      state.isAuthorized = true;
-    });
-    builder.addCase(loginUserByEmail.rejected, (state, {payload}) => {
-      state.loading = "failed";
-      state.user = null;
-      state.error = payload;
-      state.isAuthorized = false;
-    });
-    builder.addCase(refreshUser.pending, (state) => {
-      state.loading = "pending";
-    });
-    builder.addCase(refreshUser.fulfilled, (state, {payload}) => {
-      state.loading = "succeeded";
-      state.error = null;
-      state.user = payload;
-      state.isAuthorized = true;
-    });
-    builder.addCase(refreshUser.rejected, (state, {payload}) => {
-      state.loading = "failed";
-      state.user = null;
-      state.error = payload;
-      state.isAuthorized = false;
+    builder.addMatcher(recoverUserApi.endpoints.recoverUser.matchFulfilled, (state, {payload}) => {
+      console.log(payload.data);
+      state[InitialState.Account] = payload.data.account;
     });
   },
 });
+
+export const {logOut} = slice.actions;
+
+export default slice;
+
+export const selectAccount = (state: RootState) => state.auth.account;

@@ -2,8 +2,9 @@ import {lazy, Suspense} from "react";
 import {Routes, Route, Navigate} from "react-router-dom";
 
 import {AppRoutes} from "./AppRoutes";
-import {useRefresh} from "./hooks/useRefresh";
 import {useTheme} from "./hooks/useTheme";
+import {} from "./redux/api/authApi";
+import {useRecoverUserQuery} from "./redux/api/authApi";
 import {ProtectedRouteType} from "./routes/constants";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -12,8 +13,8 @@ const Feed = lazy(() => import("pages/Feed/Feed"));
 const NotFound = lazy(() => import("pages/NotFound/NotFound"));
 
 function App() {
+  useRecoverUserQuery();
   useTheme();
-  useRefresh();
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
