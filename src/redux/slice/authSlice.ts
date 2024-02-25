@@ -16,8 +16,8 @@ const InitialState = {
 } as const;
 
 export interface IInitialState {
-  access: Nullable<IAccessDTO>;
-  account: Nullable<IAccountDTO>;
+  [InitialState.Access]: Nullable<IAccessDTO>;
+  [InitialState.Account]: Nullable<IAccountDTO>;
 }
 
 const {setLocalStorage} = localStorageService<typeof InitialState.Access, IAccessDTO>();
@@ -28,7 +28,7 @@ const slice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(login.endpoints.login.matchFulfilled, (state, {payload}) => {
-      setLocalStorage("access", payload.data.access);
+      setLocalStorage(InitialState.Access, payload.data.access);
       state.account = payload.data.account;
       state.access = payload.data.access;
     });
