@@ -3,8 +3,8 @@ import {Routes, Route, Navigate} from "react-router-dom";
 
 import {AppRoutes} from "./AppRoutes";
 import {useTheme} from "./hooks/useTheme";
-// import {ProtectedRouteType} from "./routes/constants";
-// import ProtectedRoute from "./routes/ProtectedRoute";
+import {ProtectedRouteType} from "./routes/constants";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 const Login = lazy(() => import("pages/Login/Login"));
 const Feed = lazy(() => import("pages/Feed/Feed"));
@@ -29,17 +29,17 @@ function App() {
             index
             path={AppRoutes.Login}
             element={
-              // <ProtectedRoute type={ProtectedRouteType.Public}>
-              <Login />
-              // </ProtectedRoute>
+              <ProtectedRoute type={ProtectedRouteType.Public}>
+                <Login />
+              </ProtectedRoute>
             }
           />
           <Route
             path={AppRoutes.Feed}
             element={
-              // <ProtectedRoute type={ProtectedRouteType.Private}>
-              <Feed />
-              // </ProtectedRoute>
+              <ProtectedRoute type={ProtectedRouteType.Private}>
+                <Feed />
+              </ProtectedRoute>
             }
           />
           <Route

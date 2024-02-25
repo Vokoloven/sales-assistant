@@ -4,13 +4,13 @@ import {createSlice} from "@reduxjs/toolkit";
 import type {IAccountDTO} from "submodules/interfaces/dto/account/iaccount.interface";
 import type {IAccessDTO} from "submodules/interfaces/dto/auth/iaccess.interface";
 
-import {login} from "../api/authApi";
+import {auth} from "../api/authApi";
 import {localStorageService} from "../service/localStorageService";
 import {RootState} from "../store";
 
 type Nullable<T> = T | null;
 
-const InitialState = {
+export const InitialState = {
   Access: "access",
   Account: "account",
 } as const;
@@ -27,10 +27,10 @@ const slice = createSlice({
   initialState: {account: null, access: null} as IInitialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addMatcher(login.endpoints.login.matchFulfilled, (state, {payload}) => {
+    builder.addMatcher(auth.endpoints.login.matchFulfilled, (state, {payload}) => {
       setLocalStorage(InitialState.Access, payload.data.access);
-      state.account = payload.data.account;
-      state.access = payload.data.access;
+      state[InitialState.Account] = payload.data.account;
+      state[InitialState.Access] = payload.data.access;
     });
   },
 });
@@ -39,4 +39,4 @@ const slice = createSlice({
 
 export default slice;
 
-export const selectCurrentUser = (state: RootState) => state.auth.account;
+export const selectAccess = (state: RootState) => state.auth.access;
