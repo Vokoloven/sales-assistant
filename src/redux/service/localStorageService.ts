@@ -2,7 +2,7 @@ type TSetLocalStorage<K, T> = (key: K, value: T) => void;
 type TGetLocalStorage<K, T> = (key: K) => T | null;
 type TRemoveLocalStorage<K> = (key: K) => void;
 
-export const queryLocalStorage = <K extends string, T>() => {
+export const localStorageService = <K extends string, T>() => {
   const setLocalStorage: TSetLocalStorage<K, T> = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
   };

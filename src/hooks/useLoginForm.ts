@@ -5,10 +5,12 @@ import {useDispatch} from "react-redux";
 import type {AppDispatch} from "redux/store";
 import {ILoginRequestDTO} from "submodules/interfaces/dto/auth/iadmin-login-request.interface";
 
-import {loginUserByEmail} from "../redux/thunk/authThunk";
+import {useLoginMutation} from "../redux/api/authApi";
+import {setCredentials} from "../redux/slice/authSlice";
 
 export const useLoginForm = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const [login] = useLoginMutation();
   const {
     register,
     handleSubmit,
@@ -21,7 +23,15 @@ export const useLoginForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<ILoginRequestDTO> = (data) => dispatch(loginUserByEmail(data));
+  const onSubmit: SubmitHandler<ILoginRequestDTO> = async (data) => {
+    try {
+      const user = await login(data).unwrap();
+
+      dispatch(setCredentials(user));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const isDirtyPassword = dirtyFields?.password;
 

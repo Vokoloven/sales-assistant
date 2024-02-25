@@ -1,7 +1,8 @@
 import {useState, useEffect} from "react";
 
-import {queryLocalStorage} from "utils/queryLocalStorage/queryLocalStorage";
 import {FilterKeys} from "utils/types/filterKeys";
+
+import {localStorageService} from "../redux/service/localStorageService";
 
 export const ThemeConfig = {
   Name: "theme",
@@ -14,7 +15,7 @@ type ThemeMode = FilterKeys<typeof ThemeConfig, "light" | "dark">;
 const {Dark, Light, Name} = ThemeConfig;
 const html = document.querySelector("html") as HTMLElement;
 
-const {getLocalStorage, setLocalStorage} = queryLocalStorage<typeof Name, ThemeMode>();
+const {getLocalStorage, setLocalStorage} = localStorageService<typeof Name, ThemeMode>();
 
 export const getTheme = () => {
   const theme = html.dataset[Name] as ThemeMode;
