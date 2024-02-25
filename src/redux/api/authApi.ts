@@ -1,32 +1,34 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-
 import {AppConfig} from "AppConfig";
+import type {IAccountResponseDTO} from "submodules/interfaces/dto/account/iaccount-response.interfaces";
 import type {ILoginRequestDTO} from "submodules/interfaces/dto/auth/iadmin-login-request.interface";
 import type {ILoginResponseDTO} from "submodules/interfaces/dto/auth/ilogin-response.interfaces";
+import type {IApiResponseGenericDTO} from "submodules/interfaces/dto/common/iapi-response.interface";
 
-import {headers} from "./headers/headers";
+import {adminApi} from "./adminApi";
+import {HTTP_METHODS} from "../utils";
 
-interface ILoginResponseActualData {
-  data: ILoginResponseDTO;
-}
-
-const baseQuery = fetchBaseQuery({
-  baseUrl: AppConfig.BaseUrl,
-  headers,
-});
-
-export const auth = createApi({
-  reducerPath: "login",
-  baseQuery: baseQuery,
+export const loginApi = adminApi.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation<ILoginResponseActualData, ILoginRequestDTO>({
+    login: builder.mutation<IApiResponseGenericDTO<ILoginResponseDTO>, ILoginRequestDTO>({
       query: (credentials) => ({
         url: AppConfig.Login,
-        method: "POST",
-        body: credentials,
+        method: HTTP_METHODS.POST,
+        body: {...credentials},
       }),
     }),
   }),
 });
 
-export const {useLoginMutation} = auth;
+export const recoverUserApi = adminApi.injectEndpoints({
+  endpoints: (builder) => ({
+    recoverUser: builder.query<{data: IAccountResponseDTO}, void>({
+      query: () => ({
+        url: AppConfig.RecoverUser,
+        method: HTTP_METHODS.GET,
+      }),
+    }),
+  }),
+});
+
+export const {useLoginMutation} = loginApi;
+export const {useRecoverUserQuery} = recoverUserApi;

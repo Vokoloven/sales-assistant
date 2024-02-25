@@ -5,7 +5,7 @@ import {AppRoutes} from "AppRoutes";
 import {KeyExtractor} from "utils/types/keyExtractor";
 
 import {ProtectedRouteType} from "./constants";
-import {selectAccess} from "../redux/slice/authSlice";
+import {selectAccount} from "../redux/slice/authSlice";
 
 interface IProps {
   children?: React.ReactNode;
@@ -13,16 +13,16 @@ interface IProps {
 }
 
 const ProtectedRoute = ({children, type}: IProps) => {
-  const access = useSelector(selectAccess);
+  const account = useSelector(selectAccount);
 
-  if (type === ProtectedRouteType.Private && !access) {
+  if (type === ProtectedRouteType.Private && !account) {
     return (
       <Navigate
         to={`/${AppRoutes.Login}`}
         replace
       />
     );
-  } else if (type === ProtectedRouteType.Public && access) {
+  } else if (type === ProtectedRouteType.Public && account) {
     return (
       <Navigate
         to={`/${AppRoutes.Feed}`}
