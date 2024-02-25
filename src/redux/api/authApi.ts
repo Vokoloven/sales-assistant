@@ -5,6 +5,10 @@ import {RootState} from "redux/store";
 import type {ILoginRequestDTO} from "submodules/interfaces/dto/auth/iadmin-login-request.interface";
 import type {ILoginResponseDTO} from "submodules/interfaces/dto/auth/ilogin-response.interfaces";
 
+interface ILoginResponseActualData {
+  data: ILoginResponseDTO;
+}
+
 import {headers} from "./headers/headers";
 
 const baseQuery = fetchBaseQuery({
@@ -24,17 +28,14 @@ const baseQuery = fetchBaseQuery({
 export const login = createApi({
   baseQuery,
   endpoints: (builder) => ({
-    login: builder.mutation<ILoginResponseDTO, ILoginRequestDTO>({
+    login: builder.mutation<ILoginResponseActualData, ILoginRequestDTO>({
       query: (credentials) => ({
         url: AppConfig.Login,
         method: "POST",
         body: credentials,
       }),
     }),
-    protected: builder.mutation<{message: string}, void>({
-      query: () => "protected",
-    }),
   }),
 });
 
-export const {useLoginMutation, useProtectedMutation} = login;
+export const {useLoginMutation} = login;
