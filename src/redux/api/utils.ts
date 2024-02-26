@@ -23,7 +23,7 @@ export const getBody = () => {
 };
 
 export const isAccessRestricted = (statusCode: number): boolean => {
-  if (statusCode === STATUS_CODE.FORBIDDEN) return true;
+  if (statusCode === STATUS_CODE.FORBIDDEN || statusCode === STATUS_CODE.UNAUTHORIZED) return true;
 
   return false;
 };

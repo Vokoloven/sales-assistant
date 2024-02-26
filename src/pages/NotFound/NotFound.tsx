@@ -33,7 +33,7 @@ const NotFound = () => {
           <div className={styles.sectionBoxInner}>
             <Button
               classname={styles.sectionButton}
-              size={ButtonSize.Small}
+              size={ButtonSize.Medium}
               text="Go to home page"
               onClick={() => navigate(AppRoutes.BaseUrl, {replace: true})}
             />
