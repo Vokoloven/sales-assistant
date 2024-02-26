@@ -1,23 +1,21 @@
 import {lazy, Suspense} from "react";
 import {Routes, Route, Navigate} from "react-router-dom";
 
+import {useTheme} from "hooks/useTheme";
 import {ProtectedRouteType} from "routes/constants";
+import Layout from "routes/Layout";
+import ProtectedRoute from "routes/ProtectedRoute";
 
 import {AppRoutes} from "./AppRoutes";
-import {useTheme} from "./hooks/useTheme";
 import {useRecoverUserQuery} from "./redux/api/authApi";
-import {} from "./redux/api/authApi";
 
 const Login = lazy(() => import("pages/Login/Login"));
 const Feed = lazy(() => import("pages/Feed/Feed"));
 const NotFound = lazy(() => import("pages/NotFound/NotFound"));
-const Layout = lazy(() => import("routes/Layout"));
-const ProtectedRoute = lazy(() => import("routes/ProtectedRoute"));
 
 function App() {
+  const {themeSwitcher} = useTheme();
   useRecoverUserQuery();
-
-  useTheme();
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
@@ -44,7 +42,7 @@ function App() {
             <Route element={<ProtectedRoute type={ProtectedRouteType.Private} />}>
               <Route
                 path={AppRoutes.Feed}
-                element={<Feed />}
+                element={<Feed themeSwitcher={themeSwitcher} />}
               />
             </Route>
             <Route

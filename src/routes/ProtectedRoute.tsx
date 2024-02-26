@@ -7,7 +7,6 @@ import {KeyExtractor} from "utils/types/keyExtractor";
 import {ProtectedRouteType} from "./constants";
 
 interface IProps {
-  children?: React.ReactNode;
   type: KeyExtractor<typeof ProtectedRouteType>;
 }
 
@@ -33,25 +32,3 @@ const ProtectedRoute = ({type}: IProps) => {
 };
 
 export default ProtectedRoute;
-
-// import {Outlet, useLocation, Navigate} from "react-router-dom";
-
-// import {AppRoutes} from "AppRoutes";
-// import {useAuth} from "hooks/useAuth";
-
-// const ProtectedRoute = () => {
-//   const {user} = useAuth();
-//   const location = useLocation();
-
-//   if (user) return <Outlet />;
-
-//   return (
-//     <Navigate
-//       to={AppRoutes.Login}
-//       state={{from: location}}
-//       replace
-//     />
-//   );
-// };
-
-// export default ProtectedRoute;

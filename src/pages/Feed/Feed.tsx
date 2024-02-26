@@ -5,14 +5,16 @@ import Button from "components/Button/Button";
 import {ButtonSize} from "components/Button/constants";
 import ButtonIcon from "components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "components/Icons/constants";
-import {useTheme, ThemeConfig, getTheme} from "hooks/useTheme";
+import {ThemeConfig, getTheme} from "hooks/useTheme";
 
 import styles from "./Feed.module.scss";
+import {useRecoverUserQuery} from "../../redux/api/authApi";
 
-const Feed = () => {
-  const {themeSwitcher} = useTheme();
+const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const theme = getTheme();
   const [collapsed, setCollapsed] = useState(false);
+
+  useRecoverUserQuery();
 
   return (
     <section className={styles.section}>
