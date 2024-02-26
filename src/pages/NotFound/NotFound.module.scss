@@ -31,11 +31,8 @@
 
     &Inner {
       padding: 10px;
-
-      &:last-child {
-        display: flex;
-        justify-content: center;
-      }
+      display: flex;
+      justify-content: center;
     }
   }
 
