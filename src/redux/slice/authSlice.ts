@@ -39,7 +39,6 @@ const slice = createSlice({
       state[InitialState.Access] = payload.data.access;
     });
     builder.addMatcher(recoverUserApi.endpoints.recoverUser.matchFulfilled, (state, {payload}) => {
-      console.log(payload.data);
       state[InitialState.Account] = payload.data.account;
     });
   },

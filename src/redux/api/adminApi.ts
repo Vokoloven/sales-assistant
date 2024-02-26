@@ -25,34 +25,34 @@ const {setLocalStorage} = localStorageService<typeof InitialState.Access, IAcces
 const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   IApiResponseGenericDTO<ILoginResponseDTO> | IApiResponseDTO,
-  IApiResponseDTO
+  {data: IApiResponseDTO}
 > = async (args, api, extraOptions) => {
   let result = (await baseQuery(args, api, extraOptions)) as QueryReturnValue<
     IApiResponseDTO,
-    IApiResponseDTO,
+    {data: IApiResponseDTO},
     FetchBaseQueryMeta
   >;
 
   const error = result?.error;
 
-  if (error && error.statusCode !== STATUS_CODE.SUCCESS) {
-    if (isAccessRestricted(error.statusCode) && typeof args !== "string" && args.url !== AppConfig.Login) {
+  if (error && error.data.statusCode !== STATUS_CODE.SUCCESS) {
+    if (isAccessRestricted(error.data.statusCode) && typeof args !== "string" && args.url !== AppConfig.Login) {
       const refreshTokenResult = (await baseQuery(
         {
           url: AppConfig.RefreshToken,
           method: HTTP_METHODS.PUT,
-          body: getBody(),
+          body: {...getBody()},
         },
         api,
         extraOptions,
-      )) as QueryReturnValue<IApiResponseGenericDTO<ILoginResponseDTO>, IApiResponseDTO, FetchBaseQueryMeta>;
+      )) as QueryReturnValue<IApiResponseGenericDTO<ILoginResponseDTO>, {data: IApiResponseDTO}, FetchBaseQueryMeta>;
       if (refreshTokenResult.data) {
         const {access} = refreshTokenResult.data.data;
         setLocalStorage(InitialState.Access, access);
 
         result = (await baseQuery(args, api, extraOptions)) as QueryReturnValue<
           IApiResponseGenericDTO<ILoginResponseDTO>,
-          IApiResponseDTO,
+          {data: IApiResponseDTO},
           FetchBaseQueryMeta
         >;
 
@@ -64,7 +64,6 @@ const baseQueryWithReauth: BaseQueryFn<
       return {error: refreshTokenResult.error};
     }
   }
-
 
   return result;
 };
