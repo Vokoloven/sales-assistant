@@ -35,20 +35,28 @@ export const useTheme = () => {
   });
 
   const themeSwitcher = () => {
-    setTheme((prevTheme) => {
-      const newTheme = prevTheme === Light ? Dark : Light;
+    if (theme) {
+      setTheme((prevTheme) => {
+        const newTheme = prevTheme === Light ? Dark : Light;
 
-      setLocalStorage(Name, newTheme);
+        setLocalStorage(Name, newTheme);
 
-      html.dataset[Name] = newTheme;
-      return newTheme;
-    });
+        html.dataset[Name] = newTheme;
+        return newTheme;
+      });
+    }
   };
 
   useEffect(() => {
-    window.addEventListener("storage", themeSwitcher);
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === Name) {
+        themeSwitcher();
+      }
+    };
 
-    return () => window.removeEventListener("storage", themeSwitcher);
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   useEffect(() => {
