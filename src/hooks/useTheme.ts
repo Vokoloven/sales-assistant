@@ -46,6 +46,12 @@ export const useTheme = () => {
   };
 
   useEffect(() => {
+    window.addEventListener("storage", themeSwitcher);
+
+    return () => window.removeEventListener("storage", themeSwitcher);
+  }, []);
+
+  useEffect(() => {
     html.dataset[Name] = theme;
   }, []);
 
