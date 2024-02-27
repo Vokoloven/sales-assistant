@@ -37,13 +37,13 @@
   }
 
   &Title {
-    @include font($fs: 40px, $fclr: $Gray800, $lh: 20px);
+    @include font($fs: 40px, $fclr: $Gray800, $lh: 45px);
     margin: 0;
     @include ellipsis;
   }
 
   &Heading {
-    @include font($fs: 20px, $fclr: $Gray800, $lh: 20px);
+    @include font($fs: 20px, $fclr: $Gray800, $lh: 25px);
     margin: 0;
     @include ellipsis;
   }
@@ -59,11 +59,11 @@
 html[data-theme="dark"] {
   .section {
     &Title {
-      @include font($fs: 40px, $fclr: $White, $lh: 40px);
+      @include font($fs: 40px, $fclr: $White, $lh: 45px);
     }
 
     &Heading {
-      @include font($fs: 20px, $fclr: $White, $lh: 40px);
+      @include font($fs: 20px, $fclr: $White, $lh: 25px);
     }
 
     &Description {

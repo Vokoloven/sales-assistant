@@ -9,5 +9,7 @@ export const useRefresh = () => {
 
   const access = getLocalStorage(InitialState.Access);
 
+  console.log(access);
+
   useRecoverUserQuery(undefined, {skip: !access});
 };
