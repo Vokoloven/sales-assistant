@@ -1,17 +1,41 @@
+import {useForm} from "react-hook-form";
+import type {SubmitHandler} from "react-hook-form";
+
 import Button from "components/Button/Button";
 import {ButtonType} from "components/Button/constants";
 import {InputType} from "components/Input/constants";
 import Input from "components/Input/Input";
-import {useLoginForm} from "hooks/useLoginForm";
 import {ILoginRequestDTO} from "submodules/interfaces/dto/auth/iadmin-login-request.interface";
 import {validator} from "utils/validators/validator";
 
 import styles from "./Login.module.scss";
+import {useLoginMutation} from "../../redux/api/authApi";
 
 const {email, password} = validator();
 
 const Login = () => {
-  const {errors, handleSubmit, onSubmit, register, isValid, isDirtyPassword} = useLoginForm();
+  const [login] = useLoginMutation();
+  const {
+    register,
+    handleSubmit,
+    formState: {errors, isValid, dirtyFields},
+  } = useForm<ILoginRequestDTO>({
+    mode: "all",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<ILoginRequestDTO> = async (data) => {
+    try {
+      await login(data).unwrap();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const isDirtyPassword = dirtyFields?.password;
 
   return (
     <section className={styles.section}>
