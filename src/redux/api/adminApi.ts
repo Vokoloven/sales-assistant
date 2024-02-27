@@ -1,18 +1,18 @@
-import type {QueryReturnValue} from "@reduxjs/toolkit/dist/query/baseQueryTypes";
-import type {BaseQueryFn, FetchArgs, FetchBaseQueryMeta} from "@reduxjs/toolkit/query";
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import type {QueryReturnValue} from '@reduxjs/toolkit/dist/query/baseQueryTypes';
+import type {BaseQueryFn, FetchArgs, FetchBaseQueryMeta} from '@reduxjs/toolkit/query';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-import {AppConfig} from "AppConfig";
-import type {IAccessDTO} from "submodules/interfaces/dto/auth/iaccess.interface";
-import type {ILoginResponseDTO} from "submodules/interfaces/dto/auth/ilogin-response.interfaces";
-import {IApiResponseDTO} from "submodules/interfaces/dto/common/iapi-response.interface";
-import type {IApiResponseGenericDTO} from "submodules/interfaces/dto/common/iapi-response.interface";
+import {AppConfig} from 'AppConfig';
+import type {IAccessDTO} from 'submodules/interfaces/dto/auth/iaccess.interface';
+import type {ILoginResponseDTO} from 'submodules/interfaces/dto/auth/ilogin-response.interfaces';
+import {IApiResponseDTO} from 'submodules/interfaces/dto/common/iapi-response.interface';
+import type {IApiResponseGenericDTO} from 'submodules/interfaces/dto/common/iapi-response.interface';
 
-import {getPreparedHeaders, getBody, isAccessRestricted} from "./utils";
-import {localStorageService} from "../service/localStorageService";
-import {InitialState} from "../slice/authSlice";
-import {logOut} from "../slice/authSlice";
-import {headers, HTTP_METHODS, STATUS_CODE} from "../utils";
+import {getPreparedHeaders, getBody, isAccessRestricted} from './utils';
+import {localStorageService} from '../service/localStorageService';
+import {InitialState} from '../slice/authSlice';
+import {logOut} from '../slice/authSlice';
+import {headers, HTTP_METHODS, STATUS_CODE} from '../utils';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: AppConfig.BaseUrl,
@@ -36,7 +36,7 @@ const baseQueryWithReauth: BaseQueryFn<
   const error = result?.error;
 
   if (error && error.data.statusCode !== STATUS_CODE.SUCCESS) {
-    if (isAccessRestricted(error.data.statusCode) && typeof args !== "string" && args.url !== AppConfig.Login) {
+    if (isAccessRestricted(error.data.statusCode) && typeof args !== 'string' && args.url !== AppConfig.Login) {
       const refreshTokenResult = (await baseQuery(
         {
           url: AppConfig.RefreshToken,
@@ -69,7 +69,7 @@ const baseQueryWithReauth: BaseQueryFn<
 };
 
 export const adminApi = createApi({
-  reducerPath: "adminApi",
+  reducerPath: 'adminApi',
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
   keepUnusedDataFor: 0,

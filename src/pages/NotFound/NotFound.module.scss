@@ -1,4 +1,4 @@
-@import "design/index.scss";
+@import 'design/index.scss';
 
 .section {
   display: flex;
@@ -56,7 +56,7 @@
   }
 }
 
-html[data-theme="dark"] {
+html[data-theme='dark'] {
   .section {
     &Title {
       @include font($fs: 40px, $fclr: $White, $lh: 45px);

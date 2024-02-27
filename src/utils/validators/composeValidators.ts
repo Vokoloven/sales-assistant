@@ -1,4 +1,4 @@
-import type {TCombineGeneralValidator, TCombineGeneralValidatorResult} from "./types/composeValidators";
+import type {TCombineGeneralValidator, TCombineGeneralValidatorResult} from './types/composeValidators';
 
 type TComposeValidator = (...validators: Array<TCombineGeneralValidator>) => TCombineGeneralValidatorResult;
 

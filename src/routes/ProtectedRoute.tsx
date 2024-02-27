@@ -1,10 +1,10 @@
-import {Navigate, Outlet} from "react-router-dom";
+import {Navigate, Outlet} from 'react-router-dom';
 
-import {AppRoutes} from "AppRoutes";
-import {useAuth} from "hooks/useAuth";
-import {KeyExtractor} from "utils/types/keyExtractor";
+import {AppRoutes} from 'AppRoutes';
+import {useAuth} from 'hooks/useAuth';
+import {KeyExtractor} from 'utils/types/keyExtractor';
 
-import {ProtectedRouteType} from "./constants";
+import {ProtectedRouteType} from './constants';
 
 interface IProps {
   type: KeyExtractor<typeof ProtectedRouteType>;

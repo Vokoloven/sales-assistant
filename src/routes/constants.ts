@@ -1,4 +1,4 @@
 export const ProtectedRouteType = {
-  Private: "private",
-  Public: "public",
+  Private: 'private',
+  Public: 'public',
 } as const;

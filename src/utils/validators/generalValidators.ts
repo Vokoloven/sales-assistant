@@ -1,5 +1,5 @@
-import type {TRequired, TMaxLength, TMinLength, TPattern} from "./types/generalValidators";
-import type {KeyExtractor} from "../types/keyExtractor";
+import type {TRequired, TMaxLength, TMinLength, TPattern} from './types/generalValidators';
+import type {KeyExtractor} from '../types/keyExtractor';
 
 type TGeneralValidator<T> = (obj: KeyExtractor<T>) => T;
 

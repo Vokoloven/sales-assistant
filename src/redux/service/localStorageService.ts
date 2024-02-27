@@ -15,7 +15,7 @@ export const localStorageService = <K extends string, T>() => {
         const parsedValue = JSON.parse(value) as T;
         return parsedValue;
       } catch (error) {
-        console.error("Error parsing value from local storage:", error);
+        console.error('Error parsing value from local storage:', error);
         return null;
       }
     }

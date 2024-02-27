@@ -1,15 +1,15 @@
-import {useForm} from "react-hook-form";
-import type {SubmitHandler} from "react-hook-form";
+import {useForm} from 'react-hook-form';
+import type {SubmitHandler} from 'react-hook-form';
 
-import Button from "components/Button/Button";
-import {ButtonType} from "components/Button/constants";
-import {InputType} from "components/Input/constants";
-import Input from "components/Input/Input";
-import {ILoginRequestDTO} from "submodules/interfaces/dto/auth/iadmin-login-request.interface";
-import {validator} from "utils/validators/validator";
+import Button from 'components/Button/Button';
+import {ButtonType} from 'components/Button/constants';
+import {InputType} from 'components/Input/constants';
+import Input from 'components/Input/Input';
+import {ILoginRequestDTO} from 'submodules/interfaces/dto/auth/iadmin-login-request.interface';
+import {validator} from 'utils/validators/validator';
 
-import styles from "./Login.module.scss";
-import {useLoginMutation} from "../../redux/api/authApi";
+import styles from './Login.module.scss';
+import {useLoginMutation} from '../../redux/api/authApi';
 
 const {email, password} = validator();
 
@@ -20,10 +20,10 @@ const Login = () => {
     handleSubmit,
     formState: {errors, isValid, dirtyFields},
   } = useForm<ILoginRequestDTO>({
-    mode: "all",
+    mode: 'all',
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 

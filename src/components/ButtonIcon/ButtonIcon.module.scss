@@ -1,4 +1,4 @@
-@import "design/index.scss";
+@import 'design/index.scss';
 
 .button {
   padding: 0;
@@ -21,7 +21,7 @@
   }
 }
 
-html[data-theme="dark"] {
+html[data-theme='dark'] {
   .button {
     &:hover {
       background-color: $BlueA800;

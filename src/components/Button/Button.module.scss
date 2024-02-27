@@ -1,4 +1,4 @@
-@import "design/index.scss";
+@import 'design/index.scss';
 
 .button {
   display: flex;
@@ -60,7 +60,7 @@
   }
 }
 
-html[data-theme="dark"] {
+html[data-theme='dark'] {
   .button {
     &.primary {
       @include darkColors($clr: $White);

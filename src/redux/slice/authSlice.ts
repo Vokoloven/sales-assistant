@@ -1,19 +1,19 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice} from '@reduxjs/toolkit';
 
-import type {IAccountDTO} from "submodules/interfaces/dto/account/iaccount.interface";
-import type {IAccessDTO} from "submodules/interfaces/dto/auth/iaccess.interface";
+import type {IAccountDTO} from 'submodules/interfaces/dto/account/iaccount.interface';
+import type {IAccessDTO} from 'submodules/interfaces/dto/auth/iaccess.interface';
 
-import {loginApi} from "../api/authApi";
-import {recoverUserApi} from "../api/authApi";
-import {localStorageService} from "../service/localStorageService";
-import {RootState} from "../store";
+import {loginApi} from '../api/authApi';
+import {recoverUserApi} from '../api/authApi';
+import {localStorageService} from '../service/localStorageService';
+import {RootState} from '../store';
 
 type Nullable<T> = T | null;
 
 export const InitialState = {
-  Access: "access",
-  Account: "account",
-  IsLogged: "isLogged",
+  Access: 'access',
+  Account: 'account',
+  IsLogged: 'isLogged',
 } as const;
 
 export interface IInitialState {
@@ -31,7 +31,7 @@ const initialState: IInitialState = {
 const {setLocalStorage, removeLocalStorage} = localStorageService<typeof InitialState.Access, IAccessDTO>();
 
 const slice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     logOut: (state) => {

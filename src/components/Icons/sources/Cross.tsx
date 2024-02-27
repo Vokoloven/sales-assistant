@@ -1,6 +1,6 @@
-import type {IIconProps} from "../types/icon";
+import type {IIconProps} from '../types/icon';
 
-export const Cross = ({viewBox = "0 0 16 16", width = "16", height = "16", className}: IIconProps) => (
+export const Cross = ({viewBox = '0 0 16 16', width = '16', height = '16', className}: IIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}

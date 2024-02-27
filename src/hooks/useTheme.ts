@@ -1,19 +1,19 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect} from 'react';
 
-import {FilterKeys} from "utils/types/filterKeys";
+import {FilterKeys} from 'utils/types/filterKeys';
 
-import {localStorageService} from "../redux/service/localStorageService";
+import {localStorageService} from '../redux/service/localStorageService';
 
 export const ThemeConfig = {
-  Name: "theme",
-  Light: "light",
-  Dark: "dark",
+  Name: 'theme',
+  Light: 'light',
+  Dark: 'dark',
 } as const;
 
-type ThemeMode = FilterKeys<typeof ThemeConfig, "light" | "dark">;
+type ThemeMode = FilterKeys<typeof ThemeConfig, 'light' | 'dark'>;
 
 const {Dark, Light, Name} = ThemeConfig;
-const html = document.querySelector("html") as HTMLElement;
+const html = document.querySelector('html') as HTMLElement;
 
 const {getLocalStorage, setLocalStorage} = localStorageService<typeof Name, ThemeMode>();
 
@@ -54,9 +54,9 @@ export const useTheme = () => {
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener('storage', handleStorageChange);
 
-    return () => window.removeEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   useEffect(() => {
