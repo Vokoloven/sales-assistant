@@ -8,13 +8,10 @@ import {IconAppName} from "components/Icons/constants";
 import {ThemeConfig, getTheme} from "hooks/useTheme";
 
 import styles from "./Feed.module.scss";
-import {useRecoverUserQuery} from "../../redux/api/authApi";
 
 const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const theme = getTheme();
   const [collapsed, setCollapsed] = useState(false);
-
-  useRecoverUserQuery();
 
   return (
     <section className={styles.section}>
