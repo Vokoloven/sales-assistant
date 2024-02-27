@@ -13,18 +13,26 @@ type Nullable<T> = T | null;
 export const InitialState = {
   Access: "access",
   Account: "account",
+  IsLogged: "isLogged",
 } as const;
 
 export interface IInitialState {
   [InitialState.Access]: Nullable<IAccessDTO>;
   [InitialState.Account]: Nullable<IAccountDTO>;
+  [InitialState.IsLogged]: boolean;
 }
+
+const initialState: IInitialState = {
+  [InitialState.Access]: null,
+  [InitialState.Account]: null,
+  [InitialState.IsLogged]: false,
+} as const;
 
 const {setLocalStorage, removeLocalStorage} = localStorageService<typeof InitialState.Access, IAccessDTO>();
 
 const slice = createSlice({
   name: "auth",
-  initialState: {account: null, access: null} as IInitialState,
+  initialState,
   reducers: {
     logOut: (state) => {
       state[InitialState.Access] = null;
