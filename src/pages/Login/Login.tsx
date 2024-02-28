@@ -5,8 +5,11 @@ import Button from "../../components/Button/Button";
 import {ButtonType} from "../../components/Button/constants";
 import {InputType} from "../../components/Input/constants";
 import Input from "../../components/Input/Input";
+import {NotifyType} from "../../components/Notify/constants";
+import Notify from "../../components/Notify/Notify";
 import {useLoginMutation} from "../../redux/api/authApi";
 import {ILoginRequestDTO} from "../../submodules/interfaces/dto/auth/iadmin-login-request.interface";
+import type {IApiResponseDTO} from "../../submodules/interfaces/dto/common/iapi-response.interface";
 import {validator} from "../../utils/validators/validator";
 
 import styles from "./Login.module.scss";
@@ -14,9 +17,12 @@ import styles from "./Login.module.scss";
 const {email, password} = validator();
 
 const Login = () => {
-  const [login] = useLoginMutation();
+  const [login, {error}] = useLoginMutation();
+  const {data} = (error as {data: IApiResponseDTO}) ?? {};
+
   const {
     register,
+    reset,
     handleSubmit,
     formState: {errors, isValid, dirtyFields},
   } = useForm<ILoginRequestDTO>({
@@ -27,15 +33,27 @@ const Login = () => {
     },
   });
 
+  const isDirtyPassword = dirtyFields?.password;
+
+  const handleErrorMessage = () => {
+    const isDirtyFields = Boolean(Object.keys(dirtyFields).length);
+
+    if (!isDirtyFields && data?.error?.errorCode) {
+      return data.error.errorCode;
+    } else {
+      return "";
+    }
+  };
+
   const onSubmit: SubmitHandler<ILoginRequestDTO> = async (data) => {
     try {
       await login(data).unwrap();
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    } finally {
+      reset(data);
     }
   };
-
-  const isDirtyPassword = dirtyFields?.password;
 
   return (
     <section className={styles.section}>
@@ -52,6 +70,10 @@ const Login = () => {
             </div>
           </div>
           <div className={styles.sectionAsideBoxOuter}>
+            <Notify
+              type={NotifyType.Error}
+              message={handleErrorMessage()}
+            />
             <form
               className={styles.sectionForm}
               onSubmit={handleSubmit(onSubmit)}
