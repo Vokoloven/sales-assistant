@@ -14,6 +14,8 @@ const Icons: TIcon = {
   [IconAppName.Moon]: makeIcon(IconInstance.Moon),
   [IconAppName.Sun]: makeIcon(IconInstance.Sun),
   [IconAppName.Cross]: makeIcon(IconInstance.Cross),
+  [IconAppName.ChevronRight]: makeIcon(IconInstance.Chevron),
+  [IconAppName.User]: makeIcon(IconInstance.User),
 };
 
 export default Icons;

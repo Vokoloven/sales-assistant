@@ -1,16 +1,19 @@
 import classnames from "classnames";
 import {useState} from "react";
+import {useSelector} from "react-redux";
 
 import Button from "../../components/Button/Button";
 import {ButtonSize} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "../../components/Icons/constants";
 import {ThemeConfig, getTheme} from "../../hooks/useTheme";
+import {selectUser} from "../../redux/slice/authSlice";
 
 import styles from "./Feed.module.scss";
 
 const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const theme = getTheme();
+  const user = useSelector(selectUser);
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -27,6 +30,18 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
             </div>
           </div>
         </div>
+        <div className={styles.sectionSidebarBox}>
+          <div className={styles.sectionSidebarBoxOuter}>
+            <div className={styles.sectionSidebarBoxInner}>
+              <Button
+                text={user?.email ?? ""}
+                iconBefore={IconAppName.User}
+                iconAfter={IconAppName.ChevronRight}
+                classname={styles.sectionSidebarBoxInnerUserButton}
+              />
+            </div>
+          </div>
+        </div>
       </aside>
       <div className={classnames(styles.sectionContent, {[`${styles.collapsed}`]: collapsed})}>
         <header className={styles.sectionHeader}>
@@ -37,7 +52,7 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                   onClick={() => setCollapsed((prevCollapsed) => !prevCollapsed)}
                   icon={collapsed ? IconAppName.Menu : IconAppName.CollapseMenu}
                   iconProps={{className: styles.sectionIcon}}
-                  className={styles.sectionSidebarIconButton}
+                  className={styles.sectionHeaderBoxInnerIconButton}
                   ariaLabel={"Menu toggler"}
                 />
               </div>
@@ -58,7 +73,7 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                   onClick={themeSwitcher}
                   icon={theme === ThemeConfig.Light ? IconAppName.Moon : IconAppName.Sun}
                   iconProps={{className: styles.sectionIcon}}
-                  className={classnames(styles.sectionSidebarIconButton, {[`${styles.collapsed}`]: collapsed})}
+                  className={classnames(styles.sectionHeaderBoxInnerIconButton, {[`${styles.collapsed}`]: collapsed})}
                   ariaLabel={"Sidebar collapse"}
                 />
               </div>
