@@ -1,12 +1,9 @@
 import {useRecoverUserQuery} from "../redux/api/authApi";
-import {localStorageService} from "../redux/service/localStorageService";
-import {InitialState} from "../redux/slice/authSlice";
-import type {IInitialState} from "../redux/slice/authSlice";
+
+import {useAuth} from "./useAuth";
 
 export const useRefresh = () => {
-  const {getLocalStorage} = localStorageService<typeof InitialState.Access, IInitialState>();
-
-  const access = getLocalStorage(InitialState.Access);
+  const {access} = useAuth();
 
   useRecoverUserQuery(undefined, {skip: !access});
 };

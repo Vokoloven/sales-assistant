@@ -1,8 +1,8 @@
 import {useNavigate} from "react-router-dom";
 
-import {AppRoutes} from "AppRoutes";
-import Button from "components/Button/Button";
-import {ButtonSize} from "components/Button/constants";
+import {AppRoutes} from "../../AppRoutes";
+import Button from "../../components/Button/Button";
+import {ButtonSize} from "../../components/Button/constants";
 
 import styles from "./NotFound.module.scss";
 

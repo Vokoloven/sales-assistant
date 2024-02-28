@@ -1,4 +1,4 @@
-@import "design/index.scss";
+@import "../../design/index.scss";
 
 .input {
   width: 100%;
@@ -47,7 +47,7 @@
 
     transform: translate(-50%, -50%);
 
-    fill: $White !important;
+    fill: $White;
   }
 }
 

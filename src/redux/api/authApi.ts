@@ -1,11 +1,11 @@
-import {AppConfig} from "AppConfig";
-import type {IAccountResponseDTO} from "submodules/interfaces/dto/account/iaccount-response.interfaces";
-import type {ILoginRequestDTO} from "submodules/interfaces/dto/auth/iadmin-login-request.interface";
-import type {ILoginResponseDTO} from "submodules/interfaces/dto/auth/ilogin-response.interfaces";
-import type {IApiResponseGenericDTO} from "submodules/interfaces/dto/common/iapi-response.interface";
+import {AppConfig} from "../../AppConfig";
+import type {IAccountResponseDTO} from "../../submodules/interfaces/dto/account/iaccount-response.interfaces";
+import type {ILoginRequestDTO} from "../../submodules/interfaces/dto/auth/iadmin-login-request.interface";
+import type {ILoginResponseDTO} from "../../submodules/interfaces/dto/auth/ilogin-response.interfaces";
+import type {IApiResponseGenericDTO} from "../../submodules/interfaces/dto/common/iapi-response.interface";
+import {HTTP_METHODS} from "../utils";
 
 import {adminApi} from "./adminApi";
-import {HTTP_METHODS} from "../utils";
 
 export const loginApi = adminApi.injectEndpoints({
   endpoints: (builder) => ({

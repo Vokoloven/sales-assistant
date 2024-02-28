@@ -1,5 +1,4 @@
-import type {IAccessDTO} from "submodules/interfaces/dto/auth/iaccess.interface";
-
+import type {IAccessDTO} from "../../submodules/interfaces/dto/auth/iaccess.interface";
 import {localStorageService} from "../service/localStorageService";
 import {InitialState} from "../slice/authSlice";
 import {STATUS_CODE} from "../utils";

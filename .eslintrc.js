@@ -30,8 +30,15 @@ module.exports = {
     "import/order": [
       "error",
       {
-        groups: [["builtin", "external"], "internal", ["parent", "sibling", "index"]],
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
         "newlines-between": "always",
+        "pathGroups": [
+          {
+            "pattern": "styles",
+            "group": "unknown",
+            "position": "after",
+          },
+        ],
         alphabetize: {
           order: "asc",
           caseInsensitive: true,
@@ -70,6 +77,9 @@ module.exports = {
     "react/display-name": "off",
   },
   settings: {
+    "react": {
+      "version": "^18.2.0",
+    },
     "import/resolver": {
       typescript: {},
     },
