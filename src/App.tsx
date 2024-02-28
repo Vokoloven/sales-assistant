@@ -2,6 +2,7 @@ import {lazy, Suspense} from "react";
 import {Routes, Route, Navigate} from "react-router-dom";
 
 import {AppRoutes} from "./AppRoutes";
+import Progress from "./components/Progress/Progress";
 import {useRefresh} from "./hooks/useRefresh";
 import {useTheme} from "./hooks/useTheme";
 import {ProtectedRouteType} from "./routes/constants";
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <>
-      <Suspense fallback={<div></div>}>
+      <Suspense fallback={<Progress />}>
         <Routes>
           <Route
             path="/"
