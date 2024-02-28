@@ -1,0 +1,90 @@
+@import "../../design/index.scss";
+
+.box {
+  padding: 10px 15px;
+
+  @include mobile {
+    padding: 10px 4px;
+  }
+}
+
+.notify {
+  width: 100%;
+  padding: 8px 12px;
+
+  border-radius: 8px;
+
+  &Wrapper {
+    margin: 0 -6px;
+
+    &Outer {
+      padding: 0 3px;
+    }
+
+    &Inner {
+      position: relative;
+      display: block;
+      padding: 0 3px;
+
+      @include ellipsis;
+    }
+  }
+
+  &Title {
+    display: block;
+    @include font($fw: 500, $lh: 24px);
+    padding-left: 36px;
+    @include ellipsis;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      transform: translateY(-50%);
+
+      width: 24px;
+      height: 24px;
+
+      background-image: (url("../../design/images/icons/errorLight.svg"));
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
+  &Message {
+    display: block;
+    @include ellipsis;
+
+    @include font($fs: 14px, $lh: 20px);
+    padding-left: 36px;
+  }
+
+  &.error {
+    background-color: $Error200;
+  }
+}
+
+html[data-theme="dark"] {
+  .notify {
+    &Inner {
+      background-color: $White;
+    }
+
+    &Title {
+      @include font($fclr: $White, $lh: 24px, $fw: 500);
+
+      &::after {
+        background-image: (url("../../design/images/icons/errorDark.svg"));
+      }
+    }
+
+    &Message {
+      @include font($fs: 14px, $lh: 20px, $fclr: $White);
+    }
+
+    &.error {
+      background-color: $ErrorA200;
+    }
+  }
+}
