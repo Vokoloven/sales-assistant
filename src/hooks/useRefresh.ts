@@ -1,5 +1,6 @@
-import {useAuth} from "./useAuth";
 import {useRecoverUserQuery} from "../redux/api/authApi";
+
+import {useAuth} from "./useAuth";
 
 export const useRefresh = () => {
   const {access} = useAuth();

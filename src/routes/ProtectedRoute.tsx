@@ -1,9 +1,10 @@
 import {Navigate, Outlet} from "react-router-dom";
 
-import {ProtectedRouteType} from "./constants";
 import {AppRoutes} from "../AppRoutes";
 import {useAuth} from "../hooks/useAuth";
 import {KeyExtractor} from "../utils/types/keyExtractor";
+
+import {ProtectedRouteType} from "./constants";
 
 interface IProps {
   type: KeyExtractor<typeof ProtectedRouteType>;
