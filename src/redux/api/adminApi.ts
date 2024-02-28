@@ -2,13 +2,12 @@ import type {QueryReturnValue} from '@reduxjs/toolkit/dist/query/baseQueryTypes'
 import type {BaseQueryFn, FetchArgs, FetchBaseQueryMeta} from '@reduxjs/toolkit/query';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-import {AppConfig} from 'AppConfig';
-import type {IAccessDTO} from 'submodules/interfaces/dto/auth/iaccess.interface';
-import type {ILoginResponseDTO} from 'submodules/interfaces/dto/auth/ilogin-response.interfaces';
-import {IApiResponseDTO} from 'submodules/interfaces/dto/common/iapi-response.interface';
-import type {IApiResponseGenericDTO} from 'submodules/interfaces/dto/common/iapi-response.interface';
-
 import {getPreparedHeaders, getBody, isAccessRestricted} from './utils';
+import {AppConfig} from '../../AppConfig';
+import type {IAccessDTO} from '../../submodules/interfaces/dto/auth/iaccess.interface';
+import type {ILoginResponseDTO} from '../../submodules/interfaces/dto/auth/ilogin-response.interfaces';
+import type {IApiResponseGenericDTO} from '../../submodules/interfaces/dto/common/iapi-response.interface';
+import {IApiResponseDTO} from '../../submodules/interfaces/dto/common/iapi-response.interface';
 import {localStorageService} from '../service/localStorageService';
 import {InitialState} from '../slice/authSlice';
 import {logOut} from '../slice/authSlice';

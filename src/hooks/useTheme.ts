@@ -1,8 +1,7 @@
 import {useState, useEffect} from 'react';
 
-import {FilterKeys} from 'utils/types/filterKeys';
-
 import {localStorageService} from '../redux/service/localStorageService';
+import {FilterKeys} from '../utils/types/filterKeys';
 
 export const ThemeConfig = {
   Name: 'theme',

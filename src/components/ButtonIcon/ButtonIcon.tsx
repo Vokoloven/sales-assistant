@@ -1,8 +1,7 @@
 import classnames from 'classnames';
 
-import {KeyExtractor} from 'utils/types/keyExtractor';
-
 import styles from './ButtonIcon.module.scss';
+import {KeyExtractor} from '../../utils/types/keyExtractor';
 import {ButtonType} from '../Button/constants';
 import {IconAppName} from '../Icons/constants';
 import Icons from '../Icons/Icons';

@@ -1,17 +1,16 @@
 import {lazy, Suspense} from 'react';
 import {Routes, Route, Navigate} from 'react-router-dom';
 
-import {useRefresh} from 'hooks/useRefresh';
-import {useTheme} from 'hooks/useTheme';
-// import {ProtectedRouteType} from "routes/constants";
-import Layout from 'routes/Layout';
-// import ProtectedRoute from "routes/ProtectedRoute";
-
 import {AppRoutes} from './AppRoutes';
+import {useRefresh} from './hooks/useRefresh';
+import {useTheme} from './hooks/useTheme';
+import {ProtectedRouteType} from './routes/constants';
+import Layout from './routes/Layout';
+import ProtectedRoute from './routes/ProtectedRoute';
 
-const Login = lazy(() => import('pages/Login/Login'));
-const Feed = lazy(() => import('pages/Feed/Feed'));
-const NotFound = lazy(() => import('pages/NotFound/NotFound'));
+const Login = lazy(() => import('./pages/Login/Login'));
+const Feed = lazy(() => import('./pages/Feed/Feed'));
+const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
 
 function App() {
   const {themeSwitcher} = useTheme();
@@ -19,7 +18,7 @@ function App() {
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div></div>}>
         <Routes>
           <Route
             path="/"
@@ -34,23 +33,23 @@ function App() {
                 />
               }
             />
-            {/* <Route element={<ProtectedRoute type={ProtectedRouteType.Public} />}> */}
+            <Route element={<ProtectedRoute type={ProtectedRouteType.Public} />}>
+              <Route
+                path={AppRoutes.Login}
+                element={<Login />}
+              />
+            </Route>
+            <Route element={<ProtectedRoute type={ProtectedRouteType.Private} />}>
+              <Route
+                path={AppRoutes.Feed}
+                element={<Feed themeSwitcher={themeSwitcher} />}
+              />
+            </Route>
             <Route
-              path={AppRoutes.Login}
-              element={<Login />}
+              path={AppRoutes.NotFound}
+              element={<NotFound />}
             />
           </Route>
-          {/* <Route element={<ProtectedRoute type={ProtectedRouteType.Private} />}> */}
-          <Route
-            path={AppRoutes.Feed}
-            element={<Feed themeSwitcher={themeSwitcher} />}
-          />
-          {/* </Route> */}
-          <Route
-            path={AppRoutes.NotFound}
-            element={<NotFound />}
-          />
-          {/* </Route> */}
         </Routes>
       </Suspense>
     </>

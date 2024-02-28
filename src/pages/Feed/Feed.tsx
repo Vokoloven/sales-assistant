@@ -1,13 +1,12 @@
 import classnames from 'classnames';
 import {useState} from 'react';
 
-import Button from 'components/Button/Button';
-import {ButtonSize} from 'components/Button/constants';
-import ButtonIcon from 'components/ButtonIcon/ButtonIcon';
-import {IconAppName} from 'components/Icons/constants';
-import {ThemeConfig, getTheme} from 'hooks/useTheme';
-
 import styles from './Feed.module.scss';
+import Button from '../../components/Button/Button';
+import {ButtonSize} from '../../components/Button/constants';
+import ButtonIcon from '../../components/ButtonIcon/ButtonIcon';
+import {IconAppName} from '../../components/Icons/constants';
+import {ThemeConfig, getTheme} from '../../hooks/useTheme';
 
 const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const theme = getTheme();
