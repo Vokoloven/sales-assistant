@@ -3,18 +3,18 @@ import {useState, useEffect} from "react";
 import styles from "./Progress.module.scss";
 
 const Progress = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(50);
 
   useEffect(() => {
     const id = setInterval(() => {
       setValue((prevValue) => {
-        if (prevValue >= 100) {
-          return (prevValue = 0);
+        if (prevValue >= 1000) {
+          return (prevValue = 50);
         } else {
-          return (prevValue += 20);
+          return (prevValue += prevValue * (1 / 50));
         }
       });
-    }, 300);
+    }, 10);
 
     return () => clearInterval(id);
   }, []);
@@ -26,7 +26,7 @@ const Progress = () => {
           role="progressbar"
           className={styles.progressBoxProgress}
           value={value}
-          max={100}
+          max={1000}
         ></progress>
       </div>
     </div>
