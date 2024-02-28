@@ -1,8 +1,8 @@
 import {Navigate, Outlet} from "react-router-dom";
 
-import {AppRoutes} from "AppRoutes";
-import {useAuth} from "hooks/useAuth";
-import {KeyExtractor} from "utils/types/keyExtractor";
+import {AppRoutes} from "../AppRoutes";
+import {useAuth} from "../hooks/useAuth";
+import {KeyExtractor} from "../utils/types/keyExtractor";
 
 import {ProtectedRouteType} from "./constants";
 
@@ -11,16 +11,16 @@ interface IProps {
 }
 
 const ProtectedRoute = ({type}: IProps) => {
-  const {user} = useAuth();
+  const {access} = useAuth();
 
-  if (type === ProtectedRouteType.Private && !user) {
+  if (type === ProtectedRouteType.Private && Boolean(!access)) {
     return (
       <Navigate
         to={`/${AppRoutes.Login}`}
         replace
       />
     );
-  } else if (type === ProtectedRouteType.Public && user) {
+  } else if (type === ProtectedRouteType.Public && Boolean(access)) {
     return (
       <Navigate
         to={`/${AppRoutes.Feed}`}
