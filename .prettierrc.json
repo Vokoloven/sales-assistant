@@ -1,5 +1,5 @@
 {
-  "singleQuote": true,
+  "singleQuote": false,
   "bracketSpacing": false,
   "arrowParens": "always",
   "printWidth": 120,
@@ -9,7 +9,7 @@
     {
       "files": "*.scss",
       "options": {
-        "singleQuote": true
+        "singleQuote": false
       }
     }
   ],

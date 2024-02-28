@@ -1,8 +1,8 @@
-import {configureStore} from '@reduxjs/toolkit';
-import {combineReducers} from '@reduxjs/toolkit';
+import {configureStore} from "@reduxjs/toolkit";
+import {combineReducers} from "@reduxjs/toolkit";
 
-import {adminApi} from './api/adminApi';
-import authSlice from './slice/authSlice';
+import {adminApi} from "./api/adminApi";
+import authSlice from "./slice/authSlice";
 
 const rootReducer = combineReducers({
   [adminApi.reducerPath]: adminApi.reducer,

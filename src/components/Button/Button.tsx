@@ -1,11 +1,11 @@
-import classnames from 'classnames';
+import classnames from "classnames";
 
-import styles from './Button.module.scss';
-import {ButtonType, ButtonColor, ButtonSize} from './constants';
-import type {KeyExtractor} from '../../utils/types/keyExtractor';
-import {IconAppName} from '../Icons/constants';
-import Icons from '../Icons/Icons';
-import type {TIconComponent, IIconProps} from '../Icons/types/icon';
+import styles from "./Button.module.scss";
+import {ButtonType, ButtonColor, ButtonSize} from "./constants";
+import type {KeyExtractor} from "../../utils/types/keyExtractor";
+import {IconAppName} from "../Icons/constants";
+import Icons from "../Icons/Icons";
+import type {TIconComponent, IIconProps} from "../Icons/types/icon";
 
 interface Button {
   text: string;

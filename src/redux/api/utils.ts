@@ -1,7 +1,7 @@
-import type {IAccessDTO} from '../../submodules/interfaces/dto/auth/iaccess.interface';
-import {localStorageService} from '../service/localStorageService';
-import {InitialState} from '../slice/authSlice';
-import {STATUS_CODE} from '../utils';
+import type {IAccessDTO} from "../../submodules/interfaces/dto/auth/iaccess.interface";
+import {localStorageService} from "../service/localStorageService";
+import {InitialState} from "../slice/authSlice";
+import {STATUS_CODE} from "../utils";
 
 const {getLocalStorage} = localStorageService<typeof InitialState.Access, IAccessDTO>();
 
@@ -9,7 +9,7 @@ export const getPreparedHeaders = (headers: Headers) => {
   const parsedTokens = getLocalStorage(InitialState.Access);
 
   if (parsedTokens?.accessToken) {
-    headers.set('authorization', `Bearer ${parsedTokens?.accessToken}`);
+    headers.set("authorization", `Bearer ${parsedTokens?.accessToken}`);
   }
 
   return headers;

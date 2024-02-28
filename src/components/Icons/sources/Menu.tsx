@@ -1,6 +1,6 @@
-import type {IIconProps} from '../types/icon';
+import type {IIconProps} from "../types/icon";
 
-export const Menu = ({viewBox = '0 0 24 24', width = '24', height = '24', className}: IIconProps) => (
+export const Menu = ({viewBox = "0 0 24 24", width = "24", height = "24", className}: IIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}

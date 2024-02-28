@@ -1,4 +1,4 @@
-@import '../../design/index.scss';
+@import "../../design/index.scss";
 
 .input {
   width: 100%;
@@ -51,7 +51,7 @@
   }
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   .input {
     background-color: $Black;
     color: $White;

@@ -1,11 +1,11 @@
-export const headers = {'Content-Type': 'application/json'} as const;
+export const headers = {"Content-Type": "application/json"} as const;
 
 export const HTTP_METHODS = {
-  GET: 'GET',
-  POST: 'POST',
-  PUT: 'PUT',
-  PATCH: 'PATCH',
-  DELETE: 'DELETE',
+  GET: "GET",
+  POST: "POST",
+  PUT: "PUT",
+  PATCH: "PATCH",
+  DELETE: "DELETE",
 } as const;
 
 export const STATUS_CODE = {

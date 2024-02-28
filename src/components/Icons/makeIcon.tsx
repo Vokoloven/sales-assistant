@@ -1,4 +1,4 @@
-import type {TIconComponent, IIconProps} from './types/icon';
+import type {TIconComponent, IIconProps} from "./types/icon";
 
 export const makeIcon = (
   Icon: TIconComponent,

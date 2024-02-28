@@ -1,12 +1,12 @@
-import classnames from 'classnames';
-import {useState} from 'react';
+import classnames from "classnames";
+import {useState} from "react";
 
-import styles from './Feed.module.scss';
-import Button from '../../components/Button/Button';
-import {ButtonSize} from '../../components/Button/constants';
-import ButtonIcon from '../../components/ButtonIcon/ButtonIcon';
-import {IconAppName} from '../../components/Icons/constants';
-import {ThemeConfig, getTheme} from '../../hooks/useTheme';
+import styles from "./Feed.module.scss";
+import Button from "../../components/Button/Button";
+import {ButtonSize} from "../../components/Button/constants";
+import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
+import {IconAppName} from "../../components/Icons/constants";
+import {ThemeConfig, getTheme} from "../../hooks/useTheme";
 
 const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const theme = getTheme();
@@ -37,7 +37,7 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                   icon={collapsed ? IconAppName.Menu : IconAppName.CollapseMenu}
                   iconProps={{className: styles.sectionIcon}}
                   className={styles.sectionSidebarIconButton}
-                  ariaLabel={'Menu toggler'}
+                  ariaLabel={"Menu toggler"}
                 />
               </div>
             </div>
@@ -58,7 +58,7 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                   icon={theme === ThemeConfig.Light ? IconAppName.Moon : IconAppName.Sun}
                   iconProps={{className: styles.sectionIcon}}
                   className={classnames(styles.sectionSidebarIconButton, {[`${styles.collapsed}`]: collapsed})}
-                  ariaLabel={'Sidebar collapse'}
+                  ariaLabel={"Sidebar collapse"}
                 />
               </div>
             </div>
