@@ -18,7 +18,7 @@
     border-color: $BlueA300;
 
     &:disabled {
-      @include font($fclr: $Gray400);
+      @include font($lh: 24px, $fclr: $Gray400);
     }
 
     &:not(:disabled):hover {
