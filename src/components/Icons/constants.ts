@@ -7,6 +7,7 @@ export const IconInstanceName = {
   Cross: "Cross",
   Chevron: "Chevron",
   User: "User",
+  LogOut: "LogOut",
 } as const;
 
 export const IconAppName = {
@@ -18,4 +19,5 @@ export const IconAppName = {
   Cross: "Cross",
   ChevronRight: "ChevronRight",
   User: "User",
+  LogOut: "LogOut",
 } as const;

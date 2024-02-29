@@ -1,20 +1,36 @@
 import classnames from "classnames";
 import {useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import Button from "../../components/Button/Button";
 import {ButtonSize} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "../../components/Icons/constants";
+import Tooltip from "../../components/Tooltip/Tooltip";
+import type {TElements} from "../../components/Tooltip/types/tooltip";
 import {ThemeConfig, getTheme} from "../../hooks/useTheme";
 import {selectUser} from "../../redux/slice/authSlice";
+import {logOut} from "../../redux/slice/authSlice";
 
 import styles from "./Feed.module.scss";
 
 const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const theme = getTheme();
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const [collapsed, setCollapsed] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const elements: TElements = [
+    {
+      id: 1,
+      iconBefore: IconAppName.LogOut,
+      text: "Test",
+      onClick: () => {
+        dispatch(logOut());
+      },
+    },
+  ];
 
   return (
     <section className={styles.section}>
@@ -33,12 +49,19 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
         <div className={styles.sectionSidebarBox}>
           <div className={styles.sectionSidebarBoxOuter}>
             <div className={styles.sectionSidebarBoxInner}>
-              <Button
-                text={user?.email ?? ""}
-                iconBefore={IconAppName.User}
-                iconAfter={IconAppName.ChevronRight}
-                classname={styles.sectionSidebarBoxInnerUserButton}
-              />
+              <Tooltip
+                elements={elements}
+                open={open}
+                setOpen={setOpen}
+              >
+                <Button
+                  text={user?.email ?? ""}
+                  iconBefore={IconAppName.User}
+                  iconAfter={IconAppName.ChevronRight}
+                  classname={styles.sectionSidebarBoxInnerUserButton}
+                  onClick={() => setOpen((prevOpen) => !prevOpen)}
+                />
+              </Tooltip>
             </div>
           </div>
         </div>
