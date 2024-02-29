@@ -5,6 +5,9 @@ export const IconInstanceName = {
   Sun: "Sun",
   Moon: "Moon",
   Cross: "Cross",
+  Chevron: "Chevron",
+  User: "User",
+  LogOut: "LogOut",
 } as const;
 
 export const IconAppName = {
@@ -14,4 +17,7 @@ export const IconAppName = {
   Sun: "Sun",
   Moon: "Moon",
   Cross: "Cross",
+  ChevronRight: "ChevronRight",
+  User: "User",
+  LogOut: "LogOut",
 } as const;

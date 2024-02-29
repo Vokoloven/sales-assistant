@@ -6,6 +6,7 @@ export const ButtonType = {
 
 export const ButtonColor = {
   Primary: "primary",
+  Tooltip: "tooltip",
 } as const;
 
 export const ButtonSize = {

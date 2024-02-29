@@ -59,3 +59,4 @@ export const {logOut} = slice.actions;
 export default slice;
 
 export const selectIsLogged = (state: RootState) => state.auth.isLogged;
+export const selectUser = (state: RootState) => state.auth.account;

@@ -48,9 +48,7 @@ const Login = () => {
   const onSubmit: SubmitHandler<ILoginRequestDTO> = async (data) => {
     try {
       await login(data).unwrap();
-    } catch (error) {
-      console.error(error);
-    } finally {
+    } catch (error) { /* empty */ } finally {
       reset(data);
     }
   };

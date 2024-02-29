@@ -1,0 +1,68 @@
+@import "../../design/index.scss";
+
+.wrapper {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: $White;
+  border-radius: 8px;
+  width: 100%;
+
+  &.top {
+    transform: translateY(-100%);
+  }
+
+  &.right {
+    transform: translateX(100%);
+  }
+
+  &.bottom {
+    transform: translateY(100%);
+  }
+
+  &.left {
+    transform: translateX(-100%);
+  }
+
+  &Button {
+    justify-content: flex-start;
+    padding: 11px;
+    gap: 8px;
+    border-width: 1px;
+    border-color: tomato;
+
+    &.couple {
+      &:first-child {
+        border-bottom: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      &:last-child {
+        border-top: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+
+    &.alot {
+      &:not(:first-child):not(:last-child) {
+        border-radius: 0;
+        border-top: 0;
+        border-bottom: 0;
+      }
+
+      &:first-child {
+        border-bottom: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      &:last-child {
+        border-top: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+  }
+}
