@@ -5,6 +5,7 @@ import {Chevron} from "./Chevron";
 import {CollapseMenu} from "./CollapseMenu";
 import {Cross} from "./Cross";
 import {Eye} from "./Eye";
+import {Feed} from "./Feed";
 import {LogOut} from "./LogOut";
 import {Menu} from "./Menu";
 import {Moon} from "./Moon";
@@ -25,4 +26,5 @@ export const IconInstance: TIconInstance = {
   Chevron,
   User,
   LogOut,
+  Feed,
 };

@@ -32,7 +32,7 @@
 
   &.tooltip {
     background-color: $White;
-    border-color: $Gray300;
+    border-color: $Gray600;
 
     &:disabled {
       @include font($lh: 24px, $fclr: $Gray400);
@@ -42,7 +42,7 @@
       background-color: $Gray100;
     }
     &:not(:disabled):focus {
-      background-color: $Gray300;
+      background-color: $Gray600;
       outline: none;
     }
   }
@@ -96,7 +96,7 @@ html[data-theme="dark"] {
     }
 
     &.tooltip {
-      @include darkColors($clr: $White, $bc: $Gray300);
+      @include darkColors($clr: $White, $bc: $Gray400);
 
       &:disabled {
         @include darkColors($clr: $Gray400);
@@ -107,7 +107,7 @@ html[data-theme="dark"] {
       }
 
       &:not(:disabled):focus {
-        background-color: $Gray300;
+        background-color: $Gray400;
       }
     }
 

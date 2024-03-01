@@ -1,9 +1,11 @@
 import classnames from "classnames";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
+import {AppRoutes} from "../../AppRoutes";
 import Button from "../../components/Button/Button";
-import {ButtonSize} from "../../components/Button/constants";
+import {ButtonColor, ButtonSize} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "../../components/Icons/constants";
 import Tooltip from "../../components/Tooltip/Tooltip";
@@ -25,8 +27,7 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const user = useSelector(selectUser);
   const [collapsed, setCollapsed] = useState(false);
   const [open, setOpen] = useState(false);
-
-  console.log(isLogged);
+  const navigate = useNavigate();
 
   useGetFeedsQuery(
     {
@@ -64,6 +65,13 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
         <div className={styles.sectionSidebarBox}>
           <div className={styles.sectionSidebarBoxOuter}>
             <div className={styles.sectionSidebarBoxInner}>
+              <Button
+                text={"Upwork feed"}
+                color={ButtonColor.Tooltip}
+                iconBefore={IconAppName.Feed}
+                classname={styles.sectionSidebarBoxInnerUserButton}
+                onClick={() => navigate(`/${AppRoutes.Feed}`)}
+              />
               <Tooltip
                 elements={elements}
                 open={open}
@@ -71,6 +79,7 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
               >
                 <Button
                   text={user?.email ?? ""}
+                  color={ButtonColor.Tooltip}
                   iconBefore={IconAppName.User}
                   iconAfter={IconAppName.ChevronRight}
                   classname={styles.sectionSidebarBoxInnerUserButton}

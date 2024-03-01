@@ -17,6 +17,7 @@ const Icons: TIcon = {
   [IconAppName.ChevronRight]: makeIcon(IconInstance.Chevron),
   [IconAppName.User]: makeIcon(IconInstance.User),
   [IconAppName.LogOut]: makeIcon(IconInstance.LogOut),
+  [IconAppName.Feed]: makeIcon(IconInstance.Feed),
 };
 
 export default Icons;

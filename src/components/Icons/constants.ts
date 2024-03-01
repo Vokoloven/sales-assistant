@@ -8,6 +8,7 @@ export const IconInstanceName = {
   Chevron: "Chevron",
   User: "User",
   LogOut: "LogOut",
+  Feed: "Feed",
 } as const;
 
 export const IconAppName = {
@@ -20,4 +21,5 @@ export const IconAppName = {
   ChevronRight: "ChevronRight",
   User: "User",
   LogOut: "LogOut",
+  Feed: "Feed",
 } as const;

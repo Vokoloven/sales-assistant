@@ -62,10 +62,11 @@
         padding: 3px 4px;
 
         &UserButton {
+          gap: 8px;
           padding: 12px;
           border: none;
           display: flex;
-          justify-content: space-between;
+          justify-content: flex-start;
         }
       }
     }
