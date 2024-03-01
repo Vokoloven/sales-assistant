@@ -3,7 +3,7 @@ import {useRecoverUserQuery} from "../redux/api/authApi";
 import {useAuth} from "./useAuth";
 
 export const useRefresh = () => {
-  const {access} = useAuth();
+  const {access, isLogged} = useAuth();
 
-  useRecoverUserQuery(undefined, {skip: !access});
+  useRecoverUserQuery(undefined, {skip: isLogged || !access});
 };

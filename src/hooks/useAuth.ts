@@ -28,5 +28,5 @@ export const useAuth = () => {
     return () => window.removeEventListener("storage", handleStorageEvent);
   }, [isLogged]);
 
-  return useMemo(() => ({access}), [access]);
+  return useMemo(() => ({access, isLogged}), [access, isLogged]);
 };
