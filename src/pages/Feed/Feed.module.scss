@@ -27,7 +27,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    padding: 12px 16px;
+    padding: 0px 16px;
 
     z-index: 1;
     word-wrap: break-word;
@@ -45,7 +45,8 @@
     }
 
     &Box {
-      margin: -6px -8px;
+      position: relative;
+      margin: 0 -8px;
       &:first-child {
         flex-grow: 1;
       }
@@ -55,11 +56,11 @@
 
       &Outer {
         width: 100%;
-        padding: 3px 4px;
+        padding: 6px 4px;
       }
 
       &Inner {
-        padding: 3px 4px;
+        padding: 6px 4px;
 
         &UserButton {
           gap: 8px;
@@ -67,6 +68,17 @@
           border: none;
           display: flex;
           justify-content: flex-start;
+        }
+      }
+      &:last-child {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: -8px;
+          left: -8px;
+          height: 1px;
+          background-color: $Gray600;
         }
       }
     }
@@ -97,12 +109,12 @@
   }
 
   &Header {
-    padding: 8px;
+    padding: 4px 8px;
 
     &Box {
       display: flex;
       justify-content: space-between;
-      margin: -4px;
+      margin: 0 -4px;
 
       &Outer {
         padding: 2px;
