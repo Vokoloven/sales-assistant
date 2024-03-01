@@ -20,15 +20,13 @@ const Progress = () => {
   }, []);
 
   return (
-    <div className={styles.cover}>
-      <div className={styles.progressBox}>
-        <progress
-          role="progressbar"
-          className={styles.progressBoxProgress}
-          value={value}
-          max={1000}
-        ></progress>
-      </div>
+    <div className={styles.progressBox}>
+      <progress
+        role="progressbar"
+        className={styles.progressBoxProgress}
+        value={value}
+        max={1000}
+      ></progress>
     </div>
   );
 };
