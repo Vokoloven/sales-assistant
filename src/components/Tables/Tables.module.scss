@@ -1,0 +1,164 @@
+@import "../../design/index.scss";
+
+.wrapper {
+  max-width: 100%;
+  padding: 0 32px;
+}
+
+.tableResponsive {
+  display: block;
+  //   overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.thead {
+  background-color: $Gray100;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  &Th {
+    padding: 8px;
+
+    vertical-align: baseline;
+
+    &:nth-child(5) {
+      text-align: end;
+    }
+
+    &:last-child {
+      text-align: end;
+    }
+  }
+}
+
+.tbody {
+  &Tr {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: $Gray400;
+    }
+  }
+
+  &Td {
+    vertical-align: baseline;
+
+    padding: 8px;
+
+    &:first-child {
+      max-width: 208px;
+    }
+
+    &:first-child > &Box {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    &:nth-child(2) {
+      max-width: 160px;
+    }
+
+    &:nth-child(2) > &Box {
+      @include ellipsis;
+    }
+
+    &:nth-child(3) {
+      max-width: 208px;
+    }
+
+    &:nth-child(3) > &Box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    &:nth-child(4) {
+      min-width: 140px;
+    }
+
+    &:nth-child(4) > &Box {
+      @include ellipsis;
+    }
+
+    &:nth-child(5) {
+      text-align: end;
+      max-width: 160px;
+    }
+    &:nth-child(5) > &Box {
+      @include ellipsis;
+    }
+
+    &:last-child {
+      text-align: end;
+      max-width: 160px;
+    }
+
+    &:last-child > &Box {
+      @include ellipsis;
+    }
+
+    &Box {
+      &Text {
+        border-radius: 8px;
+        padding: 2px 8px;
+        background-color: $Gray600;
+        @include ellipsis;
+      }
+    }
+  }
+}
+
+.score {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+
+  &.scorePink {
+    background-color: $ScorePink;
+  }
+  &.scoreOrange {
+    background-color: $ScoreOrange;
+  }
+  &.scoreYellow {
+    background-color: $ScoreYellow;
+  }
+  &.scoreGreen {
+    background-color: $ScoreGreen;
+  }
+  &.scoreBlue {
+    background-color: $ScoreBlue;
+  }
+}
+
+html[data-theme="dark"] {
+  .thead {
+    color: $White;
+    background-color: $Gray900;
+  }
+
+  .tbody {
+    &Td {
+      color: $Gray400;
+
+      &Box {
+        &Text {
+          background-color: $Gray800;
+        }
+      }
+    }
+  }
+
+  .score {
+    color: $Gray900;
+  }
+}

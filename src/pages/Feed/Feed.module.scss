@@ -85,6 +85,8 @@
   }
 
   &Content {
+    overflow-x: hidden;
+
     @include mobile($mobileM) {
       margin-left: $mobileSS;
     }
@@ -157,6 +159,10 @@
       }
     }
   }
+}
+
+.main {
+  overflow-y: auto;
 }
 
 html[data-theme="dark"] {

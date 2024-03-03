@@ -5,11 +5,11 @@ import type {IAccessDTO} from "../../submodules/interfaces/dto/auth/iaccess.inte
 import type {IUpworkResponseListFeedsDto} from "../../submodules/interfaces/dto/upwork-feed/iupwork-response-list-feeds.dto";
 import {loginApi} from "../api/authApi";
 import {recoverUserApi} from "../api/authApi";
-import {upworkFeeds} from "../api/feedApi";
+import {upworkFeedsApi} from "../api/upworkFeedsApi";
 import {localStorageService} from "../service/localStorageService";
 import {RootState} from "../store";
 
-type Nullable<T> = T | null;
+export type Nullable<T> = T | null;
 
 export const InitialState = {
   Access: "access",
@@ -22,7 +22,7 @@ export interface IInitialState {
   [InitialState.Access]: Nullable<IAccessDTO>;
   [InitialState.Account]: Nullable<IAccountDTO>;
   [InitialState.IsLogged]: boolean;
-  [InitialState.GetFeeds]: Nullable<IUpworkResponseListFeedsDto>;
+  [InitialState.GetFeeds]: Nullable<{data: IUpworkResponseListFeedsDto}>;
 }
 
 const initialState: IInitialState = {
@@ -35,14 +35,14 @@ const initialState: IInitialState = {
 const {setLocalStorage, removeLocalStorage} = localStorageService<typeof InitialState.Access, IAccessDTO>();
 
 const slice = createSlice({
-  name: "auth",
+  name: "root",
   initialState,
   reducers: {
     logOut: (state) => {
+      removeLocalStorage(InitialState.Access);
       state[InitialState.IsLogged] = false;
       state[InitialState.Access] = null;
       state[InitialState.Account] = null;
-      removeLocalStorage(InitialState.Access);
     },
   },
   extraReducers: (builder) => {
@@ -56,7 +56,7 @@ const slice = createSlice({
       state[InitialState.Account] = payload.data.account;
       state[InitialState.IsLogged] = true;
     });
-    builder.addMatcher(upworkFeeds.endpoints.getFeeds.matchFulfilled, (state, {payload}) => {
+    builder.addMatcher(upworkFeedsApi.endpoints.getFeeds.matchFulfilled, (state, {payload}) => {
       state[InitialState.GetFeeds] = {...payload};
     });
   },
@@ -66,5 +66,5 @@ export const {logOut} = slice.actions;
 
 export default slice;
 
-export const selectIsLogged = (state: RootState) => state.auth.isLogged;
-export const selectUser = (state: RootState) => state.auth.account;
+export const selectIsLogged = (state: RootState) => state.root.isLogged;
+export const selectUser = (state: RootState) => state.root.account;

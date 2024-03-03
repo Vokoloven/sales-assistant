@@ -2,18 +2,18 @@ import {configureStore} from "@reduxjs/toolkit";
 import {combineReducers} from "@reduxjs/toolkit";
 
 import {adminApi} from "./api/adminApi";
-import {upworkFeeds} from "./api/feedApi";
-import authSlice from "./slice/authSlice";
+import {upworkFeedsApi} from "./api/upworkFeedsApi";
+import slice from "./slice/slice";
 
 const rootReducer = combineReducers({
   [adminApi.reducerPath]: adminApi.reducer,
-  [authSlice.name]: authSlice.reducer,
-  [upworkFeeds.reducerPath]: upworkFeeds.reducer,
+  [slice.name]: slice.reducer,
+  [upworkFeedsApi.reducerPath]: upworkFeedsApi.reducer,
 });
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(adminApi.middleware, upworkFeeds.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(adminApi.middleware, upworkFeedsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

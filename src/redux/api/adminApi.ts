@@ -8,8 +8,8 @@ import type {ILoginResponseDTO} from "../../submodules/interfaces/dto/auth/ilogi
 import type {IApiResponseGenericDTO} from "../../submodules/interfaces/dto/common/iapi-response.interface";
 import {IApiResponseDTO} from "../../submodules/interfaces/dto/common/iapi-response.interface";
 import {localStorageService} from "../service/localStorageService";
-import {InitialState} from "../slice/authSlice";
-import {logOut} from "../slice/authSlice";
+import {InitialState} from "../slice/slice";
+import {logOut} from "../slice/slice";
 import {HTTP_METHODS, STATUS_CODE} from "../utils";
 
 import {baseQuery, getBody, isAccessRestricted} from "./utils";

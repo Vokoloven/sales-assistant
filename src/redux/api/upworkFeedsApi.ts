@@ -7,11 +7,11 @@ import {HTTP_METHODS} from "../utils";
 
 import {baseQuery} from "./utils";
 
-export const upworkFeeds = createApi({
+export const upworkFeedsApi = createApi({
   reducerPath: "upworkFeeds",
   baseQuery,
   endpoints: (builder) => ({
-    getFeeds: builder.query<IUpworkResponseListFeedsDto, IGetAllUpworkFeedRequest>({
+    getFeeds: builder.query<{data: IUpworkResponseListFeedsDto}, IGetAllUpworkFeedRequest>({
       query: (credentials) => ({
         url: AppConfig.GetFeed,
         method: HTTP_METHODS.POST,
@@ -21,4 +21,4 @@ export const upworkFeeds = createApi({
   }),
 });
 
-export const {useGetFeedsQuery} = upworkFeeds;
+export const {useGetFeedsQuery} = upworkFeedsApi;

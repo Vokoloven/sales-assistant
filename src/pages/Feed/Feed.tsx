@@ -8,20 +8,20 @@ import Button from "../../components/Button/Button";
 import {ButtonColor, ButtonSize} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "../../components/Icons/constants";
+import Tables from "../../components/Tables/Tables";
 import Tooltip from "../../components/Tooltip/Tooltip";
 import type {TElements} from "../../components/Tooltip/types/tooltip";
 import {useAuth} from "../../hooks/useAuth";
 import {ThemeConfig, getTheme} from "../../hooks/useTheme";
-import {useGetFeedsQuery} from "../../redux/api/feedApi";
-import {selectUser} from "../../redux/slice/authSlice";
-import {logOut} from "../../redux/slice/authSlice";
+import {useGetFeedsQuery} from "../../redux/api/upworkFeedsApi";
+import {selectUser} from "../../redux/slice/slice";
+import {logOut} from "../../redux/slice/slice";
 import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
 
 import styles from "./Feed.module.scss";
 
 const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
-  const {isLogged} = useAuth();
   const theme = getTheme();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -29,7 +29,9 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  useGetFeedsQuery(
+  const {isLogged} = useAuth();
+
+  const {data} = useGetFeedsQuery(
     {
       sortDirection: SortDirection.ASC,
       sortBy: UpworkFeedSortBy.Title,
@@ -41,7 +43,7 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
     {
       id: 1,
       iconBefore: IconAppName.LogOut,
-      text: "Test",
+      text: "Log Out",
       onClick: () => {
         dispatch(logOut());
       },
@@ -127,7 +129,9 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
             </div>
           </div>
         </header>
-        <main></main>
+        <main className={styles.main}>
+          <Tables fetchedData={data} />
+        </main>
         <footer></footer>
       </div>
     </section>

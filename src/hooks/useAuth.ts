@@ -3,9 +3,9 @@ import {useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 
 import {localStorageService} from "../redux/service/localStorageService";
-import {selectIsLogged} from "../redux/slice/authSlice";
-import {InitialState} from "../redux/slice/authSlice";
-import {logOut} from "../redux/slice/authSlice";
+import {selectIsLogged} from "../redux/slice/slice";
+import {InitialState} from "../redux/slice/slice";
+import {logOut} from "../redux/slice/slice";
 import type {IAccessDTO} from "../submodules/interfaces/dto/auth/iaccess.interface";
 
 export const useAuth = () => {

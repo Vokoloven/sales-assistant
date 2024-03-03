@@ -3,7 +3,7 @@ import {fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {AppConfig} from "../../AppConfig";
 import type {IAccessDTO} from "../../submodules/interfaces/dto/auth/iaccess.interface";
 import {localStorageService} from "../service/localStorageService";
-import {InitialState} from "../slice/authSlice";
+import {InitialState} from "../slice/slice";
 import {headers} from "../utils";
 import {STATUS_CODE} from "../utils";
 
