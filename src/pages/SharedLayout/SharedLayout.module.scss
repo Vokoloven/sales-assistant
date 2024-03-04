@@ -112,6 +112,8 @@
 
   &Header {
     padding: 4px 8px;
+    flex-grow: 0;
+    flex-shrink: 0;
 
     &Box {
       display: flex;

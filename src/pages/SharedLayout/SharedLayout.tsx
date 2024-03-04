@@ -11,13 +11,9 @@ import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "../../components/Icons/constants";
 import Tooltip from "../../components/Tooltip/Tooltip";
 import type {TElements} from "../../components/Tooltip/types/tooltip";
-// import {useAuth} from "../../hooks/useAuth";
 import {ThemeConfig, getTheme} from "../../hooks/useTheme";
-// import {useGetFeedsQuery} from "../../redux/api/upworkFeedsApi";
 import {selectUser} from "../../redux/slice/slice";
 import {logOut} from "../../redux/slice/slice";
-// import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
-// import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
 
 import styles from "./SharedLayout.module.scss";
 
@@ -28,16 +24,6 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const [collapsed, setCollapsed] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-
-  //   const {isLogged} = useAuth();
-
-  //   const {data} = useGetFeedsQuery(
-  //     {
-  //       sortDirection: SortDirection.ASC,
-  //       sortBy: UpworkFeedSortBy.Title,
-  //     },
-  //     {skip: !isLogged},
-  //   );
 
   const elements: TElements = [
     {

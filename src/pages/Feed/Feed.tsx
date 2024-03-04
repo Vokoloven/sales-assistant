@@ -8,7 +8,7 @@ import Button from "../../components/Button/Button";
 import {ButtonColor, ButtonSize} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "../../components/Icons/constants";
-import Tables from "../../components/Tables/Table";
+import Tables from "../../components/Tables/Tables";
 import Tooltip from "../../components/Tooltip/Tooltip";
 import type {TElements} from "../../components/Tooltip/types/tooltip";
 import {useAuth} from "../../hooks/useAuth";

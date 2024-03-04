@@ -1,0 +1,57 @@
+@import "../../design/index.scss";
+
+.table {
+  min-width: 100%;
+}
+
+.row {
+  display: flex;
+}
+
+.thead {
+  background-color: $Gray100;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.td {
+  & > .cell {
+    padding: 8px;
+  }
+}
+
+.td.title {
+  &:first-child {
+    & > .cell {
+      & span {
+        position: relative;
+        display: block;
+        max-height: 44.8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        &::before {
+          position: absolute;
+          content: "...";
+          inset-block-end: 0;
+          inset-inline-end: 0;
+        }
+      }
+    }
+  }
+}
+
+.td.keywords {
+  & > .cell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    & > span {
+      border-radius: 8px;
+      padding: 2px 8px;
+      background-color: $Gray600;
+      @include ellipsis;
+    }
+  }
+}
