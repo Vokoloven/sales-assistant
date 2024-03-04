@@ -1,0 +1,178 @@
+@import "../../design/index.scss";
+
+.section {
+  display: flex;
+  height: 100vh;
+
+  overflow-x: hidden;
+
+  &Button {
+    margin-right: 8px;
+  }
+
+  &Box {
+    margin: 0 -10px;
+  }
+
+  &Sidebar {
+    display: flex;
+    flex-direction: column;
+
+    @include mobile($mobileM) {
+      max-width: $mobileSS;
+    }
+    @include box(0, $mobileS);
+    height: 100%;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0px 16px;
+
+    z-index: 1;
+    word-wrap: break-word;
+
+    @include transition(left);
+
+    &.collapsed {
+      @include mobile($mobileM) {
+        left: -$mobileSS;
+      }
+
+      left: -$mobileS;
+
+      @include transition(left);
+    }
+
+    &Box {
+      position: relative;
+      margin: 0 -8px;
+      &:first-child {
+        flex-grow: 1;
+      }
+      &:last-child {
+        flex: 0;
+      }
+
+      &Outer {
+        width: 100%;
+        padding: 6px 4px;
+      }
+
+      &Inner {
+        padding: 6px 4px;
+
+        &UserButton {
+          gap: 8px;
+          padding: 12px;
+          border: none;
+          display: flex;
+          justify-content: flex-start;
+        }
+      }
+      &:last-child {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: -8px;
+          left: -8px;
+          height: 1px;
+          background-color: $Gray600;
+        }
+      }
+    }
+  }
+
+  &Content {
+    overflow-x: hidden;
+
+    @include mobile($mobileM) {
+      margin-left: $mobileSS;
+    }
+
+    padding: 8px 0;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 100%;
+
+    background-color: $Gray100;
+    margin-left: $mobileS;
+
+    @include transition(margin-left);
+
+    &.collapsed {
+      margin-left: 0;
+
+      @include transition(margin-left);
+    }
+  }
+
+  &Header {
+    padding: 4px 8px;
+
+    &Box {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 -4px;
+
+      &Outer {
+        padding: 2px;
+
+        &:nth-child(2) {
+          display: none;
+        }
+
+        &:nth-child(2) > .sectionHeaderBoxInner {
+          display: flex;
+          justify-content: center;
+        }
+
+        @include tablet {
+          &:last-child {
+            display: none;
+          }
+        }
+
+        &.collapsed {
+          @include laptop {
+            &:nth-child(2) {
+              flex: 1;
+              display: initial;
+            }
+          }
+
+          &:last-child {
+            display: initial;
+          }
+        }
+      }
+
+      &Inner {
+        padding: 2px;
+
+        &IconButton {
+          padding: 12px;
+        }
+      }
+    }
+  }
+}
+
+.main {
+  overflow-y: auto;
+}
+
+html[data-theme="dark"] {
+  .section {
+    &Sidebar {
+      background-color: $Black;
+    }
+
+    &Content {
+      background-color: $Gray900;
+    }
+  }
+}

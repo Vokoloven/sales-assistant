@@ -2,26 +2,26 @@ import classnames from "classnames";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 
 import {AppRoutes} from "../../AppRoutes";
 import Button from "../../components/Button/Button";
 import {ButtonColor, ButtonSize} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "../../components/Icons/constants";
-import Tables from "../../components/Tables/Table";
 import Tooltip from "../../components/Tooltip/Tooltip";
 import type {TElements} from "../../components/Tooltip/types/tooltip";
-import {useAuth} from "../../hooks/useAuth";
+// import {useAuth} from "../../hooks/useAuth";
 import {ThemeConfig, getTheme} from "../../hooks/useTheme";
-import {useGetFeedsQuery} from "../../redux/api/upworkFeedsApi";
+// import {useGetFeedsQuery} from "../../redux/api/upworkFeedsApi";
 import {selectUser} from "../../redux/slice/slice";
 import {logOut} from "../../redux/slice/slice";
-import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
-import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
+// import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
+// import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
 
-import styles from "./Feed.module.scss";
+import styles from "./SharedLayout.module.scss";
 
-const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
+const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const theme = getTheme();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -29,15 +29,15 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  const {isLogged} = useAuth();
+  //   const {isLogged} = useAuth();
 
-  const {data} = useGetFeedsQuery(
-    {
-      sortDirection: SortDirection.ASC,
-      sortBy: UpworkFeedSortBy.Title,
-    },
-    {skip: !isLogged},
-  );
+  //   const {data} = useGetFeedsQuery(
+  //     {
+  //       sortDirection: SortDirection.ASC,
+  //       sortBy: UpworkFeedSortBy.Title,
+  //     },
+  //     {skip: !isLogged},
+  //   );
 
   const elements: TElements = [
     {
@@ -129,13 +129,10 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
             </div>
           </div>
         </header>
-        <main className={styles.main}>
-          <Tables fetchedData={data} />
-        </main>
-        <footer></footer>
+        <Outlet />
       </div>
     </section>
   );
 };
 
-export default Feed;
+export default SharedLayout;

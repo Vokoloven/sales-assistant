@@ -10,7 +10,8 @@ import Layout from "./routes/Layout";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 const Login = lazy(() => import("./pages/Login/Login"));
-const Feed = lazy(() => import("./pages/Feed/Feed"));
+// const Feed = lazy(() => import("./pages/Feed/Feed"));
+const SharedLayout = lazy(() => import("./pages/SharedLayout/SharedLayout"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
             <Route element={<ProtectedRoute type={ProtectedRouteType.Private} />}>
               <Route
                 path={AppRoutes.Feed}
-                element={<Feed themeSwitcher={themeSwitcher} />}
+                element={<SharedLayout themeSwitcher={themeSwitcher} />}
               />
             </Route>
             <Route
