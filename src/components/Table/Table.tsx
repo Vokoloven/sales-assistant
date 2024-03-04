@@ -19,7 +19,7 @@ const TableInstance = <T,>({table, styles}: IProps<T>) => {
               return (
                 <th
                   key={header.id}
-                  className={styles[`${header.column.columnDef?.["className"]}`]}
+                  className={classnames(styles.th, styles[`${header.column.columnDef?.["className"]}`])}
                   style={{
                     minWidth: header.column.columnDef.minSize,
                     width: header.column.columnDef.size,
@@ -33,7 +33,7 @@ const TableInstance = <T,>({table, styles}: IProps<T>) => {
           </tr>
         ))}
       </thead>
-      <tbody>
+      <tbody className={styles.tbody}>
         {table.getRowModel().rows.map((row) => {
           return (
             <tr

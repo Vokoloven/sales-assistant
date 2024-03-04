@@ -17,7 +17,7 @@ export const UpworkFeed = () => {
   const {isLogged} = useAuth();
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 10,
+    pageSize: 20,
   });
 
   const {data: fetchedData} = useGetFeedsQuery(
@@ -35,7 +35,8 @@ export const UpworkFeed = () => {
         header: "Title",
         cell: (info) => {
           const title = info.getValue() as string;
-          return <span>{title}</span>;
+
+          return title.slice(0, 42) + "...";
         },
         minSize: 200,
         width: 200,
