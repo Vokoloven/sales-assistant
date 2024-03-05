@@ -4,7 +4,7 @@
   min-width: 100%;
 }
 
-.row {
+.tr {
   display: flex;
 }
 
@@ -16,8 +16,18 @@
 }
 
 .th {
-  & > div {
+  & > .cell {
     @include ellipsis;
+  }
+}
+
+.th.matchedBlogs,
+.th.matchedCases {
+  text-align: right;
+  & > .cell {
+    & > span {
+      display: block;
+    }
   }
 }
 
@@ -46,12 +56,19 @@
   &:first-child {
     & > .cell {
       & span {
-        display: block;
-        max-height: 44.8px;
         overflow: hidden;
         text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
       }
     }
+  }
+}
+
+.td.published {
+  & > .cell {
+    @include ellipsis;
   }
 }
 
@@ -67,5 +84,72 @@
       background-color: $Gray600;
       @include ellipsis;
     }
+  }
+}
+
+.td.score {
+  & > .cell {
+    & span {
+      display: block;
+      padding: 2px 8px;
+      border-radius: 20px;
+
+      @include ellipsis;
+
+      &.scorePink {
+        background-color: $ScorePink;
+      }
+      &.scoreOrange {
+        background-color: $ScoreOrange;
+      }
+      &.scoreYellow {
+        background-color: $ScoreYellow;
+      }
+      &.scoreGreen {
+        background-color: $ScoreGreen;
+      }
+      &.scoreBlue {
+        background-color: $ScoreBlue;
+      }
+    }
+  }
+}
+
+.td.review {
+  text-align: center;
+}
+
+.td.matchedBlogs,
+.td.matchedCases {
+  text-align: right;
+
+  & > .cell {
+    @include ellipsis;
+  }
+}
+
+.icon {
+  &Like {
+    fill: $Like;
+  }
+  &Dislike {
+    fill: $Dislike;
+  }
+}
+
+html[data-theme="dark"] {
+  .thead {
+    background-color: $Gray900;
+  }
+  .th {
+    color: $Gray600;
+  }
+  .td {
+    color: $Gray400;
+  }
+
+  .td.keywords,
+  .td.score {
+    color: $Gray900;
   }
 }

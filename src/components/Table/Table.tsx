@@ -13,7 +13,7 @@ const TableInstance = <T,>({table, styles}: IProps<T>) => {
         {table.getHeaderGroups().map((headerGroup) => (
           <tr
             key={headerGroup.id}
-            className={styles.row}
+            className={styles.tr}
           >
             {headerGroup.headers.map((header) => {
               return (
@@ -26,7 +26,7 @@ const TableInstance = <T,>({table, styles}: IProps<T>) => {
                     flex: `${header.column.columnDef.size} 0 auto`,
                   }}
                 >
-                  <div>{flexRender(header.column.columnDef.header, header.getContext())}</div>
+                  <div className={styles.cell}>{flexRender(header.column.columnDef.header, header.getContext())}</div>
                 </th>
               );
             })}
@@ -38,7 +38,7 @@ const TableInstance = <T,>({table, styles}: IProps<T>) => {
           return (
             <tr
               key={row.id}
-              className={styles.row}
+              className={styles.tr}
             >
               {row.getVisibleCells().map((cell) => {
                 return (

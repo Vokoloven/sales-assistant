@@ -9,6 +9,8 @@ export const IconInstanceName = {
   User: "User",
   LogOut: "LogOut",
   Feed: "Feed",
+  Like: "Like",
+  Dislike: "Dislike",
 } as const;
 
 export const IconAppName = {
@@ -22,4 +24,6 @@ export const IconAppName = {
   User: "User",
   LogOut: "LogOut",
   Feed: "Feed",
+  Like: "Like",
+  Dislike: "Dislike",
 } as const;

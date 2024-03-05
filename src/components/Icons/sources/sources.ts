@@ -4,8 +4,10 @@ import type {TIconComponent} from "../types/icon";
 import {Chevron} from "./Chevron";
 import {CollapseMenu} from "./CollapseMenu";
 import {Cross} from "./Cross";
+import {Dislike} from "./Dislike";
 import {Eye} from "./Eye";
 import {Feed} from "./Feed";
+import {Like} from "./Like";
 import {LogOut} from "./LogOut";
 import {Menu} from "./Menu";
 import {Moon} from "./Moon";
@@ -27,4 +29,6 @@ export const IconInstance: TIconInstance = {
   User,
   LogOut,
   Feed,
+  Like,
+  Dislike,
 };

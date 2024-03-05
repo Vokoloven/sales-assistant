@@ -18,6 +18,8 @@ const Icons: TIcon = {
   [IconAppName.User]: makeIcon(IconInstance.User),
   [IconAppName.LogOut]: makeIcon(IconInstance.LogOut),
   [IconAppName.Feed]: makeIcon(IconInstance.Feed),
+  [IconAppName.Like]: makeIcon(IconInstance.Like),
+  [IconAppName.Dislike]: makeIcon(IconInstance.Dislike),
 };
 
 export default Icons;

@@ -1,10 +1,13 @@
 import {ColumnDef, useReactTable, getCoreRowModel, getPaginationRowModel} from "@tanstack/react-table";
+import classnames from "classnames";
 import {useMemo, useState} from "react";
 
+import Icons from "../../components/Icons/Icons";
 import TableInstance from "../../components/Table/Table";
 import {useAuth} from "../../hooks/useAuth";
 import {useGetFeedsQuery} from "../../redux/api/upworkFeedsApi";
 import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
+import {ReviewType} from "../../submodules/enums/upwork-feed/review-type.enum";
 import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
 import type {IReviewDTO} from "../../submodules/interfaces/dto/upwork-feed/ireview.dto";
 import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
@@ -28,16 +31,26 @@ export const UpworkFeed = () => {
     {skip: !isLogged},
   );
 
+  const scoreHandler = (score: number) => {
+    if (score < 100) {
+      return "scorePink";
+    } else if (score > 100 && score < 150) {
+      return "scoreOrange";
+    } else if (score > 150 && score < 200) {
+      return "scoreYellow";
+    } else if (score > 200 && score < 250) {
+      return "scoreGreen";
+    } else if (score > 250) {
+      return "scoreBlue";
+    }
+  };
+
   const columns = useMemo<ColumnDef<IUpworkFeedItemDTO>[]>(
     () => [
       {
         accessorKey: "title",
         header: "Title",
-        cell: (info) => {
-          const title = info.getValue() as string;
-
-          return title.slice(0, 42) + "...";
-        },
+        cell: (info) => <span>{info.getValue() as string}</span>,
         minSize: 200,
         width: 200,
         className: "title",
@@ -65,7 +78,11 @@ export const UpworkFeed = () => {
       {
         accessorKey: "score",
         header: "Score",
-        cell: (info) => info.getValue() ?? "",
+        cell: (info) => {
+          const score = info.getValue() as number;
+
+          return <span className={classnames(tableStyles[`${scoreHandler(score)}`])}>{score}</span>;
+        },
         minSize: 140,
         width: 140,
         className: "score",
@@ -75,7 +92,13 @@ export const UpworkFeed = () => {
         header: "Reaction",
         cell: (info) => {
           const type = info.getValue() as IReviewDTO | null;
-          return type ? type.type : "";
+          if (type?.type === ReviewType.Like) {
+            return <Icons.Dislike className={tableStyles.iconLike} />;
+          } else if (type?.type === ReviewType.Dislike) {
+            return <Icons.Like className={tableStyles.iconDislike} />;
+          } else {
+            return "";
+          }
         },
         minSize: 140,
         width: 140,
@@ -83,15 +106,25 @@ export const UpworkFeed = () => {
       },
       {
         accessorKey: "matchedCases",
-        header: "Matched Cases",
+        header: () => (
+          <>
+            <span>Matched</span>
+            <span>Cases</span>
+          </>
+        ),
         cell: (info) => info.getValue(),
         minSize: 110,
         width: 110,
-        className: "publishmatchedCasesed",
+        className: "matchedCases",
       },
       {
         accessorKey: "matchedBlogs",
-        header: "Matched Blogs",
+        header: () => (
+          <>
+            <span>Matched</span>
+            <span>Blogs</span>
+          </>
+        ),
         cell: (info) => info.getValue(),
         minSize: 110,
         width: 110,
