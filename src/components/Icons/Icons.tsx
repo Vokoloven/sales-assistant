@@ -1,4 +1,5 @@
 import {IconAppName} from "./constants";
+import styles from "./Icons.module.scss";
 import {makeIcon} from "./makeIcon";
 import {IconInstance} from "./sources/sources";
 import type {TIconComponent} from "./types/icon";
@@ -20,6 +21,7 @@ const Icons: TIcon = {
   [IconAppName.Feed]: makeIcon(IconInstance.Feed),
   [IconAppName.Like]: makeIcon(IconInstance.Like),
   [IconAppName.Dislike]: makeIcon(IconInstance.Dislike),
+  [IconAppName.ChevronDown]: makeIcon(IconInstance.Chevron, {className: styles.chevronDown}),
 };
 
 export default Icons;

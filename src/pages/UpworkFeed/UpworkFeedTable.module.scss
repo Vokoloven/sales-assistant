@@ -1,5 +1,23 @@
 @import "../../design/index.scss";
 
+.main {
+  overflow-y: auto;
+  flex-grow: 1;
+  max-width: 100%;
+  margin: 0 -16px;
+
+  &Outer {
+    padding: 2px 8px;
+  }
+
+  &Inner {
+    display: block;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    padding: 2px 8px;
+  }
+}
+
 .table {
   min-width: 100%;
 }
@@ -16,6 +34,7 @@
 }
 
 .th {
+  color: $GrayA800;
   & > .cell {
     @include ellipsis;
   }
@@ -32,7 +51,7 @@
 }
 
 .tbody {
-  & > .row {
+  & > .tr {
     position: relative;
     &::after {
       content: "";
@@ -41,7 +60,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background-color: $Gray300;
+      background-color: $Gray400;
     }
   }
 }
@@ -53,6 +72,8 @@
 }
 
 .td.title {
+  color: $BlueA200;
+
   &:first-child {
     & > .cell {
       & span {
@@ -67,6 +88,7 @@
 }
 
 .td.published {
+  color: $GrayA700;
   & > .cell {
     @include ellipsis;
   }
@@ -79,6 +101,7 @@
     gap: 4px;
 
     & > span {
+      color: $ABlack;
       border-radius: 8px;
       padding: 2px 8px;
       background-color: $Gray600;
@@ -89,12 +112,14 @@
 
 .td.score {
   & > .cell {
+    display: flex;
+
     & span {
-      display: block;
+      color: $ABlack;
+      @include ellipsis;
+
       padding: 2px 8px;
       border-radius: 20px;
-
-      @include ellipsis;
 
       &.scorePink {
         background-color: $ScorePink;
@@ -121,6 +146,7 @@
 
 .td.matchedBlogs,
 .td.matchedCases {
+  color: $GrayA700;
   text-align: right;
 
   & > .cell {
@@ -137,19 +163,116 @@
   }
 }
 
+.footer {
+  margin: 0 -16px;
+  &Outer {
+    padding: 2px 2px;
+  }
+  &Inner {
+    padding: 2px 2px;
+
+    &Items {
+      display: flex;
+      align-items: center;
+
+      &Outer {
+        position: relative;
+        padding: 0 6px;
+
+        &:first-child {
+          ::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: $Gray400;
+          }
+        }
+      }
+
+      &Inner {
+        padding: 0 6px;
+
+        &Shown {
+          display: flex;
+          gap: 8px;
+          padding: 12px 8px;
+        }
+        &PerPage {
+          padding: 12px 8px;
+          display: flex;
+          gap: 8px;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+
 html[data-theme="dark"] {
   .thead {
     background-color: $Gray900;
   }
   .th {
-    color: $Gray600;
+    color: $Gray700;
+  }
+
+  .tbody {
+    & > .tr {
+      &::after {
+        background-color: $GrayA300;
+      }
+    }
   }
   .td {
     color: $Gray400;
   }
 
-  .td.keywords,
+  .td.title {
+    color: $BlueA700;
+  }
+
+  .td.published {
+    color: $Gray700;
+  }
+
+  .td.keywords {
+    & > .cell {
+      & > span {
+        color: $White;
+        background-color: $Gray800;
+      }
+    }
+  }
+
   .td.score {
-    color: $Gray900;
+    & > .cell {
+      & > span {
+        color: $White;
+
+        &.scorePink {
+          background-color: $ScoreAPink;
+        }
+        &.scoreOrange {
+          background-color: $ScoreAOrange;
+        }
+        &.scoreYellow {
+          background-color: $ScoreAYellow;
+        }
+        &.scoreGreen {
+          background-color: $ScoreAGreen;
+        }
+        &.scoreBlue {
+          background-color: $ScoreABlue;
+        }
+      }
+    }
+  }
+
+  .td.matchedBlogs,
+  .td.matchedCases {
+    color: $Gray700;
   }
 }

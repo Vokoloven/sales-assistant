@@ -1,6 +1,7 @@
 import {ColumnDef, useReactTable, getCoreRowModel, getPaginationRowModel} from "@tanstack/react-table";
 import classnames from "classnames";
 import {useMemo, useState} from "react";
+import Select, {components} from "react-select";
 
 import Icons from "../../components/Icons/Icons";
 import TableInstance from "../../components/Table/Table";
@@ -13,14 +14,27 @@ import type {IReviewDTO} from "../../submodules/interfaces/dto/upwork-feed/irevi
 import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
 import {formatDate} from "../../utils/formatDates";
 
-import styles from "./UpworkFeed.module.scss";
-import tableStyles from "./UpworkFeedTable.module.scss";
+import {selectStyles} from "./selectStyles";
+import styles from "./UpworkFeedTable.module.scss";
+
+const options = [
+  {value: 10, label: "10"},
+  {value: 20, label: "20"},
+  {value: 30, label: "30"},
+  {value: 40, label: "40"},
+  {value: 50, label: "50"},
+] as const;
+
+export type TOption = {
+  [K in keyof (typeof options)[number]]: (typeof options)[number][K] extends number ? number : string;
+};
 
 export const UpworkFeed = () => {
+  const [selectedOption, setSelectedOption] = useState({value: 10, label: "10"});
   const {isLogged} = useAuth();
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 20,
+    pageSize: 10,
   });
 
   const {data: fetchedData} = useGetFeedsQuery(
@@ -81,7 +95,7 @@ export const UpworkFeed = () => {
         cell: (info) => {
           const score = info.getValue() as number;
 
-          return <span className={classnames(tableStyles[`${scoreHandler(score)}`])}>{score}</span>;
+          return <span className={classnames(styles[`${scoreHandler(score)}`])}>{score}</span>;
         },
         minSize: 140,
         width: 140,
@@ -93,9 +107,9 @@ export const UpworkFeed = () => {
         cell: (info) => {
           const type = info.getValue() as IReviewDTO | null;
           if (type?.type === ReviewType.Like) {
-            return <Icons.Dislike className={tableStyles.iconLike} />;
+            return <Icons.Dislike className={styles.iconLike} />;
           } else if (type?.type === ReviewType.Dislike) {
-            return <Icons.Like className={tableStyles.iconDislike} />;
+            return <Icons.Like className={styles.iconDislike} />;
           } else {
             return "";
           }
@@ -151,21 +165,71 @@ export const UpworkFeed = () => {
     state: {pagination},
   });
 
+  const handleChange = (option: TOption | null): void => {
+    setSelectedOption((prevSelectedOption) => ({...prevSelectedOption, ...option}));
+    setPagination((prevPagination) => ({...prevPagination, pageSize: option!.value}));
+  };
+
   if (data?.length) {
     return (
       <>
-        <main className={styles.outer}>
-          <div className={styles.inner}>
-            <TableInstance<IUpworkFeedItemDTO>
-              table={table}
-              styles={tableStyles}
-            />
+        <main className={styles.main}>
+          <div className={styles.mainOuter}>
+            <div className={styles.mainInner}>
+              <TableInstance<IUpworkFeedItemDTO>
+                table={table}
+                styles={styles}
+              />
+            </div>
           </div>
         </main>
-        <footer>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque fuga incidunt porro aliquam atque quo magnam
-          ratione, reprehenderit sapiente numquam quidem cum, accusantium voluptatem asperiores eos doloremque modi
-          culpa ex!
+        <footer className={styles.footer}>
+          <div className={styles.footerOuter}>
+            <div className={styles.footerInner}>
+              <div className={styles.footerInnerItems}>
+                <div className={styles.footerInnerItemsOuter}>
+                  <div className={styles.footerInnerItemsInner}>
+                    <div className={styles.footerInnerItemsInnerShown}>
+                      <span>Items shown:</span>
+                      <span>
+                        <b>1-{table.getRowModel().rows.length.toLocaleString()}</b>
+                      </span>
+                      <span>
+                        out of <b>{data?.length}</b>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.footerInnerItemsOuter}>
+                  <div className={styles.footerInnerItemsInner}>
+                    <div className={styles.footerInnerItemsInnerPerPage}>
+                      <span>Items per page:</span>
+                      <div>
+                        <Select
+                          components={{
+                            IndicatorSeparator: null,
+                            DropdownIndicator: (props) => {
+                              return (
+                                <components.DropdownIndicator {...props}>
+                                  <Icons.ChevronDown />
+                                </components.DropdownIndicator>
+                              );
+                            },
+                          }}
+                          defaultValue={selectedOption}
+                          options={options}
+                          onChange={handleChange}
+                          styles={selectStyles}
+                          menuPlacement="top"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div></div>
+          </div>
         </footer>
       </>
     );

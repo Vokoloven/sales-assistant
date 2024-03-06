@@ -1,22 +1,76 @@
 $Gray900: #181a1f;
 $Gray800: #252733;
+$GrayA800: #4c4c4c;
+$Gray700: #c9ced6;
+$GrayA700: #414752;
 $Gray600: #ebecf0;
 $Gray400: #b0b3b8;
 $Gray300: #d5d7db;
+$GrayA300: #414752;
 $Gray100: #f6f7f8;
 $BlueA800: #181b29;
+$BlueA700: #5b94fe;
 $BlueA600: #3760ad;
 $BlueA300: #abbde0;
+$BlueA200: #0f62fe;
 $BlueA100: #f0f5ff;
 $Error600: #cc0022;
 $Error200: #fae1e5;
 $ErrorA200: #3d2b2e;
 $White: #ffffff;
 $Black: #131314;
+$ABlack: #0e0e0f;
 $ScorePink: #fac8d0;
 $ScoreOrange: #fad2b4;
 $ScoreYellow: #f0e4a8;
 $ScoreGreen: #c9f0c9;
 $ScoreBlue: #c4e5f5;
+$ScoreAPink: #7a2c39;
+$ScoreAOrange: #6b3920;
+$ScoreAYellow: #705c0b;
+$ScoreAGreen: #2d662d;
+$ScoreABlue: #295266;
 $Like: #187a18;
 $Dislike: #cc0022;
+$colors: (
+  "Gray900": #181a1f,
+  "Gray800": #252733,
+  "GrayA800": #4c4c4c,
+  "Gray700": #c9ced6,
+  "GrayA700": #414752,
+  "Gray600": #ebecf0,
+  "Gray400": #b0b3b8,
+  "Gray300": #d5d7db,
+  "GrayA300": #414752,
+  "Gray100": #f6f7f8,
+  "BlueA800": #181b29,
+  "BlueA700": #5b94fe,
+  "BlueA600": #3760ad,
+  "BlueA300": #abbde0,
+  "BlueA200": #0f62fe,
+  "BlueA100": #f0f5ff,
+  "Error600": #cc0022,
+  "Error200": #fae1e5,
+  "ErrorA200": #3d2b2e,
+  "White": #ffffff,
+  "Black": #131314,
+  "ABlack": #0e0e0f,
+  "ScorePink": #fac8d0,
+  "ScoreOrange": #fad2b4,
+  "ScoreYellow": #f0e4a8,
+  "ScoreGreen": #c9f0c9,
+  "ScoreBlue": #c4e5f5,
+  "ScoreAPink": #7a2c39,
+  "ScoreAOrange": #6b3920,
+  "ScoreAYellow": #705c0b,
+  "ScoreAGreen": #2d662d,
+  "ScoreABlue": #295266,
+  "Like": #187a18,
+  "Dislike": #cc0022,
+);
+
+:export {
+  @each $key, $value in $colors {
+    #{unquote($key)}: $value;
+  }
+}

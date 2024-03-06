@@ -26,4 +26,5 @@ export const IconAppName = {
   Feed: "Feed",
   Like: "Like",
   Dislike: "Dislike",
+  ChevronDown: "ChevronDown",
 } as const;

@@ -87,11 +87,13 @@
   &Content {
     overflow-x: hidden;
 
+    padding: 0 32px;
+
     @include mobile($mobileM) {
       margin-left: $mobileSS;
     }
 
-    padding: 8px 0;
+    // padding: 8px 0;
 
     display: flex;
     flex-direction: column;
@@ -111,18 +113,16 @@
   }
 
   &Header {
-    padding: 4px 8px;
+    margin: 0 -32px;
     flex-grow: 0;
     flex-shrink: 0;
 
     &Box {
       display: flex;
       justify-content: space-between;
-      margin: 0 -4px;
+      padding: 6px 4px;
 
       &Outer {
-        padding: 2px;
-
         &:nth-child(2) {
           display: none;
         }
@@ -153,8 +153,6 @@
       }
 
       &Inner {
-        padding: 2px;
-
         &IconButton {
           padding: 12px;
         }
