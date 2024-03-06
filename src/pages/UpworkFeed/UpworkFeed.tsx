@@ -6,6 +6,7 @@ import Select, {components} from "react-select";
 import Icons from "../../components/Icons/Icons";
 import TableInstance from "../../components/Table/Table";
 import {useAuth} from "../../hooks/useAuth";
+import {getTheme} from "../../hooks/useTheme";
 import {useGetFeedsQuery} from "../../redux/api/upworkFeedsApi";
 import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {ReviewType} from "../../submodules/enums/upwork-feed/review-type.enum";
@@ -219,7 +220,7 @@ export const UpworkFeed = () => {
                           defaultValue={selectedOption}
                           options={options}
                           onChange={handleChange}
-                          styles={selectStyles}
+                          styles={selectStyles(getTheme())}
                           menuPlacement="top"
                         />
                       </div>

@@ -9,7 +9,7 @@ export const ThemeConfig = {
   Dark: "dark",
 } as const;
 
-type ThemeMode = FilterKeys<typeof ThemeConfig, "light" | "dark">;
+export type ThemeMode = FilterKeys<typeof ThemeConfig, "light" | "dark">;
 
 const {Dark, Light, Name} = ThemeConfig;
 const html = document.querySelector("html") as HTMLElement;

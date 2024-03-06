@@ -3,3 +3,9 @@
 .chevronDown {
   transform: rotate(90deg);
 }
+
+html[data-theme="dark"] {
+  .chevronDown {
+    fill: $Gray600;
+  }
+}
