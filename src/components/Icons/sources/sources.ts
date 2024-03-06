@@ -2,6 +2,7 @@ import {IconInstanceName} from "../constants";
 import type {TIconComponent} from "../types/icon";
 
 import {Chevron} from "./Chevron";
+import {ChevronWithLine} from "./ChevronWithLine";
 import {CollapseMenu} from "./CollapseMenu";
 import {Cross} from "./Cross";
 import {Dislike} from "./Dislike";
@@ -31,4 +32,5 @@ export const IconInstance: TIconInstance = {
   Feed,
   Like,
   Dislike,
+  ChevronWithLine,
 };

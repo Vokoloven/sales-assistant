@@ -11,6 +11,7 @@ export const IconInstanceName = {
   Feed: "Feed",
   Like: "Like",
   Dislike: "Dislike",
+  ChevronWithLine: "ChevronWithLine",
 } as const;
 
 export const IconAppName = {
@@ -27,4 +28,7 @@ export const IconAppName = {
   Like: "Like",
   Dislike: "Dislike",
   ChevronDown: "ChevronDown",
+  ChevronLeft: "ChevronLeft",
+  ChevronWithLineRight: "ChevronWithLineRight",
+  ChevronWithLineLeft: "ChevronWithLineLeft",
 } as const;

@@ -164,12 +164,18 @@
 }
 
 .footer {
+  flex-shrink: 0;
+  flex-grow: 0;
   margin: 0 -16px;
+  max-width: 100%;
   &Outer {
-    padding: 2px 2px;
+    padding: 4px 2px;
   }
   &Inner {
-    padding: 2px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 2px;
 
     &Items {
       display: flex;
@@ -199,19 +205,84 @@
           display: flex;
           gap: 8px;
           padding: 12px 8px;
+
+          & > span {
+            display: block;
+
+            @include ellipsis;
+
+            &:first-child {
+              color: $GrayA600;
+              max-width: 107px;
+            }
+
+            @include font($lh: 24px, $fclr: $Black);
+
+            &:nth-child(2) {
+              font-weight: 700;
+            }
+            &:nth-child(3) {
+              max-width: 47px;
+            }
+            &:last-child {
+              font-weight: 700;
+            }
+          }
         }
         &PerPage {
-          padding: 12px 8px;
+          padding: 0 8px;
           display: flex;
           gap: 8px;
           align-items: center;
+
+          & > span {
+            max-width: 127px;
+            display: block;
+
+            @include ellipsis;
+
+            @include font($lh: 24px, $fclr: $GrayA600);
+          }
         }
       }
     }
   }
+  &ButtonIcon {
+    padding: 12px;
+  }
 }
 
 html[data-theme="dark"] {
+  .footer {
+    &Inner {
+      &Items {
+        &Outer {
+          &:first-child {
+            ::after {
+              background-color: $GrayA300;
+            }
+          }
+        }
+
+        &Inner {
+          &Shown {
+            & > span {
+              &:first-child {
+                color: $Gray700;
+              }
+              color: $White;
+            }
+          }
+          &PerPage {
+            & > span {
+              color: $Gray700;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .thead {
     background-color: $Gray900;
   }

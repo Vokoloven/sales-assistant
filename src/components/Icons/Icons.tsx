@@ -21,7 +21,16 @@ const Icons: TIcon = {
   [IconAppName.Feed]: makeIcon(IconInstance.Feed),
   [IconAppName.Like]: makeIcon(IconInstance.Like),
   [IconAppName.Dislike]: makeIcon(IconInstance.Dislike),
-  [IconAppName.ChevronDown]: makeIcon(IconInstance.Chevron, {className: styles.chevronDown}),
+  [IconAppName.ChevronDown]: makeIcon(IconInstance.Chevron, {
+    className: styles.chevronDown,
+  }),
+  [IconAppName.ChevronWithLineRight]: makeIcon(IconInstance.ChevronWithLine, {className: styles.chevron}),
+  [IconAppName.ChevronLeft]: makeIcon(IconInstance.Chevron, {
+    className: styles.chevronLeft,
+  }),
+  [IconAppName.ChevronWithLineLeft]: makeIcon(IconInstance.ChevronWithLine, {
+    className: styles.chevronLeft,
+  }),
 };
 
 export default Icons;

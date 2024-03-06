@@ -4,6 +4,10 @@
   transform: rotate(90deg);
 }
 
+.chevronLeft {
+  transform: rotate(180deg);
+}
+
 html[data-theme="dark"] {
   .chevronDown {
     fill: $Gray600;

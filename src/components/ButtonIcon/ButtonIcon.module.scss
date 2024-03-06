@@ -16,6 +16,15 @@
     outline: none;
   }
 
+  &:disabled {
+    &:hover {
+      background-color: initial;
+    }
+    & > .buttonIcon {
+      fill: $Disabled;
+    }
+  }
+
   &Icon {
     fill: $Gray800;
   }
@@ -31,8 +40,17 @@ html[data-theme="dark"] {
       outline: none;
     }
 
+    &:disabled {
+      &:hover {
+        background-color: initial;
+      }
+      & > .buttonIcon {
+        fill: $GrayA300;
+      }
+    }
+
     &Icon {
-      fill: $White;
+      fill: $Gray600;
     }
   }
 }

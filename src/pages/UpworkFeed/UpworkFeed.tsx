@@ -3,6 +3,8 @@ import classnames from "classnames";
 import {useMemo, useState} from "react";
 import Select, {components} from "react-select";
 
+import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
+import {IconAppName} from "../../components/Icons/constants";
 import Icons from "../../components/Icons/Icons";
 import TableInstance from "../../components/Table/Table";
 import {useAuth} from "../../hooks/useAuth";
@@ -192,12 +194,9 @@ export const UpworkFeed = () => {
                   <div className={styles.footerInnerItemsInner}>
                     <div className={styles.footerInnerItemsInnerShown}>
                       <span>Items shown:</span>
-                      <span>
-                        <b>1-{table.getRowModel().rows.length.toLocaleString()}</b>
-                      </span>
-                      <span>
-                        out of <b>{data?.length}</b>
-                      </span>
+                      <span>1-{table.getRowModel().rows.length.toLocaleString()}</span>
+                      <span>out of</span>
+                      <span>{data?.length}</span>
                     </div>
                   </div>
                 </div>
@@ -228,8 +227,33 @@ export const UpworkFeed = () => {
                   </div>
                 </div>
               </div>
+              <div>
+                <ButtonIcon
+                  className={styles.footerButtonIcon}
+                  icon={IconAppName.ChevronWithLineLeft}
+                  onClick={() => table.firstPage()}
+                  disabled={!table.getCanPreviousPage()}
+                />
+                <ButtonIcon
+                  className={styles.footerButtonIcon}
+                  icon={IconAppName.ChevronLeft}
+                  onClick={() => table.previousPage()}
+                  disabled={!table.getCanPreviousPage()}
+                />
+                <ButtonIcon
+                  className={styles.footerButtonIcon}
+                  icon={IconAppName.ChevronRight}
+                  onClick={() => table.nextPage()}
+                  disabled={!table.getCanNextPage()}
+                />
+                <ButtonIcon
+                  className={styles.footerButtonIcon}
+                  icon={IconAppName.ChevronWithLineRight}
+                  onClick={() => table.lastPage()}
+                  disabled={!table.getCanNextPage()}
+                />
+              </div>
             </div>
-            <div></div>
           </div>
         </footer>
       </>
