@@ -3,8 +3,9 @@
 .main {
   overflow-y: auto;
   flex-grow: 1;
-  max-width: 100%;
   margin: 0 -16px;
+
+  scrollbar-width: thin;
 
   &Outer {
     padding: 2px 8px;
@@ -167,7 +168,6 @@
   flex-shrink: 0;
   flex-grow: 0;
   margin: 0 -16px;
-  max-width: 100%;
   &Outer {
     padding: 4px 2px;
   }
