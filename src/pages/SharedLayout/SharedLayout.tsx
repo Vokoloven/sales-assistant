@@ -21,7 +21,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const theme = getTheme();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
