@@ -9,7 +9,7 @@ import styles from "./Button.module.scss";
 import {ButtonType, ButtonColor, ButtonSize} from "./constants";
 
 interface Button {
-  text: string;
+  text: string | number;
   onClick?: () => void;
   isDisabled?: boolean;
   type?: KeyExtractor<typeof ButtonType>;
@@ -42,12 +42,12 @@ const Button = ({
   const IconBefore: TIconComponent | undefined = iconBefore && Icons[iconBefore];
   const IconAfter: TIconComponent | undefined = iconAfter && Icons[iconAfter];
 
-  const buttonClasses = classnames(styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`], classname);
+  // const buttonClasses = classnames(styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`], classname);
 
   return (
     <button
       onClick={onClick}
-      className={buttonClasses}
+      className={classnames(styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`], classname)}
       type={type}
       disabled={isDisabled}
     >

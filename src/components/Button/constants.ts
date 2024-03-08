@@ -7,6 +7,8 @@ export const ButtonType = {
 export const ButtonColor = {
   Primary: "primary",
   Tooltip: "tooltip",
+  Pagiantion: "pagination",
+  PaginationActive: "paginationActive",
 } as const;
 
 export const ButtonSize = {

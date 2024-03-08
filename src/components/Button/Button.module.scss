@@ -47,6 +47,30 @@
     }
   }
 
+  &.pagination {
+    border-color: transparent;
+    background-color: $Gray100;
+
+    &:not(:disabled):hover {
+      background-color: $BlueA100;
+    }
+
+    &:not(:disabled):focus {
+      outline: none;
+    }
+
+    &Active {
+      background-color: $White;
+      border-color: $BlueA300;
+      &:not(:disabled):hover {
+        background-color: $BlueA100;
+      }
+      &:not(:disabled):focus {
+        outline: none;
+      }
+    }
+  }
+
   &.fullWidth {
     width: 100%;
     max-width: 100%;
@@ -108,6 +132,29 @@ html[data-theme="dark"] {
 
       &:not(:disabled):focus {
         background-color: $Gray400;
+      }
+    }
+
+    &.pagination {
+      @include darkColors($clr: $White, $bg: $Gray900, $bc: transparent);
+
+      &:not(:disabled):hover {
+        background-color: $BlueA800;
+      }
+
+      &:not(:disabled):focus {
+        outline: none;
+      }
+
+      &Active {
+        @include darkColors($clr: $White, $bg: $Black);
+
+        &:not(:disabled):hover {
+          background-color: $BlueA800;
+        }
+        &:not(:disabled):focus {
+          outline: none;
+        }
       }
     }
 

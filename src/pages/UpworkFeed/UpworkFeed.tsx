@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {ColumnDef, useReactTable, getCoreRowModel, getPaginationRowModel} from "@tanstack/react-table";
 import classnames from "classnames";
 import {useMemo, useState} from "react";
 import Select, {components} from "react-select";
 
+import Button from "../../components/Button/Button";
+import {ButtonColor} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "../../components/Icons/constants";
 import Icons from "../../components/Icons/Icons";
@@ -173,6 +176,15 @@ export const UpworkFeed = () => {
     setPagination((prevPagination) => ({...prevPagination, pageSize: option!.value}));
   };
 
+  const currentPage = table.getState().pagination.pageIndex + 1;
+  const totalPages = table.getPageCount();
+
+  const pages = useMemo<Array<number>>(() => {
+    const start = Math.floor(table.getState().pagination.pageIndex / 6) * 6;
+    const end = start + 6 > totalPages ? totalPages : start + 6;
+    return Array.from({length: end - start}, (_, i) => start + i + 1);
+  }, [table.getState().pagination.pageIndex, totalPages]);
+
   if (data?.length) {
     return (
       <>
@@ -227,7 +239,7 @@ export const UpworkFeed = () => {
                   </div>
                 </div>
               </div>
-              <div>
+              <div className={styles.footerInnerButtons}>
                 <ButtonIcon
                   className={styles.footerButtonIcon}
                   icon={IconAppName.ChevronWithLineLeft}
@@ -240,6 +252,17 @@ export const UpworkFeed = () => {
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                 />
+
+                {pages.map((page, index) => (
+                  <Button
+                    key={index}
+                    text={page}
+                    color={currentPage === page ? ButtonColor.PaginationActive : ButtonColor.Pagiantion}
+                    classname={styles.footerButton}
+                    onClick={() => table.setPageIndex(page - 1)}
+                  />
+                ))}
+
                 <ButtonIcon
                   className={styles.footerButtonIcon}
                   icon={IconAppName.ChevronRight}

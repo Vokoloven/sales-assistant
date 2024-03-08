@@ -8,18 +8,15 @@
 
   line-height: 0px;
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: $BlueA100;
   }
-  &:focus {
+  &:not(:disabled):focus {
     background-color: $BlueA300;
     outline: none;
   }
 
   &:disabled {
-    &:hover {
-      background-color: initial;
-    }
     & > .buttonIcon {
       fill: $Disabled;
     }
@@ -32,18 +29,16 @@
 
 html[data-theme="dark"] {
   .button {
-    &:hover {
+    &:not(:disabled):hover {
       background-color: $BlueA800;
     }
-    &:focus {
+
+    &:not(:disabled):focus {
       background-color: $BlueA600;
       outline: none;
     }
 
     &:disabled {
-      &:hover {
-        background-color: initial;
-      }
       & > .buttonIcon {
         fill: $GrayA300;
       }

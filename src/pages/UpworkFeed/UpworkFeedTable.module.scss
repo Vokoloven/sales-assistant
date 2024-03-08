@@ -246,7 +246,16 @@
         }
       }
     }
+
+    &Buttons {
+      display: flex;
+    }
   }
+
+  &Button {
+    padding: 10px 10px;
+  }
+
   &ButtonIcon {
     padding: 12px;
   }
