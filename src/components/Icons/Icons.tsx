@@ -31,6 +31,7 @@ const Icons: TIcon = {
   [IconAppName.ChevronWithLineLeft]: makeIcon(IconInstance.ChevronWithLine, {
     className: styles.chevronLeft,
   }),
+  [IconAppName.Sort]: makeIcon(IconInstance.Sort, {className: styles.sort}),
 };
 
 export default Icons;

@@ -25,6 +25,7 @@
 
 .tr {
   display: flex;
+  gap: 16px;
 }
 
 .thead {
@@ -37,7 +38,14 @@
 .th {
   color: $GrayA800;
   & > .cell {
+    padding: 8px 4px;
+    display: flex;
+    justify-content: space-between;
+
     @include ellipsis;
+    & + div {
+      margin-bottom: 8px;
+    }
   }
 }
 

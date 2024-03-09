@@ -8,8 +8,16 @@
   transform: rotate(180deg);
 }
 
+.sort {
+  fill: $Gray200;
+}
+
 html[data-theme="dark"] {
   .chevronDown {
     fill: $Gray600;
+  }
+
+  .sort {
+    fill: $GrayA400;
   }
 }

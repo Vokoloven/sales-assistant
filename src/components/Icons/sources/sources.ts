@@ -12,6 +12,7 @@ import {Like} from "./Like";
 import {LogOut} from "./LogOut";
 import {Menu} from "./Menu";
 import {Moon} from "./Moon";
+import {Sort} from "./Sort";
 import {Sun} from "./Sun";
 import {User} from "./User";
 
@@ -33,4 +34,5 @@ export const IconInstance: TIconInstance = {
   Like,
   Dislike,
   ChevronWithLine,
+  Sort,
 };
