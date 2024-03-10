@@ -33,8 +33,6 @@ const Login = () => {
     },
   });
 
-  console.log(errors);
-
   const isDirtyPassword = dirtyFields?.password;
 
   const handleErrorMessage = () => {
