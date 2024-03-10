@@ -10,19 +10,17 @@ import {InputType} from "./constants";
 import styles from "./Input.module.scss";
 
 interface IProps<T extends FieldValues> {
-  id: string;
-  name: Path<T>;
-  type: KeyExtractor<typeof InputType>;
   placeholder?: string;
   isDisabled?: boolean;
   hasAutoFocus?: boolean;
-  label?: string;
-  value?: string | number;
+  id: string;
+  name: Path<T>;
+  label: string;
+  type: KeyExtractor<typeof InputType>;
   register: UseFormRegister<T>;
-  errorMessage?: string | undefined;
+  errorMessage: string | undefined;
   validate: TValidatorReturn<TCombineGeneralValidatorResult>;
   isDirtyPassword?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const togglePasswordVisibility = (id: string) => {
@@ -41,14 +39,11 @@ const Input = <T extends FieldValues>({
   id,
   register,
   name,
+  hasAutoFocus = false,
+  isDisabled = false,
   errorMessage,
   validate,
   isDirtyPassword,
-  value,
-  placeholder,
-  onChange,
-  hasAutoFocus = false,
-  isDisabled = false,
 }: IProps<T>) => {
   return (
     <div className={styles.inputWrapper}>
@@ -65,13 +60,10 @@ const Input = <T extends FieldValues>({
           className={styles.input}
           id={id}
           type={type}
-          value={value}
           {...register(name, validate())}
           disabled={isDisabled}
           autoFocus={hasAutoFocus}
           autoComplete="off"
-          placeholder={placeholder}
-          onChange={onChange}
         />
         {isDirtyPassword && (
           <ButtonIcon
