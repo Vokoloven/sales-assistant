@@ -91,7 +91,13 @@ const TableInstance = <T,>({table, styles}: IProps<T>) => {
                         header.column.id === AccessorKey.Published ||
                         header.column.id === AccessorKey.Score,
                     })}
-                    onClick={header.column.getToggleSortingHandler()}
+                    onClick={
+                      header.column.id === AccessorKey.Title ||
+                      header.column.id === AccessorKey.Published ||
+                      header.column.id === AccessorKey.Score
+                        ? header.column.getToggleSortingHandler()
+                        : undefined
+                    }
                   >
                     {flexRender(header.column.columnDef.header, header.getContext())}
                   </div>
