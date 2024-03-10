@@ -36,16 +36,16 @@ function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
   //   />
   // ));
 
-  // if (header === capitalize(AccessorKey.Title))
-  //   return (
-  //     <Input
-  //       id={header}
-  //       name={header}
-  //       type={InputType.Text}
-  //       value={(columnFilterValue ?? "") as string}
-  //       onChange={onChange}
-  //     />
-  //   );
+  if (header === capitalize(AccessorKey.Title))
+    return (
+      <Input
+        id={header}
+        name={header}
+        type={InputType.Text}
+        value={(columnFilterValue ?? "") as string}
+        onChange={onChange}
+      />
+    );
 
   if (header === capitalize(AccessorKey.Published))
     return (

@@ -10,17 +10,20 @@ import {InputType} from "./constants";
 import styles from "./Input.module.scss";
 
 interface IProps<T extends FieldValues> {
+  id: string;
+  name: Path<T>;
+  type: KeyExtractor<typeof InputType>;
   placeholder?: string;
   isDisabled?: boolean;
   hasAutoFocus?: boolean;
-  id: string;
-  name: Path<T>;
-  label: string;
-  type: KeyExtractor<typeof InputType>;
-  register: UseFormRegister<T>;
-  errorMessage: string | undefined;
-  validate: TValidatorReturn<TCombineGeneralValidatorResult>;
+  label?: string;
+  errorMessage?: string | undefined;
+  validate?: TValidatorReturn<TCombineGeneralValidatorResult>;
+  register?: UseFormRegister<T>;
   isDirtyPassword?: boolean;
+  value?: string | number;
+  onClick?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const togglePasswordVisibility = (id: string) => {
@@ -44,7 +47,16 @@ const Input = <T extends FieldValues>({
   errorMessage,
   validate,
   isDirtyPassword,
+  value,
+  onChange,
+  onClick,
 }: IProps<T>) => {
+  const {
+    onChange: registerOnChange,
+    ref: registerRef,
+    ...rest
+  } = (register && register(name, validate && validate())) ?? {};
+
   return (
     <div className={styles.inputWrapper}>
       {label && (
@@ -60,10 +72,14 @@ const Input = <T extends FieldValues>({
           className={styles.input}
           id={id}
           type={type}
-          {...register(name, validate())}
           disabled={isDisabled}
           autoFocus={hasAutoFocus}
           autoComplete="off"
+          value={value}
+          ref={registerRef}
+          onChange={registerOnChange ?? onChange}
+          onClick={onClick}
+          {...rest}
         />
         {isDirtyPassword && (
           <ButtonIcon
