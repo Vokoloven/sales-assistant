@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   ColumnDef,
   useReactTable,
@@ -27,20 +26,11 @@ import type {IReviewDTO} from "../../submodules/interfaces/dto/upwork-feed/irevi
 import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
 import {formatDate} from "../../utils/formatDates";
 
+import {options, AccessorKey} from "./constants";
 import {selectStyles} from "./selectStyles";
+import type {TOption} from "./types/types";
 import styles from "./UpworkFeedTable.module.scss";
-
-const options = [
-  {value: 10, label: "10"},
-  {value: 20, label: "20"},
-  {value: 30, label: "30"},
-  {value: 40, label: "40"},
-  {value: 50, label: "50"},
-] as const;
-
-export type TOption = {
-  [K in keyof (typeof options)[number]]: (typeof options)[number][K] extends number ? number : string;
-};
+import {capitalize, scoreHandler} from "./utils";
 
 export const UpworkFeed = () => {
   const [selectedOption, setSelectedOption] = useState({value: 10, label: "10"});
@@ -58,41 +48,27 @@ export const UpworkFeed = () => {
     {skip: !isLogged},
   );
 
-  const scoreHandler = (score: number) => {
-    if (score < 100) {
-      return "scorePink";
-    } else if (score > 100 && score < 150) {
-      return "scoreOrange";
-    } else if (score > 150 && score < 200) {
-      return "scoreYellow";
-    } else if (score > 200 && score < 250) {
-      return "scoreGreen";
-    } else if (score > 250) {
-      return "scoreBlue";
-    }
-  };
-
   const columns = useMemo<ColumnDef<IUpworkFeedItemDTO>[]>(
     () => [
       {
-        accessorKey: "title",
-        header: "Title",
+        accessorKey: AccessorKey.Title,
+        header: capitalize(AccessorKey.Title),
         cell: (info) => <span>{info.getValue() as string}</span>,
         minSize: 200,
         width: 200,
-        className: "title",
+        className: AccessorKey.Title,
       },
       {
-        accessorKey: "published",
-        header: "Published",
+        accessorKey: AccessorKey.Published,
+        header: capitalize(AccessorKey.Published),
         cell: (info) => formatDate(info.getValue()),
         minSize: 140,
         width: 140,
-        className: "published",
+        className: AccessorKey.Published,
       },
       {
-        accessorKey: "keywords",
-        header: "Keywords",
+        accessorKey: AccessorKey.Keywords,
+        header: capitalize(AccessorKey.Keywords),
         cell: (info) => {
           const keywords = info.getValue() as string[];
 
@@ -100,11 +76,11 @@ export const UpworkFeed = () => {
         },
         minSize: 200,
         width: 200,
-        className: "keywords",
+        className: AccessorKey.Keywords,
       },
       {
-        accessorKey: "score",
-        header: "Score",
+        accessorKey: AccessorKey.Score,
+        header: capitalize(AccessorKey.Score),
         cell: (info) => {
           const score = info.getValue() as number;
 
@@ -112,11 +88,11 @@ export const UpworkFeed = () => {
         },
         minSize: 140,
         width: 140,
-        className: "score",
+        className: AccessorKey.Score,
       },
       {
-        accessorKey: "review",
-        header: "Reaction",
+        accessorKey: AccessorKey.Review,
+        header: capitalize(AccessorKey.Review),
         cell: (info) => {
           const type = info.getValue() as IReviewDTO | null;
           if (type?.type === ReviewType.Like) {
@@ -129,10 +105,10 @@ export const UpworkFeed = () => {
         },
         minSize: 140,
         width: 140,
-        className: "review",
+        className: AccessorKey.Review,
       },
       {
-        accessorKey: "matchedCases",
+        accessorKey: AccessorKey.MatchedCases,
         header: () => (
           <>
             <span>Matched</span>
@@ -142,10 +118,10 @@ export const UpworkFeed = () => {
         cell: (info) => info.getValue(),
         minSize: 110,
         width: 110,
-        className: "matchedCases",
+        className: AccessorKey.MatchedCases,
       },
       {
-        accessorKey: "matchedBlogs",
+        accessorKey: AccessorKey.MatchedBlogs,
         header: () => (
           <>
             <span>Matched</span>
@@ -155,7 +131,7 @@ export const UpworkFeed = () => {
         cell: (info) => info.getValue(),
         minSize: 110,
         width: 110,
-        className: "matchedBlogs",
+        className: AccessorKey.MatchedBlogs,
       },
     ],
     [],

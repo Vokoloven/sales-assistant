@@ -7,7 +7,7 @@ import colors from "../../design/settings/colors.scss";
 import type {ThemeMode} from "../../hooks/useTheme";
 import {ThemeConfig} from "../../hooks/useTheme";
 
-import type {TOption} from "./UpworkFeed";
+import type {TOption} from "./types/types";
 
 export const selectStyles = (theme: ThemeMode) => {
   const selectStyles: StylesConfig<TOption, IsMulti> = {

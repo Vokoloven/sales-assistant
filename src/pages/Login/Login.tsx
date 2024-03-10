@@ -33,6 +33,8 @@ const Login = () => {
     },
   });
 
+  console.log(errors);
+
   const isDirtyPassword = dirtyFields?.password;
 
   const handleErrorMessage = () => {
@@ -48,7 +50,9 @@ const Login = () => {
   const onSubmit: SubmitHandler<ILoginRequestDTO> = async (data) => {
     try {
       await login(data).unwrap();
-    } catch (error) { /* empty */ } finally {
+    } catch (error) {
+      /* empty */
+    } finally {
       reset(data);
     }
   };

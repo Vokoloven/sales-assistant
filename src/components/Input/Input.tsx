@@ -18,9 +18,9 @@ interface IProps<T extends FieldValues> {
   hasAutoFocus?: boolean;
   label?: string;
   value?: string | number;
-  register?: UseFormRegister<T>;
+  register: UseFormRegister<T>;
   errorMessage?: string | undefined;
-  validate?: TValidatorReturn<TCombineGeneralValidatorResult>;
+  validate: TValidatorReturn<TCombineGeneralValidatorResult>;
   isDirtyPassword?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -66,7 +66,7 @@ const Input = <T extends FieldValues>({
           id={id}
           type={type}
           value={value}
-          {...(register && register(name, validate!()))}
+          {...register(name, validate())}
           disabled={isDisabled}
           autoFocus={hasAutoFocus}
           autoComplete="off"

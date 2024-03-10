@@ -40,7 +40,6 @@
   & > .cell {
     padding: 8px 4px;
     display: flex;
-    justify-content: space-between;
 
     @include ellipsis;
     & + div {

@@ -1,18 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Table, flexRender, Column} from "@tanstack/react-table";
 import classnames from "classnames";
+import {useState, forwardRef} from "react";
+import DatePicker from "react-datepicker";
 
+import {AccessorKey} from "../../pages/UpworkFeed/constants";
+import {capitalize} from "../../pages/UpworkFeed/utils";
 import Icons from "../Icons/Icons";
 import {InputType} from "../Input/constants";
 import Input from "../Input/Input";
 
+import "react-datepicker/dist/react-datepicker.css";
 interface IProps<T> {
   table: Table<T>;
   styles: {[x: string]: string};
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function Filter({column, table}: {column: Column<any, any>; table: Table<any>}) {
+function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
+  const [startDate, setStartDate] = useState(new Date());
   const columnFilterValue = column.getFilterValue();
   const header = column.columnDef.header;
 
@@ -20,14 +26,33 @@ function Filter({column, table}: {column: Column<any, any>; table: Table<any>}) 
     column.setFilterValue(e.target.value);
   };
 
-  if (header === "Title")
+  // const DateInput = forwardRef(({value, onClick}: {value?: string | number; onClick?: () => void}, ref) => (
+  //   <Input
+  //     id={InputType.Date}
+  //     name={InputType.Date}
+  //     type={InputType.Text}
+  //     value={value}
+  //     onChange={onChange}
+  //   />
+  // ));
+
+  // if (header === capitalize(AccessorKey.Title))
+  //   return (
+  //     <Input
+  //       id={header}
+  //       name={header}
+  //       type={InputType.Text}
+  //       value={(columnFilterValue ?? "") as string}
+  //       onChange={onChange}
+  //     />
+  //   );
+
+  if (header === capitalize(AccessorKey.Published))
     return (
-      <Input
-        id={header}
-        name={header}
-        type={InputType.Text}
-        value={(columnFilterValue ?? "") as string}
-        onChange={onChange}
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+        // customInput={<DateInput />}
       />
     );
 
@@ -55,8 +80,8 @@ const TableInstance = <T,>({table, styles}: IProps<T>) => {
                   }}
                 >
                   {/* <div className={styles.cell}>{flexRender(header.column.columnDef.header, header.getContext())}</div> */}
-                  <div className={styles.cell}>
-                    {flexRender(header.column.columnDef.header, header.getContext())}{" "}
+                  <div>
+                    <div className={styles.cell}>{flexRender(header.column.columnDef.header, header.getContext())}</div>
                     <div>
                       <Icons.Sort />
                     </div>
