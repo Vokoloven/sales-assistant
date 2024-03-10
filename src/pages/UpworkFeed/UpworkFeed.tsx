@@ -7,6 +7,7 @@ import {
   getFilteredRowModel,
 } from "@tanstack/react-table";
 import classnames from "classnames";
+import {format} from "date-fns";
 import {useMemo, useState} from "react";
 import Select, {components} from "react-select";
 
@@ -24,7 +25,6 @@ import {ReviewType} from "../../submodules/enums/upwork-feed/review-type.enum";
 import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
 import type {IReviewDTO} from "../../submodules/interfaces/dto/upwork-feed/ireview.dto";
 import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
-import {formatDate} from "../../utils/formatDates";
 
 import {options, AccessorKey} from "./constants";
 import {selectStyles} from "./selectStyles";
@@ -60,8 +60,9 @@ export const UpworkFeed = () => {
       },
       {
         accessorKey: AccessorKey.Published,
+        accessorFn: (row) => format(row.published, "MM/dd/yyyy"),
         header: capitalize(AccessorKey.Published),
-        cell: (info) => formatDate(info.getValue()),
+        cell: (info) => info.getValue(),
         minSize: 140,
         width: 140,
         className: AccessorKey.Published,

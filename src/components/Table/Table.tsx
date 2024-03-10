@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Table, flexRender, Column} from "@tanstack/react-table";
 import classnames from "classnames";
+import {format} from "date-fns";
 import {useState, forwardRef} from "react";
 import DatePicker from "react-datepicker";
 
 import {AccessorKey} from "../../pages/UpworkFeed/constants";
-import {capitalize} from "../../pages/UpworkFeed/utils";
 import Icons from "../Icons/Icons";
 import {InputType} from "../Input/constants";
 import Input from "../Input/Input";
@@ -20,39 +19,46 @@ interface IProps<T> {
 function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
   const [startDate, setStartDate] = useState(new Date());
   const columnFilterValue = column.getFilterValue();
-  const header = column.columnDef.header;
+  const {id} = column;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     column.setFilterValue(e.target.value);
   };
 
-  // const DateInput = forwardRef(({value, onClick}: {value?: string | number; onClick?: () => void}, ref) => (
-  //   <Input
-  //     id={InputType.Date}
-  //     name={InputType.Date}
-  //     type={InputType.Text}
-  //     value={value}
-  //     onChange={onChange}
-  //   />
-  // ));
-
-  if (header === capitalize(AccessorKey.Title))
+  const DateInput = forwardRef(({value, onClick}: {value?: string | number; onClick?: () => void}, ref) => {
     return (
       <Input
-        id={header}
-        name={header}
+        id={InputType.Date}
+        name={InputType.Date}
+        type={InputType.Text}
+        value={value}
+        onChange={onChange}
+        onClick={onClick}
+        forwardedRef={ref}
+      />
+    );
+  });
+
+  if (id === AccessorKey.Title)
+    return (
+      <Input
+        id={id}
+        name={id}
         type={InputType.Text}
         value={(columnFilterValue ?? "") as string}
         onChange={onChange}
       />
     );
 
-  if (header === capitalize(AccessorKey.Published))
+  if (id === AccessorKey.Published)
     return (
       <DatePicker
         selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        // customInput={<DateInput />}
+        onChange={(date: Date) => {
+          setStartDate(date);
+          column.setFilterValue(format(date, "MM/dd/yyyy"));
+        }}
+        customInput={<DateInput />}
       />
     );
 

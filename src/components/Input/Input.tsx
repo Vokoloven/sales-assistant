@@ -24,6 +24,7 @@ interface IProps<T extends FieldValues> {
   value?: string | number;
   onClick?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  forwardedRef?: React.ForwardedRef<unknown>;
 }
 
 const togglePasswordVisibility = (id: string) => {
@@ -50,6 +51,7 @@ const Input = <T extends FieldValues>({
   value,
   onChange,
   onClick,
+  forwardedRef,
 }: IProps<T>) => {
   const {
     onChange: registerOnChange,
@@ -76,7 +78,7 @@ const Input = <T extends FieldValues>({
           autoFocus={hasAutoFocus}
           autoComplete="off"
           value={value}
-          ref={registerRef}
+          ref={registerRef ?? (forwardedRef as React.LegacyRef<HTMLInputElement>)}
           onChange={registerOnChange ?? onChange}
           onClick={onClick}
           {...rest}
