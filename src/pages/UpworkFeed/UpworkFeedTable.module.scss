@@ -40,6 +40,23 @@
   & > .cell {
     padding: 8px 4px;
     display: flex;
+    flex-direction: column;
+
+    &.sort {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 16px;
+        height: 16px;
+        transform: translateY(-50%);
+        background-image: url("../../design/images/icons/sortLight.svg");
+        background-repeat: no-repeat;
+      }
+    }
 
     @include ellipsis;
     & + div {

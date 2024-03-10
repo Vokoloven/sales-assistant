@@ -6,7 +6,6 @@ import {useState, forwardRef} from "react";
 import DatePicker from "react-datepicker";
 
 import {AccessorKey} from "../../pages/UpworkFeed/constants";
-import Icons from "../Icons/Icons";
 import {InputType} from "../Input/constants";
 import Input from "../Input/Input";
 
@@ -17,7 +16,7 @@ interface IProps<T> {
 }
 
 function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState("");
   const columnFilterValue = column.getFilterValue();
   const {id} = column;
 
@@ -55,7 +54,7 @@ function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
       <DatePicker
         selected={startDate}
         onChange={(date: Date) => {
-          setStartDate(date);
+          setStartDate(format(date, "MM/dd/yyyy"));
           column.setFilterValue(format(date, "MM/dd/yyyy"));
         }}
         customInput={<DateInput />}
@@ -85,12 +84,16 @@ const TableInstance = <T,>({table, styles}: IProps<T>) => {
                     flex: `${header.column.columnDef.size} 0 auto`,
                   }}
                 >
-                  {/* <div className={styles.cell}>{flexRender(header.column.columnDef.header, header.getContext())}</div> */}
-                  <div>
-                    <div className={styles.cell}>{flexRender(header.column.columnDef.header, header.getContext())}</div>
-                    <div>
-                      <Icons.Sort />
-                    </div>
+                  <div
+                    className={classnames(styles.cell, {
+                      [`${styles.sort}`]:
+                        header.column.id === AccessorKey.Title ||
+                        header.column.id === AccessorKey.Published ||
+                        header.column.id === AccessorKey.Score,
+                    })}
+                    onClick={header.column.getToggleSortingHandler()}
+                  >
+                    {flexRender(header.column.columnDef.header, header.getContext())}
                   </div>
                   {header.column.getCanFilter() ? (
                     <div>
