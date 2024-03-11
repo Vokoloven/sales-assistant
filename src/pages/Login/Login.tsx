@@ -7,6 +7,7 @@ import {InputType} from "../../components/Input/constants";
 import Input from "../../components/Input/Input";
 import {NotifyType} from "../../components/Notify/constants";
 import Notify from "../../components/Notify/Notify";
+import Spinner from "../../components/Spinner/Spinner";
 import {useLoginMutation} from "../../redux/api/authApi";
 import {ILoginRequestDTO} from "../../submodules/interfaces/dto/auth/iadmin-login-request.interface";
 import type {IApiResponseDTO} from "../../submodules/interfaces/dto/common/iapi-response.interface";
@@ -17,7 +18,7 @@ import styles from "./Login.module.scss";
 const {email, password} = validator();
 
 const Login = () => {
-  const [login, {error}] = useLoginMutation();
+  const [login, {error, isLoading}] = useLoginMutation();
   const {data} = (error as {data: IApiResponseDTO}) ?? {};
 
   const {
@@ -48,7 +49,9 @@ const Login = () => {
   const onSubmit: SubmitHandler<ILoginRequestDTO> = async (data) => {
     try {
       await login(data).unwrap();
-    } catch (error) { /* empty */ } finally {
+    } catch (error) {
+      /* empty */
+    } finally {
       reset(data);
     }
   };
@@ -99,6 +102,8 @@ const Login = () => {
                 text="Sign in"
                 type={ButtonType.Submit}
                 isDisabled={!isValid}
+                isLoading={isLoading}
+                spinner={<Spinner size="24px" />}
               />
             </form>
           </div>
