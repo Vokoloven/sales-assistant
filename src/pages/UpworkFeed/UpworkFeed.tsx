@@ -20,9 +20,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import {useAuth} from "../../hooks/useAuth";
 import {getTheme} from "../../hooks/useTheme";
 import {useGetFeedsQuery} from "../../redux/api/upworkFeedsApi";
-import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {ReviewType} from "../../submodules/enums/upwork-feed/review-type.enum";
-import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
 import type {IReviewDTO} from "../../submodules/interfaces/dto/upwork-feed/ireview.dto";
 import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
 
@@ -41,13 +39,7 @@ export const UpworkFeed = () => {
     pageSize: 10,
   });
 
-  const {data: fetchedData, isLoading} = useGetFeedsQuery(
-    {
-      sortDirection: SortDirection.ASC,
-      sortBy: UpworkFeedSortBy.Title,
-    },
-    {skip: !isLogged},
-  );
+  const {data: fetchedData, isLoading} = useGetFeedsQuery(undefined, {skip: !isLogged});
 
   const columns = useMemo<ColumnDef<IUpworkFeedItemDTO>[]>(
     () => [

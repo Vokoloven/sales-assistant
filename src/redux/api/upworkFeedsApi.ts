@@ -11,8 +11,8 @@ export const upworkFeedsApi = createApi({
   reducerPath: "upworkFeeds",
   baseQuery,
   endpoints: (builder) => ({
-    getFeeds: builder.query<{data: IUpworkResponseListFeedsDto}, IGetAllUpworkFeedRequest>({
-      query: (credentials) => ({
+    getFeeds: builder.query<{data: IUpworkResponseListFeedsDto}, IGetAllUpworkFeedRequest | undefined>({
+      query: (credentials = {}) => ({
         url: AppConfig.GetFeed,
         method: HTTP_METHODS.POST,
         body: {...credentials},
