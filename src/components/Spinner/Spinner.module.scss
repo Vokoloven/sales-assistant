@@ -1,0 +1,33 @@
+@import "../../design/index.scss";
+
+.spinner {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border-radius: 50%;
+  background:
+    linear-gradient(0deg, rgb(55 96 173/50%) 30%, #0000 0 70%, rgb(55 96 173/100%) 0) 50%/8% 100%,
+    linear-gradient(90deg, rgb(55 96 173/25%) 30%, #0000 0 70%, rgb(55 96 173/75%) 0) 50%/100% 8%;
+  background-repeat: no-repeat;
+  animation: spinner 1s infinite steps(12);
+
+  &::before,
+  &::after {
+    content: "";
+    grid-area: 1/1;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.915;
+    transform: rotate(30deg);
+  }
+  &::after {
+    opacity: 0.83;
+    transform: rotate(60deg);
+  }
+}
+
+@keyframes spinner {
+  100% {
+    transform: rotate(1turn);
+  }
+}

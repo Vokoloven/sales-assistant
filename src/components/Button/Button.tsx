@@ -22,6 +22,8 @@ interface Button {
   iconAfter?: KeyExtractor<typeof IconAppName>;
   iconAfterProps?: IIconProps;
   iconAfterClassname?: string;
+  spinner?: JSX.Element;
+  isLoading?: boolean;
 }
 
 const Button = ({
@@ -34,6 +36,8 @@ const Button = ({
   iconAfterProps,
   iconAfterClassname,
   iconBeforeClassname,
+  spinner,
+  isLoading = false,
   isDisabled = false,
   color = ButtonColor.Primary,
   type = ButtonType.Button,
@@ -49,14 +53,14 @@ const Button = ({
       onClick={onClick}
       className={classnames(styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`], classname)}
       type={type}
-      disabled={isDisabled}
+      disabled={isDisabled || isLoading}
     >
       {IconBefore && (
         <div className={classnames(styles.buttonIcon, iconBeforeClassname)}>
           <IconBefore {...iconBeforeProps} />
         </div>
       )}
-      <span className={styles.buttonText}>{text}</span>
+      <span className={styles.buttonText}>{isLoading ? spinner : text}</span>
       {IconAfter && (
         <div className={classnames(styles.buttonIcon, iconAfterClassname)}>
           <IconAfter {...iconAfterProps} />
