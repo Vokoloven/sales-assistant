@@ -17,7 +17,6 @@ import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "../../components/Icons/constants";
 import Icons from "../../components/Icons/Icons";
 import Spinner from "../../components/Spinner/Spinner";
-import TableInstance from "../../components/Table/Table";
 import {useAuth} from "../../hooks/useAuth";
 import {getTheme} from "../../hooks/useTheme";
 import {useGetFeedsQuery} from "../../redux/api/upworkFeedsApi";
@@ -31,6 +30,7 @@ import {options, AccessorKey} from "./constants";
 import {selectStyles} from "./selectStyles";
 import type {TOption} from "./types/types";
 import styles from "./UpworkFeedTable.module.scss";
+import TableInstance from "./UpworkTable";
 import {capitalize, scoreHandler} from "./utils";
 
 export const UpworkFeed = () => {

@@ -5,9 +5,10 @@ import {format} from "date-fns";
 import {useState, forwardRef} from "react";
 import DatePicker from "react-datepicker";
 
-import {AccessorKey} from "../../pages/UpworkFeed/constants";
-import {InputType} from "../Input/constants";
-import Input from "../Input/Input";
+import {InputType} from "../../components/Input/constants";
+import Input from "../../components/Input/Input";
+
+import {AccessorKey} from "./constants";
 
 import "react-datepicker/dist/react-datepicker.css";
 interface IProps<T> {
@@ -64,7 +65,7 @@ function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
   return null;
 }
 
-const TableInstance = <T,>({table, styles}: IProps<T>) => {
+const UpworkTable = <T,>({table, styles}: IProps<T>) => {
   return (
     <table className={styles.table}>
       <thead className={styles.thead}>
@@ -145,4 +146,4 @@ const TableInstance = <T,>({table, styles}: IProps<T>) => {
   );
 };
 
-export default TableInstance;
+export default UpworkTable;
