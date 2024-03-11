@@ -16,6 +16,7 @@ import {ButtonColor} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "../../components/Icons/constants";
 import Icons from "../../components/Icons/Icons";
+import Spinner from "../../components/Spinner/Spinner";
 import TableInstance from "../../components/Table/Table";
 import {useAuth} from "../../hooks/useAuth";
 import {getTheme} from "../../hooks/useTheme";
@@ -40,7 +41,7 @@ export const UpworkFeed = () => {
     pageSize: 10,
   });
 
-  const {data: fetchedData} = useGetFeedsQuery(
+  const {data: fetchedData, isLoading} = useGetFeedsQuery(
     {
       sortDirection: SortDirection.ASC,
       sortBy: UpworkFeedSortBy.Title,
@@ -171,6 +172,7 @@ export const UpworkFeed = () => {
     return Array.from({length: end - start}, (_, i) => start + i + 1);
   }, [table.getState().pagination.pageIndex, totalPages]);
 
+  if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
   if (data?.length) {
     return (
       <>
@@ -238,7 +240,6 @@ export const UpworkFeed = () => {
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                 />
-
                 {pages.map((page, index) => (
                   <Button
                     key={index}
@@ -248,7 +249,6 @@ export const UpworkFeed = () => {
                     onClick={() => table.setPageIndex(page - 1)}
                   />
                 ))}
-
                 <ButtonIcon
                   className={styles.footerButtonIcon}
                   icon={IconAppName.ChevronRight}

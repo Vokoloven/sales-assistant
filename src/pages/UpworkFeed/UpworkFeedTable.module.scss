@@ -1,5 +1,14 @@
 @import "../../design/index.scss";
 
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+  @include font($fs: 24px);
+}
+
 .main {
   overflow-y: auto;
   flex-grow: 1;
@@ -304,6 +313,10 @@
 }
 
 html[data-theme="dark"] {
+  .spinner {
+    color: $White;
+  }
+
   .footer {
     &Inner {
       &Items {
