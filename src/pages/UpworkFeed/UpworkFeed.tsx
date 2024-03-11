@@ -5,6 +5,8 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   getFilteredRowModel,
+  FilterFn,
+  FilterFnOption,
 } from "@tanstack/react-table";
 import classnames from "classnames";
 import {format} from "date-fns";
@@ -40,6 +42,10 @@ export const UpworkFeed = () => {
   });
 
   const {data: fetchedData, isLoading} = useGetFeedsQuery(undefined, {skip: !isLogged});
+
+  const scoreFilter: FilterFn<IUpworkFeedItemDTO> = (row, columnId, value) => {
+    return row.original[columnId] < value;
+  };
 
   const columns = useMemo<ColumnDef<IUpworkFeedItemDTO>[]>(
     () => [
@@ -83,6 +89,7 @@ export const UpworkFeed = () => {
         minSize: 140,
         width: 140,
         className: AccessorKey.Score,
+        filterFn: "scoreFilter" as FilterFnOption<IUpworkFeedItemDTO>,
       },
       {
         accessorKey: AccessorKey.Review,
@@ -148,6 +155,9 @@ export const UpworkFeed = () => {
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
     state: {pagination},
+    filterFns: {
+      scoreFilter,
+    },
   });
 
   const handleChange = (option: TOption | null): void => {

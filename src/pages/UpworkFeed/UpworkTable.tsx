@@ -1,14 +1,18 @@
+/* eslint-disable indent */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Table, flexRender, Column} from "@tanstack/react-table";
 import classnames from "classnames";
 import {format} from "date-fns";
 import {useState, forwardRef} from "react";
 import DatePicker from "react-datepicker";
+import Select from "react-select";
 
 import {InputType} from "../../components/Input/constants";
 import Input from "../../components/Input/Input";
+import {getTheme} from "../../hooks/useTheme";
 
 import {AccessorKey} from "./constants";
+import {selectStyles} from "./selectStyles";
 
 import "react-datepicker/dist/react-datepicker.css";
 interface IProps<T> {
@@ -20,6 +24,7 @@ function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
   const [startDate, setStartDate] = useState("");
   const columnFilterValue = column.getFilterValue();
   const {id} = column;
+  const theme = getTheme();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     column.setFilterValue(e.target.value);
@@ -62,6 +67,26 @@ function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
       />
     );
 
+  const options = [
+    {value: 30, label: "0 - 100"},
+    {value: 150, label: "100 - 150"},
+    {value: 200, label: "150 - 200"},
+  ];
+
+  if (id === AccessorKey.Score) {
+    const handleChange = (option: any): void => {
+      column.setFilterValue(option.value);
+    };
+
+    return (
+      <Select
+        options={options}
+        onChange={handleChange}
+        styles={selectStyles(theme)}
+      />
+    );
+  }
+
   return null;
 }
 
@@ -77,6 +102,7 @@ const UpworkTable = <T,>({table, styles}: IProps<T>) => {
             {headerGroup.headers.map((header) => {
               return (
                 <th
+                  onClick={() => console.log(header.column.columnDef.meta)}
                   key={header.id}
                   className={classnames(styles.th, styles[`${header.column.columnDef?.["className"]}`])}
                   style={{
@@ -105,8 +131,8 @@ const UpworkTable = <T,>({table, styles}: IProps<T>) => {
                   {header.column.getCanFilter() ? (
                     <div>
                       <Filter
-                        column={header.column}
                         table={table}
+                        column={header.column}
                       />
                     </div>
                   ) : null}
