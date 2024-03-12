@@ -25,6 +25,7 @@
     "react-router-dom": "^6.22.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
+    "sass": "^1.71.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -57,14 +58,10 @@
     ]
   },
   "devDependencies": {
-    "@types/css-modules": "^1.0.5",
-    "@types/node-sass": "^4.11.7",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-prettier": "^5.1.3",
-    "node-sass": "^7.0.3",
-    "sass": "^1.71.0"
+    "eslint-plugin-prettier": "^5.1.3"
   }
 }
