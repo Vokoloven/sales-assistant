@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import Select from "react-select";
 
 import {InputType} from "../../components/Input/constants";
+import {InputStyle} from "../../components/Input/constants";
 import Input from "../../components/Input/Input";
 import {getTheme} from "../../hooks/useTheme";
 
@@ -40,6 +41,7 @@ function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
         onChange={onChange}
         onClick={onClick}
         forwardedRef={ref}
+        inputStyle={InputStyle.Form}
       />
     );
   });
@@ -52,6 +54,7 @@ function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
         type={InputType.Text}
         value={(columnFilterValue ?? "") as string}
         onChange={onChange}
+        inputStyle={InputStyle.Form}
       />
     );
 

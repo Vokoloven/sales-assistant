@@ -4,3 +4,7 @@ export const InputType = {
   Password: "password",
   Date: "date",
 } as const;
+
+export const InputStyle = {
+  Form: "form",
+} as const;

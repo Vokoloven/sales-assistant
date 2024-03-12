@@ -49,6 +49,11 @@
 
     fill: $White;
   }
+
+  &.form {
+    padding: 11px;
+    @include font($fs: 14px, $lh: 20px);
+  }
 }
 
 html[data-theme="dark"] {

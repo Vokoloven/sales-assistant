@@ -41,7 +41,7 @@ export const UpworkFeed = () => {
     pageSize: 10,
   });
 
-  const {data: fetchedData, isLoading} = useGetFeedsQuery(undefined, {skip: !isLogged});
+  const {data: fetchedData, isLoading} = useGetFeedsQuery({pageSize: 25, pageNumber: 1}, {skip: !isLogged});
 
   const scoreFilter: FilterFn<IUpworkFeedItemDTO> = (row, columnId, value) => {
     return row.original[columnId] < value;
@@ -172,7 +172,7 @@ export const UpworkFeed = () => {
     const start = Math.floor(table.getState().pagination.pageIndex / 6) * 6;
     const end = start + 6 > totalPages ? totalPages : start + 6;
     return Array.from({length: end - start}, (_, i) => start + i + 1);
-  }, [table.getState().pagination.pageIndex, totalPages]);
+  }, [currentPage - 1, totalPages]);
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
   if (data?.length) {

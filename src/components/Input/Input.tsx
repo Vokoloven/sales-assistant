@@ -1,3 +1,4 @@
+import classnames from "classnames";
 import type {UseFormRegister, FieldValues, Path} from "react-hook-form";
 
 import {KeyExtractor} from "../../utils/types/keyExtractor";
@@ -6,7 +7,7 @@ import type {TValidatorReturn} from "../../utils/validators/types/validator";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";
 import {IconAppName} from "../Icons/constants";
 
-import {InputType} from "./constants";
+import {InputType, InputStyle} from "./constants";
 import styles from "./Input.module.scss";
 
 interface IProps<T extends FieldValues> {
@@ -25,6 +26,7 @@ interface IProps<T extends FieldValues> {
   onClick?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   forwardedRef?: React.ForwardedRef<unknown>;
+  inputStyle?: KeyExtractor<typeof InputStyle>;
 }
 
 const togglePasswordVisibility = (id: string) => {
@@ -43,8 +45,6 @@ const Input = <T extends FieldValues>({
   id,
   register,
   name,
-  hasAutoFocus = false,
-  isDisabled = false,
   errorMessage,
   validate,
   isDirtyPassword,
@@ -52,6 +52,9 @@ const Input = <T extends FieldValues>({
   onChange,
   onClick,
   forwardedRef,
+  inputStyle,
+  hasAutoFocus = false,
+  isDisabled = false,
 }: IProps<T>) => {
   const {
     onChange: registerOnChange,
@@ -71,7 +74,7 @@ const Input = <T extends FieldValues>({
       )}
       <div className={styles.inputBox}>
         <input
-          className={styles.input}
+          className={classnames(styles.input, styles[`${inputStyle}`])}
           id={id}
           type={type}
           disabled={isDisabled}

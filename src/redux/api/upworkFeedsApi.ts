@@ -7,12 +7,17 @@ import {HTTP_METHODS} from "../utils";
 
 import {baseQuery} from "./utils";
 
+interface IGetAllUpworkFeedRequestWithPages extends IGetAllUpworkFeedRequest {
+  pageSize: number;
+  pageNumber: number;
+}
+
 export const upworkFeedsApi = createApi({
   reducerPath: "upworkFeeds",
   baseQuery,
   endpoints: (builder) => ({
-    getFeeds: builder.query<{data: IUpworkResponseListFeedsDto}, IGetAllUpworkFeedRequest | undefined>({
-      query: (credentials = {}) => ({
+    getFeeds: builder.query<{data: IUpworkResponseListFeedsDto}, IGetAllUpworkFeedRequestWithPages>({
+      query: (credentials) => ({
         url: AppConfig.GetFeed,
         method: HTTP_METHODS.POST,
         body: {...credentials},
