@@ -104,7 +104,6 @@ const UpworkTable = <T,>({table, styles}: IProps<T>) => {
             {headerGroup.headers.map((header) => {
               return (
                 <th
-                  onClick={() => console.log(header.column.columnDef.meta)}
                   key={header.id}
                   className={classnames(styles.th, styles[`${header.column.columnDef?.["className"]}`])}
                   style={{

@@ -37,10 +37,16 @@ import styles from "./UpworkFeedTable.module.scss";
 import TableInstance from "./UpworkTable";
 import {capitalize, scoreHandler} from "./utils";
 
+export type ColumnSort = {
+  id: string;
+  desc: boolean;
+};
+
 export const UpworkFeed = () => {
   const {isLogged} = useAuth();
   const [getFeeds, {isLoading, data: fetchedData}] = useGetFeedsMutation();
   const [selectedOption, setSelectedOption] = useState({value: 10, label: "10"});
+  const [sorting, setSorting] = useState<ColumnSort[]>([]);
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
@@ -67,15 +73,15 @@ export const UpworkFeed = () => {
           await getFeeds({
             pageSize: pagination.pageSize,
             pageNumber: pagination.pageIndex + 1,
-            sortBy: UpworkFeedSortBy.Title,
-            sortDirection: SortDirection.ASC,
+            sortBy: sorting[0]?.id as UpworkFeedSortBy,
+            sortDirection: Boolean(sorting.length) && sorting[0]?.desc ? SortDirection.DESC : SortDirection.ASC,
           });
         } catch (error) {
-          console.log(error);
+          /* empty */
         }
       }
     },
-    [isLogged, pagination],
+    [isLogged, pagination, sorting],
   );
 
   useEffect(() => {
@@ -184,13 +190,16 @@ export const UpworkFeed = () => {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onPaginationChange: setPagination,
+    onSortingChange: setSorting,
     rowCount: fetchedData?.data.items.totalCount,
     manualPagination: true,
+    manualSorting: true,
     filterFns: {
       scoreFilter,
     },
     state: {
       pagination,
+      sorting,
     },
   });
 
