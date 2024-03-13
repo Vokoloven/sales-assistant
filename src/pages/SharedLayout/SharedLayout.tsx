@@ -8,6 +8,7 @@ import {AppRoutes} from "../../AppRoutes";
 import Button from "../../components/Button/Button";
 import {ButtonColor, ButtonSize} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
+import {ButtonIconVariant} from "../../components/ButtonIcon/constants";
 import {IconAppName} from "../../components/Icons/constants";
 import Tooltip from "../../components/Tooltip/Tooltip";
 import type {TElements} from "../../components/Tooltip/types/tooltip";
@@ -89,6 +90,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                   iconProps={{className: styles.sectionIcon}}
                   className={styles.sectionHeaderBoxInnerIconButton}
                   ariaLabel={"Menu toggler"}
+                  buttonIconVariant={ButtonIconVariant.Primary}
                 />
               </div>
             </div>
@@ -110,6 +112,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                   iconProps={{className: styles.sectionIcon}}
                   className={classnames(styles.sectionHeaderBoxInnerIconButton, {[`${styles.collapsed}`]: collapsed})}
                   ariaLabel={"Sidebar collapse"}
+                  buttonIconVariant={ButtonIconVariant.Primary}
                 />
               </div>
             </div>

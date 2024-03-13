@@ -5,6 +5,7 @@ import {KeyExtractor} from "../../utils/types/keyExtractor";
 import {ButtonType} from "../Button/constants";
 import {IconAppName} from "../Icons/constants";
 import type {TIconComponent, IIconProps} from "../Icons/types/icon";
+import {ButtonIconVariant} from "./constants";
 
 import styles from "./ButtonIcon.module.scss";
 import Icons from "../Icons/Icons";
@@ -18,6 +19,7 @@ interface IProps {
   disabled?: boolean;
   ariaLabel?: string;
   onClick?: () => void;
+  buttonIconVariant?: KeyExtractor<typeof ButtonIconVariant>;
 }
 
 const ButtonIcon = ({
@@ -28,6 +30,7 @@ const ButtonIcon = ({
   ariaLabel,
   disabled = false,
   type = ButtonType.Button,
+  buttonIconVariant = ButtonIconVariant.Primary,
 }: IProps) => {
   const Icon: TIconComponent = Icons[icon];
 
@@ -37,7 +40,7 @@ const ButtonIcon = ({
     <button
       type={type}
       onClick={onClick}
-      className={classnames(styles.button, className)}
+      className={classnames(styles.button, styles[`${buttonIconVariant}`], className)}
       aria-label={ariaLabel}
       disabled={disabled}
     >

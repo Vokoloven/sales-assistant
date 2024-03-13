@@ -8,12 +8,28 @@
 
   line-height: 0px;
 
-  &:not(:disabled):hover {
-    background-color: $BlueA100;
-  }
   &:not(:disabled):focus {
-    background-color: $BlueA300;
     outline: none;
+  }
+
+  &.primary {
+    &:not(:disabled):hover {
+      background-color: $BlueA100;
+    }
+
+    &:not(:disabled):focus {
+      background-color: $BlueA300;
+    }
+  }
+
+  &.input {
+    &:not(:disabled):hover {
+      background-color: initial;
+    }
+
+    &:not(:disabled):focus {
+      background-color: initial;
+    }
   }
 
   &:disabled {
@@ -29,13 +45,24 @@
 
 html[data-theme="dark"] {
   .button {
-    &:not(:disabled):hover {
-      background-color: $BlueA800;
+    &.primary {
+      &:not(:disabled):hover {
+        background-color: $BlueA800;
+      }
+
+      &:not(:disabled):focus {
+        background-color: $BlueA600;
+      }
     }
 
-    &:not(:disabled):focus {
-      background-color: $BlueA600;
-      outline: none;
+    &.input {
+      &:not(:disabled):hover {
+        background-color: initial;
+      }
+
+      &:not(:disabled):focus {
+        background-color: initial;
+      }
     }
 
     &:disabled {

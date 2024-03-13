@@ -34,7 +34,7 @@
     position: relative;
   }
 
-  &PasswordToggler {
+  &Button {
     position: absolute;
     display: block;
 
@@ -46,8 +46,6 @@
     right: 0;
 
     transform: translate(-50%, -50%);
-
-    fill: $White;
   }
 
   &.form {

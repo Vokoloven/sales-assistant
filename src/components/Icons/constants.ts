@@ -1,5 +1,6 @@
 export const IconInstanceName = {
   Eye: "Eye",
+  EyeCrossOut: "EyeCrossOut",
   Menu: "Menu",
   CollapseMenu: "CollapseMenu",
   Sun: "Sun",
@@ -17,6 +18,7 @@ export const IconInstanceName = {
 
 export const IconAppName = {
   ShowPassword: "ShowPassword",
+  HidePassword: "HidePassword",
   Menu: "Menu",
   CollapseMenu: "CollapseMenu",
   Sun: "Sun",

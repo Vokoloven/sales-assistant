@@ -7,6 +7,7 @@ import {CollapseMenu} from "./CollapseMenu";
 import {Cross} from "./Cross";
 import {Dislike} from "./Dislike";
 import {Eye} from "./Eye";
+import {EyeCrossOut} from "./EyeCrossOut";
 import {Feed} from "./Feed";
 import {Like} from "./Like";
 import {LogOut} from "./LogOut";
@@ -22,6 +23,7 @@ type TIconInstance = {
 
 export const IconInstance: TIconInstance = {
   Eye,
+  EyeCrossOut,
   Menu,
   CollapseMenu,
   Sun,

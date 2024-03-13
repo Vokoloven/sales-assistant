@@ -32,6 +32,7 @@ const Icons: TIcon = {
     className: styles.chevronLeft,
   }),
   [IconAppName.Sort]: makeIcon(IconInstance.Sort, {className: styles.sort}),
+  [IconAppName.HidePassword]: makeIcon(IconInstance.EyeCrossOut),
 };
 
 export default Icons;

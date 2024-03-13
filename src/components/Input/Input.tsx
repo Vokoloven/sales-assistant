@@ -5,6 +5,7 @@ import {KeyExtractor} from "../../utils/types/keyExtractor";
 import type {TCombineGeneralValidatorResult} from "../../utils/validators/types/composeValidators";
 import type {TValidatorReturn} from "../../utils/validators/types/validator";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";
+import {ButtonIconVariant} from "../ButtonIcon/constants";
 import {IconAppName} from "../Icons/constants";
 
 import {InputType, InputStyle} from "./constants";
@@ -21,23 +22,16 @@ interface IProps<T extends FieldValues> {
   errorMessage?: string | undefined;
   validate?: TValidatorReturn<TCombineGeneralValidatorResult>;
   register?: UseFormRegister<T>;
-  isDirtyPassword?: boolean;
   value?: string | number;
   onClick?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   forwardedRef?: React.ForwardedRef<unknown>;
   inputStyle?: KeyExtractor<typeof InputStyle>;
+  buttonIcon?: {
+    icon: KeyExtractor<typeof IconAppName>;
+    onClick: () => void;
+  };
 }
-
-const togglePasswordVisibility = (id: string) => {
-  const input = document.getElementById(id) as HTMLInputElement;
-
-  if (input.type === InputType.Password) {
-    input.type = InputType.Text;
-  } else {
-    input.type = InputType.Password;
-  }
-};
 
 const Input = <T extends FieldValues>({
   label,
@@ -47,12 +41,12 @@ const Input = <T extends FieldValues>({
   name,
   errorMessage,
   validate,
-  isDirtyPassword,
   value,
   onChange,
   onClick,
   forwardedRef,
   inputStyle,
+  buttonIcon,
   hasAutoFocus = false,
   isDisabled = false,
 }: IProps<T>) => {
@@ -86,12 +80,14 @@ const Input = <T extends FieldValues>({
           onClick={onClick}
           {...rest}
         />
-        {isDirtyPassword && (
-          <ButtonIcon
-            icon={IconAppName.ShowPassword}
-            iconProps={{className: styles.inputPasswordToggler}}
-            onClick={() => togglePasswordVisibility(id)}
-          />
+        {buttonIcon && (
+          <div className={styles.inputButton}>
+            <ButtonIcon
+              icon={buttonIcon.icon}
+              onClick={buttonIcon.onClick}
+              buttonIconVariant={ButtonIconVariant.Input}
+            />
+          </div>
         )}
       </div>
       {errorMessage && <span className={styles.inputTextError}>{errorMessage}</span>}
