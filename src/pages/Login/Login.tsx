@@ -138,6 +138,7 @@ const Login = () => {
                             ? IconAppName.ShowPassword
                             : IconAppName.HidePassword,
                         onClick: togglePasswordVisibility,
+                        ariaLabel: "Toggle Password Visibility",
                       }
                     : undefined
                 }

@@ -30,6 +30,7 @@ interface IProps<T extends FieldValues> {
   buttonIcon?: {
     icon: KeyExtractor<typeof IconAppName>;
     onClick: () => void;
+    ariaLabel?: string;
   };
 }
 
@@ -86,6 +87,7 @@ const Input = <T extends FieldValues>({
               icon={buttonIcon.icon}
               onClick={buttonIcon.onClick}
               buttonIconVariant={ButtonIconVariant.Input}
+              ariaLabel={buttonIcon.ariaLabel}
             />
           </div>
         )}

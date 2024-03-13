@@ -74,7 +74,7 @@ export const UpworkFeed = () => {
             pageSize: pagination.pageSize,
             pageNumber: pagination.pageIndex + 1,
             sortBy: sorting[0]?.id as UpworkFeedSortBy,
-            sortDirection: Boolean(sorting.length) && sorting[0]?.desc ? SortDirection.DESC : SortDirection.ASC,
+            sortDirection: sorting.length ? (sorting[0]?.desc ? SortDirection.DESC : SortDirection.ASC) : undefined,
           });
         } catch (error) {
           /* empty */
