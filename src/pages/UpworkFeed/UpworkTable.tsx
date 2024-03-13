@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Table, flexRender, Column} from "@tanstack/react-table";
 import classnames from "classnames";

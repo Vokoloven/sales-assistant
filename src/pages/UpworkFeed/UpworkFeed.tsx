@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ColumnDef,
   useReactTable,
@@ -10,7 +12,7 @@ import {
 } from "@tanstack/react-table";
 import classnames from "classnames";
 import {format} from "date-fns";
-import {useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import Select, {components} from "react-select";
 
 import Button from "../../components/Button/Button";
@@ -21,8 +23,10 @@ import Icons from "../../components/Icons/Icons";
 import Spinner from "../../components/Spinner/Spinner";
 import {useAuth} from "../../hooks/useAuth";
 import {getTheme} from "../../hooks/useTheme";
-import {useGetFeedsQuery} from "../../redux/api/upworkFeedsApi";
+import {useGetFeedsMutation} from "../../redux/api/upworkFeedsApi";
+import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {ReviewType} from "../../submodules/enums/upwork-feed/review-type.enum";
+import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
 import type {IReviewDTO} from "../../submodules/interfaces/dto/upwork-feed/ireview.dto";
 import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
 
@@ -34,14 +38,49 @@ import TableInstance from "./UpworkTable";
 import {capitalize, scoreHandler} from "./utils";
 
 export const UpworkFeed = () => {
-  const [selectedOption, setSelectedOption] = useState({value: 10, label: "10"});
   const {isLogged} = useAuth();
+  const [getFeeds, {isLoading, data: fetchedData}] = useGetFeedsMutation();
+  const [selectedOption, setSelectedOption] = useState({value: 10, label: "10"});
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
   });
+  const data = useMemo<IUpworkFeedItemDTO[]>(() => {
+    if (fetchedData) {
+      return fetchedData.data.items.items;
+    } else {
+      return [];
+    }
+  }, [fetchedData]);
 
-  const {data: fetchedData, isLoading} = useGetFeedsQuery({pageSize: 25, pageNumber: 1}, {skip: !isLogged});
+  const getFeedsRequest = useCallback(
+    async ({
+      pagination,
+    }: {
+      pagination: {
+        pageIndex: number;
+        pageSize: number;
+      };
+    }) => {
+      if (isLogged) {
+        try {
+          await getFeeds({
+            pageSize: pagination.pageSize,
+            pageNumber: pagination.pageIndex + 1,
+            sortBy: UpworkFeedSortBy.Title,
+            sortDirection: SortDirection.ASC,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    },
+    [isLogged, pagination],
+  );
+
+  useEffect(() => {
+    getFeedsRequest({pagination});
+  }, [getFeedsRequest]);
 
   const scoreFilter: FilterFn<IUpworkFeedItemDTO> = (row, columnId, value) => {
     return row.original[columnId] < value;
@@ -138,25 +177,20 @@ export const UpworkFeed = () => {
     [],
   );
 
-  const data = useMemo<IUpworkFeedItemDTO[]>(() => {
-    if (fetchedData) {
-      return fetchedData.data.items.items;
-    } else {
-      return [];
-    }
-  }, [fetchedData]);
-
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
-    state: {pagination},
+    rowCount: fetchedData?.data.items.totalCount,
+    manualPagination: true,
     filterFns: {
       scoreFilter,
+    },
+    state: {
+      pagination,
     },
   });
 
@@ -165,17 +199,19 @@ export const UpworkFeed = () => {
     setPagination((prevPagination) => ({...prevPagination, pageSize: option!.value}));
   };
 
-  const currentPage = table.getState().pagination.pageIndex + 1;
   const totalPages = table.getPageCount();
+  const currentPage = table.getState().pagination.pageIndex + 1;
 
   const pages = useMemo<Array<number>>(() => {
-    const start = Math.floor(table.getState().pagination.pageIndex / 6) * 6;
-    const end = start + 6 > totalPages ? totalPages : start + 6;
+    const numberOfButtons = 6;
+
+    const start = Math.floor((currentPage - 1) / numberOfButtons) * numberOfButtons;
+    const end = start + numberOfButtons > totalPages ? totalPages : start + numberOfButtons;
     return Array.from({length: end - start}, (_, i) => start + i + 1);
-  }, [currentPage - 1, totalPages]);
+  }, [currentPage, totalPages]);
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
-  if (data?.length) {
+  if (data) {
     return (
       <>
         <main className={styles.main}>
@@ -196,9 +232,9 @@ export const UpworkFeed = () => {
                   <div className={styles.footerInnerItemsInner}>
                     <div className={styles.footerInnerItemsInnerShown}>
                       <span>Items shown:</span>
-                      <span>1-{table.getRowModel().rows.length.toLocaleString()}</span>
+                      <span>1-{pagination.pageSize}</span>
                       <span>out of</span>
-                      <span>{data?.length}</span>
+                      <span>{fetchedData?.data.items.totalCount}</span>
                     </div>
                   </div>
                 </div>
