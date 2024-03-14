@@ -46,8 +46,6 @@ const Button = ({
   const IconBefore: TIconComponent | undefined = iconBefore && Icons[iconBefore];
   const IconAfter: TIconComponent | undefined = iconAfter && Icons[iconAfter];
 
-  // const buttonClasses = classnames(styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`], classname);
-
   return (
     <button
       onClick={onClick}
