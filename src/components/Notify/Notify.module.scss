@@ -22,7 +22,6 @@
     }
 
     &Inner {
-      position: relative;
       display: block;
       padding: 0 3px;
 
@@ -36,20 +35,28 @@
     padding-left: 36px;
     @include ellipsis;
 
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 2px;
-      transform: translateY(-50%);
+    &-error {
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 2px;
+        transform: translateY(-50%);
 
-      width: 24px;
-      height: 24px;
+        width: 24px;
+        height: 24px;
 
-      background-image: (url("../../design/images/icons/errorLight.svg"));
-      background-repeat: no-repeat;
-      background-size: cover;
+        background-image: (url("../../design/images/icons/errorLight.svg"));
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
     }
+  }
+
+  &Type {
+    font-weight: 700;
+    text-transform: capitalize;
   }
 
   &Message {
@@ -60,7 +67,7 @@
     padding-left: 36px;
   }
 
-  &.error {
+  &.notify-error {
     background-color: $Error200;
   }
 }
@@ -74,8 +81,10 @@ html[data-theme="dark"] {
     &Title {
       @include font($fclr: $White, $lh: 24px, $fw: 500);
 
-      &::after {
-        background-image: (url("../../design/images/icons/errorDark.svg"));
+      &-error {
+        &::after {
+          background-image: (url("../../design/images/icons/errorDark.svg"));
+        }
       }
     }
 
@@ -83,7 +92,7 @@ html[data-theme="dark"] {
       @include font($fs: 14px, $lh: 20px, $fclr: $White);
     }
 
-    &.error {
+    &.notify-error {
       background-color: $ErrorA200;
     }
   }

@@ -4,8 +4,6 @@ import {
   ColumnDef,
   useReactTable,
   getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
   getFilteredRowModel,
   FilterFn,
   FilterFnOption,
@@ -20,6 +18,8 @@ import {ButtonColor} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {IconAppName} from "../../components/Icons/constants";
 import Icons from "../../components/Icons/Icons";
+import {NotifyType} from "../../components/Notify/constants";
+import Notify from "../../components/Notify/Notify";
 import Spinner from "../../components/Spinner/Spinner";
 import {useAuth} from "../../hooks/useAuth";
 import {getTheme} from "../../hooks/useTheme";
@@ -44,7 +44,7 @@ export type ColumnSort = {
 
 export const UpworkFeed = () => {
   const {isLogged} = useAuth();
-  const [getFeeds, {isLoading, data: fetchedData}] = useGetFeedsMutation();
+  const [getFeeds, {isLoading, error, data: fetchedData}] = useGetFeedsMutation();
   const [selectedOption, setSelectedOption] = useState({value: 10, label: "10"});
   const [sorting, setSorting] = useState<ColumnSort[]>([]);
   const [pagination, setPagination] = useState({
@@ -58,6 +58,8 @@ export const UpworkFeed = () => {
       return [];
     }
   }, [fetchedData]);
+
+  console.log(error);
 
   const getFeedsRequest = useCallback(
     async ({
@@ -187,7 +189,6 @@ export const UpworkFeed = () => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
@@ -220,6 +221,29 @@ export const UpworkFeed = () => {
   }, [currentPage, totalPages]);
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
+  if (error) {
+    if ("status" in error && error.status === 401) {
+      return (
+        <div>
+          <Notify
+            type={NotifyType.Error}
+            message={"Something went wrong"}
+          />
+          <div className={styles.error}>
+            Please try again later.&nbsp;
+            <span
+              onClick={() => {
+                getFeedsRequest({pagination});
+              }}
+              className={styles.errorReload}
+            >
+              Reload
+            </span>
+          </div>
+        </div>
+      );
+    }
+  }
   if (data) {
     return (
       <>

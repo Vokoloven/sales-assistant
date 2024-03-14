@@ -9,6 +9,18 @@
   @include font($fs: 24px);
 }
 
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &Reload {
+    display: block;
+    cursor: pointer;
+    @include font($fclr: $BlueA200);
+  }
+}
+
 .main {
   overflow-y: auto;
   flex-grow: 1;
@@ -315,6 +327,14 @@
 html[data-theme="dark"] {
   .spinner {
     color: $White;
+  }
+
+  .error {
+    @include font($fclr: $White);
+
+    &Reload {
+      @include font($fclr: $BlueA700);
+    }
   }
 
   .footer {
