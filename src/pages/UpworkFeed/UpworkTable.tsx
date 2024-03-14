@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Table, flexRender, Column} from "@tanstack/react-table";
 import classnames from "classnames";
-import {format} from "date-fns";
-import {useState, forwardRef} from "react";
-import DatePicker from "react-datepicker";
-import Select from "react-select";
 
+import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
+import {ButtonIconVariant} from "../../components/ButtonIcon/constants";
+import {IconAppName} from "../../components/Icons/constants";
 import {InputType} from "../../components/Input/constants";
 import {InputStyle} from "../../components/Input/constants";
 import Input from "../../components/Input/Input";
-import {getTheme} from "../../hooks/useTheme";
+import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
+import {KeyExtractor} from "../../utils/types/keyExtractor";
 
 import {AccessorKey} from "./constants";
-import {selectStyles} from "./selectStyles";
 
 import "react-datepicker/dist/react-datepicker.css";
 interface IProps<T> {
@@ -20,30 +19,46 @@ interface IProps<T> {
   styles: {[x: string]: string};
 }
 
+const handleSortIcon = (
+  getIsSorted: () => false | Lowercase<KeyExtractor<typeof SortDirection>>,
+): KeyExtractor<typeof IconAppName> => {
+  const result = getIsSorted();
+
+  switch (result) {
+    case false:
+      return IconAppName.Sort;
+
+    case "asc":
+      return IconAppName.SortAsc;
+
+    case "desc":
+      return IconAppName.SortDesc;
+  }
+};
+
 function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
-  const [startDate, setStartDate] = useState("");
+  // const [startDate, setStartDate] = useState("");
   const columnFilterValue = column.getFilterValue();
   const {id} = column;
-  const theme = getTheme();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     column.setFilterValue(e.target.value);
   };
 
-  const DateInput = forwardRef(({value, onClick}: {value?: string | number; onClick?: () => void}, ref) => {
-    return (
-      <Input
-        id={InputType.Date}
-        name={InputType.Date}
-        type={InputType.Text}
-        value={value}
-        onChange={onChange}
-        onClick={onClick}
-        forwardedRef={ref}
-        inputStyle={InputStyle.Form}
-      />
-    );
-  });
+  // const DateInput = forwardRef(({value, onClick}: {value?: string | number; onClick?: () => void}, ref) => {
+  //   return (
+  //     <Input
+  //       id={InputType.Date}
+  //       name={InputType.Date}
+  //       type={InputType.Text}
+  //       value={value}
+  //       onChange={onChange}
+  //       onClick={onClick}
+  //       forwardedRef={ref}
+  //       inputStyle={InputStyle.Form}
+  //     />
+  //   );
+  // });
 
   if (id === AccessorKey.Title)
     return (
@@ -57,37 +72,17 @@ function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
       />
     );
 
-  if (id === AccessorKey.Published)
-    return (
-      <DatePicker
-        selected={startDate}
-        onChange={(date: Date) => {
-          setStartDate(format(date, "MM/dd/yyyy"));
-          column.setFilterValue(format(date, "MM/dd/yyyy"));
-        }}
-        customInput={<DateInput />}
-      />
-    );
-
-  const options = [
-    {value: 30, label: "0 - 100"},
-    {value: 150, label: "100 - 150"},
-    {value: 200, label: "150 - 200"},
-  ];
-
-  if (id === AccessorKey.Score) {
-    const handleChange = (option: any): void => {
-      column.setFilterValue(option.value);
-    };
-
-    return (
-      <Select
-        options={options}
-        onChange={handleChange}
-        styles={selectStyles(theme)}
-      />
-    );
-  }
+  // if (id === AccessorKey.Published)
+  //   return (
+  //     <DatePicker
+  //       selected={startDate}
+  //       onChange={(date: Date) => {
+  //         setStartDate(format(date, "MM/dd/yyyy"));
+  //         column.setFilterValue(format(date, "MM/dd/yyyy"));
+  //       }}
+  //       customInput={<DateInput />}
+  //     />
+  //   );
 
   return null;
 }
@@ -112,22 +107,15 @@ const UpworkTable = <T,>({table, styles}: IProps<T>) => {
                     flex: `${header.column.columnDef.size} 0 auto`,
                   }}
                 >
-                  <div
-                    className={classnames(styles.cell, {
-                      [`${styles.sort}`]:
-                        header.column.id === AccessorKey.Title ||
-                        header.column.id === AccessorKey.Published ||
-                        header.column.id === AccessorKey.Score,
-                    })}
-                    onClick={
-                      header.column.id === AccessorKey.Title ||
-                      header.column.id === AccessorKey.Published ||
-                      header.column.id === AccessorKey.Score
-                        ? header.column.getToggleSortingHandler()
-                        : undefined
-                    }
-                  >
-                    {flexRender(header.column.columnDef.header, header.getContext())}
+                  <div className={styles.cell}>
+                    <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
+                    {header.column.columnDef?.["isSorted"] && (
+                      <ButtonIcon
+                        onClick={header.column.getToggleSortingHandler()}
+                        icon={handleSortIcon(header.column.getIsSorted)}
+                        buttonIconVariant={ButtonIconVariant.Input}
+                      />
+                    )}
                   </div>
                   {header.column.getCanFilter() ? (
                     <div>

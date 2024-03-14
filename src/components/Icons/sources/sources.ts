@@ -14,6 +14,7 @@ import {LogOut} from "./LogOut";
 import {Menu} from "./Menu";
 import {Moon} from "./Moon";
 import {Sort} from "./Sort";
+import {SortDesc} from "./SortAsc";
 import {Sun} from "./Sun";
 import {User} from "./User";
 
@@ -37,4 +38,5 @@ export const IconInstance: TIconInstance = {
   Dislike,
   ChevronWithLine,
   Sort,
+  SortDesc,
 };

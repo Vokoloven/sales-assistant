@@ -7,8 +7,8 @@ import {IconAppName} from "../Icons/constants";
 import type {TIconComponent, IIconProps} from "../Icons/types/icon";
 import {ButtonIconVariant} from "./constants";
 
-import styles from "./ButtonIcon.module.scss";
 import Icons from "../Icons/Icons";
+import styles from "./ButtonIcon.module.scss";
 
 interface IProps {
   icon: KeyExtractor<typeof IconAppName>;
@@ -18,7 +18,7 @@ interface IProps {
   type?: KeyExtractor<typeof ButtonType>;
   disabled?: boolean;
   ariaLabel?: string;
-  onClick?: () => void;
+  onClick?: (() => void) | ((event: unknown) => void);
   buttonIconVariant?: KeyExtractor<typeof ButtonIconVariant>;
 }
 

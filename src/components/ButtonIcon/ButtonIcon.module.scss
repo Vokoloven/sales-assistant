@@ -37,10 +37,6 @@
       fill: $Disabled;
     }
   }
-
-  &Icon {
-    fill: $Gray800;
-  }
 }
 
 html[data-theme="dark"] {
@@ -69,10 +65,6 @@ html[data-theme="dark"] {
       & > .buttonIcon {
         fill: $GrayA300;
       }
-    }
-
-    &Icon {
-      fill: $Gray600;
     }
   }
 }

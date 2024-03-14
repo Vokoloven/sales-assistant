@@ -10,7 +10,6 @@ import Layout from "./routes/Layout";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 const Login = lazy(() => import("./pages/Login/Login"));
-// const Feed = lazy(() => import("./pages/Feed/Feed"));
 const SharedLayout = lazy(() => import("./pages/SharedLayout/SharedLayout"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 const UpworkFeed = lazy(() => import("./pages/UpworkFeed/UpworkFeed"));

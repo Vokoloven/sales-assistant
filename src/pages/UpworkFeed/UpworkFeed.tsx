@@ -1,13 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  ColumnDef,
-  useReactTable,
-  getCoreRowModel,
-  getFilteredRowModel,
-  FilterFn,
-  FilterFnOption,
-} from "@tanstack/react-table";
+import {ColumnDef, useReactTable, getCoreRowModel, FilterFn, FilterFnOption} from "@tanstack/react-table";
 import classnames from "classnames";
 import {format} from "date-fns";
 import {useCallback, useEffect, useMemo, useState} from "react";
@@ -23,6 +16,7 @@ import Notify from "../../components/Notify/Notify";
 import Spinner from "../../components/Spinner/Spinner";
 import {useAuth} from "../../hooks/useAuth";
 import {getTheme} from "../../hooks/useTheme";
+import {useRecoverUserQuery} from "../../redux/api/authApi";
 import {useGetFeedsMutation} from "../../redux/api/upworkFeedsApi";
 import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {ReviewType} from "../../submodules/enums/upwork-feed/review-type.enum";
@@ -37,17 +31,22 @@ import styles from "./UpworkFeedTable.module.scss";
 import TableInstance from "./UpworkTable";
 import {capitalize, scoreHandler} from "./utils";
 
-export type ColumnSort = {
+type ColumnSort = {
   id: string;
   desc: boolean;
 };
 
+type PaginationState = {
+  pageIndex: number;
+  pageSize: number;
+};
+
 export const UpworkFeed = () => {
   const {isLogged} = useAuth();
-  const [getFeeds, {isLoading, error, data: fetchedData}] = useGetFeedsMutation();
+  const [getFeeds, {isLoading, isError, data: fetchedData}] = useGetFeedsMutation();
   const [selectedOption, setSelectedOption] = useState({value: 10, label: "10"});
   const [sorting, setSorting] = useState<ColumnSort[]>([]);
-  const [pagination, setPagination] = useState({
+  const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   });
@@ -59,17 +58,10 @@ export const UpworkFeed = () => {
     }
   }, [fetchedData]);
 
-  console.log(error);
+  useRecoverUserQuery(undefined, {skip: !isError});
 
   const getFeedsRequest = useCallback(
-    async ({
-      pagination,
-    }: {
-      pagination: {
-        pageIndex: number;
-        pageSize: number;
-      };
-    }) => {
+    async ({pagination, sorting}: {pagination: PaginationState; sorting: ColumnSort[]}) => {
       if (isLogged) {
         try {
           await getFeeds({
@@ -87,12 +79,8 @@ export const UpworkFeed = () => {
   );
 
   useEffect(() => {
-    getFeedsRequest({pagination});
+    getFeedsRequest({pagination, sorting});
   }, [getFeedsRequest]);
-
-  const scoreFilter: FilterFn<IUpworkFeedItemDTO> = (row, columnId, value) => {
-    return row.original[columnId] < value;
-  };
 
   const columns = useMemo<ColumnDef<IUpworkFeedItemDTO>[]>(
     () => [
@@ -103,6 +91,7 @@ export const UpworkFeed = () => {
         minSize: 200,
         width: 200,
         className: AccessorKey.Title,
+        isSorted: true,
       },
       {
         accessorKey: AccessorKey.Published,
@@ -112,6 +101,7 @@ export const UpworkFeed = () => {
         minSize: 140,
         width: 140,
         className: AccessorKey.Published,
+        isSorted: true,
       },
       {
         accessorKey: AccessorKey.Keywords,
@@ -136,7 +126,7 @@ export const UpworkFeed = () => {
         minSize: 140,
         width: 140,
         className: AccessorKey.Score,
-        filterFn: "scoreFilter" as FilterFnOption<IUpworkFeedItemDTO>,
+        isSorted: true,
       },
       {
         accessorKey: AccessorKey.Review,
@@ -189,15 +179,12 @@ export const UpworkFeed = () => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
     rowCount: fetchedData?.data.items.totalCount,
     manualPagination: true,
     manualSorting: true,
-    filterFns: {
-      scoreFilter,
-    },
+    manualFiltering: true,
     state: {
       pagination,
       sorting,
@@ -221,28 +208,26 @@ export const UpworkFeed = () => {
   }, [currentPage, totalPages]);
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
-  if (error) {
-    if ("status" in error && error.status === 401) {
-      return (
-        <div>
-          <Notify
-            type={NotifyType.Error}
-            message={"Something went wrong"}
-          />
-          <div className={styles.error}>
-            Please try again later.&nbsp;
-            <span
-              onClick={() => {
-                getFeedsRequest({pagination});
-              }}
-              className={styles.errorReload}
-            >
-              Reload
-            </span>
-          </div>
+  if (isError) {
+    return (
+      <div>
+        <Notify
+          type={NotifyType.Error}
+          message={"Something went wrong"}
+        />
+        <div className={styles.error}>
+          Please try again later.&nbsp;
+          <span
+            onClick={() => {
+              getFeedsRequest({pagination, sorting});
+            }}
+            className={styles.errorReload}
+          >
+            Reload
+          </span>
         </div>
-      );
-    }
+      </div>
+    );
   }
   if (data) {
     return (

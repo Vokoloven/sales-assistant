@@ -14,6 +14,7 @@ export const IconInstanceName = {
   Dislike: "Dislike",
   ChevronWithLine: "ChevronWithLine",
   Sort: "Sort",
+  SortDesc: "SortDesc",
 } as const;
 
 export const IconAppName = {
@@ -35,4 +36,6 @@ export const IconAppName = {
   ChevronWithLineRight: "ChevronWithLineRight",
   ChevronWithLineLeft: "ChevronWithLineLeft",
   Sort: "Sort",
+  SortDesc: "SortDesc",
+  SortAsc: "SortAsc",
 } as const;

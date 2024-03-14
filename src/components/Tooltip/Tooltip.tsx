@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import {useRef, useEffect, useCallback} from "react";
+import {useRef, ElementRef, useEffect, useCallback} from "react";
 
 import {KeyExtractor} from "../../utils/types/keyExtractor";
 import Button from "../Button/Button";
@@ -18,7 +18,7 @@ interface IProps {
 }
 
 const Tooltip = ({children, elements, open = false, setOpen, position = Position.Top}: IProps) => {
-  const tooltipRef = useRef<HTMLDivElement>(null);
+  const tooltipRef = useRef<ElementRef<"div">>(null);
   const handleElementsLength = (elements: TElements) => {
     if (elements.length === 2) {
       return "couple";
