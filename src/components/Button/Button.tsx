@@ -58,7 +58,8 @@ const Button = ({
           <IconBefore {...iconBeforeProps} />
         </div>
       )}
-      <span className={styles.buttonText}>{isLoading ? spinner : text}</span>
+      {isLoading ? spinner : null}
+      <span className={styles.buttonText}>{text}</span>
       {IconAfter && (
         <div className={classnames(styles.buttonIcon, iconAfterClassname)}>
           <IconAfter {...iconAfterProps} />
