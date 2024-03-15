@@ -29,7 +29,7 @@ interface IProps<T extends FieldValues> {
   inputStyle?: KeyExtractor<typeof InputStyle>;
   buttonIcon?: {
     icon: KeyExtractor<typeof IconAppName>;
-    onClick: () => void;
+    onClick?: () => void;
     ariaLabel?: string;
   };
 }

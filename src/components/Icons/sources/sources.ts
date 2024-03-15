@@ -5,6 +5,7 @@ import {Chevron} from "./Chevron";
 import {ChevronWithLine} from "./ChevronWithLine";
 import {CollapseMenu} from "./CollapseMenu";
 import {Cross} from "./Cross";
+import {DeleteRounded} from "./DeleteRounded";
 import {Dislike} from "./Dislike";
 import {Eye} from "./Eye";
 import {EyeCrossOut} from "./EyeCrossOut";
@@ -39,4 +40,5 @@ export const IconInstance: TIconInstance = {
   ChevronWithLine,
   Sort,
   SortDesc,
+  DeleteRounded,
 };

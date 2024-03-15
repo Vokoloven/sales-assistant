@@ -1,17 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {Table, flexRender, Column} from "@tanstack/react-table";
+import {Table, flexRender} from "@tanstack/react-table";
 import classnames from "classnames";
 
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {ButtonIconVariant} from "../../components/ButtonIcon/constants";
 import {IconAppName} from "../../components/Icons/constants";
-import {InputType} from "../../components/Input/constants";
-import {InputStyle} from "../../components/Input/constants";
-import Input from "../../components/Input/Input";
+// import {InputType} from "../../components/Input/constants";
+// import {InputStyle} from "../../components/Input/constants";
+// import Input from "../../components/Input/Input";
 import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {KeyExtractor} from "../../utils/types/keyExtractor";
 
-import {AccessorKey} from "./constants";
+import Filter from "./Filter";
+
+// import {AccessorKey} from "./constants";
 
 import "react-datepicker/dist/react-datepicker.css";
 interface IProps<T> {
@@ -36,56 +38,57 @@ const handleSortIcon = (
   }
 };
 
-function Filter({column}: {column: Column<any, any>; table: Table<any>}) {
-  // const [startDate, setStartDate] = useState("");
-  const columnFilterValue = column.getFilterValue();
-  const {id} = column;
+// const Filter = ({column}: {column: Column<any, any>; table: Table<any>}) => {
+//   const columnFilterValue = column.getFilterValue();
+//   const {id} = column;
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    column.setFilterValue(e.target.value);
-  };
+//   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     column.setFilterValue(e.target.value);
+//   };
 
-  // const DateInput = forwardRef(({value, onClick}: {value?: string | number; onClick?: () => void}, ref) => {
-  //   return (
-  //     <Input
-  //       id={InputType.Date}
-  //       name={InputType.Date}
-  //       type={InputType.Text}
-  //       value={value}
-  //       onChange={onChange}
-  //       onClick={onClick}
-  //       forwardedRef={ref}
-  //       inputStyle={InputStyle.Form}
-  //     />
-  //   );
-  // });
+//   if (id === AccessorKey.Title)
+//     return (
+//       <Input
+//         id={id}
+//         name={id}
+//         type={InputType.Text}
+//         value={(columnFilterValue ?? "") as string}
+//         onChange={onChange}
+//         inputStyle={InputStyle.Form}
+//       />
+//     );
 
-  if (id === AccessorKey.Title)
-    return (
-      <Input
-        id={id}
-        name={id}
-        type={InputType.Text}
-        value={(columnFilterValue ?? "") as string}
-        onChange={onChange}
-        inputStyle={InputStyle.Form}
-      />
-    );
+//   // const [startDate, setStartDate] = useState("");
 
-  // if (id === AccessorKey.Published)
-  //   return (
-  //     <DatePicker
-  //       selected={startDate}
-  //       onChange={(date: Date) => {
-  //         setStartDate(format(date, "MM/dd/yyyy"));
-  //         column.setFilterValue(format(date, "MM/dd/yyyy"));
-  //       }}
-  //       customInput={<DateInput />}
-  //     />
-  //   );
+//   // const DateInput = forwardRef(({value, onClick}: {value?: string | number; onClick?: () => void}, ref) => {
+//   //   return (
+//   //     <Input
+//   //       id={InputType.Date}
+//   //       name={InputType.Date}
+//   //       type={InputType.Text}
+//   //       value={value}
+//   //       onChange={onChange}
+//   //       onClick={onClick}
+//   //       forwardedRef={ref}
+//   //       inputStyle={InputStyle.Form}
+//   //     />
+//   //   );
+//   // });
 
-  return null;
-}
+//   // if (id === AccessorKey.Published)
+//   //   return (
+//   //     <DatePicker
+//   //       selected={startDate}
+//   //       onChange={(date: Date) => {
+//   //         setStartDate(format(date, "MM/dd/yyyy"));
+//   //         column.setFilterValue(format(date, "MM/dd/yyyy"));
+//   //       }}
+//   //       customInput={<DateInput />}
+//   //     />
+//   //   );
+
+//   return null;
+// };
 
 const UpworkTable = <T,>({table, styles}: IProps<T>) => {
   return (

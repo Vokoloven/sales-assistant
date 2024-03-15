@@ -41,6 +41,12 @@ type PaginationState = {
   pageSize: number;
 };
 
+type NoInfer<T> = [T][T extends any ? 0 : never];
+
+type TState = "test" | "tests";
+
+type TestType = NoInfer<TState>;
+
 export const UpworkFeed = () => {
   const {isLogged} = useAuth();
   const [getFeeds, {isLoading, isError, data: fetchedData}] = useGetFeedsMutation();
