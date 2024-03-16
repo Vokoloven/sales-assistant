@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {ColumnDef, useReactTable, getCoreRowModel, FilterFn, FilterFnOption} from "@tanstack/react-table";
+import {ColumnDef, useReactTable, getCoreRowModel, FilterFn, FilterFnOption, Column} from "@tanstack/react-table";
 import classnames from "classnames";
 import {format} from "date-fns";
 import {useCallback, useEffect, useMemo, useState} from "react";
@@ -20,7 +20,9 @@ import {useRecoverUserQuery} from "../../redux/api/authApi";
 import {useGetFeedsMutation} from "../../redux/api/upworkFeedsApi";
 import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {ReviewType} from "../../submodules/enums/upwork-feed/review-type.enum";
+import type {UpworkFeedSearchBy} from "../../submodules/enums/upwork-feed/upwork-feed-search-by.enum";
 import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
+import type {ISearchParameterDTO} from "../../submodules/interfaces/dto/common/isearch-parameter.interface";
 import type {IReviewDTO} from "../../submodules/interfaces/dto/upwork-feed/ireview.dto";
 import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
 
@@ -41,15 +43,12 @@ type PaginationState = {
   pageSize: number;
 };
 
-type NoInfer<T> = [T][T extends any ? 0 : never];
-
-type TState = "test" | "tests";
-
-type TestType = NoInfer<TState>;
+type TSerachParameterDTO = ISearchParameterDTO<UpworkFeedSearchBy>[];
 
 export const UpworkFeed = () => {
-  const {isLogged} = useAuth();
   const [getFeeds, {isLoading, isError, data: fetchedData}] = useGetFeedsMutation();
+  const {isLogged} = useAuth();
+  useRecoverUserQuery(undefined, {skip: !isError});
   const [selectedOption, setSelectedOption] = useState({value: 10, label: "10"});
   const [sorting, setSorting] = useState<ColumnSort[]>([]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -63,30 +62,6 @@ export const UpworkFeed = () => {
       return [];
     }
   }, [fetchedData]);
-
-  useRecoverUserQuery(undefined, {skip: !isError});
-
-  const getFeedsRequest = useCallback(
-    async ({pagination, sorting}: {pagination: PaginationState; sorting: ColumnSort[]}) => {
-      if (isLogged) {
-        try {
-          await getFeeds({
-            pageSize: pagination.pageSize,
-            pageNumber: pagination.pageIndex + 1,
-            sortBy: sorting[0]?.id as UpworkFeedSortBy,
-            sortDirection: sorting.length ? (sorting[0]?.desc ? SortDirection.DESC : SortDirection.ASC) : undefined,
-          });
-        } catch (error) {
-          /* empty */
-        }
-      }
-    },
-    [isLogged, pagination, sorting],
-  );
-
-  useEffect(() => {
-    getFeedsRequest({pagination, sorting});
-  }, [getFeedsRequest]);
 
   const columns = useMemo<ColumnDef<IUpworkFeedItemDTO>[]>(
     () => [
@@ -196,6 +171,41 @@ export const UpworkFeed = () => {
       sorting,
     },
   });
+
+  const tableFilterValue = table
+    .getAllColumns()
+    .reduce((acc: TSerachParameterDTO, column: Column<IUpworkFeedItemDTO, unknown>) => {
+      if (column.getFilterValue()) {
+        return (acc = [
+          ...acc,
+          {searchBy: column.id as UpworkFeedSearchBy, searchQuery: column.getFilterValue() as string},
+        ]);
+      }
+
+      return acc;
+    }, []);
+
+  const getFeedsRequest = useCallback(
+    async ({pagination, sorting}: {pagination: PaginationState; sorting: ColumnSort[]}) => {
+      if (isLogged) {
+        try {
+          await getFeeds({
+            pageSize: pagination.pageSize,
+            pageNumber: pagination.pageIndex + 1,
+            sortBy: sorting[0]?.id as UpworkFeedSortBy,
+            sortDirection: sorting.length ? (sorting[0]?.desc ? SortDirection.DESC : SortDirection.ASC) : undefined,
+          });
+        } catch (error) {
+          /* empty */
+        }
+      }
+    },
+    [isLogged, pagination, sorting],
+  );
+
+  useEffect(() => {
+    getFeedsRequest({pagination, sorting});
+  }, [getFeedsRequest]);
 
   const handleChange = (option: TOption | null): void => {
     setSelectedOption((prevSelectedOption) => ({...prevSelectedOption, ...option}));
