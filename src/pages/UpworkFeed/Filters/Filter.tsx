@@ -1,10 +1,10 @@
 import {Column, Table} from "@tanstack/react-table";
 
-import {IconAppName} from "../../components/Icons/constants";
-import {InputType} from "../../components/Input/constants";
-import {InputStyle} from "../../components/Input/constants";
-import Input from "../../components/Input/Input";
-import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
+import {IconAppName} from "../../../components/Icons/constants";
+import {InputType} from "../../../components/Input/constants";
+import {InputStyle} from "../../../components/Input/constants";
+import Input from "../../../components/Input/Input";
+import {UpworkFeedSortBy} from "../../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
 
 const Filter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>}) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {

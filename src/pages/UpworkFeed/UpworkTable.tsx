@@ -1,24 +1,25 @@
+/* eslint-disable indent */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Table, flexRender} from "@tanstack/react-table";
+import type {FilterMeta, Column} from "@tanstack/react-table";
 import classnames from "classnames";
 
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {ButtonIconVariant} from "../../components/ButtonIcon/constants";
 import {IconAppName} from "../../components/Icons/constants";
-// import {InputType} from "../../components/Input/constants";
-// import {InputStyle} from "../../components/Input/constants";
-// import Input from "../../components/Input/Input";
 import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {KeyExtractor} from "../../utils/types/keyExtractor";
 
-import Filter from "./Filter";
-
-// import {AccessorKey} from "./constants";
+import Filter from "./Filters/Filter";
 
 import "react-datepicker/dist/react-datepicker.css";
 interface IProps<T> {
   table: Table<T>;
   styles: {[x: string]: string};
+}
+
+interface ICustomFilterMeta extends FilterMeta {
+  filterComponent: (info: {column: Column<any, unknown>; table: Table<any>}) => JSX.Element;
 }
 
 const handleSortIcon = (
@@ -37,58 +38,6 @@ const handleSortIcon = (
       return IconAppName.SortDesc;
   }
 };
-
-// const Filter = ({column}: {column: Column<any, any>; table: Table<any>}) => {
-//   const columnFilterValue = column.getFilterValue();
-//   const {id} = column;
-
-//   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     column.setFilterValue(e.target.value);
-//   };
-
-//   if (id === AccessorKey.Title)
-//     return (
-//       <Input
-//         id={id}
-//         name={id}
-//         type={InputType.Text}
-//         value={(columnFilterValue ?? "") as string}
-//         onChange={onChange}
-//         inputStyle={InputStyle.Form}
-//       />
-//     );
-
-//   // const [startDate, setStartDate] = useState("");
-
-//   // const DateInput = forwardRef(({value, onClick}: {value?: string | number; onClick?: () => void}, ref) => {
-//   //   return (
-//   //     <Input
-//   //       id={InputType.Date}
-//   //       name={InputType.Date}
-//   //       type={InputType.Text}
-//   //       value={value}
-//   //       onChange={onChange}
-//   //       onClick={onClick}
-//   //       forwardedRef={ref}
-//   //       inputStyle={InputStyle.Form}
-//   //     />
-//   //   );
-//   // });
-
-//   // if (id === AccessorKey.Published)
-//   //   return (
-//   //     <DatePicker
-//   //       selected={startDate}
-//   //       onChange={(date: Date) => {
-//   //         setStartDate(format(date, "MM/dd/yyyy"));
-//   //         column.setFilterValue(format(date, "MM/dd/yyyy"));
-//   //       }}
-//   //       customInput={<DateInput />}
-//   //     />
-//   //   );
-
-//   return null;
-// };
 
 const UpworkTable = <T,>({table, styles}: IProps<T>) => {
   return (
@@ -122,10 +71,18 @@ const UpworkTable = <T,>({table, styles}: IProps<T>) => {
                   </div>
                   {header.column.getCanFilter() ? (
                     <div>
-                      <Filter
-                        table={table}
-                        column={header.column}
-                      />
+                      {header.column.columnDef?.meta &&
+                      (header.column.columnDef?.meta as ICustomFilterMeta).filterComponent ? (
+                        (header.column.columnDef?.meta as ICustomFilterMeta).filterComponent({
+                          column: header.column,
+                          table,
+                        })
+                      ) : (
+                        <Filter
+                          table={table}
+                          column={header.column}
+                        />
+                      )}
                     </div>
                   ) : null}
                 </th>
