@@ -1,20 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Column, Table} from "@tanstack/react-table";
 
 import {IconAppName} from "../../components/Icons/constants";
 import {InputType} from "../../components/Input/constants";
 import {InputStyle} from "../../components/Input/constants";
 import Input from "../../components/Input/Input";
+import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
 
-const Filter = <T,>({column, table}: {column: Column<T, unknown>; table: Table<T>}) => {
+const Filter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>}) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     column.setFilterValue(event.target.value);
   };
 
-  const firstValue = table.getPreFilteredRowModel().flatRows[0]?.getValue(column.id);
   const isDirtyField = Boolean(column.getFilterValue());
 
-  if (typeof firstValue === "string") {
+  const {id} = column;
+
+  if (id === UpworkFeedSortBy.Title) {
     return (
       <Input
         id={column.id}

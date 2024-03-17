@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {ColumnDef, useReactTable, getCoreRowModel, FilterFn, FilterFnOption, Column} from "@tanstack/react-table";
 import classnames from "classnames";
 import {format} from "date-fns";
@@ -15,6 +14,7 @@ import {NotifyType} from "../../components/Notify/constants";
 import Notify from "../../components/Notify/Notify";
 import Spinner from "../../components/Spinner/Spinner";
 import {useAuth} from "../../hooks/useAuth";
+import {useDebounceValue} from "../../hooks/useDebounceValue";
 import {getTheme} from "../../hooks/useTheme";
 import {useRecoverUserQuery} from "../../redux/api/authApi";
 import {useGetFeedsMutation} from "../../redux/api/upworkFeedsApi";
@@ -185,8 +185,18 @@ export const UpworkFeed = () => {
       return acc;
     }, []);
 
+  const debouncedTableFilterValue = useDebounceValue(tableFilterValue, 1000);
+
   const getFeedsRequest = useCallback(
-    async ({pagination, sorting}: {pagination: PaginationState; sorting: ColumnSort[]}) => {
+    async ({
+      pagination,
+      sorting,
+      debouncedTableFilterValue,
+    }: {
+      pagination: PaginationState;
+      sorting: ColumnSort[];
+      debouncedTableFilterValue: TSerachParameterDTO;
+    }) => {
       if (isLogged) {
         try {
           await getFeeds({
@@ -194,17 +204,18 @@ export const UpworkFeed = () => {
             pageNumber: pagination.pageIndex + 1,
             sortBy: sorting[0]?.id as UpworkFeedSortBy,
             sortDirection: sorting.length ? (sorting[0]?.desc ? SortDirection.DESC : SortDirection.ASC) : undefined,
+            searchParameters: debouncedTableFilterValue,
           });
         } catch (error) {
           /* empty */
         }
       }
     },
-    [isLogged, pagination, sorting],
+    [isLogged, pagination, sorting, JSON.stringify(debouncedTableFilterValue)],
   );
 
   useEffect(() => {
-    getFeedsRequest({pagination, sorting});
+    getFeedsRequest({pagination, sorting, debouncedTableFilterValue});
   }, [getFeedsRequest]);
 
   const handleChange = (option: TOption | null): void => {
@@ -215,7 +226,7 @@ export const UpworkFeed = () => {
   const totalPages = table.getPageCount();
   const currentPage = table.getState().pagination.pageIndex + 1;
 
-  const pages = useMemo<Array<number>>(() => {
+  const pages = useMemo<number[]>(() => {
     const numberOfButtons = 6;
 
     const start = Math.floor((currentPage - 1) / numberOfButtons) * numberOfButtons;
@@ -235,7 +246,7 @@ export const UpworkFeed = () => {
           Please try again later.&nbsp;
           <span
             onClick={() => {
-              getFeedsRequest({pagination, sorting});
+              getFeedsRequest({pagination, sorting, debouncedTableFilterValue});
             }}
             className={styles.errorReload}
           >
