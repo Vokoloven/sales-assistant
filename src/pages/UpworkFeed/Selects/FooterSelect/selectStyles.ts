@@ -3,11 +3,11 @@ import type {StylesConfig} from "react-select";
 const {Gray400, GrayA400, Gray100, Gray600, Black, White, Gray800, GrayA300} = colors;
 
 type IsMulti = false;
-import colors from "../../design/settings/colors.scss";
-import type {ThemeMode} from "../../hooks/useTheme";
-import {ThemeConfig} from "../../hooks/useTheme";
+import colors from "../../../../design/settings/colors.scss";
+import type {ThemeMode} from "../../../../hooks/useTheme";
+import {ThemeConfig} from "../../../../hooks/useTheme";
 
-import type {TOption} from "./types/types";
+import type {TOption} from "./FooterSelect";
 
 export const selectStyles = (theme: ThemeMode) => {
   const selectStyles: StylesConfig<TOption, IsMulti> = {

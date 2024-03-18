@@ -1,5 +1,3 @@
-/* eslint-disable indent */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Table, flexRender} from "@tanstack/react-table";
 import type {FilterMeta, Column} from "@tanstack/react-table";
 import classnames from "classnames";
@@ -19,7 +17,7 @@ interface IProps<T> {
 }
 
 interface ICustomFilterMeta extends FilterMeta {
-  filterComponent: (info: {column: Column<any, unknown>; table: Table<any>}) => JSX.Element;
+  filterComponent: <T>(info: {column: Column<T, unknown>; table: Table<T>}) => JSX.Element;
 }
 
 const handleSortIcon = (

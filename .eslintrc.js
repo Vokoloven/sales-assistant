@@ -45,7 +45,7 @@ module.exports = {
         },
       },
     ],
-    indent: ["error", 2, {SwitchCase: 1}],
+    indent: ["error", 2, {SwitchCase: 1, ignoredNodes: ["ConditionalExpression"]}],
     "linebreak-style": 0,
     quotes: ["error", "double"],
     semi: "off",

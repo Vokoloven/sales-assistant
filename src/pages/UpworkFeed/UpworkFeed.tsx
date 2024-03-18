@@ -2,7 +2,6 @@ import {ColumnDef, useReactTable, getCoreRowModel, Column} from "@tanstack/react
 import classnames from "classnames";
 import {format} from "date-fns";
 import {useCallback, useEffect, useMemo, useState} from "react";
-import Select, {components} from "react-select";
 
 import Button from "../../components/Button/Button";
 import {ButtonColor} from "../../components/Button/constants";
@@ -14,7 +13,6 @@ import Notify from "../../components/Notify/Notify";
 import Spinner from "../../components/Spinner/Spinner";
 import {useAuth} from "../../hooks/useAuth";
 import {useDebounceValue} from "../../hooks/useDebounceValue";
-import {getTheme} from "../../hooks/useTheme";
 import {useRecoverUserQuery} from "../../redux/api/authApi";
 import {useGetFeedsMutation} from "../../redux/api/upworkFeedsApi";
 import {STATUS_CODE} from "../../redux/utils";
@@ -26,10 +24,10 @@ import type {ISearchParameterDTO} from "../../submodules/interfaces/dto/common/i
 import type {IReviewDTO} from "../../submodules/interfaces/dto/upwork-feed/ireview.dto";
 import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
 
-import {options, AccessorKey} from "./constants";
+import {AccessorKey} from "./constants";
 import DateFilter from "./Filters/DateFilter";
-import {selectStyles} from "./selectStyles";
-import type {TOption} from "./types/types";
+import ScoreFilter from "./Filters/ScoreFilter";
+import FooterSelect from "./Selects/FooterSelect/FooterSelect";
 import styles from "./UpworkFeedTable.module.scss";
 import TableInstance from "./UpworkTable";
 import {capitalize, scoreHandler} from "./utils";
@@ -39,7 +37,7 @@ type ColumnSort = {
   desc: boolean;
 };
 
-type PaginationState = {
+export type PaginationState = {
   pageIndex: number;
   pageSize: number;
 };
@@ -50,7 +48,6 @@ export const UpworkFeed = () => {
   const [getFeeds, {isLoading, isError, error, data: fetchedData}] = useGetFeedsMutation();
   const {isLogged} = useAuth();
   useRecoverUserQuery(undefined, {skip: !isError});
-  const [selectedOption, setSelectedOption] = useState({value: 10, label: "10"});
   const [sorting, setSorting] = useState<ColumnSort[]>([]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
@@ -112,6 +109,7 @@ export const UpworkFeed = () => {
         width: 140,
         className: AccessorKey.Score,
         isSorted: true,
+        meta: {filterComponent: ScoreFilter},
       },
       {
         accessorKey: AccessorKey.Review,
@@ -189,7 +187,7 @@ export const UpworkFeed = () => {
       return acc;
     }, []);
 
-  const debouncedTableFilterValue = useDebounceValue(tableFilterValue, 1000);
+  const debouncedTableFilterValue = useDebounceValue(tableFilterValue);
 
   const getFeedsRequest = useCallback(
     async ({
@@ -222,11 +220,6 @@ export const UpworkFeed = () => {
   useEffect(() => {
     getFeedsRequest({pagination, sorting, debouncedTableFilterValue});
   }, [getFeedsRequest]);
-
-  const handleChange = (option: TOption | null): void => {
-    setSelectedOption((prevSelectedOption) => ({...prevSelectedOption, ...option}));
-    setPagination((prevPagination) => ({...prevPagination, pageSize: option!.value}));
-  };
 
   const totalPages = table.getPageCount();
   const currentPage = table.getState().pagination.pageIndex + 1;
@@ -295,22 +288,9 @@ export const UpworkFeed = () => {
                     <div className={styles.footerInnerItemsInnerPerPage}>
                       <span>Items per page:</span>
                       <div>
-                        <Select
-                          components={{
-                            IndicatorSeparator: null,
-                            DropdownIndicator: (props) => {
-                              return (
-                                <components.DropdownIndicator {...props}>
-                                  <Icons.ChevronDown />
-                                </components.DropdownIndicator>
-                              );
-                            },
-                          }}
-                          defaultValue={selectedOption}
-                          options={options}
-                          onChange={handleChange}
-                          styles={selectStyles(getTheme())}
-                          menuPlacement="top"
+                        <FooterSelect
+                          pagination={pagination}
+                          setPagination={setPagination}
                         />
                       </div>
                     </div>
