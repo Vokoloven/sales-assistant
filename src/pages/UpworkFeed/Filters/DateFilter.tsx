@@ -28,11 +28,7 @@ const DateFilter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>})
 
   const isDirtyField = Boolean(column.getFilterValue());
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    column.setFilterValue(event.target.value);
-  };
-
-  const datePickerOnChange = (update: Date[]) => {
+  const handleChange = (update: Date[]) => {
     const [startDate, endDate] = update;
     setDateRange(update);
     if (startDate && endDate) {
@@ -46,7 +42,7 @@ const DateFilter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>})
         id={column.id}
         name={column.id}
         type={InputType.Text}
-        onChange={handleChange}
+        readOnly
         onClick={onClick}
         forwardedRef={ref}
         buttonIcon={
@@ -71,7 +67,7 @@ const DateFilter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>})
     <DatePicker
       startDate={startDate}
       endDate={endDate}
-      onChange={datePickerOnChange}
+      onChange={handleChange}
       customInput={<DateInput />}
       dateFormat="MM/dd/yyyy"
       selectsRange={true}

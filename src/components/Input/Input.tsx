@@ -32,6 +32,7 @@ interface IProps<T extends FieldValues> {
     onClick?: () => void;
     ariaLabel?: string;
   };
+  readOnly?: boolean;
 }
 
 const Input = <T extends FieldValues>({
@@ -50,6 +51,7 @@ const Input = <T extends FieldValues>({
   buttonIcon,
   hasAutoFocus = false,
   isDisabled = false,
+  readOnly = false,
 }: IProps<T>) => {
   const {
     onChange: registerOnChange,
@@ -79,6 +81,7 @@ const Input = <T extends FieldValues>({
           ref={registerRef ?? (forwardedRef as React.LegacyRef<HTMLInputElement>)}
           onChange={registerOnChange ?? onChange}
           onClick={onClick}
+          readOnly={readOnly}
           {...rest}
         />
         {buttonIcon && (

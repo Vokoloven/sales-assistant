@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import {ColumnDef, useReactTable, getCoreRowModel, FilterFn, FilterFnOption, Column} from "@tanstack/react-table";
+import {ColumnDef, useReactTable, getCoreRowModel, Column} from "@tanstack/react-table";
 import classnames from "classnames";
 import {format} from "date-fns";
 import {useCallback, useEffect, useMemo, useState} from "react";
@@ -18,6 +17,7 @@ import {useDebounceValue} from "../../hooks/useDebounceValue";
 import {getTheme} from "../../hooks/useTheme";
 import {useRecoverUserQuery} from "../../redux/api/authApi";
 import {useGetFeedsMutation} from "../../redux/api/upworkFeedsApi";
+import {STATUS_CODE} from "../../redux/utils";
 import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {ReviewType} from "../../submodules/enums/upwork-feed/review-type.enum";
 import type {UpworkFeedSearchBy} from "../../submodules/enums/upwork-feed/upwork-feed-search-by.enum";
@@ -47,7 +47,7 @@ type PaginationState = {
 type TSerachParameterDTO = ISearchParameterDTO<UpworkFeedSearchBy>[];
 
 export const UpworkFeed = () => {
-  const [getFeeds, {isLoading, isError, data: fetchedData}] = useGetFeedsMutation();
+  const [getFeeds, {isLoading, isError, error, data: fetchedData}] = useGetFeedsMutation();
   const {isLogged} = useAuth();
   useRecoverUserQuery(undefined, {skip: !isError});
   const [selectedOption, setSelectedOption] = useState({value: 10, label: "10"});
@@ -240,26 +240,28 @@ export const UpworkFeed = () => {
   }, [currentPage, totalPages]);
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
-  if (isError) {
-    return (
-      <div>
-        <Notify
-          type={NotifyType.Error}
-          message={"Something went wrong"}
-        />
-        <div className={styles.error}>
-          Please try again later.&nbsp;
-          <span
-            onClick={() => {
-              getFeedsRequest({pagination, sorting, debouncedTableFilterValue});
-            }}
-            className={styles.errorReload}
-          >
-            Reload
-          </span>
+  if (error) {
+    if ("status" in error && error.status === STATUS_CODE.UNAUTHORIZED) {
+      return (
+        <div>
+          <Notify
+            type={NotifyType.Error}
+            message={"Something went wrong"}
+          />
+          <div className={styles.error}>
+            Please try again later.&nbsp;
+            <span
+              onClick={() => {
+                getFeedsRequest({pagination, sorting, debouncedTableFilterValue});
+              }}
+              className={styles.errorReload}
+            >
+              Reload
+            </span>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
   if (data) {
     return (
