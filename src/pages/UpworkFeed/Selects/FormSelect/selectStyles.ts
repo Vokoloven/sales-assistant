@@ -1,16 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {StylesConfig} from "react-select";
 
 const {Gray400, GrayA400, Gray100, Gray600, Black, White, Gray800, GrayA300} = colors;
 
-type IsMulti = false;
+type IsMulti = true;
 import colors from "../../../../design/settings/colors.scss";
 import type {ThemeMode} from "../../../../hooks/useTheme";
 import {ThemeConfig} from "../../../../hooks/useTheme";
-
-import type {TOption} from "./FooterSelect";
+import type {IOptionInterface} from "../../../../submodules/interfaces/dto/common/ioption.interface";
 
 export const selectStyles = (theme: ThemeMode) => {
-  const selectStyles: StylesConfig<TOption, IsMulti> = {
+  const selectStyles: StylesConfig<IOptionInterface, IsMulti> = {
     container: (base) => ({
       ...base,
       minWidth: 100,

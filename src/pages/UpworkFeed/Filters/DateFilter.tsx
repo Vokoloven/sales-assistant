@@ -71,6 +71,7 @@ const DateFilter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>})
       customInput={<DateInput />}
       dateFormat="MM/dd/yyyy"
       selectsRange={true}
+      calendarStartDay={1}
       formatWeekDay={(nameOfDay) => nameOfDay.substr(0, 3).toUpperCase()}
       renderCustomHeader={({decreaseMonth, increaseMonth, prevMonthButtonDisabled, nextMonthButtonDisabled, date}) => {
         const months = [

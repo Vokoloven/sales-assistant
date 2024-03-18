@@ -172,6 +172,7 @@ export const UpworkFeed = () => {
       pagination,
       sorting,
     },
+    meta: {scoreOptions: fetchedData?.data?.scoreOptions, keywordsOptions: fetchedData?.data?.keywordsOptions},
   });
 
   const tableFilterValue = table
