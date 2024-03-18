@@ -2,10 +2,11 @@
 
 .input {
   width: 100%;
-  padding: 18px 12px;
+  padding: 18px 40px 18px 12px;
 
   border: 1px solid $Gray400;
   border-radius: 8px;
+  @include ellipsis;
 
   &:focus {
     outline: none;
@@ -46,10 +47,14 @@
     right: 0;
 
     transform: translate(-50%, -50%);
+
+    &.formButton {
+      max-width: 20px;
+    }
   }
 
   &.form {
-    padding: 11px;
+    padding: 11px 34px 11px 11px;
     @include font($fs: 14px, $lh: 20px);
   }
 }

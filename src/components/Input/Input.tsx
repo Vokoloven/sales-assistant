@@ -82,7 +82,7 @@ const Input = <T extends FieldValues>({
           {...rest}
         />
         {buttonIcon && (
-          <div className={styles.inputButton}>
+          <div className={classnames(styles.inputButton, styles[`${inputStyle}Button`])}>
             <ButtonIcon
               icon={buttonIcon.icon}
               onClick={buttonIcon.onClick}

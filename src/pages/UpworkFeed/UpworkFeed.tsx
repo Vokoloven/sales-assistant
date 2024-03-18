@@ -220,7 +220,7 @@ export const UpworkFeed = () => {
     // JSON.stringify(debouncedTableFilterValue)
     [isLogged, pagination, sorting],
   );
-  console.log(debouncedTableFilterValue);
+  // console.log(debouncedTableFilterValue);
 
   useEffect(() => {
     getFeedsRequest({pagination, sorting, debouncedTableFilterValue});
