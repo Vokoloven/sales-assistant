@@ -12,7 +12,18 @@ import Input from "../../../components/Input/Input";
 import "./DatePicker.scss";
 
 const DateFilter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>}) => {
-  const [dateRange, setDateRange] = useState<null[] | Date[]>([null, null]);
+  const [dateRange, setDateRange] = useState<null[] | Date[]>(() => {
+    if (column.getFilterValue()) {
+      const value = column.getFilterValue() as string;
+      const arrayValue = value.split(" - ");
+      const startDate = new Date(arrayValue[0]);
+      const endDate = new Date(arrayValue[1]);
+
+      return [startDate, endDate];
+    }
+
+    return [null, null];
+  });
   const [startDate, endDate] = dateRange;
 
   const isDirtyField = Boolean(column.getFilterValue());
