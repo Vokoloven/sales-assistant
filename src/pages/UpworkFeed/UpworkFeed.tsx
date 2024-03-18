@@ -28,7 +28,6 @@ import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-fe
 
 import {options, AccessorKey} from "./constants";
 import DateFilter from "./Filters/DateFilter";
-import {dateFilterFn} from "./FiltersFn/dateFilterFn";
 import {selectStyles} from "./selectStyles";
 import type {TOption} from "./types/types";
 import styles from "./UpworkFeedTable.module.scss";
@@ -85,7 +84,6 @@ export const UpworkFeed = () => {
         width: 140,
         className: AccessorKey.Published,
         isSorted: true,
-        filterFn: "dateFilterFn" as FilterFnOption<IUpworkFeedItemDTO>,
         meta: {
           filterComponent: DateFilter,
         },
@@ -210,17 +208,16 @@ export const UpworkFeed = () => {
             pageNumber: pagination.pageIndex + 1,
             sortBy: sorting[0]?.id as UpworkFeedSortBy,
             sortDirection: sorting.length ? (sorting[0]?.desc ? SortDirection.DESC : SortDirection.ASC) : undefined,
-            // searchParameters: debouncedTableFilterValue,
+            searchParameters: debouncedTableFilterValue,
           });
         } catch (error) {
           /* empty */
         }
       }
     },
-    // JSON.stringify(debouncedTableFilterValue)
-    [isLogged, pagination, sorting],
+
+    [isLogged, pagination, sorting, JSON.stringify(debouncedTableFilterValue)],
   );
-  // console.log(debouncedTableFilterValue);
 
   useEffect(() => {
     getFeedsRequest({pagination, sorting, debouncedTableFilterValue});

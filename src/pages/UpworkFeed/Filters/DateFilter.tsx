@@ -26,11 +26,6 @@ const DateFilter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>})
     setDateRange(update);
     if (startDate && endDate) {
       column.setFilterValue(`${startDate.toISOString()} - ${endDate.toISOString()}`);
-      return;
-    }
-    if (startDate) {
-      column.setFilterValue(startDate.toISOString());
-      return;
     }
   };
 
