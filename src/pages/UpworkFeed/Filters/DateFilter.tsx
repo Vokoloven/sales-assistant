@@ -87,7 +87,8 @@ const DateFilter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>})
           "October",
           "November",
           "December",
-        ];
+        ] as const;
+
         const monthName = months[date.getMonth()];
 
         return (

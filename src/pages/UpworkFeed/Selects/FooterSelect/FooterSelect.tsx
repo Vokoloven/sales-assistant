@@ -26,7 +26,7 @@ const FooterSelect = ({
   pagination: PaginationState;
   setPagination: React.Dispatch<React.SetStateAction<PaginationState>>;
 }) => {
-  const [selectedOption, setSelectedOption] = useState(() => {
+  const [option, setOption] = useState(() => {
     if (pagination) {
       return {value: pagination.pageSize, label: String(pagination.pageSize)};
     }
@@ -35,7 +35,7 @@ const FooterSelect = ({
   });
 
   const handleChange = (option: TOption | null): void => {
-    setSelectedOption((prevSelectedOption) => ({...prevSelectedOption, ...option}));
+    setOption((prevOption) => ({...prevOption, ...option}));
     setPagination((prevPagination) => ({...prevPagination, pageSize: option!.value}));
   };
 
@@ -51,7 +51,7 @@ const FooterSelect = ({
           );
         },
       }}
-      defaultValue={selectedOption}
+      defaultValue={option}
       options={options}
       onChange={handleChange}
       styles={selectStyles(getTheme())}

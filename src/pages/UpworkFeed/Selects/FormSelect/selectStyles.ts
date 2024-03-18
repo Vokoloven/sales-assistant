@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type {StylesConfig} from "react-select";
 
-const {Gray400, GrayA400, Gray100, Gray600, Black, White, Gray800, GrayA300} = colors;
+const {Gray400, Gray100, Gray600, Black, White, Gray800, GrayA300} = colors;
 
 type IsMulti = true;
 import colors from "../../../../design/settings/colors.scss";
@@ -29,7 +29,7 @@ export const selectStyles = (theme: ThemeMode) => {
     }),
     control: (base) => ({
       ...base,
-      ...(theme === ThemeConfig.Light ? {borderColor: Gray400} : {borderColor: GrayA400}),
+      ...(theme === ThemeConfig.Light ? {borderColor: Gray400} : {borderColor: Gray400}),
       ...(theme === ThemeConfig.Light ? {backgroundColor: White} : {backgroundColor: Black}),
 
       "&:hover": {
@@ -47,7 +47,7 @@ export const selectStyles = (theme: ThemeMode) => {
     }),
     menu: (base) => ({
       ...base,
-      ...(theme === ThemeConfig.Light ? {border: `solid 1px ${Gray400}`} : {border: `solid 1px ${GrayA400}`}),
+      ...(theme === ThemeConfig.Light ? {border: `solid 1px ${Gray400}`} : {border: `solid 1px ${Gray400}`}),
       boxShadow: "none",
       ...(theme === ThemeConfig.Light ? {backgroundColor: White} : {backgroundColor: Black}),
     }),
@@ -69,6 +69,8 @@ export const selectStyles = (theme: ThemeMode) => {
     valueContainer: (base) => ({
       ...base,
       padding: "11px 12px",
+      fontSize: "14px",
+      lineHeight: "20px",
     }),
   };
 

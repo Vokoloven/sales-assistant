@@ -38,6 +38,7 @@ const Icons: TIcon = {
   [IconAppName.SortAsc]: makeIcon(IconInstance.SortDesc, {className: classnames(styles.sort, styles.sortAsc)}),
   [IconAppName.HidePassword]: makeIcon(IconInstance.EyeCrossOut, {className: styles.icon}),
   [IconAppName.ClearInput]: makeIcon(IconInstance.DeleteRounded, {className: styles.deleteRounded}),
+  [IconAppName.ChevronSmallDown]: makeIcon(IconInstance.ChevronSmall, {className: styles.icon}),
 };
 
 export default Icons;

@@ -2,6 +2,7 @@ import {IconInstanceName} from "../constants";
 import type {TIconComponent} from "../types/icon";
 
 import {Chevron} from "./Chevron";
+import {ChevronSmall} from "./ChevronSmall";
 import {ChevronWithLine} from "./ChevronWithLine";
 import {CollapseMenu} from "./CollapseMenu";
 import {Cross} from "./Cross";
@@ -41,4 +42,5 @@ export const IconInstance: TIconInstance = {
   Sort,
   SortDesc,
   DeleteRounded,
+  ChevronSmall,
 };
