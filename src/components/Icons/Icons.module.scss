@@ -27,6 +27,14 @@
   }
 }
 
+.like {
+  fill: $Like;
+}
+
+.dislike {
+  fill: $Dislike;
+}
+
 html[data-theme="dark"] {
   .icon {
     fill: $Gray600;

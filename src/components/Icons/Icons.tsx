@@ -21,8 +21,8 @@ const Icons: TIcon = {
   [IconAppName.User]: makeIcon(IconInstance.User, {className: styles.icon}),
   [IconAppName.LogOut]: makeIcon(IconInstance.LogOut, {className: styles.icon}),
   [IconAppName.Feed]: makeIcon(IconInstance.Feed, {className: styles.icon}),
-  [IconAppName.Like]: makeIcon(IconInstance.Like, {className: styles.icon}),
-  [IconAppName.Dislike]: makeIcon(IconInstance.Dislike, {className: styles.icon}),
+  [IconAppName.Like]: makeIcon(IconInstance.Like, {className: styles.like}),
+  [IconAppName.Dislike]: makeIcon(IconInstance.Dislike, {className: styles.dislike}),
   [IconAppName.ChevronDown]: makeIcon(IconInstance.Chevron, {
     className: classnames(styles.icon, styles.chevronDown),
   }),

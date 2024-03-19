@@ -3,7 +3,8 @@ export const AccessorKey = {
   Published: "published",
   Keywords: "keywords",
   Score: "score",
-  Review: "reaction",
+  Review: "review",
+  Reaction: "reaction",
   MatchedCases: "matchedCases",
   MatchedBlogs: "matchedBlogs",
 } as const;
