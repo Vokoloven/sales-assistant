@@ -13,14 +13,27 @@ import type {IOptionInterface} from "../../../../submodules/interfaces/dto/commo
 
 import {selectStyles} from "./selectStyles";
 
+const optionAll = "All";
+
 const FormSelect = ({options}: {options: IOptionInterface[]}) => {
   const combinedOptions = options && [{label: "All", value: "ALL"}, ...options];
   const [option, setOption] = useState<IOptionInterface[]>([]);
 
-  const handleChange = (option: readonly IOptionInterface[]) => {
-    const isAllOption = option.some(({value}) => value === "ALL");
+  const handleChange = (option: readonly IOptionInterface[]): void => {
+    const isAllOptionSelected = (options: IOptionInterface[], option: readonly IOptionInterface[]): boolean => {
+      const isSelectedOnlyAll = option.some(({value}) => value.toLocaleLowerCase() === optionAll.toLocaleLowerCase());
+      const isSelectedAllExceptAll =
+        option.length === options.length &&
+        options.every(({value}, index) => value.toLocaleLowerCase() === option[index].value.toLocaleLowerCase());
 
-    if (isAllOption) {
+      if (isSelectedOnlyAll || isSelectedAllExceptAll) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    if (isAllOptionSelected(options, option)) {
       setOption(combinedOptions);
       return;
     }
