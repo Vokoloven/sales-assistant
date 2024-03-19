@@ -30,8 +30,6 @@ const ButtonIcon = ({
 }: IProps) => {
   const Icon: TIconComponent = Icons[icon];
 
-  console.log(styles[`button${buttonIconStyle}`]);
-
   return (
     <button
       type={type}

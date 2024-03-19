@@ -9,4 +9,5 @@ export const InputType = {
 export const InputStyle = {
   Table: "Table",
   Login: "Login",
+  Checkbox: "Checkbox",
 } as const;

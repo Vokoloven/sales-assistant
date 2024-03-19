@@ -82,7 +82,9 @@ const TableSelect = ({options}: {options: IOptionInterface[]}) => {
           id={InputType.Checkbox}
           name={InputType.Checkbox}
           type={InputType.Checkbox}
+          inputStyle="Checkbox"
           label="Checkbox"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => console.log(e.target.value)}
         />
       </>
     );
