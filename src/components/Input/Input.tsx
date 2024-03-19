@@ -95,7 +95,11 @@ const Input = <T extends FieldValues>({
           </div>
         )}
       </div>
-      {errorMessage && <span className={styles.inputTextError}>{errorMessage}</span>}
+      {errorMessage && (
+        <span className={classnames(styles.inputTextError, styles[`input${inputStyle}ButtonTextError`])}>
+          {errorMessage}
+        </span>
+      )}
     </div>
   );
 };

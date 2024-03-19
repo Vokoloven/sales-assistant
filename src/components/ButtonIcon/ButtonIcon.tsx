@@ -37,7 +37,7 @@ const ButtonIcon = ({
       aria-label={ariaLabel}
       disabled={disabled}
     >
-      <Icon className={classnames(styles.buttonIcon, styles[`buttonIcon${buttonIconStyle}`])} />
+      <Icon className={classnames(styles.buttonIcon, styles[`button${buttonIconStyle}Icon`])} />
     </button>
   );
 };

@@ -6,7 +6,7 @@ import {Outlet} from "react-router-dom";
 
 import {AppRoutes} from "../../AppRoutes";
 import Button from "../../components/Button/Button";
-import {ButtonColor, ButtonSize} from "../../components/Button/constants";
+import {ButtonStyle, ButtonSize} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {ButtonIconStyle} from "../../components/ButtonIcon/constants";
 import {IconAppName} from "../../components/Icons/constants";
@@ -46,7 +46,6 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
               <Button
                 text="New Chat"
                 iconBefore={IconAppName.Cross}
-                iconBeforeClassname={styles.sectionButton}
               />
             </div>
           </div>
@@ -56,9 +55,8 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
             <div className={styles.sectionSidebarBoxInner}>
               <Button
                 text={"Upwork feed"}
-                color={ButtonColor.Tooltip}
+                style={ButtonStyle.Tooltip}
                 iconBefore={IconAppName.Feed}
-                classname={styles.sectionSidebarBoxInnerUserButton}
                 onClick={() => navigate(`/${AppRoutes.Feed}`)}
               />
               <Tooltip
@@ -68,10 +66,9 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
               >
                 <Button
                   text={user?.email ?? ""}
-                  color={ButtonColor.Tooltip}
+                  style={ButtonStyle.Tooltip}
                   iconBefore={IconAppName.User}
                   iconAfter={IconAppName.ChevronRight}
-                  classname={styles.sectionSidebarBoxInnerUserButton}
                   onClick={() => setOpen((prevOpen) => !prevOpen)}
                 />
               </Tooltip>
@@ -97,7 +94,6 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                 <Button
                   size={ButtonSize.Small}
                   text="New Chat"
-                  iconBeforeClassname={styles.sectionButton}
                   iconBefore={IconAppName.Cross}
                 />
               </div>

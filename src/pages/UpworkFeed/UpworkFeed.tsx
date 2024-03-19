@@ -4,7 +4,7 @@ import {format} from "date-fns";
 import {useCallback, useEffect, useMemo, useState} from "react";
 
 import Button from "../../components/Button/Button";
-import {ButtonColor} from "../../components/Button/constants";
+import {ButtonStyle} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {ButtonIconStyle} from "../../components/ButtonIcon/constants";
 import {IconAppName} from "../../components/Icons/constants";
@@ -316,7 +316,7 @@ export const UpworkFeed = () => {
                   <Button
                     key={index}
                     text={page}
-                    color={currentPage === page ? ButtonColor.PaginationActive : ButtonColor.Pagiantion}
+                    style={currentPage === page ? ButtonStyle.PaginationActive : ButtonStyle.Pagiantion}
                     onClick={() => table.setPageIndex(page - 1)}
                   />
                 ))}

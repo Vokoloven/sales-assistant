@@ -4,72 +4,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 
   padding: 10px 16px;
 
   border-radius: 8px;
   border-width: 2px;
   border-style: solid;
+
   @include font($fw: 500, $lh: 24px);
   text-align: center;
 
-  &.primary {
-    background-color: $White;
-    border-color: $BlueA300;
+  background-color: $White;
+  border-color: $BlueA300;
 
-    &:disabled {
-      @include font($lh: 24px, $fclr: $Gray400);
-    }
-
-    &:not(:disabled):hover {
-      background-color: $BlueA100;
-    }
-    &:not(:disabled):focus {
-      background-color: $BlueA300;
-      outline: none;
-    }
+  &:disabled {
+    @include font($lh: 24px, $fclr: $Gray400);
   }
 
-  &.tooltip {
-    background-color: $White;
-    border-color: $Gray600;
-
-    &:disabled {
-      @include font($lh: 24px, $fclr: $Gray400);
-    }
-
-    &:not(:disabled):hover {
-      background-color: $Gray100;
-    }
-    &:not(:disabled):focus {
-      background-color: $Gray600;
-      outline: none;
-    }
+  &:not(:disabled):hover {
+    background-color: $BlueA100;
   }
-
-  &.pagination {
-    border-color: transparent;
-    background-color: $Gray100;
-
-    &:not(:disabled):hover {
-      background-color: $BlueA100;
-    }
-
-    &:not(:disabled):focus {
-      outline: none;
-    }
-
-    &Active {
-      background-color: $White;
-      border-color: $BlueA300;
-      &:not(:disabled):hover {
-        background-color: $BlueA100;
-      }
-      &:not(:disabled):focus {
-        outline: none;
-      }
-    }
+  &:not(:disabled):focus {
+    background-color: $BlueA300;
+    outline: none;
   }
 
   &.fullWidth {
@@ -92,75 +50,170 @@
     @include ellipsis;
   }
 
-  &Icon {
-    fill: $Gray800;
-
+  &IconWrapper {
     line-height: 0;
-
     flex-shrink: 0;
     flex-grow: 0;
   }
 }
 
+.buttonTooltip {
+  justify-content: flex-start;
+  background-color: $White;
+  padding: 12px;
+  border: none;
+
+  &:disabled {
+    @include font($lh: 24px, $fclr: $Gray400);
+  }
+
+  &:not(:disabled):hover {
+    background-color: $Gray100;
+  }
+  &:not(:disabled):focus {
+    background-color: $Gray600;
+  }
+}
+
+.buttonTooltipMenu {
+  @extend .buttonTooltip;
+
+  padding: 11px;
+  border: 1px solid $Gray600;
+}
+
+.buttonTooltipMenuCouple {
+  @extend .buttonTooltipMenu;
+
+  &:first-child {
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-color: $Gray600;
+  }
+  &:last-child {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-color: $Gray600;
+  }
+}
+
+.buttonTooltipMenuAlot {
+  @extend .buttonTooltipMenu;
+
+  &:not(:first-child):not(:last-child) {
+    border-radius: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-color: $Gray600;
+  }
+
+  &:first-child {
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-color: $Gray600;
+  }
+  &:last-child {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-color: $Gray600;
+  }
+}
+
+.buttonPagination {
+  border-color: transparent;
+  background-color: $Gray100;
+
+  &:not(:disabled):hover {
+    background-color: $BlueA100;
+  }
+
+  &Active {
+    background-color: $White;
+    border-color: $BlueA300;
+    &:not(:disabled):hover {
+      background-color: $BlueA100;
+    }
+  }
+}
+
 html[data-theme="dark"] {
   .button {
-    &.primary {
-      @include darkColors($clr: $White);
+    @include darkColors($clr: $White);
 
-      &:disabled {
-        @include darkColors($clr: $Gray400);
-      }
+    &:disabled {
+      @include darkColors($clr: $Gray400);
+    }
+
+    &:not(:disabled):hover {
+      background-color: $BlueA800;
+    }
+
+    &:not(:disabled):focus {
+      background-color: $BlueA600;
+    }
+  }
+  .buttonTooltip {
+    @include darkColors($clr: $White, $bc: $Gray400);
+
+    &:disabled {
+      @include darkColors($clr: $Gray400);
+    }
+
+    &:not(:disabled):hover {
+      background-color: $Gray800;
+    }
+
+    &:not(:disabled):focus {
+      background-color: $Gray400;
+    }
+  }
+
+  .buttonTooltipMenuCouple {
+    &:first-child {
+      border-color: $Gray400;
+    }
+
+    &:last-child {
+      border-top: none;
+
+      border-color: $Gray400;
+    }
+  }
+
+  .buttonTooltipMenuAlot {
+    &:not(:first-child):not(:last-child) {
+      border-color: $Gray400;
+    }
+
+    &:first-child {
+      border-color: $Gray400;
+    }
+
+    &:last-child {
+      border-color: $Gray400;
+    }
+  }
+
+  .buttonPagination {
+    @include darkColors($clr: $White, $bg: $Gray900, $bc: transparent);
+
+    &:not(:disabled):focus {
+      outline: none;
+    }
+
+    &Active {
+      @include darkColors($clr: $White, $bg: $Black);
 
       &:not(:disabled):hover {
         background-color: $BlueA800;
       }
-
-      &:not(:disabled):focus {
-        background-color: $BlueA600;
-      }
-    }
-
-    &.tooltip {
-      @include darkColors($clr: $White, $bc: $Gray400);
-
-      &:disabled {
-        @include darkColors($clr: $Gray400);
-      }
-
-      &:not(:disabled):hover {
-        background-color: $Gray800;
-      }
-
-      &:not(:disabled):focus {
-        background-color: $Gray400;
-      }
-    }
-
-    &.pagination {
-      @include darkColors($clr: $White, $bg: $Gray900, $bc: transparent);
-
-      &:not(:disabled):hover {
-        background-color: $BlueA800;
-      }
-
       &:not(:disabled):focus {
         outline: none;
       }
-
-      &Active {
-        @include darkColors($clr: $White, $bg: $Black);
-
-        &:not(:disabled):hover {
-          background-color: $BlueA800;
-        }
-        &:not(:disabled):focus {
-          outline: none;
-        }
-      }
-    }
-
-    &Icon {
-      fill: $White;
     }
   }
 }
