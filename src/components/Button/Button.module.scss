@@ -126,14 +126,25 @@
 .buttonPagination {
   border-color: transparent;
   background-color: $Gray100;
+  border-radius: 4px;
+
+  padding: 12px 10px;
+  border: none;
+  min-width: 36px;
 
   &:not(:disabled):hover {
     background-color: $BlueA100;
   }
 
   &Active {
+    border-radius: 4px;
+    min-width: 36px;
+
+    padding: 10px 8px;
+    border: 2px solid $BlueA300;
     background-color: $White;
     border-color: $BlueA300;
+
     &:not(:disabled):hover {
       background-color: $BlueA100;
     }
