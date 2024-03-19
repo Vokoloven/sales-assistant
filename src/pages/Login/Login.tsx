@@ -7,6 +7,7 @@ import Button from "../../components/Button/Button";
 import {ButtonType} from "../../components/Button/constants";
 import {IconAppName} from "../../components/Icons/constants";
 import {InputType} from "../../components/Input/constants";
+import {InputStyle} from "../../components/Input/constants";
 import Input from "../../components/Input/Input";
 import {NotifyType} from "../../components/Notify/constants";
 import Notify from "../../components/Notify/Notify";
@@ -121,6 +122,7 @@ const Login = () => {
                 label={Inputs.Email.label}
                 errorMessage={errors.email?.message}
                 validate={email}
+                inputStyle={InputStyle.Login}
               />
               <Input<ILoginRequestDTO>
                 id={Inputs.Password.id}
@@ -130,6 +132,7 @@ const Login = () => {
                 label={Inputs.Password.label}
                 errorMessage={errors.password?.message}
                 validate={password}
+                inputStyle={InputStyle.Login}
                 buttonIcon={
                   isDirtyPassword
                     ? {

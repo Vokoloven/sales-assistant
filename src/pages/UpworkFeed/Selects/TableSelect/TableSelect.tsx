@@ -8,6 +8,8 @@ import ButtonIcon from "../../../../components/ButtonIcon/ButtonIcon";
 import {ButtonIconVariant} from "../../../../components/ButtonIcon/constants";
 import {IconAppName} from "../../../../components/Icons/constants";
 import Icons from "../../../../components/Icons/Icons";
+import {InputType} from "../../../../components/Input/constants";
+import Input from "../../../../components/Input/Input";
 import {getTheme} from "../../../../hooks/useTheme";
 import type {IOptionInterface} from "../../../../submodules/interfaces/dto/common/ioption.interface";
 
@@ -15,7 +17,7 @@ import {selectStyles} from "./selectStyles";
 
 const optionAll = "All";
 
-const FormSelect = ({options}: {options: IOptionInterface[]}) => {
+const TableSelect = ({options}: {options: IOptionInterface[]}) => {
   const combinedOptions = options && [{label: "All", value: "ALL"}, ...options];
   const [option, setOption] = useState<IOptionInterface[]>([]);
 
@@ -43,40 +45,49 @@ const FormSelect = ({options}: {options: IOptionInterface[]}) => {
 
   if (options) {
     return (
-      <Select
-        components={{
-          IndicatorSeparator: null,
-          ClearIndicator: (props) => {
-            return (
-              <components.ClearIndicator {...props}>
-                <ButtonIcon
-                  icon={IconAppName.ClearInput}
-                  buttonIconVariant={ButtonIconVariant.Input}
-                  ariaLabel={"Clear Input"}
-                  onClick={() => setOption([])}
-                />
-              </components.ClearIndicator>
-            );
-          },
-          DropdownIndicator: (props) => {
-            return (
-              <components.DropdownIndicator {...props}>
-                <Icons.ChevronSmallDown />
-              </components.DropdownIndicator>
-            );
-          },
-        }}
-        placeholder=""
-        onChange={handleChange}
-        closeMenuOnSelect={false}
-        options={combinedOptions}
-        styles={selectStyles(getTheme())}
-        isMulti
-        value={option}
-      />
+      <>
+        <Select
+          components={{
+            IndicatorSeparator: null,
+            ClearIndicator: (props) => {
+              return (
+                <components.ClearIndicator {...props}>
+                  <ButtonIcon
+                    icon={IconAppName.ClearInput}
+                    buttonIconVariant={ButtonIconVariant.Input}
+                    ariaLabel={"Clear Input"}
+                    onClick={() => setOption([])}
+                  />
+                </components.ClearIndicator>
+              );
+            },
+            DropdownIndicator: (props) => {
+              return (
+                <components.DropdownIndicator {...props}>
+                  <Icons.ChevronSmallDown />
+                </components.DropdownIndicator>
+              );
+            },
+          }}
+          placeholder=""
+          onChange={handleChange}
+          closeMenuOnSelect={false}
+          options={combinedOptions}
+          styles={selectStyles(getTheme())}
+          isMulti
+          value={option}
+        />
+
+        <Input
+          id={InputType.Checkbox}
+          name={InputType.Checkbox}
+          type={InputType.Checkbox}
+          label="Checkbox"
+        />
+      </>
     );
   }
   return null;
 };
 
-export default FormSelect;
+export default TableSelect;

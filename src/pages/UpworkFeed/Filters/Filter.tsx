@@ -28,7 +28,7 @@ const Filter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>}) => 
             : undefined
         }
         value={(column.getFilterValue() ?? "") as string}
-        inputStyle={InputStyle.Form}
+        inputStyle={InputStyle.Table}
       />
     );
   }

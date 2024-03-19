@@ -58,7 +58,7 @@ const DateFilter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>})
             : undefined
         }
         value={value}
-        inputStyle={InputStyle.Form}
+        inputStyle={InputStyle.Table}
       />
     );
   });

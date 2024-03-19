@@ -12,12 +12,6 @@
     outline: none;
   }
 
-  &Wrapper {
-    &:not(:last-child) {
-      margin-bottom: 16px;
-    }
-  }
-
   &Label {
     display: block;
     @include font($lh: 24px);
@@ -47,15 +41,23 @@
     right: 0;
 
     transform: translate(-50%, -50%);
+  }
+}
 
-    &.formButton {
-      max-width: 20px;
+.inputLogin {
+  &Wrapper {
+    &:not(:last-child) {
+      margin-bottom: 16px;
     }
   }
+}
 
-  &.form {
-    padding: 11px 34px 11px 11px;
-    @include font($fs: 14px, $lh: 20px);
+.inputTable {
+  padding: 11px 34px 11px 11px;
+  @include font($fs: 14px, $lh: 20px);
+
+  &Button {
+    max-width: 20px;
   }
 }
 

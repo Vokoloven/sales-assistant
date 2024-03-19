@@ -3,8 +3,10 @@ export const InputType = {
   Email: "email",
   Password: "password",
   Date: "date",
+  Checkbox: "checkbox",
 } as const;
 
 export const InputStyle = {
-  Form: "form",
+  Table: "Table",
+  Login: "Login",
 } as const;

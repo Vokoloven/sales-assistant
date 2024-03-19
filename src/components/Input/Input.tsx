@@ -59,19 +59,21 @@ const Input = <T extends FieldValues>({
     ...rest
   } = (register && register(name, validate && validate())) ?? {};
 
+  console.log(inputStyle);
+
   return (
-    <div className={styles.inputWrapper}>
+    <div className={classnames(styles.inputWrapper, styles[`input${inputStyle}Wrapper`])}>
       {label && (
         <label
-          className={styles.inputLabel}
+          className={classnames(styles.inputLabel, styles[`input${inputStyle}Label`])}
           htmlFor={id}
         >
           {label}
         </label>
       )}
-      <div className={styles.inputBox}>
+      <div className={classnames(styles.inputBox, styles[`input${inputStyle}Box`])}>
         <input
-          className={classnames(styles.input, styles[`${inputStyle}`])}
+          className={classnames(styles.input, styles[`input${inputStyle}`])}
           id={id}
           type={type}
           disabled={isDisabled}
@@ -85,7 +87,7 @@ const Input = <T extends FieldValues>({
           {...rest}
         />
         {buttonIcon && (
-          <div className={classnames(styles.inputButton, styles[`${inputStyle}Button`])}>
+          <div className={classnames(styles.inputButton, styles[`input${inputStyle}Button`])}>
             <ButtonIcon
               icon={buttonIcon.icon}
               onClick={buttonIcon.onClick}
