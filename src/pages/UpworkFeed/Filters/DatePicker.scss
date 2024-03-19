@@ -91,6 +91,10 @@ html[data-theme="light"] {
     background-color: inherit;
     color: $GrayA800;
   }
+
+  .react-datepicker__day--today {
+    color: $GrayA800;
+  }
 }
 
 html[data-theme="dark"] {
@@ -183,6 +187,10 @@ html[data-theme="dark"] {
   .react-datepicker__day--in-selecting-range {
     //when selecting range in progress
     background-color: inherit;
+    color: $White;
+  }
+
+  .react-datepicker__day--today {
     color: $White;
   }
 }
