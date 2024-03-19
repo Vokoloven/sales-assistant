@@ -6,8 +6,9 @@ import {IconAppName} from "../Icons/constants";
 import Icons from "../Icons/Icons";
 import type {TIconComponent} from "../Icons/types/icon";
 
-import styles from "./ButtonIcon.module.scss";
 import {ButtonIconStyle} from "./constants";
+// eslint-disable-next-line import/order
+import styles from "./ButtonIcon.module.scss";
 
 interface IProps {
   icon: KeyExtractor<typeof IconAppName>;
@@ -29,6 +30,8 @@ const ButtonIcon = ({
 }: IProps) => {
   const Icon: TIconComponent = Icons[icon];
 
+  console.log(styles[`button${buttonIconStyle}`]);
+
   return (
     <button
       type={type}
@@ -37,7 +40,7 @@ const ButtonIcon = ({
       aria-label={ariaLabel}
       disabled={disabled}
     >
-      <Icon className={classnames(styles.buttonIcon, styles[`button${buttonIconStyle}Icon`])} />
+      <Icon />
     </button>
   );
 };
