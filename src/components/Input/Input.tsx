@@ -1,4 +1,5 @@
 import classnames from "classnames";
+import type {RefCallback} from "react";
 import type {UseFormRegister, FieldValues, Path} from "react-hook-form";
 
 import {KeyExtractor} from "../../utils/types/keyExtractor";
@@ -25,7 +26,7 @@ interface IProps<T extends FieldValues> {
   value?: string | number;
   onClick?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  forwardedRef?: React.ForwardedRef<unknown>;
+  forwardedRef?: React.ForwardedRef<unknown> | RefCallback<HTMLDivElement>;
   inputStyle?: KeyExtractor<typeof InputStyle>;
   buttonIcon?: {
     icon: KeyExtractor<typeof IconAppName>;
@@ -34,6 +35,7 @@ interface IProps<T extends FieldValues> {
     ariaLabel?: string;
   };
   readOnly?: boolean;
+  checked?: boolean;
 }
 
 const Input = <T extends FieldValues>({
@@ -53,6 +55,7 @@ const Input = <T extends FieldValues>({
   hasAutoFocus = false,
   isDisabled = false,
   readOnly = false,
+  checked = false,
 }: IProps<T>) => {
   const {
     onChange: registerOnChange,
@@ -83,6 +86,7 @@ const Input = <T extends FieldValues>({
           onChange={registerOnChange ?? onChange}
           onClick={onClick}
           readOnly={readOnly}
+          checked={checked}
           {...rest}
         />
         {buttonIcon && (

@@ -96,6 +96,19 @@
     background-image: url("../../design/images/icons/check.svg");
     background-size: contain;
   }
+
+  &Wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &Label {
+    margin: 0;
+    flex: 1;
+  }
 }
 
 html[data-theme="dark"] {
@@ -105,6 +118,12 @@ html[data-theme="dark"] {
 
     &Label {
       color: $Gray600;
+    }
+  }
+
+  .inputCheckbox {
+    &:checked {
+      background-color: $BlueA200;
     }
   }
 }

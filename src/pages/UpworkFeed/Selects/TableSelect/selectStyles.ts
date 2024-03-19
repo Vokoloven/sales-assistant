@@ -18,8 +18,8 @@ export const selectStyles = (theme: ThemeMode) => {
     option: (base, state) => ({
       ...base,
       ...(theme === ThemeConfig.Light
-        ? {backgroundColor: state.isSelected ? Gray600 : "inherit"}
-        : {backgroundColor: state.isSelected ? Gray800 : "inherit"}),
+        ? {backgroundColor: state.isSelected ? "inherit" : "inherit"}
+        : {backgroundColor: state.isSelected ? "inherit" : "inherit"}),
       ...(theme === ThemeConfig.Light ? {color: Black} : {color: White}),
       "&:hover": {
         ...(theme === ThemeConfig.Light

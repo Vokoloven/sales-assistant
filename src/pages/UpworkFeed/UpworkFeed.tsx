@@ -116,7 +116,6 @@ export const UpworkFeed = () => {
         accessorKey: AccessorKey.Review,
         header: capitalize(AccessorKey.Reaction),
         cell: (info) => {
-          console.log(info.getValue());
           const type = info.getValue() as IReviewDTO | null;
           if (type?.type === ReviewType.Like) {
             return <Icons.Dislike />;
