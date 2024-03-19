@@ -63,15 +63,16 @@ const Tooltip = ({children, elements, open = false, setOpen, position = Position
         className={styles.wrapper}
       >
         <div className={classnames(styles.tooltip, styles[`${position}`])}>
-          {elements.map((element) => (
-            <Button
-              key={element.id}
-              style={handleElementsLength(elements)}
-              text={element.text}
-              iconBefore={element.iconBefore}
-              onClick={handleOnClick(element.onClick)}
-            />
-          ))}
+          {Boolean(elements.length) &&
+            elements.map((element) => (
+              <Button
+                key={element.id}
+                style={handleElementsLength(elements)}
+                text={element.text}
+                iconBefore={element.iconBefore}
+                onClick={handleOnClick(element.onClick)}
+              />
+            ))}
         </div>
         <div>{children}</div>
       </div>
