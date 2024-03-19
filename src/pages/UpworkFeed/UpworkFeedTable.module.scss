@@ -188,15 +188,6 @@
   }
 }
 
-.icon {
-  &Like {
-    fill: $Like;
-  }
-  &Dislike {
-    fill: $Dislike;
-  }
-}
-
 .footer {
   flex-shrink: 0;
   flex-grow: 0;
@@ -301,14 +292,6 @@
     &Buttons {
       display: flex;
     }
-  }
-
-  &Button {
-    padding: 10px 10px;
-  }
-
-  &ButtonIcon {
-    padding: 12px;
   }
 }
 

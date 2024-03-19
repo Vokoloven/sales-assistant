@@ -31,10 +31,6 @@ html[data-theme="light"] {
     width: 320px;
   }
 
-  .react-datepicker__header--custom__button {
-    padding: 8px;
-  }
-
   .react-datepicker__week {
     display: flex;
     justify-content: space-between;
@@ -128,10 +124,6 @@ html[data-theme="dark"] {
   .react-datepicker__month-container {
     width: 320px;
     background-color: $Black;
-  }
-
-  .react-datepicker__header--custom__button {
-    padding: 8px;
   }
 
   .react-datepicker__week {

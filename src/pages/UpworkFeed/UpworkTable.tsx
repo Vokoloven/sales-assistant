@@ -3,7 +3,7 @@ import type {FilterMeta, Column} from "@tanstack/react-table";
 import classnames from "classnames";
 
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
-import {ButtonIconVariant} from "../../components/ButtonIcon/constants";
+import {ButtonIconStyle} from "../../components/ButtonIcon/constants";
 import {IconAppName} from "../../components/Icons/constants";
 import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {KeyExtractor} from "../../utils/types/keyExtractor";
@@ -63,7 +63,7 @@ const UpworkTable = <T,>({table, styles}: IProps<T>) => {
                       <ButtonIcon
                         onClick={header.column.getToggleSortingHandler()}
                         icon={handleSortIcon(header.column.getIsSorted)}
-                        buttonIconVariant={ButtonIconVariant.Input}
+                        buttonIconStyle={ButtonIconStyle.Input}
                       />
                     )}
                   </div>

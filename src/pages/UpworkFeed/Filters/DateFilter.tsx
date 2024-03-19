@@ -97,14 +97,12 @@ const DateFilter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>})
               icon={IconAppName.ChevronLeft}
               onClick={decreaseMonth}
               disabled={prevMonthButtonDisabled}
-              className={"react-datepicker__header--custom__button"}
             />
             <span>{`${monthName} ${date.getFullYear()}`}</span>
             <ButtonIcon
               icon={IconAppName.ChevronRight}
               onClick={increaseMonth}
               disabled={nextMonthButtonDisabled}
-              className={"react-datepicker__header--custom__button"}
             />
           </div>
         );

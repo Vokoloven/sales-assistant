@@ -5,7 +5,7 @@ import {KeyExtractor} from "../../utils/types/keyExtractor";
 import type {TCombineGeneralValidatorResult} from "../../utils/validators/types/composeValidators";
 import type {TValidatorReturn} from "../../utils/validators/types/validator";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";
-import {ButtonIconVariant} from "../ButtonIcon/constants";
+import {ButtonIconStyle} from "../ButtonIcon/constants";
 import {IconAppName} from "../Icons/constants";
 
 import {InputType, InputStyle} from "./constants";
@@ -59,8 +59,6 @@ const Input = <T extends FieldValues>({
     ...rest
   } = (register && register(name, validate && validate())) ?? {};
 
-  console.log(inputStyle);
-
   return (
     <div className={classnames(styles.inputWrapper, styles[`input${inputStyle}Wrapper`])}>
       {label && (
@@ -91,7 +89,7 @@ const Input = <T extends FieldValues>({
             <ButtonIcon
               icon={buttonIcon.icon}
               onClick={buttonIcon.onClick}
-              buttonIconVariant={ButtonIconVariant.Input}
+              buttonIconStyle={ButtonIconStyle.Input}
               ariaLabel={buttonIcon.ariaLabel}
             />
           </div>

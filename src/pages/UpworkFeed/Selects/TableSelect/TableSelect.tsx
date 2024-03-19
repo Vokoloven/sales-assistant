@@ -5,7 +5,7 @@ import {useState} from "react";
 import Select, {components} from "react-select";
 
 import ButtonIcon from "../../../../components/ButtonIcon/ButtonIcon";
-import {ButtonIconVariant} from "../../../../components/ButtonIcon/constants";
+import {ButtonIconStyle} from "../../../../components/ButtonIcon/constants";
 import {IconAppName} from "../../../../components/Icons/constants";
 import Icons from "../../../../components/Icons/Icons";
 import {InputType} from "../../../../components/Input/constants";
@@ -54,7 +54,7 @@ const TableSelect = ({options}: {options: IOptionInterface[]}) => {
                 <components.ClearIndicator {...props}>
                   <ButtonIcon
                     icon={IconAppName.ClearInput}
-                    buttonIconVariant={ButtonIconVariant.Input}
+                    buttonIconStyle={ButtonIconStyle.Input}
                     ariaLabel={"Clear Input"}
                     onClick={() => setOption([])}
                   />

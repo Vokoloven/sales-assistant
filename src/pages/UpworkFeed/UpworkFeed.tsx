@@ -6,6 +6,7 @@ import {useCallback, useEffect, useMemo, useState} from "react";
 import Button from "../../components/Button/Button";
 import {ButtonColor} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
+import {ButtonIconStyle} from "../../components/ButtonIcon/constants";
 import {IconAppName} from "../../components/Icons/constants";
 import Icons from "../../components/Icons/Icons";
 import {NotifyType} from "../../components/Notify/constants";
@@ -300,37 +301,36 @@ export const UpworkFeed = () => {
               </div>
               <div className={styles.footerInnerButtons}>
                 <ButtonIcon
-                  className={styles.footerButtonIcon}
                   icon={IconAppName.ChevronWithLineLeft}
                   onClick={() => table.firstPage()}
                   disabled={!table.getCanPreviousPage()}
+                  buttonIconStyle={ButtonIconStyle.FooterFeed}
                 />
                 <ButtonIcon
-                  className={styles.footerButtonIcon}
                   icon={IconAppName.ChevronLeft}
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
+                  buttonIconStyle={ButtonIconStyle.FooterFeed}
                 />
                 {pages.map((page, index) => (
                   <Button
                     key={index}
                     text={page}
                     color={currentPage === page ? ButtonColor.PaginationActive : ButtonColor.Pagiantion}
-                    classname={styles.footerButton}
                     onClick={() => table.setPageIndex(page - 1)}
                   />
                 ))}
                 <ButtonIcon
-                  className={styles.footerButtonIcon}
                   icon={IconAppName.ChevronRight}
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
+                  buttonIconStyle={ButtonIconStyle.FooterFeed}
                 />
                 <ButtonIcon
-                  className={styles.footerButtonIcon}
                   icon={IconAppName.ChevronWithLineRight}
                   onClick={() => table.lastPage()}
                   disabled={!table.getCanNextPage()}
+                  buttonIconStyle={ButtonIconStyle.FooterFeed}
                 />
               </div>
             </div>

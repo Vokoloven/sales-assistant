@@ -5,7 +5,7 @@ import {KeyExtractor} from "../../utils/types/keyExtractor";
 import {ButtonType} from "../Button/constants";
 import {IconAppName} from "../Icons/constants";
 import type {TIconComponent, IIconProps} from "../Icons/types/icon";
-import {ButtonIconVariant} from "./constants";
+import {ButtonIconStyle} from "./constants";
 
 import Icons from "../Icons/Icons";
 import styles from "./ButtonIcon.module.scss";
@@ -13,24 +13,22 @@ import styles from "./ButtonIcon.module.scss";
 interface IProps {
   icon: KeyExtractor<typeof IconAppName>;
   children?: React.ReactNode;
-  className?: string;
   iconProps?: IIconProps;
   type?: KeyExtractor<typeof ButtonType>;
   disabled?: boolean;
   ariaLabel?: string;
   onClick?: (() => void) | ((event: unknown) => void);
-  buttonIconVariant?: KeyExtractor<typeof ButtonIconVariant>;
+  buttonIconStyle?: KeyExtractor<typeof ButtonIconStyle>;
 }
 
 const ButtonIcon = ({
-  className,
   icon,
   iconProps,
   onClick,
   ariaLabel,
   disabled = false,
   type = ButtonType.Button,
-  buttonIconVariant = ButtonIconVariant.Primary,
+  buttonIconStyle,
 }: IProps) => {
   const Icon: TIconComponent = Icons[icon];
 
@@ -40,13 +38,13 @@ const ButtonIcon = ({
     <button
       type={type}
       onClick={onClick}
-      className={classnames(styles.button, styles[`${buttonIconVariant}`], className)}
+      className={classnames(styles.button, styles[`button${buttonIconStyle}`])}
       aria-label={ariaLabel}
       disabled={disabled}
     >
       <Icon
         {...iconPropsRest}
-        className={classnames(styles.buttonIcon, classNameIcon)}
+        className={classnames(styles.buttonIcon, styles[`buttonIcon${buttonIconStyle}`], classNameIcon)}
       />
     </button>
   );

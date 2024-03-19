@@ -5,37 +5,42 @@
   border: none;
   background-color: transparent;
   border-radius: 8px;
-
   line-height: 0px;
 
   &:not(:disabled):focus {
     outline: none;
   }
 
-  &.primary {
-    &:not(:disabled):hover {
-      background-color: $BlueA100;
-    }
-
-    &:not(:disabled):focus {
-      background-color: $BlueA300;
-    }
+  &:not(:disabled):hover {
+    background-color: $BlueA100;
   }
 
-  &.input {
-    &:not(:disabled):hover {
-      background-color: initial;
-    }
-
-    &:not(:disabled):focus {
-      background-color: initial;
-    }
+  &:not(:disabled):focus {
+    background-color: $BlueA300;
   }
 
   &:disabled {
     & > .buttonIcon {
       fill: $Disabled;
     }
+  }
+}
+
+.buttonHeader {
+  padding: 12px;
+}
+
+.buttonFooterFeed {
+  padding: 12px;
+}
+
+.buttonInput {
+  &:not(:disabled):hover {
+    background-color: initial;
+  }
+
+  &:not(:disabled):focus {
+    background-color: initial;
   }
 }
 
@@ -48,16 +53,6 @@ html[data-theme="dark"] {
 
       &:not(:disabled):focus {
         background-color: $BlueA600;
-      }
-    }
-
-    &.input {
-      &:not(:disabled):hover {
-        background-color: initial;
-      }
-
-      &:not(:disabled):focus {
-        background-color: initial;
       }
     }
 
