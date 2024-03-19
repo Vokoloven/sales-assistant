@@ -87,7 +87,6 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                 <ButtonIcon
                   onClick={() => setCollapsed((prevCollapsed) => !prevCollapsed)}
                   icon={collapsed ? IconAppName.Menu : IconAppName.CollapseMenu}
-                  iconProps={{className: styles.sectionIcon}}
                   ariaLabel={"Menu toggler"}
                   buttonIconStyle={ButtonIconStyle.Header}
                 />
@@ -108,7 +107,6 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                 <ButtonIcon
                   onClick={themeSwitcher}
                   icon={theme === ThemeConfig.Light ? IconAppName.Moon : IconAppName.Sun}
-                  iconProps={{className: styles.sectionIcon}}
                   ariaLabel={"Sidebar collapse"}
                   buttonIconStyle={ButtonIconStyle.Header}
                 />
