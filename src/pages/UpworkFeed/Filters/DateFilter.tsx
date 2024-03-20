@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import {Column, Table} from "@tanstack/react-table";
 import {useState, forwardRef} from "react";
 import DatePicker from "react-datepicker";
@@ -49,13 +48,13 @@ const DateFilter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>})
         buttonIcon={
           isDirtyField
             ? {
-                icon: IconAppName.ClearInput,
-                ariaLabel: "Clear field",
-                onClick: () => {
-                  column.setFilterValue("");
-                  setDateRange([null, null]);
-                },
-              }
+              icon: IconAppName.ClearInput,
+              ariaLabel: "Clear field",
+              onClick: () => {
+                column.setFilterValue("");
+                setDateRange([null, null]);
+              },
+            }
             : undefined
         }
         value={value}
