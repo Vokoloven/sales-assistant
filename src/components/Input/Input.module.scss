@@ -75,8 +75,8 @@
   border: 2px solid $Gray400;
   background-color: $White;
 
-  width: 20px;
-  height: 20px;
+  min-width: 20px;
+  aspect-ratio: 1;
 
   cursor: pointer;
 

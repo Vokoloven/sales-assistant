@@ -18,30 +18,49 @@ import {InputStyle} from "../../../../components/Input/constants";
 import Input from "../../../../components/Input/Input";
 import {getTheme} from "../../../../hooks/useTheme";
 import type {IOptionInterface} from "../../../../submodules/interfaces/dto/common/ioption.interface";
+import {KeyExtractor} from "../../../../utils/types/keyExtractor";
 
 import {selectStyles} from "./selectStyles";
 
 const optionAll = "ALL";
 
-const TableSelect = ({options}: {options: IOptionInterface[]}) => {
+const ArrayMethod = {
+  Filter: "filter",
+  Some: "some",
+} as const;
+
+const ScoreSelect = ({options}: {options: IOptionInterface[]}) => {
   const combinedOptions = options && [{label: "ALL", value: "ALL"}, ...options];
   const [selectedOption, setSelectedOption] = useState<IOptionInterface[]>([]);
 
   const handleChange = (option: readonly IOptionInterface[]): void => {
-    const isSelectedAll = (option: IOptionInterface[] | readonly IOptionInterface[]) => {
-      return option.some(({value}) => value.toLocaleLowerCase() === optionAll.toLocaleLowerCase());
+    const handleSelectedValue = (
+      option: IOptionInterface[] | readonly IOptionInterface[],
+      method: KeyExtractor<typeof ArrayMethod> = ArrayMethod.Some,
+    ): IOptionInterface[] | boolean => {
+      if (method === ArrayMethod.Filter) {
+        return option[method](({value}) => value.toLocaleLowerCase() !== optionAll.toLocaleLowerCase());
+      }
+
+      return option[method](({value}) => value.toLocaleLowerCase() === optionAll.toLocaleLowerCase());
     };
 
     setSelectedOption((prevSelectedOption) => {
-      if (isSelectedAll(prevSelectedOption) && !isSelectedAll(option) && option.length < combinedOptions.length) {
+      if (
+        handleSelectedValue(prevSelectedOption) &&
+        !handleSelectedValue(option) &&
+        option.length < combinedOptions.length
+      ) {
         return [];
       }
 
-      if (!isSelectedAll(prevSelectedOption) && isSelectedAll(option)) {
+      if (!handleSelectedValue(prevSelectedOption) && handleSelectedValue(option)) {
         return [...combinedOptions];
       }
 
-      return [...option];
+      const filteredOption = handleSelectedValue(option, "filter");
+
+      return Array.isArray(filteredOption) ? filteredOption : [];
     });
   };
 
@@ -123,4 +142,4 @@ const TableSelect = ({options}: {options: IOptionInterface[]}) => {
   return null;
 };
 
-export default TableSelect;
+export default ScoreSelect;
