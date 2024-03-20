@@ -14,6 +14,7 @@ const ScoreFilter = <T,>({column, table}: {column: Column<T, unknown>; table: Ta
     <ScoreSelect
       options={scoreOptions}
       setFilterValue={setFilterValue}
+      filterValue={(column.getFilterValue() as string[]) ?? []}
     />
   );
 };

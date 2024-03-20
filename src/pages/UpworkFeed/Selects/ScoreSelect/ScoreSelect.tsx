@@ -43,19 +43,35 @@ const handleSelectedValue = (
 const ScoreSelect = ({
   options,
   setFilterValue,
+  filterValue,
 }: {
   options: IOptionInterface[];
   setFilterValue: (value: string[]) => void;
+  filterValue: string[];
 }) => {
   const combinedOptions = options && [{label: "ALL", value: "ALL"}, ...options];
-  const [selectedOption, setSelectedOption] = useState<IOptionInterface[]>([]);
-  const [isCheckboxIndeterminate, setIsCheckboxIndeterminate] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<IOptionInterface[]>(() => {
+    if (filterValue.length > 0) {
+      return filterValue.reduce((acc: IOptionInterface[], val: string, index: number) => {
+        if (options.length - 1 === index) {
+          return (acc = [{value: optionAll, label: optionAll}, ...acc, {value: val, label: val}]);
+        }
 
-  console.log(selectedOption);
+        return (acc = [...acc, {value: val, label: val}]);
+      }, []);
+    }
+    return [];
+  });
+  const [isCheckboxIndeterminate, setIsCheckboxIndeterminate] = useState(() => {
+    if (filterValue.length > 0 && filterValue.length !== options.length) {
+      return true;
+    }
+    return false;
+  });
 
   useEffect(() => {
     const clearOption = handleSelectedValue(selectedOption, "filter");
-    if (Array.isArray(clearOption) && clearOption.length > 0) {
+    if (Array.isArray(clearOption)) {
       const resultAsArray = clearOption.reduce((acc: string[], val: IOptionInterface) => {
         return [...acc, val.value];
       }, []);

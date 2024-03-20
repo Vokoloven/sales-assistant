@@ -70,8 +70,8 @@ const UpworkTable = <T,>({table, styles}: IProps<T>) => {
                   {header.column.getCanFilter() ? (
                     <div>
                       {header.column.columnDef?.meta &&
-                      (header.column.columnDef?.meta as ICustomFilterMeta).filterComponent ? (
-                        (header.column.columnDef?.meta as ICustomFilterMeta).filterComponent({
+                      (header.column.columnDef?.meta as ICustomFilterMeta)?.filterComponent ? (
+                        (header.column.columnDef?.meta as ICustomFilterMeta)?.filterComponent({
                           column: header.column,
                           table,
                         })
