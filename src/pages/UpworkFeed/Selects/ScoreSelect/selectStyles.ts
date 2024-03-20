@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {StylesConfig} from "react-select";
 
-const {Gray400, Gray100, Gray600, Black, White, Gray800, GrayA300, GrayA800, BlueA200, BlueA700} = colors;
+const {Gray400, Gray100, Gray600, Black, White, Gray800, GrayA300, BlueA200} = colors;
 
 type IsMulti = true;
 import colors from "../../../../design/settings/colors.scss";
@@ -76,7 +74,7 @@ export const selectStyles = (theme: ThemeMode) => {
     multiValue: (base) => ({
       ...base,
       ...(theme === ThemeConfig.Light ? {backgroundColor: Gray400} : {backgroundColor: GrayA300}),
-      "&:first-child": {marginRight: "auto"},
+      "&:first-of-type": {marginRight: "auto"},
     }),
     multiValueLabel: (base) => ({
       ...base,
@@ -85,7 +83,7 @@ export const selectStyles = (theme: ThemeMode) => {
     multiValueRemove: (base) => ({
       ...base,
       "&:hover": {
-        ...(theme === ThemeConfig.Light ? {backgroundColor: BlueA700} : {backgroundColor: BlueA200}),
+        backgroundColor: BlueA200,
       },
       "& > svg": {
         fill: White,

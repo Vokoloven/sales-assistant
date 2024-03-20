@@ -10,4 +10,5 @@ export const InputStyle = {
   Table: "Table",
   Login: "Login",
   Checkbox: "Checkbox",
+  CheckboxIndeterminate: "CheckboxIndeterminate",
 } as const;

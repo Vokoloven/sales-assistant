@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {css} from "@emotion/css";
 import {useState} from "react";
 import Select, {
@@ -33,6 +32,7 @@ const ArrayMethod = {
 const ScoreSelect = ({options}: {options: IOptionInterface[]}) => {
   const combinedOptions = options && [{label: "ALL", value: "ALL"}, ...options];
   const [selectedOption, setSelectedOption] = useState<IOptionInterface[]>([]);
+  const [isCheckboxIndeterminate, setIsCheckboxIndeterminate] = useState(false);
 
   const handleChange = (option: readonly IOptionInterface[]): void => {
     const handleSelectedValue = (
@@ -52,21 +52,38 @@ const ScoreSelect = ({options}: {options: IOptionInterface[]}) => {
         !handleSelectedValue(option) &&
         option.length < combinedOptions.length
       ) {
+        setIsCheckboxIndeterminate(false);
         return [];
       }
 
       if (option.length === combinedOptions.length - 1 && !handleSelectedValue(option)) {
+        setIsCheckboxIndeterminate(false);
         return [...combinedOptions];
       }
 
       if (!handleSelectedValue(prevSelectedOption) && handleSelectedValue(option)) {
+        setIsCheckboxIndeterminate(false);
         return [...combinedOptions];
       }
 
       const filteredOption = handleSelectedValue(option, "filter");
 
+      if (Array.isArray(filteredOption) && filteredOption.length !== 0) {
+        setIsCheckboxIndeterminate(true);
+      } else {
+        setIsCheckboxIndeterminate(false);
+      }
+
       return Array.isArray(filteredOption) ? filteredOption : [];
     });
+  };
+
+  const handleOptionStyle = ({data: {value}}: OptionProps<IOptionInterface, true>) => {
+    if (value === optionAll && isCheckboxIndeterminate) {
+      return InputStyle.CheckboxIndeterminate;
+    }
+
+    return InputStyle.Checkbox;
   };
 
   const Option = (props: OptionProps<IOptionInterface, true>) => {
@@ -78,7 +95,7 @@ const ScoreSelect = ({options}: {options: IOptionInterface[]}) => {
           type={InputType.Checkbox}
           label={props.label}
           forwardedRef={props.innerRef}
-          inputStyle={InputStyle.Checkbox}
+          inputStyle={handleOptionStyle(props)}
           checked={props.isSelected}
           readOnly
         />
@@ -122,6 +139,7 @@ const ScoreSelect = ({options}: {options: IOptionInterface[]}) => {
     </components.ClearIndicator>
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const IndicatorSeparator = (props: IndicatorSeparatorProps<IOptionInterface, true>) => null;
 
   if (options) {

@@ -111,6 +111,34 @@
   }
 }
 
+.inputCheckboxIndeterminate {
+  @extend .inputCheckbox;
+
+  border-color: $BlueA200;
+
+  &::before {
+    content: "";
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 10px;
+    height: 2px;
+    background-color: $BlueA200;
+    border-radius: 2px;
+  }
+
+  &Wrapper {
+    @extend .inputCheckboxWrapper;
+  }
+
+  &Label {
+    @extend .inputCheckboxLabel;
+  }
+}
+
 html[data-theme="dark"] {
   .input {
     background-color: $Black;
