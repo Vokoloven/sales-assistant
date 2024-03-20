@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {css} from "@emotion/css";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import Select, {
   components,
   OptionProps,
   MultiValueProps,
   DropdownIndicatorProps,
   ClearIndicatorProps,
-  IndicatorSeparatorProps,
 } from "react-select";
 
 import ButtonIcon from "../../../../components/ButtonIcon/ButtonIcon";
@@ -40,10 +40,28 @@ const handleSelectedValue = (
   return option[method](({value}) => value.toLocaleLowerCase() === optionAll.toLocaleLowerCase());
 };
 
-const ScoreSelect = ({options}: {options: IOptionInterface[]}) => {
+const ScoreSelect = ({
+  options,
+  setFilterValue,
+}: {
+  options: IOptionInterface[];
+  setFilterValue: (value: string[]) => void;
+}) => {
   const combinedOptions = options && [{label: "ALL", value: "ALL"}, ...options];
   const [selectedOption, setSelectedOption] = useState<IOptionInterface[]>([]);
   const [isCheckboxIndeterminate, setIsCheckboxIndeterminate] = useState(false);
+
+  console.log(selectedOption);
+
+  useEffect(() => {
+    const clearOption = handleSelectedValue(selectedOption, "filter");
+    if (Array.isArray(clearOption) && clearOption.length > 0) {
+      const resultAsArray = clearOption.reduce((acc: string[], val: IOptionInterface) => {
+        return [...acc, val.value];
+      }, []);
+      setFilterValue(resultAsArray);
+    }
+  }, [JSON.stringify(selectedOption)]);
 
   const handleChange = (option: readonly IOptionInterface[]): void => {
     setSelectedOption((prevSelectedOption) => {
@@ -139,8 +157,7 @@ const ScoreSelect = ({options}: {options: IOptionInterface[]}) => {
     </components.ClearIndicator>
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const IndicatorSeparator = (props: IndicatorSeparatorProps<IOptionInterface, true>) => null;
+  const IndicatorSeparator = () => null;
 
   if (options) {
     return (
