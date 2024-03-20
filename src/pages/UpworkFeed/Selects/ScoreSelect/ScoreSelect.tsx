@@ -29,23 +29,23 @@ const ArrayMethod = {
   Some: "some",
 } as const;
 
+const handleSelectedValue = (
+  option: IOptionInterface[] | readonly IOptionInterface[],
+  method: KeyExtractor<typeof ArrayMethod> = ArrayMethod.Some,
+): IOptionInterface[] | boolean => {
+  if (method === ArrayMethod.Filter) {
+    return option[method](({value}) => value.toLocaleLowerCase() !== optionAll.toLocaleLowerCase());
+  }
+
+  return option[method](({value}) => value.toLocaleLowerCase() === optionAll.toLocaleLowerCase());
+};
+
 const ScoreSelect = ({options}: {options: IOptionInterface[]}) => {
   const combinedOptions = options && [{label: "ALL", value: "ALL"}, ...options];
   const [selectedOption, setSelectedOption] = useState<IOptionInterface[]>([]);
   const [isCheckboxIndeterminate, setIsCheckboxIndeterminate] = useState(false);
 
   const handleChange = (option: readonly IOptionInterface[]): void => {
-    const handleSelectedValue = (
-      option: IOptionInterface[] | readonly IOptionInterface[],
-      method: KeyExtractor<typeof ArrayMethod> = ArrayMethod.Some,
-    ): IOptionInterface[] | boolean => {
-      if (method === ArrayMethod.Filter) {
-        return option[method](({value}) => value.toLocaleLowerCase() !== optionAll.toLocaleLowerCase());
-      }
-
-      return option[method](({value}) => value.toLocaleLowerCase() === optionAll.toLocaleLowerCase());
-    };
-
     setSelectedOption((prevSelectedOption) => {
       if (
         handleSelectedValue(prevSelectedOption) &&
