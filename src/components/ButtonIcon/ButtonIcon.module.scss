@@ -34,6 +34,10 @@
   padding: 12px;
 }
 
+.buttonDatePicker {
+  padding: 8px;
+}
+
 .buttonInput {
   &:not(:disabled):hover {
     background-color: initial;

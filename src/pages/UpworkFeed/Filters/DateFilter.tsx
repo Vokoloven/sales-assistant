@@ -4,6 +4,7 @@ import {useState, forwardRef} from "react";
 import DatePicker from "react-datepicker";
 
 import ButtonIcon from "../../../components/ButtonIcon/ButtonIcon";
+import {ButtonIconStyle} from "../../../components/ButtonIcon/constants";
 import {IconAppName} from "../../../components/Icons/constants";
 import {InputType} from "../../../components/Input/constants";
 import {InputStyle} from "../../../components/Input/constants";
@@ -97,12 +98,14 @@ const DateFilter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>})
               icon={IconAppName.ChevronLeft}
               onClick={decreaseMonth}
               disabled={prevMonthButtonDisabled}
+              buttonIconStyle={ButtonIconStyle.DatePicker}
             />
             <span>{`${monthName} ${date.getFullYear()}`}</span>
             <ButtonIcon
               icon={IconAppName.ChevronRight}
               onClick={increaseMonth}
               disabled={nextMonthButtonDisabled}
+              buttonIconStyle={ButtonIconStyle.DatePicker}
             />
           </div>
         );
