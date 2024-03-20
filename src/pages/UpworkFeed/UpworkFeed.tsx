@@ -218,7 +218,7 @@ export const UpworkFeed = () => {
       }
     },
 
-    [isLogged, pagination, sorting, JSON.stringify(debouncedTableFilterValue)],
+    [isLogged, JSON.stringify(pagination), sorting, JSON.stringify(debouncedTableFilterValue)],
   );
 
   useEffect(() => {
