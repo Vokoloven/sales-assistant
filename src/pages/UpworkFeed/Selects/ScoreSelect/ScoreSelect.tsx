@@ -54,6 +54,10 @@ const ScoreSelect = ({options}: {options: IOptionInterface[]}) => {
         return [];
       }
 
+      if (option.length === combinedOptions.length - 1 && !handleSelectedValue(option)) {
+        return [...combinedOptions];
+      }
+
       if (!handleSelectedValue(prevSelectedOption) && handleSelectedValue(option)) {
         return [...combinedOptions];
       }
