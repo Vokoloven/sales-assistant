@@ -65,7 +65,6 @@ export const selectStyles = (theme: ThemeMode) => {
       ...base,
       padding: "0",
       margin: "0",
-      // caretColor: "transparent",
     }),
     valueContainer: (base) => ({
       ...base,
