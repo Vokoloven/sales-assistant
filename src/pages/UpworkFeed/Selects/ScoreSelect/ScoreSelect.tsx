@@ -175,32 +175,27 @@ const ScoreSelect = ({
 
   const IndicatorSeparator = () => null;
 
-  if (options) {
-    return (
-      <>
-        <Select
-          components={{
-            IndicatorSeparator,
-            ClearIndicator,
-            DropdownIndicator,
-            Option,
-            MultiValue,
-          }}
-          placeholder=""
-          onChange={handleChange}
-          closeMenuOnSelect={false}
-          options={combinedOptions}
-          styles={selectStyles(getTheme())}
-          isMulti
-          value={selectedOption}
-          escapeClearsValue={false}
-          hideSelectedOptions={false}
-          isSearchable={false}
-        />
-      </>
-    );
-  }
-  return null;
+  return (
+    <Select
+      components={{
+        IndicatorSeparator,
+        ClearIndicator,
+        DropdownIndicator,
+        Option,
+        MultiValue,
+      }}
+      placeholder=""
+      onChange={handleChange}
+      closeMenuOnSelect={false}
+      options={combinedOptions}
+      styles={selectStyles(getTheme())}
+      isMulti
+      value={selectedOption}
+      escapeClearsValue={false}
+      hideSelectedOptions={false}
+      isSearchable={false}
+    />
+  );
 };
 
 export default ScoreSelect;
