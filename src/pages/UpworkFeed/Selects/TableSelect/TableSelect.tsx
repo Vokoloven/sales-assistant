@@ -1,6 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {useState} from "react";
-import Select, {components, OptionProps, GroupBase} from "react-select";
+import Select, {
+  components,
+  OptionProps,
+  MultiValueProps,
+  DropdownIndicatorProps,
+  ClearIndicatorProps,
+  IndicatorSeparatorProps,
+} from "react-select";
 
 import ButtonIcon from "../../../../components/ButtonIcon/ButtonIcon";
 import {ButtonIconStyle} from "../../../../components/ButtonIcon/constants";
@@ -18,77 +25,86 @@ const optionAll = "ALL";
 
 const TableSelect = ({options}: {options: IOptionInterface[]}) => {
   const combinedOptions = options && [{label: "ALL", value: "ALL"}, ...options];
-  const [option, setOption] = useState<IOptionInterface[]>([]);
+  const [selectedOption, setSelectedOption] = useState<IOptionInterface[]>([]);
 
   const handleChange = (option: readonly IOptionInterface[]): void => {
-    const isAllOptionSelected = (options: IOptionInterface[], option: readonly IOptionInterface[]): boolean => {
-      const isSelectedOnlyAll = option.some(({value}) => value.toLocaleLowerCase() === optionAll.toLocaleLowerCase());
-
-      if (isSelectedOnlyAll) return true;
-
-      const sortedOptions = (options: readonly IOptionInterface[] | IOptionInterface[]) =>
-        [...options].sort((a, b) => a.value.localeCompare(b.value));
-
-      const isSelectedAllExceptAll =
-        option.length === options.length &&
-        sortedOptions(options).every(
-          ({value}, index) => value.toLocaleLowerCase() === sortedOptions(option)[index].value.toLocaleLowerCase(),
-        );
-
-      if (isSelectedAllExceptAll) return true;
-
-      return false;
+    const isSelectedAll = (option: IOptionInterface[] | readonly IOptionInterface[]) => {
+      return option.some(({value}) => value.toLocaleLowerCase() === optionAll.toLocaleLowerCase());
     };
 
-    if (isAllOptionSelected(options, option)) {
-      setOption(combinedOptions);
-      return;
-    }
+    setSelectedOption((prevSelectedOption) => {
+      if (isSelectedAll(prevSelectedOption) && !isSelectedAll(option) && option.length < combinedOptions.length) {
+        return [];
+      }
 
-    setOption([...option]);
+      if (!isSelectedAll(prevSelectedOption) && isSelectedAll(option)) {
+        return [...combinedOptions];
+      }
+
+      return [...option];
+    });
   };
 
-  const CustomOption = (props: OptionProps<IOptionInterface, true>) => {
+  const Option = (props: OptionProps<IOptionInterface, true>) => {
     return (
-      <Input
-        id={props.innerProps.id as string}
-        name={props.data.value}
-        type={InputType.Checkbox}
-        label={props.label}
-        forwardedRef={props.innerRef}
-        inputStyle={InputStyle.Checkbox}
-        checked={props.isSelected}
-        readOnly
-      />
+      <components.Option {...props}>
+        <Input
+          id={props.innerProps.id as string}
+          name={props.data.value}
+          type={InputType.Checkbox}
+          label={props.label}
+          forwardedRef={props.innerRef}
+          inputStyle={InputStyle.Checkbox}
+          checked={props.isSelected}
+          readOnly
+        />
+      </components.Option>
     );
   };
+
+  const MultiValue = (props: MultiValueProps<IOptionInterface, true>) => {
+    const maxToShow = 1;
+    const overflow = props
+      .getValue()
+      .slice(maxToShow)
+      .map((x) => x.label);
+
+    return props.index < maxToShow ? (
+      <components.MultiValue {...props} />
+    ) : props.index === maxToShow ? (
+      <div>{`+${props.getValue().length - 1} items`}</div>
+    ) : null;
+  };
+
+  const DropdownIndicator = (props: DropdownIndicatorProps<IOptionInterface, true>) => (
+    <components.DropdownIndicator {...props}>
+      <Icons.ChevronSmallDown />
+    </components.DropdownIndicator>
+  );
+
+  const ClearIndicator = (props: ClearIndicatorProps<IOptionInterface, true>) => (
+    <components.ClearIndicator {...props}>
+      <ButtonIcon
+        icon={IconAppName.ClearInput}
+        buttonIconStyle={ButtonIconStyle.Input}
+        ariaLabel={"Clear Input"}
+        onClick={() => setSelectedOption([])}
+      />
+    </components.ClearIndicator>
+  );
+
+  const IndicatorSeparator = (props: IndicatorSeparatorProps<IOptionInterface, true>) => null;
 
   if (options) {
     return (
       <>
         <Select
           components={{
-            IndicatorSeparator: null,
-            ClearIndicator: (props) => (
-              <components.ClearIndicator {...props}>
-                <ButtonIcon
-                  icon={IconAppName.ClearInput}
-                  buttonIconStyle={ButtonIconStyle.Input}
-                  ariaLabel={"Clear Input"}
-                  onClick={() => setOption([])}
-                />
-              </components.ClearIndicator>
-            ),
-            DropdownIndicator: (props) => (
-              <components.DropdownIndicator {...props}>
-                <Icons.ChevronSmallDown />
-              </components.DropdownIndicator>
-            ),
-            Option: (props) => (
-              <components.Option {...props}>
-                <CustomOption {...props} />
-              </components.Option>
-            ),
+            IndicatorSeparator,
+            ClearIndicator,
+            DropdownIndicator,
+            Option,
+            MultiValue,
           }}
           placeholder=""
           onChange={handleChange}
@@ -96,9 +112,10 @@ const TableSelect = ({options}: {options: IOptionInterface[]}) => {
           options={combinedOptions}
           styles={selectStyles(getTheme())}
           isMulti
-          value={option}
+          value={selectedOption}
           escapeClearsValue={false}
           hideSelectedOptions={false}
+          isSearchable={false}
         />
       </>
     );

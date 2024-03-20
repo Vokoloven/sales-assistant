@@ -201,15 +201,17 @@ export const UpworkFeed = () => {
       sorting: ColumnSort[];
       debouncedTableFilterValue: TSerachParameterDTO;
     }) => {
+      const dto = {
+        pageSize: pagination.pageSize,
+        pageNumber: pagination.pageIndex + 1,
+        sortBy: sorting[0]?.id as UpworkFeedSortBy,
+        sortDirection: sorting.length ? (sorting[0]?.desc ? SortDirection.DESC : SortDirection.ASC) : undefined,
+        searchParameters: debouncedTableFilterValue.length ? debouncedTableFilterValue : undefined,
+      };
+
       if (isLogged) {
         try {
-          await getFeeds({
-            pageSize: pagination.pageSize,
-            pageNumber: pagination.pageIndex + 1,
-            sortBy: sorting[0]?.id as UpworkFeedSortBy,
-            sortDirection: sorting.length ? (sorting[0]?.desc ? SortDirection.DESC : SortDirection.ASC) : undefined,
-            searchParameters: debouncedTableFilterValue.length ? debouncedTableFilterValue : undefined,
-          });
+          await getFeeds({...dto});
         } catch (error) {
           /* empty */
         }

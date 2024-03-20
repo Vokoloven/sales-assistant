@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {Column, Table, TableMeta} from "@tanstack/react-table";
+import {Column, Table} from "@tanstack/react-table";
 
 import type {IUpworkResponseListFeedsDto} from "../../../submodules/interfaces/dto/upwork-feed/iupwork-response-list-feeds.dto";
 import TableSelect from "../Selects/TableSelect/TableSelect";

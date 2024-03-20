@@ -50,6 +50,7 @@ export const selectStyles = (theme: ThemeMode) => {
       ...(theme === ThemeConfig.Light ? {border: `solid 1px ${Gray400}`} : {border: `solid 1px ${Gray400}`}),
       boxShadow: "none",
       ...(theme === ThemeConfig.Light ? {backgroundColor: White} : {backgroundColor: Black}),
+      borderRadius: "8px",
     }),
     menuList: (base) => ({
       ...base,
@@ -64,13 +65,16 @@ export const selectStyles = (theme: ThemeMode) => {
       ...base,
       padding: "0",
       margin: "0",
-      caretColor: "transparent",
+      // caretColor: "transparent",
     }),
     valueContainer: (base) => ({
       ...base,
       padding: "11px 12px",
       fontSize: "14px",
       lineHeight: "20px",
+    }),
+    multiValue: (base) => ({
+      ...base,
     }),
   };
 

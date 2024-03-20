@@ -1,5 +1,5 @@
 import {useState} from "react";
-import Select, {components} from "react-select";
+import Select, {components, DropdownIndicatorProps, IndicatorSeparatorProps} from "react-select";
 
 import Icons from "../../../../components/Icons/Icons";
 import {getTheme} from "../../../../hooks/useTheme";
@@ -39,23 +39,27 @@ const FooterSelect = ({
     setPagination((prevPagination) => ({...prevPagination, pageSize: option!.value}));
   };
 
+  const DropdownIndicator = (props: DropdownIndicatorProps<TOption, false>) => (
+    <components.DropdownIndicator {...props}>
+      <Icons.ChevronSmallDown />
+    </components.DropdownIndicator>
+  );
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const IndicatorSeparator = (props: IndicatorSeparatorProps<TOption, false>) => null;
+
   return (
     <Select
       components={{
-        IndicatorSeparator: null,
-        DropdownIndicator: (props) => {
-          return (
-            <components.DropdownIndicator {...props}>
-              <Icons.ChevronDown />
-            </components.DropdownIndicator>
-          );
-        },
+        IndicatorSeparator,
+        DropdownIndicator,
       }}
       defaultValue={option}
       options={options}
       onChange={handleChange}
       styles={selectStyles(getTheme())}
       menuPlacement="top"
+      isSearchable={false}
     />
   );
 };
