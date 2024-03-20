@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import {css} from "@emotion/css";
 import {useState} from "react";
 import Select, {
   components,
@@ -87,16 +88,21 @@ const ScoreSelect = ({options}: {options: IOptionInterface[]}) => {
 
   const MultiValue = (props: MultiValueProps<IOptionInterface, true>) => {
     const maxToShow = 1;
-    const overflow = props
-      .getValue()
-      .slice(maxToShow)
-      .map((x) => x.label);
 
-    return props.index < maxToShow ? (
-      <components.MultiValue {...props} />
-    ) : props.index === maxToShow ? (
-      <div>{`+${props.getValue().length - 1} items`}</div>
-    ) : null;
+    const multiValueStyle = props.getStyles("multiValue", props);
+    const multiValueLabel = props.getStyles("multiValueLabel", props);
+
+    if (props.index < maxToShow) {
+      return <components.MultiValue {...props} />;
+    } else if (props.index === maxToShow) {
+      return (
+        <div className={css(multiValueStyle)}>
+          <div className={css(multiValueLabel)}>{`+${props.getValue().length - 1}`}</div>
+        </div>
+      );
+    }
+
+    return null;
   };
 
   const DropdownIndicator = (props: DropdownIndicatorProps<IOptionInterface, true>) => (

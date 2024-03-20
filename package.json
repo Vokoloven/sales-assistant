@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@emotion/css": "^11.11.2",
     "@reduxjs/toolkit": "^2.2.1",
     "@tanstack/react-table": "^8.13.2",
     "@testing-library/jest-dom": "^5.17.0",
