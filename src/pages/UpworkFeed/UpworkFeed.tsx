@@ -314,38 +314,70 @@ export const UpworkFeed = () => {
                 </div>
               </div>
               <div className={styles.footerInnerButtons}>
-                <ButtonIcon
-                  icon={IconAppName.ChevronWithLineLeft}
-                  onClick={() => table.firstPage()}
-                  disabled={!table.getCanPreviousPage()}
-                  buttonIconStyle={ButtonIconStyle.FooterFeed}
-                />
-                <ButtonIcon
-                  icon={IconAppName.ChevronLeft}
-                  onClick={() => table.previousPage()}
-                  disabled={!table.getCanPreviousPage()}
-                  buttonIconStyle={ButtonIconStyle.FooterFeed}
-                />
-                {pages.map((page, index) => (
-                  <Button
-                    key={index}
-                    text={page}
-                    style={currentPage === page ? ButtonStyle.PaginationActive : ButtonStyle.Pagiantion}
-                    onClick={() => table.setPageIndex(page - 1)}
+                <div className={styles.footerInnerBothSides}>
+                  <ButtonIcon
+                    icon={IconAppName.ChevronWithLineLeft}
+                    onClick={() => table.firstPage()}
+                    disabled={!table.getCanPreviousPage()}
+                    buttonIconStyle={ButtonIconStyle.FooterFeed}
                   />
-                ))}
-                <ButtonIcon
-                  icon={IconAppName.ChevronRight}
-                  onClick={() => table.nextPage()}
-                  disabled={!table.getCanNextPage()}
-                  buttonIconStyle={ButtonIconStyle.FooterFeed}
-                />
-                <ButtonIcon
-                  icon={IconAppName.ChevronWithLineRight}
-                  onClick={() => table.lastPage()}
-                  disabled={!table.getCanNextPage()}
-                  buttonIconStyle={ButtonIconStyle.FooterFeed}
-                />
+                  <ButtonIcon
+                    icon={IconAppName.ChevronLeft}
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                    buttonIconStyle={ButtonIconStyle.FooterFeed}
+                  />
+                </div>
+                <div className={styles.footerInnerNumeratic}>
+                  {pages.map((page, index) => (
+                    <Button
+                      key={index}
+                      text={page}
+                      style={currentPage === page ? ButtonStyle.PaginationActive : ButtonStyle.Pagiantion}
+                      onClick={() => table.setPageIndex(page - 1)}
+                    />
+                  ))}
+                </div>
+                <div className={styles.footerInnerBothSides}>
+                  <ButtonIcon
+                    icon={IconAppName.ChevronRight}
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                    buttonIconStyle={ButtonIconStyle.FooterFeed}
+                  />
+                  <ButtonIcon
+                    icon={IconAppName.ChevronWithLineRight}
+                    onClick={() => table.lastPage()}
+                    disabled={!table.getCanNextPage()}
+                    buttonIconStyle={ButtonIconStyle.FooterFeed}
+                  />
+                </div>
+                <div className={styles.footerInnerBothSidesMobile}>
+                  <ButtonIcon
+                    icon={IconAppName.ChevronWithLineLeft}
+                    onClick={() => table.firstPage()}
+                    disabled={!table.getCanPreviousPage()}
+                    buttonIconStyle={ButtonIconStyle.FooterFeed}
+                  />
+                  <ButtonIcon
+                    icon={IconAppName.ChevronLeft}
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                    buttonIconStyle={ButtonIconStyle.FooterFeed}
+                  />
+                  <ButtonIcon
+                    icon={IconAppName.ChevronRight}
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                    buttonIconStyle={ButtonIconStyle.FooterFeed}
+                  />
+                  <ButtonIcon
+                    icon={IconAppName.ChevronWithLineRight}
+                    onClick={() => table.lastPage()}
+                    disabled={!table.getCanNextPage()}
+                    buttonIconStyle={ButtonIconStyle.FooterFeed}
+                  />
+                </div>
               </div>
             </div>
           </div>

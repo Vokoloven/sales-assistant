@@ -201,6 +201,10 @@
     justify-content: space-between;
     padding: 4px 2px;
 
+    @include mobile {
+      gap: 8px;
+    }
+
     @include tablet($tabletL) {
       flex-direction: column;
     }
@@ -213,6 +217,10 @@
     &Items {
       display: flex;
       align-items: center;
+
+      @include mobile {
+        gap: 8px;
+      }
 
       @include tablet($tabletL) {
         flex-wrap: wrap;
@@ -292,6 +300,29 @@
     &Buttons {
       display: flex;
       justify-content: center;
+
+      @include mobile {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    &BothSides {
+      display: flex;
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    &Numeratic {
+      display: flex;
+    }
+
+    &BothSidesMobile {
+      @include mobileMin {
+        display: none;
+      }
     }
   }
 }
