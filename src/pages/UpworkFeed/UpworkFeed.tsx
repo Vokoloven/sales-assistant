@@ -277,6 +277,15 @@ export const UpworkFeed = () => {
   if (data) {
     return (
       <>
+        <div className={styles.header}>
+          <h2 className={styles.headerTitle}>Upwork feed</h2>
+          <div>
+            <Button
+              text={"Refresh RSS"}
+              iconBefore={IconAppName.Refresh}
+            />
+          </div>
+        </div>
         <main className={styles.main}>
           <div className={styles.mainOuter}>
             <div className={styles.mainInner}>

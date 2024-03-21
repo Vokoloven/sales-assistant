@@ -17,6 +17,7 @@ export const IconInstanceName = {
   SortDesc: "SortDesc",
   DeleteRounded: "DeleteRounded",
   ChevronSmall: "ChevronSmall",
+  Refresh: "Refresh",
 } as const;
 
 export const IconAppName = {
@@ -42,4 +43,5 @@ export const IconAppName = {
   SortAsc: "SortAsc",
   ClearInput: "ClearInput",
   ChevronSmallDown: "ChevronSmallDown",
+  Refresh: "Refresh",
 } as const;

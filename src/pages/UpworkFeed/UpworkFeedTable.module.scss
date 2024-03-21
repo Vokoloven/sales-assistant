@@ -21,6 +21,16 @@
   }
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &Title {
+    flex: 1;
+  }
+}
+
 .main {
   overflow-y: auto;
   flex-grow: 1;
