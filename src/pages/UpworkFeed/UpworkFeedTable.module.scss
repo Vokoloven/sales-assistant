@@ -351,6 +351,12 @@ html[data-theme="dark"] {
     color: $White;
   }
 
+  .header {
+    &Title {
+      color: $White;
+    }
+  }
+
   .error {
     @include font($fclr: $White);
 
