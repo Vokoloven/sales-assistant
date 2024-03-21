@@ -22,12 +22,21 @@
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin: 0 -16px;
+
+  &Outer {
+    padding: 2px 8px;
+  }
+
+  &Inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 8px;
+  }
 
   &Title {
-    flex: 1;
+    margin: 0;
+    text-align: center;
   }
 }
 

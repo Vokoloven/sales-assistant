@@ -278,12 +278,16 @@ export const UpworkFeed = () => {
     return (
       <>
         <div className={styles.header}>
-          <h2 className={styles.headerTitle}>Upwork feed</h2>
-          <div>
-            <Button
-              text={"Refresh RSS"}
-              iconBefore={IconAppName.Refresh}
-            />
+          <div className={styles.headerOuter}>
+            <div className={styles.headerInner}>
+              <h2 className={styles.headerTitle}>Upwork feed</h2>
+              <div>
+                <Button
+                  text={"Refresh RSS"}
+                  iconBefore={IconAppName.Refresh}
+                />
+              </div>
+            </div>
           </div>
         </div>
         <main className={styles.main}>
