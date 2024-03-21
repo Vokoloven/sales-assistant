@@ -14,7 +14,6 @@ import {NotifyType} from "../../components/Notify/constants";
 import Notify from "../../components/Notify/Notify";
 import Spinner from "../../components/Spinner/Spinner";
 import {useAuth} from "../../hooks/useAuth";
-import {useDebounceValue} from "../../hooks/useDebounceValue";
 import {useRecoverUserQuery} from "../../redux/api/authApi";
 import {useGetFeedsMutation} from "../../redux/api/upworkFeedsApi";
 import {STATUS_CODE} from "../../redux/utils";
@@ -203,24 +202,22 @@ export const UpworkFeed = () => {
       return acc;
     }, []);
 
-  const debouncedTableFilterValue = useDebounceValue(tableFilterValue);
-
   const getFeedsRequest = useCallback(
     async ({
       pagination,
       sorting,
-      debouncedTableFilterValue,
+      tableFilterValue,
     }: {
       pagination: PaginationState;
       sorting: ColumnSort[];
-      debouncedTableFilterValue: TSerachParameterDTO;
+      tableFilterValue: TSerachParameterDTO;
     }) => {
       const dto = {
         pageSize: pagination.pageSize,
         pageNumber: pagination.pageIndex + 1,
         sortBy: sorting[0]?.id as UpworkFeedSortBy,
         sortDirection: sorting.length ? (sorting[0]?.desc ? SortDirection.DESC : SortDirection.ASC) : undefined,
-        searchParameters: debouncedTableFilterValue.length > 0 ? debouncedTableFilterValue : undefined,
+        searchParameters: tableFilterValue.length > 0 ? tableFilterValue : undefined,
       };
 
       if (isLogged) {
@@ -232,11 +229,11 @@ export const UpworkFeed = () => {
       }
     },
 
-    [isLogged, JSON.stringify(pagination), sorting, JSON.stringify(debouncedTableFilterValue)],
+    [isLogged, JSON.stringify(pagination), sorting, JSON.stringify(tableFilterValue)],
   );
 
   useEffect(() => {
-    getFeedsRequest({pagination, sorting, debouncedTableFilterValue});
+    getFeedsRequest({pagination, sorting, tableFilterValue});
   }, [getFeedsRequest]);
 
   const totalPages = table.getPageCount();
@@ -263,7 +260,7 @@ export const UpworkFeed = () => {
             Please try again later.&nbsp;
             <span
               onClick={() => {
-                getFeedsRequest({pagination, sorting, debouncedTableFilterValue});
+                getFeedsRequest({pagination, sorting, tableFilterValue});
               }}
               className={styles.errorReload}
             >
