@@ -283,9 +283,16 @@ export const UpworkFeed = () => {
                   text={"Refresh RSS"}
                   iconBefore={IconAppName.Refresh}
                   onClick={() => {
-                    setPagination({pageIndex: 0, pageSize: 10});
-                    setSorting([]);
-                    table.getAllColumns().map((column) => column.setFilterValue(undefined));
+                    if (
+                      pagination.pageIndex !== 0 ||
+                      pagination.pageSize !== 10 ||
+                      sorting.length > 0 ||
+                      tableFilterValue.length > 0
+                    ) {
+                      setPagination({pageIndex: 0, pageSize: 10});
+                      setSorting([]);
+                      table.getAllColumns().map((column) => column.setFilterValue(undefined));
+                    }
                   }}
                 />
               </div>
