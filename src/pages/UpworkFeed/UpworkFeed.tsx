@@ -285,6 +285,11 @@ export const UpworkFeed = () => {
                 <Button
                   text={"Refresh RSS"}
                   iconBefore={IconAppName.Refresh}
+                  onClick={() => {
+                    setPagination({pageIndex: 0, pageSize: 10});
+                    setSorting([]);
+                    table.getAllColumns().map((column) => column.setFilterValue(undefined));
+                  }}
                 />
               </div>
             </div>
