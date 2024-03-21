@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import {ColumnDef, useReactTable, getCoreRowModel, Column} from "@tanstack/react-table";
 import classnames from "classnames";
 import {format} from "date-fns";
@@ -179,10 +180,21 @@ export const UpworkFeed = () => {
   const tableFilterValue = table
     .getAllColumns()
     .reduce((acc: TSerachParameterDTO, column: Column<IUpworkFeedItemDTO, unknown>) => {
-      if (column.getFilterValue()) {
+      const columnValue = column.getFilterValue();
+
+      if (Array.isArray(columnValue)) {
+        return columnValue.length > 0
+          ? (acc = [
+              ...acc,
+              {searchBy: column.id as UpworkFeedSearchBy, searchQuery: column.getFilterValue() as string | string[]},
+            ])
+          : acc;
+      }
+
+      if (columnValue) {
         return (acc = [
           ...acc,
-          {searchBy: column.id as UpworkFeedSearchBy, searchQuery: column.getFilterValue() as string},
+          {searchBy: column.id as UpworkFeedSearchBy, searchQuery: column.getFilterValue() as string | string[]},
         ]);
       }
 
@@ -206,7 +218,7 @@ export const UpworkFeed = () => {
         pageNumber: pagination.pageIndex + 1,
         sortBy: sorting[0]?.id as UpworkFeedSortBy,
         sortDirection: sorting.length ? (sorting[0]?.desc ? SortDirection.DESC : SortDirection.ASC) : undefined,
-        searchParameters: debouncedTableFilterValue.length ? debouncedTableFilterValue : undefined,
+        searchParameters: debouncedTableFilterValue.length > 0 ? debouncedTableFilterValue : undefined,
       };
 
       if (isLogged) {
