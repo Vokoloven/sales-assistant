@@ -40,7 +40,7 @@ const handleSelectedValue = (
   return option[method](({value}) => value.toLocaleLowerCase() === optionAll.toLocaleLowerCase());
 };
 
-const ScoreSelect = ({
+const TableSelect = ({
   options,
   setFilterValue,
   filterValue,
@@ -198,4 +198,4 @@ const ScoreSelect = ({
   );
 };
 
-export default ScoreSelect;
+export default TableSelect;

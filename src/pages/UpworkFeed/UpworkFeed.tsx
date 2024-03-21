@@ -28,6 +28,7 @@ import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-fe
 
 import {AccessorKey} from "./constants";
 import DateFilter from "./Filters/DateFilter";
+import KeywordsFilter from "./Filters/KeywordsFilter";
 import ScoreFilter from "./Filters/ScoreFilter";
 import FooterSelect from "./Selects/FooterSelect/FooterSelect";
 import styles from "./UpworkFeedTable.module.scss";
@@ -98,6 +99,7 @@ export const UpworkFeed = () => {
         minSize: 200,
         width: 200,
         className: AccessorKey.Keywords,
+        meta: {filterComponent: KeywordsFilter},
       },
       {
         accessorKey: AccessorKey.Score,
