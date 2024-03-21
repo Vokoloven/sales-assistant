@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {css} from "@emotion/css";
-import {useState, useEffect} from "react";
+import {useVirtualizer} from "@tanstack/react-virtual";
+import {useState, useEffect, useRef, ElementRef} from "react";
 import Select, {
   components,
   OptionProps,
   MultiValueProps,
   DropdownIndicatorProps,
   ClearIndicatorProps,
+  MenuListProps,
 } from "react-select";
 
 import ButtonIcon from "../../../../components/ButtonIcon/ButtonIcon";
@@ -34,10 +36,10 @@ const handleSelectedValue = (
   method: KeyExtractor<typeof ArrayMethod> = ArrayMethod.Some,
 ): IOptionInterface[] | boolean => {
   if (method === ArrayMethod.Filter) {
-    return option[method](({value}) => value.toLocaleLowerCase() !== optionAll.toLocaleLowerCase());
+    return option[method](({value}) => value !== optionAll);
   }
 
-  return option[method](({value}) => value.toLocaleLowerCase() === optionAll.toLocaleLowerCase());
+  return option[method](({value}) => value === optionAll);
 };
 
 const TableSelect = ({
@@ -175,26 +177,77 @@ const TableSelect = ({
 
   const IndicatorSeparator = () => null;
 
+  const MenuList = ({children, ...rest}: MenuListProps<IOptionInterface, true>) => {
+    const parentRef = useRef<ElementRef<"div">>(null);
+
+    const rows = Array.isArray(children) ? children : [];
+
+    const rowVirtualizer = useVirtualizer({
+      count: rows.length,
+      getScrollElement: () => parentRef.current,
+      estimateSize: () => 50,
+    });
+
+    const virtualRows = rowVirtualizer.getVirtualItems();
+    const virtualRowsLenth = virtualRows.length;
+    const totalSize = rowVirtualizer.getTotalSize();
+    const paddingTop = virtualRowsLenth > 0 ? virtualRows?.[0].start || 0 : 0;
+    const paddingBottom = virtualRowsLenth > 0 ? totalSize - (virtualRows?.[virtualRowsLenth - 1]?.end || 0) : 0;
+
+    return (
+      <components.MenuList {...rest}>
+        <div
+          ref={parentRef}
+          style={{
+            width: "100%",
+            height: 250,
+            overflowY: "auto",
+            contain: "strict",
+          }}
+        >
+          <div style={{height: totalSize}}>
+            <div>
+              {paddingTop > 0 && <div style={{height: `${paddingTop}px`}}>test</div>}
+              {virtualRows.map((virtualRow) => (
+                <div
+                  key={virtualRow.key}
+                  data-index={virtualRow.index}
+                  ref={rowVirtualizer.measureElement}
+                >
+                  {rows[virtualRow.index]}
+                </div>
+              ))}
+              {paddingBottom > 0 && <div style={{height: `${[paddingBottom]}px`}}></div>}
+            </div>
+          </div>
+        </div>
+      </components.MenuList>
+    );
+  };
+
   return (
-    <Select
-      components={{
-        IndicatorSeparator,
-        ClearIndicator,
-        DropdownIndicator,
-        Option,
-        MultiValue,
-      }}
-      placeholder=""
-      onChange={handleChange}
-      closeMenuOnSelect={false}
-      options={combinedOptions}
-      styles={selectStyles(getTheme())}
-      isMulti
-      value={selectedOption}
-      escapeClearsValue={false}
-      hideSelectedOptions={false}
-      isSearchable={false}
-    />
+    <>
+      <Select
+        components={{
+          IndicatorSeparator,
+          ClearIndicator,
+          DropdownIndicator,
+          Option,
+          MultiValue,
+          MenuList,
+        }}
+        placeholder=""
+        onChange={handleChange}
+        closeMenuOnSelect={false}
+        options={combinedOptions}
+        styles={selectStyles(getTheme())}
+        isMulti
+        value={selectedOption}
+        escapeClearsValue={false}
+        hideSelectedOptions={false}
+        isSearchable={false}
+      />
+    </>
   );
 };
 

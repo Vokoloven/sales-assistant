@@ -12,7 +12,7 @@ const KeywordsFilter = <T,>({column, table}: {column: Column<T, unknown>; table:
 
   return (
     <TableSelect
-      options={keywordsOptions?.slice(0, 10)}
+      options={keywordsOptions}
       setFilterValue={setFilterValue}
       filterValue={(column.getFilterValue() as string[]) ?? []}
     />
