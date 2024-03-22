@@ -203,6 +203,8 @@ const TableSelect = ({
             height: 250,
             overflowY: "auto",
             contain: "strict",
+            scrollbarWidth: "thin",
+            WebkitOverflowScrolling: "touch",
           }}
         >
           <div style={{height: totalSize}}>
@@ -246,6 +248,7 @@ const TableSelect = ({
         escapeClearsValue={false}
         hideSelectedOptions={false}
         isSearchable={false}
+        captureMenuScroll={false}
       />
     </>
   );

@@ -53,6 +53,7 @@ export const selectStyles = (theme: ThemeMode) => {
     }),
     menuList: (base) => ({
       ...base,
+      maxHeight: "100%",
     }),
     singleValue: (base) => ({
       ...base,
