@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {css} from "@emotion/css";
 import {useVirtualizer} from "@tanstack/react-virtual";
 import {useState, useEffect, useRef, ElementRef} from "react";
@@ -208,19 +207,17 @@ const TableSelect = ({
           }}
         >
           <div style={{height: totalSize}}>
-            <div>
-              {paddingTop > 0 && <div style={{height: `${paddingTop}px`}}>test</div>}
-              {virtualRows.map((virtualRow) => (
-                <div
-                  key={virtualRow.key}
-                  data-index={virtualRow.index}
-                  ref={rowVirtualizer.measureElement}
-                >
-                  {rows[virtualRow.index]}
-                </div>
-              ))}
-              {paddingBottom > 0 && <div style={{height: `${[paddingBottom]}px`}}></div>}
-            </div>
+            {paddingTop > 0 && <div style={{height: `${paddingTop}px`}}></div>}
+            {virtualRows.map((virtualRow) => (
+              <div
+                key={virtualRow.key}
+                data-index={virtualRow.index}
+                ref={rowVirtualizer.measureElement}
+              >
+                {rows[virtualRow.index]}
+              </div>
+            ))}
+            {paddingBottom > 0 && <div style={{height: `${[paddingBottom]}px`}}></div>}
           </div>
         </div>
       </components.MenuList>
