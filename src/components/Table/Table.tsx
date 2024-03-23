@@ -1,25 +1,24 @@
-import {Table, flexRender} from "@tanstack/react-table";
+import {Table as TanStackTable, flexRender} from "@tanstack/react-table";
 import type {FilterMeta, Column, Row} from "@tanstack/react-table";
 import {useVirtualizer} from "@tanstack/react-virtual";
 import classnames from "classnames";
 import {useRef, ElementRef} from "react";
 
-import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
-import {ButtonIconStyle} from "../../components/ButtonIcon/constants";
-import {IconAppName} from "../../components/Icons/constants";
+import Filter from "../../pages/UpworkFeed/Filters/Filter";
 import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {KeyExtractor} from "../../utils/types/keyExtractor";
-
-import Filter from "./Filters/Filter";
+import ButtonIcon from "../ButtonIcon/ButtonIcon";
+import {ButtonIconStyle} from "../ButtonIcon/constants";
+import {IconAppName} from "../Icons/constants";
 
 import "react-datepicker/dist/react-datepicker.css";
 interface IProps<T> {
-  table: Table<T>;
+  table: TanStackTable<T>;
   styles: {[x: string]: string};
 }
 
 interface ICustomFilterMeta extends FilterMeta {
-  filterComponent: <T>(info: {column: Column<T, unknown>; table: Table<T>}) => JSX.Element;
+  filterComponent: <T>(info: {column: Column<T, unknown>; table: TanStackTable<T>}) => JSX.Element;
 }
 
 const handleSortIcon = (
@@ -39,7 +38,7 @@ const handleSortIcon = (
   }
 };
 
-const UpworkTable = <T,>({table, styles}: IProps<T>) => {
+const Table = <T,>({table, styles}: IProps<T>) => {
   const {rows} = table.getRowModel();
 
   const tableContainerRef = useRef<ElementRef<"div">>(null);
@@ -160,4 +159,4 @@ const UpworkTable = <T,>({table, styles}: IProps<T>) => {
   );
 };
 
-export default UpworkTable;
+export default Table;

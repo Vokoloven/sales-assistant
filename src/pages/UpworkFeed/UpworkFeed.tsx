@@ -13,6 +13,7 @@ import Icons from "../../components/Icons/Icons";
 import {NotifyType} from "../../components/Notify/constants";
 import Notify from "../../components/Notify/Notify";
 import Spinner from "../../components/Spinner/Spinner";
+import Table from "../../components/Table/Table";
 import {useAuth} from "../../hooks/useAuth";
 import {useRecoverUserQuery} from "../../redux/api/authApi";
 import {useGetFeedsMutation} from "../../redux/api/upworkFeedsApi";
@@ -30,8 +31,7 @@ import DateFilter from "./Filters/DateFilter";
 import KeywordsFilter from "./Filters/KeywordsFilter";
 import ScoreFilter from "./Filters/ScoreFilter";
 import FooterSelect from "./Selects/FooterSelect/FooterSelect";
-import styles from "./UpworkFeedTable.module.scss";
-import TableInstance from "./UpworkTable";
+import styles from "./UpworkFeed.module.scss";
 import {capitalize, scoreHandler} from "./utils";
 
 type ColumnSort = {
@@ -302,7 +302,7 @@ export const UpworkFeed = () => {
         <main className={styles.main}>
           <div className={styles.mainOuter}>
             <div className={styles.mainInner}>
-              <TableInstance<IUpworkFeedItemDTO>
+              <Table<IUpworkFeedItemDTO>
                 table={table}
                 styles={styles}
               />
