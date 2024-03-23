@@ -7,7 +7,7 @@ import {InputStyle} from "../../../components/Input/constants";
 import Input from "../../../components/Input/Input";
 import {UpworkFeedSortBy} from "../../../submodules/enums/upwork-feed/upwork-feed-sort-by.enum";
 
-const Filter = <T,>({column}: {column: Column<T, unknown>; table: Table<T>}) => {
+const Filter = <T, U>({column}: {column: Column<T, U>; table: Table<T>}) => {
   const [value, setValue] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(event.target.value);
