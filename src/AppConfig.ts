@@ -9,5 +9,6 @@ export const AppConfig = {
   Login: `${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.Login}`,
   RefreshToken: `${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.RefreshToken}`,
   RecoverUser: `${BaseRoutes.V1}/${AuthRoutes.BasePrefix}/${AuthRoutes.RecoverUser}`,
+  Feeds: `${BaseRoutes.V1}/${UpworkFeedsRoutesEnum.BasePrefix}`,
   GetFeed: `${BaseRoutes.V1}/${UpworkFeedsRoutesEnum.BasePrefix}/${UpworkFeedsRoutesEnum.GetFeeds}`,
 } as const;
