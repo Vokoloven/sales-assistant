@@ -3,6 +3,7 @@ import {ColumnDef, useReactTable, getCoreRowModel, Column} from "@tanstack/react
 import classnames from "classnames";
 import {format} from "date-fns";
 import {useCallback, useEffect, useMemo, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 import Button from "../../components/Button/Button";
 import {ButtonStyle} from "../../components/Button/constants";
@@ -47,6 +48,7 @@ export type PaginationState = {
 type TSerachParameterDTO = ISearchParameterDTO<UpworkFeedSearchBy>[];
 
 export const UpworkFeed = () => {
+  const navigate = useNavigate();
   const [getFeeds, {isLoading, isError, error, data: fetchedData}] = useGetFeedsMutation();
   const {isLogged} = useAuth();
   useRecoverUserQuery(undefined, {skip: !isError});
@@ -161,6 +163,12 @@ export const UpworkFeed = () => {
     [],
   );
 
+  const handleNavigate = (path: string): void => {
+    if (path) {
+      navigate(path);
+    }
+  };
+
   const table = useReactTable({
     data,
     columns,
@@ -175,7 +183,11 @@ export const UpworkFeed = () => {
       pagination,
       sorting,
     },
-    meta: {scoreOptions: fetchedData?.data?.scoreOptions, keywordsOptions: fetchedData?.data?.keywordsOptions},
+    meta: {
+      scoreOptions: fetchedData?.data?.scoreOptions,
+      keywordsOptions: fetchedData?.data?.keywordsOptions,
+      handleNavigate,
+    },
   });
 
   const tableFilterValue = table

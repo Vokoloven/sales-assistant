@@ -38,6 +38,19 @@ const handleSortIcon = (
   }
 };
 
+const handleClick = <T, U>(meta: T, obj: U): void | null => {
+  if (meta && typeof meta === "object") {
+    if ("handleNavigate" in meta) {
+      const {handleNavigate} = meta as {handleNavigate: (id: string) => void};
+      if (obj && typeof obj === "object" && "id" in obj) {
+        const {id} = obj as {id: string};
+        handleNavigate(id);
+      }
+    }
+  }
+  return null;
+};
+
 const Table = <T,>({table, styles}: IProps<T>) => {
   const {rows} = table.getRowModel();
 
@@ -123,6 +136,7 @@ const Table = <T,>({table, styles}: IProps<T>) => {
         >
           {virtualRows.map((virtualRow) => {
             const row = rows[virtualRow.index] as Row<T>;
+
             return (
               <tr
                 data-index={virtualRow.index}
@@ -134,6 +148,7 @@ const Table = <T,>({table, styles}: IProps<T>) => {
                   transform: `translateY(${virtualRow.start}px)`,
                   width: "100%",
                 }}
+                onClick={() => handleClick(table.options.meta, row.original)}
               >
                 {row.getVisibleCells().map((cell) => {
                   return (
