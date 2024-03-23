@@ -177,13 +177,13 @@ const TableSelect = ({
   const IndicatorSeparator = () => null;
 
   const MenuList = ({children, ...rest}: MenuListProps<IOptionInterface, true>) => {
-    const parentRef = useRef<ElementRef<"div">>(null);
+    const menuListContainerRef = useRef<ElementRef<"div">>(null);
 
     const rows = Array.isArray(children) ? children : [];
 
     const rowVirtualizer = useVirtualizer({
       count: rows.length,
-      getScrollElement: () => parentRef.current,
+      getScrollElement: () => menuListContainerRef.current,
       estimateSize: () => 50,
     });
 
@@ -196,7 +196,7 @@ const TableSelect = ({
     return (
       <components.MenuList {...rest}>
         <div
-          ref={parentRef}
+          ref={menuListContainerRef}
           style={{
             width: "100%",
             height: 250,
