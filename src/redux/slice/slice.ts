@@ -7,7 +7,7 @@ import {recoverUserApi} from "../api/authApi";
 import {localStorageService} from "../service/localStorageService";
 import {RootState} from "../store";
 
-type Nullable<T> = T | null;
+export type Nullable<T> = T | null;
 
 export const InitialState = {
   Access: "access",
@@ -30,14 +30,14 @@ const initialState: IInitialState = {
 const {setLocalStorage, removeLocalStorage} = localStorageService<typeof InitialState.Access, IAccessDTO>();
 
 const slice = createSlice({
-  name: "auth",
+  name: "root",
   initialState,
   reducers: {
     logOut: (state) => {
+      removeLocalStorage(InitialState.Access);
       state[InitialState.IsLogged] = false;
       state[InitialState.Access] = null;
       state[InitialState.Account] = null;
-      removeLocalStorage(InitialState.Access);
     },
   },
   extraReducers: (builder) => {
@@ -58,5 +58,5 @@ export const {logOut} = slice.actions;
 
 export default slice;
 
-export const selectIsLogged = (state: RootState) => state.auth.isLogged;
-export const selectUser = (state: RootState) => state.auth.account;
+export const selectIsLogged = (state: RootState) => state.root.isLogged;
+export const selectUser = (state: RootState) => state.root.account;

@@ -4,13 +4,17 @@ export const ButtonType = {
   Button: "button",
 } as const;
 
-export const ButtonColor = {
-  Primary: "primary",
-  Tooltip: "tooltip",
-} as const;
-
 export const ButtonSize = {
   FillWidth: "fullWidth",
   Small: "small",
   Medium: "medium",
+} as const;
+
+export const ButtonStyle = {
+  Tooltip: "Tooltip",
+  TooltipMenu: "TooltipMenu",
+  TooltipMenuCouple: "TooltipMenuCouple",
+  buttonTooltipMenuAlot: "TooltipMenuAlot",
+  Pagiantion: "Pagination",
+  PaginationActive: "PaginationActive",
 } as const;

@@ -6,10 +6,6 @@
 
   overflow-x: hidden;
 
-  &Button {
-    margin-right: 8px;
-  }
-
   &Box {
     margin: 0 -10px;
   }
@@ -27,7 +23,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    padding: 12px 16px;
+    padding: 0px 16px;
 
     z-index: 1;
     word-wrap: break-word;
@@ -45,7 +41,8 @@
     }
 
     &Box {
-      margin: -6px -8px;
+      position: relative;
+      margin: 0 -8px;
       &:first-child {
         flex-grow: 1;
       }
@@ -55,28 +52,36 @@
 
       &Outer {
         width: 100%;
-        padding: 3px 4px;
+        padding: 6px 4px;
       }
 
       &Inner {
-        padding: 3px 4px;
-
-        &UserButton {
-          padding: 12px;
-          border: none;
-          display: flex;
-          justify-content: space-between;
+        padding: 6px 4px;
+      }
+      &:last-child {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: -8px;
+          left: -8px;
+          height: 1px;
+          background-color: $Gray600;
         }
       }
     }
   }
 
   &Content {
+    overflow-x: hidden;
+
+    padding: 0 32px;
+
     @include mobile($mobileM) {
       margin-left: $mobileSS;
     }
 
-    padding: 8px 0;
+    // padding: 8px 0;
 
     display: flex;
     flex-direction: column;
@@ -96,16 +101,16 @@
   }
 
   &Header {
-    padding: 8px;
+    margin: 0 -32px;
+    flex-grow: 0;
+    flex-shrink: 0;
 
     &Box {
       display: flex;
       justify-content: space-between;
-      margin: -4px;
+      padding: 6px 4px;
 
       &Outer {
-        padding: 2px;
-
         &:nth-child(2) {
           display: none;
         }
@@ -134,16 +139,12 @@
           }
         }
       }
-
-      &Inner {
-        padding: 2px;
-
-        &IconButton {
-          padding: 12px;
-        }
-      }
     }
   }
+}
+
+.main {
+  overflow-y: auto;
 }
 
 html[data-theme="dark"] {

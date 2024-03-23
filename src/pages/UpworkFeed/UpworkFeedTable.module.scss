@@ -1,0 +1,469 @@
+@import "../../design/index.scss";
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+  @include font($fs: 24px);
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &Reload {
+    display: block;
+    cursor: pointer;
+    @include font($fclr: $BlueA200);
+  }
+}
+
+.header {
+  margin: 0 -16px;
+
+  &Outer {
+    padding: 2px 8px;
+  }
+
+  &Inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 8px;
+  }
+
+  &Title {
+    margin: 0;
+    text-align: center;
+  }
+}
+
+.main {
+  overflow-y: auto;
+  flex-grow: 1;
+  margin: 0 -16px;
+
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+
+  &Outer {
+    padding: 2px 8px;
+  }
+
+  &Inner {
+    display: block;
+    width: 100%;
+    padding: 2px 8px;
+  }
+}
+
+.table {
+  min-width: 100%;
+}
+
+.tr {
+  display: flex;
+  gap: 16px;
+}
+
+.thead {
+  background-color: $Gray100;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.th {
+  @include font($fs: 14px, $lh: 20px, $fclr: $GrayA800, $fw: 500);
+
+  &:nth-child(1) > .cell,
+  &:nth-child(2) > .cell,
+  &:nth-child(3) > .cell,
+  &:nth-child(4) > .cell {
+    margin-bottom: 20px;
+  }
+
+  & > .cell {
+    padding: 8px 4px;
+    display: flex;
+    justify-content: space-between;
+
+    @include ellipsis;
+    & + div {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.th.matchedBlogs,
+.th.matchedCases {
+  text-align: right;
+  & > .cell {
+    & > span {
+      display: flex;
+      flex-direction: column;
+      & > span {
+        @include ellipsis;
+      }
+    }
+  }
+}
+
+.tbody {
+  & > .tr {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: $Gray400;
+    }
+  }
+}
+
+.td {
+  & > .cell {
+    padding: 8px;
+  }
+}
+
+.td.title {
+  color: $BlueA200;
+
+  &:first-child {
+    & > .cell {
+      & span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
+}
+
+.td.published {
+  color: $GrayA700;
+  & > .cell {
+    @include ellipsis;
+  }
+}
+
+.td.keywords {
+  & > .cell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    & > span {
+      color: $ABlack;
+      border-radius: 8px;
+      padding: 2px 8px;
+      background-color: $Gray600;
+      @include ellipsis;
+    }
+  }
+}
+
+.td.score {
+  & > .cell {
+    display: flex;
+
+    & span {
+      color: $ABlack;
+      @include ellipsis;
+
+      padding: 2px 8px;
+      border-radius: 20px;
+
+      &.scorePink {
+        background-color: $ScorePink;
+      }
+      &.scoreOrange {
+        background-color: $ScoreOrange;
+      }
+      &.scoreYellow {
+        background-color: $ScoreYellow;
+      }
+      &.scoreGreen {
+        background-color: $ScoreGreen;
+      }
+      &.scoreBlue {
+        background-color: $ScoreBlue;
+      }
+    }
+  }
+}
+
+.td.review {
+  text-align: center;
+}
+
+.td.matchedBlogs,
+.td.matchedCases {
+  color: $GrayA700;
+  text-align: right;
+
+  & > .cell {
+    @include ellipsis;
+  }
+}
+
+.footer {
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin: 0 -16px;
+  &Outer {
+    padding: 4px 2px;
+  }
+  &Inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 2px;
+
+    @include mobile {
+      gap: 8px;
+    }
+
+    @include tablet($tabletL) {
+      flex-direction: column;
+    }
+
+    @include laptop($laptopSL) {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    &Items {
+      display: flex;
+      align-items: center;
+
+      @include mobile {
+        gap: 8px;
+      }
+
+      @include tablet($tabletL) {
+        flex-wrap: wrap;
+        flex-direction: column;
+      }
+
+      &Outer {
+        position: relative;
+        padding: 0 6px;
+
+        &:first-child {
+          ::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: $Gray400;
+
+            @include laptop($laptopSL) {
+              display: none;
+            }
+          }
+        }
+      }
+
+      &Inner {
+        padding: 0 6px;
+
+        &Shown {
+          display: flex;
+          gap: 8px;
+          padding: 12px 8px;
+
+          & > span {
+            display: block;
+
+            @include ellipsis;
+
+            &:first-child {
+              color: $GrayA600;
+              max-width: 107px;
+            }
+
+            @include font($lh: 24px, $fclr: $Black);
+
+            &:nth-child(2) {
+              font-weight: 700;
+            }
+            &:nth-child(3) {
+              max-width: 47px;
+            }
+            &:last-child {
+              font-weight: 700;
+            }
+          }
+        }
+        &PerPage {
+          padding: 0 8px;
+          display: flex;
+          gap: 8px;
+          align-items: center;
+
+          & > span {
+            max-width: 127px;
+            display: block;
+
+            @include ellipsis;
+
+            @include font($lh: 24px, $fclr: $GrayA600);
+          }
+        }
+      }
+    }
+
+    &Buttons {
+      display: flex;
+      justify-content: center;
+
+      @include mobile {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    &BothSides {
+      display: flex;
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    &Numeratic {
+      display: flex;
+    }
+
+    &BothSidesMobile {
+      @include mobileMin {
+        display: none;
+      }
+    }
+  }
+}
+
+html[data-theme="dark"] {
+  .spinner {
+    color: $White;
+  }
+
+  .header {
+    &Title {
+      color: $White;
+    }
+  }
+
+  .error {
+    @include font($fclr: $White);
+
+    &Reload {
+      @include font($fclr: $BlueA700);
+    }
+  }
+
+  .footer {
+    &Inner {
+      &Items {
+        &Outer {
+          &:first-child {
+            ::after {
+              background-color: $GrayA300;
+            }
+          }
+        }
+
+        &Inner {
+          &Shown {
+            & > span {
+              &:first-child {
+                color: $Gray700;
+              }
+              color: $White;
+            }
+          }
+          &PerPage {
+            & > span {
+              color: $Gray700;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .thead {
+    background-color: $Gray900;
+  }
+  .th {
+    color: $Gray700;
+  }
+
+  .tbody {
+    & > .tr {
+      &::after {
+        background-color: $GrayA300;
+      }
+    }
+  }
+  .td {
+    color: $Gray400;
+  }
+
+  .td.title {
+    color: $BlueA700;
+  }
+
+  .td.published {
+    color: $Gray700;
+  }
+
+  .td.keywords {
+    & > .cell {
+      & > span {
+        color: $White;
+        background-color: $Gray800;
+      }
+    }
+  }
+
+  .td.score {
+    & > .cell {
+      & > span {
+        color: $White;
+
+        &.scorePink {
+          background-color: $ScoreAPink;
+        }
+        &.scoreOrange {
+          background-color: $ScoreAOrange;
+        }
+        &.scoreYellow {
+          background-color: $ScoreAYellow;
+        }
+        &.scoreGreen {
+          background-color: $ScoreAGreen;
+        }
+        &.scoreBlue {
+          background-color: $ScoreABlue;
+        }
+      }
+    }
+  }
+
+  .td.matchedBlogs,
+  .td.matchedCases {
+    color: $Gray700;
+  }
+}

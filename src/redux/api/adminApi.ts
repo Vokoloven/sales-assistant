@@ -1,6 +1,6 @@
 import type {QueryReturnValue} from "@reduxjs/toolkit/dist/query/baseQueryTypes";
 import type {BaseQueryFn, FetchArgs, FetchBaseQueryMeta} from "@reduxjs/toolkit/query";
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {createApi} from "@reduxjs/toolkit/query/react";
 
 import {AppConfig} from "../../AppConfig";
 import type {IAccessDTO} from "../../submodules/interfaces/dto/auth/iaccess.interface";
@@ -8,17 +8,11 @@ import type {ILoginResponseDTO} from "../../submodules/interfaces/dto/auth/ilogi
 import type {IApiResponseGenericDTO} from "../../submodules/interfaces/dto/common/iapi-response.interface";
 import {IApiResponseDTO} from "../../submodules/interfaces/dto/common/iapi-response.interface";
 import {localStorageService} from "../service/localStorageService";
-import {InitialState} from "../slice/authSlice";
-import {logOut} from "../slice/authSlice";
-import {headers, HTTP_METHODS, STATUS_CODE} from "../utils";
+import {InitialState} from "../slice/slice";
+import {logOut} from "../slice/slice";
+import {HTTP_METHODS, STATUS_CODE} from "../utils";
 
-import {getPreparedHeaders, getBody, isAccessRestricted} from "./utils";
-
-const baseQuery = fetchBaseQuery({
-  baseUrl: AppConfig.BaseUrl,
-  headers,
-  prepareHeaders: (headers: Headers) => getPreparedHeaders(headers),
-});
+import {baseQuery, getBody, isAccessRestricted} from "./utils";
 
 const {setLocalStorage} = localStorageService<typeof InitialState.Access, IAccessDTO>();
 

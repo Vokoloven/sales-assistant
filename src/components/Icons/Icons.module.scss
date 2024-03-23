@@ -1,0 +1,50 @@
+@import "../../design/index.scss";
+
+.icon {
+  fill: $Gray800;
+}
+
+.chevronDown {
+  transform: rotate(90deg);
+}
+
+.chevronLeft {
+  transform: rotate(180deg);
+}
+
+.showPassword {
+  fill: $White;
+}
+
+.deleteRounded {
+  fill: $GrayA400;
+}
+
+.sort {
+  fill: $Gray200;
+  &Asc {
+    transform: rotate(180deg);
+  }
+}
+
+.like {
+  fill: $Like;
+}
+
+.dislike {
+  fill: $Dislike;
+}
+
+html[data-theme="dark"] {
+  .icon {
+    fill: $Gray600;
+  }
+
+  .chevronDown {
+    fill: $Gray600;
+  }
+
+  .sort {
+    fill: $GrayA400;
+  }
+}

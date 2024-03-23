@@ -6,7 +6,7 @@ export const makeIcon = (
 ) => {
   const IconWrapper = ({className, height, viewBox, width}: IIconProps) => {
     const props: IIconProps = {
-      className: className ?? defaultClassName,
+      className: className + " " + defaultClassName,
       height: height ?? defaultHeight,
       viewBox: viewBox ?? defaultViewBox,
       width: width ?? defaultWidth,

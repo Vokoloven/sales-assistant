@@ -1,9 +1,9 @@
 import classnames from "classnames";
-import {useRef, useEffect, useCallback} from "react";
+import {useRef, ElementRef, useEffect, useCallback} from "react";
 
 import {KeyExtractor} from "../../utils/types/keyExtractor";
 import Button from "../Button/Button";
-import {ButtonColor} from "../Button/constants";
+import {ButtonStyle} from "../Button/constants";
 
 import {Position} from "./constants";
 import styles from "./Tooltip.module.scss";
@@ -18,14 +18,15 @@ interface IProps {
 }
 
 const Tooltip = ({children, elements, open = false, setOpen, position = Position.Top}: IProps) => {
-  const tooltipRef = useRef<HTMLDivElement>(null);
-  const handleElementsLength = (elements: TElements) => {
+  const tooltipRef = useRef<ElementRef<"div">>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleElementsLength = (elements: TElements): KeyExtractor<typeof ButtonStyle> => {
     if (elements.length === 2) {
-      return "couple";
+      return "TooltipMenuCouple";
     } else if (elements.length > 2) {
-      return "alot";
+      return "TooltipMenuAlot";
     }
-    return "";
+    return "TooltipMenu";
   };
 
   const handleClickOutside = useCallback(
@@ -62,16 +63,16 @@ const Tooltip = ({children, elements, open = false, setOpen, position = Position
         className={styles.wrapper}
       >
         <div className={classnames(styles.tooltip, styles[`${position}`])}>
-          {elements.map((element) => (
-            <Button
-              key={element.id}
-              color={ButtonColor.Tooltip}
-              text={element.text}
-              iconBefore={element.iconBefore}
-              onClick={handleOnClick(element.onClick)}
-              classname={classnames(styles.tooltipButton, styles[`${handleElementsLength(elements)}`])}
-            />
-          ))}
+          {Boolean(elements.length) &&
+            elements.map((element) => (
+              <Button
+                key={element.id}
+                style={handleElementsLength(elements)}
+                text={element.text}
+                iconBefore={element.iconBefore}
+                onClick={handleOnClick(element.onClick)}
+              />
+            ))}
         </div>
         <div>{children}</div>
       </div>

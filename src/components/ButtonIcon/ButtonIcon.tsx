@@ -4,36 +4,41 @@ import {KeyExtractor} from "../../utils/types/keyExtractor";
 import {ButtonType} from "../Button/constants";
 import {IconAppName} from "../Icons/constants";
 import Icons from "../Icons/Icons";
-import type {TIconComponent, IIconProps} from "../Icons/types/icon";
+import type {TIconComponent} from "../Icons/types/icon";
 
+import {ButtonIconStyle} from "./constants";
+// eslint-disable-next-line import/order
 import styles from "./ButtonIcon.module.scss";
 
 interface IProps {
   icon: KeyExtractor<typeof IconAppName>;
   children?: React.ReactNode;
-  className?: string;
-  iconProps?: IIconProps;
   type?: KeyExtractor<typeof ButtonType>;
+  disabled?: boolean;
   ariaLabel?: string;
-  onClick?: () => void;
+  onClick?: (() => void) | ((event: unknown) => void);
+  buttonIconStyle?: KeyExtractor<typeof ButtonIconStyle>;
 }
 
-const ButtonIcon = ({className, icon, iconProps, onClick, ariaLabel, type = ButtonType.Button}: IProps) => {
+const ButtonIcon = ({
+  icon,
+  onClick,
+  ariaLabel,
+  disabled = false,
+  type = ButtonType.Button,
+  buttonIconStyle,
+}: IProps) => {
   const Icon: TIconComponent = Icons[icon];
-
-  const {className: classNameIcon, ...iconPropsRest} = iconProps ?? {};
 
   return (
     <button
       type={type}
       onClick={onClick}
-      className={classnames(styles.button, className)}
+      className={classnames(styles.button, styles[`button${buttonIconStyle}`])}
       aria-label={ariaLabel}
+      disabled={disabled}
     >
-      <Icon
-        {...iconPropsRest}
-        className={classnames(styles.buttonIcon, classNameIcon)}
-      />
+      <Icon />
     </button>
   );
 };

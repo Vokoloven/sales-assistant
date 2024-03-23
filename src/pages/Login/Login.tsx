@@ -1,9 +1,13 @@
+/* eslint-disable indent */
+import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import type {SubmitHandler} from "react-hook-form";
 
 import Button from "../../components/Button/Button";
 import {ButtonType} from "../../components/Button/constants";
+import {IconAppName} from "../../components/Icons/constants";
 import {InputType} from "../../components/Input/constants";
+import {InputStyle} from "../../components/Input/constants";
 import Input from "../../components/Input/Input";
 import {NotifyType} from "../../components/Notify/constants";
 import Notify from "../../components/Notify/Notify";
@@ -11,14 +15,31 @@ import Spinner from "../../components/Spinner/Spinner";
 import {useLoginMutation} from "../../redux/api/authApi";
 import {ILoginRequestDTO} from "../../submodules/interfaces/dto/auth/iadmin-login-request.interface";
 import type {IApiResponseDTO} from "../../submodules/interfaces/dto/common/iapi-response.interface";
+import {KeyExtractor} from "../../utils/types/keyExtractor";
 import {validator} from "../../utils/validators/validator";
 
 import styles from "./Login.module.scss";
 
 const {email, password} = validator();
 
+const Inputs = {
+  Email: {
+    id: "email",
+    name: "email",
+    label: "Login",
+    type: InputType.Email,
+  },
+  Password: {
+    id: "password",
+    name: "password",
+    label: "Password",
+    type: InputType.Password,
+  },
+} as const;
+
 const Login = () => {
   const [login, {error, isLoading}] = useLoginMutation();
+  const [passwordInputType, setPasswordInputType] = useState<KeyExtractor<typeof InputType>>(Inputs.Password.type);
   const {data} = (error as {data: IApiResponseDTO}) ?? {};
 
   const {
@@ -56,6 +77,20 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    const passwordInput = document.getElementById(Inputs.Password.id) as HTMLInputElement;
+
+    passwordInput.type = passwordInputType;
+  }, [passwordInputType]);
+
+  const togglePasswordVisibility = (): void => {
+    if (passwordInputType === InputType.Password) {
+      setPasswordInputType(InputType.Text);
+    } else {
+      setPasswordInputType(InputType.Password);
+    }
+  };
+
   return (
     <section className={styles.section}>
       <div className={styles.sectionAside}>
@@ -80,23 +115,36 @@ const Login = () => {
               onSubmit={handleSubmit(onSubmit)}
             >
               <Input<ILoginRequestDTO>
-                id="email"
-                name="email"
-                type={InputType.Email}
+                id={Inputs.Email.id}
+                name={Inputs.Email.name}
+                type={Inputs.Email.type}
                 register={register}
-                label="Login"
+                label={Inputs.Email.label}
                 errorMessage={errors.email?.message}
                 validate={email}
+                inputStyle={InputStyle.Login}
               />
               <Input<ILoginRequestDTO>
-                id="password"
-                name="password"
-                type={InputType.Password}
+                id={Inputs.Password.id}
+                name={Inputs.Password.name}
+                type={Inputs.Password.type}
                 register={register}
-                label="Password"
+                label={Inputs.Password.label}
                 errorMessage={errors.password?.message}
                 validate={password}
-                isDirtyPassword={isDirtyPassword}
+                inputStyle={InputStyle.Login}
+                buttonIcon={
+                  isDirtyPassword
+                    ? {
+                        icon:
+                          passwordInputType === Inputs.Password.type
+                            ? IconAppName.ShowPassword
+                            : IconAppName.HidePassword,
+                        onClick: togglePasswordVisibility,
+                        ariaLabel: "Toggle Password Visibility",
+                      }
+                    : undefined
+                }
               />
               <Button
                 text="Sign in"

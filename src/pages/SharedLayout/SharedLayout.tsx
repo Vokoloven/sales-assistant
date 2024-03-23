@@ -1,31 +1,36 @@
 import classnames from "classnames";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 
+import {AppRoutes} from "../../AppRoutes";
 import Button from "../../components/Button/Button";
-import {ButtonSize} from "../../components/Button/constants";
+import {ButtonStyle, ButtonSize} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
+import {ButtonIconStyle} from "../../components/ButtonIcon/constants";
 import {IconAppName} from "../../components/Icons/constants";
 import Tooltip from "../../components/Tooltip/Tooltip";
 import type {TElements} from "../../components/Tooltip/types/tooltip";
 import {ThemeConfig, getTheme} from "../../hooks/useTheme";
-import {selectUser} from "../../redux/slice/authSlice";
-import {logOut} from "../../redux/slice/authSlice";
+import {selectUser} from "../../redux/slice/slice";
+import {logOut} from "../../redux/slice/slice";
 
-import styles from "./Feed.module.scss";
+import styles from "./SharedLayout.module.scss";
 
-const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
+const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const theme = getTheme();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const elements: TElements = [
     {
       id: 1,
       iconBefore: IconAppName.LogOut,
-      text: "Test",
+      text: "Log Out",
       onClick: () => {
         dispatch(logOut());
       },
@@ -41,7 +46,6 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
               <Button
                 text="New Chat"
                 iconBefore={IconAppName.Cross}
-                iconBeforeClassname={styles.sectionButton}
               />
             </div>
           </div>
@@ -49,6 +53,12 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
         <div className={styles.sectionSidebarBox}>
           <div className={styles.sectionSidebarBoxOuter}>
             <div className={styles.sectionSidebarBoxInner}>
+              <Button
+                text={"Upwork feed"}
+                style={ButtonStyle.Tooltip}
+                iconBefore={IconAppName.Feed}
+                onClick={() => navigate(`/${AppRoutes.Feed}`)}
+              />
               <Tooltip
                 elements={elements}
                 open={open}
@@ -56,9 +66,9 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
               >
                 <Button
                   text={user?.email ?? ""}
+                  style={ButtonStyle.Tooltip}
                   iconBefore={IconAppName.User}
                   iconAfter={IconAppName.ChevronRight}
-                  classname={styles.sectionSidebarBoxInnerUserButton}
                   onClick={() => setOpen((prevOpen) => !prevOpen)}
                 />
               </Tooltip>
@@ -74,9 +84,8 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                 <ButtonIcon
                   onClick={() => setCollapsed((prevCollapsed) => !prevCollapsed)}
                   icon={collapsed ? IconAppName.Menu : IconAppName.CollapseMenu}
-                  iconProps={{className: styles.sectionIcon}}
-                  className={styles.sectionHeaderBoxInnerIconButton}
                   ariaLabel={"Menu toggler"}
+                  buttonIconStyle={ButtonIconStyle.Header}
                 />
               </div>
             </div>
@@ -85,7 +94,6 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                 <Button
                   size={ButtonSize.Small}
                   text="New Chat"
-                  iconBeforeClassname={styles.sectionButton}
                   iconBefore={IconAppName.Cross}
                 />
               </div>
@@ -95,19 +103,17 @@ const Feed = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                 <ButtonIcon
                   onClick={themeSwitcher}
                   icon={theme === ThemeConfig.Light ? IconAppName.Moon : IconAppName.Sun}
-                  iconProps={{className: styles.sectionIcon}}
-                  className={classnames(styles.sectionHeaderBoxInnerIconButton, {[`${styles.collapsed}`]: collapsed})}
                   ariaLabel={"Sidebar collapse"}
+                  buttonIconStyle={ButtonIconStyle.Header}
                 />
               </div>
             </div>
           </div>
         </header>
-        <main></main>
-        <footer></footer>
+        <Outlet />
       </div>
     </section>
   );
 };
 
-export default Feed;
+export default SharedLayout;

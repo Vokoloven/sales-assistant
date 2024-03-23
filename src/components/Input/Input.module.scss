@@ -2,19 +2,14 @@
 
 .input {
   width: 100%;
-  padding: 18px 12px;
+  padding: 18px 40px 18px 12px;
 
   border: 1px solid $Gray400;
   border-radius: 8px;
+  @include ellipsis;
 
   &:focus {
     outline: none;
-  }
-
-  &Wrapper {
-    &:not(:last-child) {
-      margin-bottom: 16px;
-    }
   }
 
   &Label {
@@ -34,7 +29,7 @@
     position: relative;
   }
 
-  &PasswordToggler {
+  &Button {
     position: absolute;
     display: block;
 
@@ -46,8 +41,101 @@
     right: 0;
 
     transform: translate(-50%, -50%);
+  }
+}
 
-    fill: $White;
+.inputLogin {
+  &Wrapper {
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+  }
+}
+
+.inputTable {
+  padding: 11px 34px 11px 11px;
+  @include font($fs: 14px, $lh: 20px);
+
+  &Button {
+    max-width: 20px;
+  }
+}
+
+.inputCheckbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+
+  padding: 0;
+  margin: 0;
+
+  position: relative;
+  border-radius: 4px;
+  border: 2px solid $Gray400;
+  background-color: $White;
+
+  min-width: 20px;
+  aspect-ratio: 1;
+
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:checked {
+    background-color: $BlueA200;
+    border-color: $BlueA200;
+
+    background-image: url("../../design/images/icons/check.svg");
+    background-size: contain;
+  }
+
+  &Wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &Label {
+    margin: 0;
+    flex: 1;
+  }
+}
+
+.inputCheckboxIndeterminate {
+  @extend .inputCheckbox;
+
+  border-color: $BlueA200;
+
+  &::before {
+    content: "";
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 10px;
+    height: 2px;
+    background-color: $BlueA200;
+    border-radius: 2px;
+  }
+
+  &Wrapper {
+    @extend .inputCheckboxWrapper;
+  }
+
+  &Label {
+    @extend .inputCheckboxLabel;
   }
 }
 
@@ -58,6 +146,12 @@ html[data-theme="dark"] {
 
     &Label {
       color: $Gray600;
+    }
+  }
+
+  .inputCheckbox {
+    &:checked {
+      background-color: $BlueA200;
     }
   }
 }

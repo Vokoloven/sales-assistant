@@ -15,12 +15,12 @@ const Notify = ({type, message}: IProps) => {
   if (message) {
     return (
       <div className={styles.box}>
-        <div className={classnames(styles.notify, styles[`${type}`])}>
+        <div className={classnames(styles.notify, styles[`notify-${type}`])}>
           <div className={classnames(styles.notifyWrapper)}>
             <div className={styles.notifyWrapperOuter}>
               <div className={styles.notifyWrapperInner}>
-                <span className={styles.notifyTitle}>
-                  <b>Error</b>
+                <span className={classnames(styles.notifyTitle, styles[`notifyTitle-${type}`])}>
+                  <span className={styles.notifyType}>{type}</span>
                 </span>
               </div>
             </div>

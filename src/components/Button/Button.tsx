@@ -3,25 +3,20 @@ import classnames from "classnames";
 import type {KeyExtractor} from "../../utils/types/keyExtractor";
 import {IconAppName} from "../Icons/constants";
 import Icons from "../Icons/Icons";
-import type {TIconComponent, IIconProps} from "../Icons/types/icon";
+import type {TIconComponent} from "../Icons/types/icon";
 
 import styles from "./Button.module.scss";
-import {ButtonType, ButtonColor, ButtonSize} from "./constants";
+import {ButtonType, ButtonStyle, ButtonSize} from "./constants";
 
 interface Button {
-  text: string;
+  text: string | number;
   onClick?: () => void;
   isDisabled?: boolean;
   type?: KeyExtractor<typeof ButtonType>;
-  color?: KeyExtractor<typeof ButtonColor>;
+  style?: KeyExtractor<typeof ButtonStyle>;
   size?: KeyExtractor<typeof ButtonSize>;
-  classname?: string;
   iconBefore?: KeyExtractor<typeof IconAppName>;
-  iconBeforeProps?: IIconProps;
-  iconBeforeClassname?: string;
   iconAfter?: KeyExtractor<typeof IconAppName>;
-  iconAfterProps?: IIconProps;
-  iconAfterClassname?: string;
   spinner?: JSX.Element;
   isLoading?: boolean;
 }
@@ -29,41 +24,35 @@ interface Button {
 const Button = ({
   text,
   onClick,
-  classname,
   iconAfter,
   iconBefore,
-  iconBeforeProps,
-  iconAfterProps,
-  iconAfterClassname,
-  iconBeforeClassname,
   spinner,
   isLoading = false,
   isDisabled = false,
-  color = ButtonColor.Primary,
+  style,
   type = ButtonType.Button,
   size = ButtonSize.FillWidth,
 }: Button) => {
   const IconBefore: TIconComponent | undefined = iconBefore && Icons[iconBefore];
   const IconAfter: TIconComponent | undefined = iconAfter && Icons[iconAfter];
 
-  const buttonClasses = classnames(styles.button, styles[`${color}`], styles[`${type}`], styles[`${size}`], classname);
-
   return (
     <button
       onClick={onClick}
-      className={buttonClasses}
+      className={classnames(styles.button, styles[`${size}`], styles[`button${style}`])}
       type={type}
       disabled={isDisabled || isLoading}
     >
       {IconBefore && (
-        <div className={classnames(styles.buttonIcon, iconBeforeClassname)}>
-          <IconBefore {...iconBeforeProps} />
+        <div className={classnames(styles.buttonIconWrapper, styles[`button${style}IconWrapper`])}>
+          <IconBefore />
         </div>
       )}
-      <span className={styles.buttonText}>{isLoading ? spinner : text}</span>
+      {isLoading ? spinner : null}
+      <span className={classnames(styles.buttonText, styles[`button${style}Text`])}>{text}</span>
       {IconAfter && (
-        <div className={classnames(styles.buttonIcon, iconAfterClassname)}>
-          <IconAfter {...iconAfterProps} />
+        <div className={classnames(styles.buttonIconWrapper, styles[`button${style}IconWrapper`])}>
+          <IconAfter />
         </div>
       )}
     </button>
