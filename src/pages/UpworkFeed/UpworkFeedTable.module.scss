@@ -46,6 +46,7 @@
   margin: 0 -16px;
 
   scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 
   &Outer {
     padding: 2px 8px;
@@ -54,7 +55,6 @@
   &Inner {
     display: block;
     width: 100%;
-    -webkit-overflow-scrolling: touch;
     padding: 2px 8px;
   }
 }
