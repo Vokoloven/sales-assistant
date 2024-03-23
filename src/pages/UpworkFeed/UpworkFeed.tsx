@@ -30,6 +30,7 @@ import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-fe
 import {AccessorKey} from "./constants";
 import DateFilter from "./Filters/DateFilter";
 import KeywordsFilter from "./Filters/KeywordsFilter";
+import ReactionFilter from "./Filters/ReactionFilter";
 import ScoreFilter from "./Filters/ScoreFilter";
 import FooterSelect from "./Selects/FooterSelect/FooterSelect";
 import styles from "./UpworkFeed.module.scss";
@@ -122,9 +123,9 @@ export const UpworkFeed = () => {
         cell: (info) => {
           const type = info.getValue() as IReviewDTO | null;
           if (type?.type === ReviewType.Like) {
-            return <Icons.Dislike />;
-          } else if (type?.type === ReviewType.Dislike) {
             return <Icons.Like />;
+          } else if (type?.type === ReviewType.Dislike) {
+            return <Icons.Dislike />;
           } else {
             return "";
           }
@@ -132,6 +133,8 @@ export const UpworkFeed = () => {
         minSize: 140,
         width: 140,
         className: AccessorKey.Review,
+        isSorted: true,
+        meta: {filterComponent: ReactionFilter},
       },
       {
         accessorKey: AccessorKey.MatchedCases,
