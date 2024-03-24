@@ -3,6 +3,7 @@ import {ColumnDef, useReactTable, getCoreRowModel, Column} from "@tanstack/react
 import classnames from "classnames";
 import {format} from "date-fns";
 import {useCallback, useEffect, useMemo, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 import Button from "../../components/Button/Button";
 import {ButtonStyle} from "../../components/Button/constants";
@@ -13,6 +14,7 @@ import Icons from "../../components/Icons/Icons";
 import {NotifyType} from "../../components/Notify/constants";
 import Notify from "../../components/Notify/Notify";
 import Spinner from "../../components/Spinner/Spinner";
+import Table from "../../components/Table/Table";
 import {useAuth} from "../../hooks/useAuth";
 import {useRecoverUserQuery} from "../../redux/api/authApi";
 import {useGetFeedsMutation} from "../../redux/api/upworkFeedsApi";
@@ -28,10 +30,10 @@ import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-fe
 import {AccessorKey} from "./constants";
 import DateFilter from "./Filters/DateFilter";
 import KeywordsFilter from "./Filters/KeywordsFilter";
+import ReactionFilter from "./Filters/ReactionFilter";
 import ScoreFilter from "./Filters/ScoreFilter";
 import FooterSelect from "./Selects/FooterSelect/FooterSelect";
-import styles from "./UpworkFeedTable.module.scss";
-import TableInstance from "./UpworkTable";
+import styles from "./UpworkFeed.module.scss";
 import {capitalize, scoreHandler} from "./utils";
 
 type ColumnSort = {
@@ -47,6 +49,7 @@ export type PaginationState = {
 type TSerachParameterDTO = ISearchParameterDTO<UpworkFeedSearchBy>[];
 
 export const UpworkFeed = () => {
+  const navigate = useNavigate();
   const [getFeeds, {isLoading, isError, error, data: fetchedData}] = useGetFeedsMutation();
   const {isLogged} = useAuth();
   useRecoverUserQuery(undefined, {skip: !isError});
@@ -55,6 +58,14 @@ export const UpworkFeed = () => {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const handleClickBodyRow = <T,>(obj: T): void => {
+    if (obj && typeof obj === "object" && "id" in obj) {
+      const {id} = obj as {id: string};
+      navigate(id);
+    }
+  };
+
   const data = useMemo<IUpworkFeedItemDTO[]>(() => {
     if (fetchedData) {
       return fetchedData.data.items.items;
@@ -70,7 +81,7 @@ export const UpworkFeed = () => {
         header: capitalize(AccessorKey.Title),
         cell: (info) => <span>{info.getValue() as string}</span>,
         minSize: 200,
-        width: 200,
+        size: 200,
         className: AccessorKey.Title,
         isSorted: true,
       },
@@ -80,7 +91,7 @@ export const UpworkFeed = () => {
         header: capitalize(AccessorKey.Published),
         cell: (info) => info.getValue(),
         minSize: 140,
-        width: 140,
+        size: 140,
         className: AccessorKey.Published,
         isSorted: true,
         meta: {
@@ -96,7 +107,7 @@ export const UpworkFeed = () => {
           return keywords?.length ? keywords.map((keyword, index) => <span key={index}>{keyword}</span>) : "";
         },
         minSize: 200,
-        width: 200,
+        size: 200,
         className: AccessorKey.Keywords,
         meta: {filterComponent: KeywordsFilter},
       },
@@ -109,7 +120,7 @@ export const UpworkFeed = () => {
           return <span className={classnames(styles[`${scoreHandler(score)}`])}>{score}</span>;
         },
         minSize: 140,
-        width: 140,
+        size: 140,
         className: AccessorKey.Score,
         isSorted: true,
         meta: {filterComponent: ScoreFilter},
@@ -120,16 +131,18 @@ export const UpworkFeed = () => {
         cell: (info) => {
           const type = info.getValue() as IReviewDTO | null;
           if (type?.type === ReviewType.Like) {
-            return <Icons.Dislike />;
-          } else if (type?.type === ReviewType.Dislike) {
             return <Icons.Like />;
+          } else if (type?.type === ReviewType.Dislike) {
+            return <Icons.Dislike />;
           } else {
             return "";
           }
         },
         minSize: 140,
-        width: 140,
+        size: 140,
         className: AccessorKey.Review,
+        isSorted: true,
+        meta: {filterComponent: ReactionFilter},
       },
       {
         accessorKey: AccessorKey.MatchedCases,
@@ -141,7 +154,7 @@ export const UpworkFeed = () => {
         ),
         cell: (info) => info.getValue(),
         minSize: 110,
-        width: 110,
+        size: 110,
         className: AccessorKey.MatchedCases,
       },
       {
@@ -154,7 +167,7 @@ export const UpworkFeed = () => {
         ),
         cell: (info) => info.getValue(),
         minSize: 110,
-        width: 110,
+        size: 110,
         className: AccessorKey.MatchedBlogs,
       },
     ],
@@ -175,7 +188,11 @@ export const UpworkFeed = () => {
       pagination,
       sorting,
     },
-    meta: {scoreOptions: fetchedData?.data?.scoreOptions, keywordsOptions: fetchedData?.data?.keywordsOptions},
+    meta: {
+      scoreOptions: fetchedData?.data?.scoreOptions,
+      keywordsOptions: fetchedData?.data?.keywordsOptions,
+      handleClickBodyRow,
+    },
   });
 
   const tableFilterValue = table
@@ -248,6 +265,7 @@ export const UpworkFeed = () => {
   }, [currentPage, totalPages]);
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
+
   if (error) {
     if ("status" in error && error.status === STATUS_CODE.UNAUTHORIZED) {
       return (
@@ -271,6 +289,7 @@ export const UpworkFeed = () => {
       );
     }
   }
+
   if (data) {
     return (
       <>
@@ -278,7 +297,7 @@ export const UpworkFeed = () => {
           <div className={styles.headerOuter}>
             <div className={styles.headerInner}>
               <h2 className={styles.headerTitle}>Upwork feed</h2>
-              <div>
+              <div className={styles.headerBox}>
                 <Button
                   text={"Refresh RSS"}
                   iconBefore={IconAppName.Refresh}
@@ -302,7 +321,7 @@ export const UpworkFeed = () => {
         <main className={styles.main}>
           <div className={styles.mainOuter}>
             <div className={styles.mainInner}>
-              <TableInstance<IUpworkFeedItemDTO>
+              <Table<IUpworkFeedItemDTO>
                 table={table}
                 styles={styles}
               />

@@ -13,6 +13,7 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const SharedLayout = lazy(() => import("./pages/SharedLayout/SharedLayout"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 const UpworkFeed = lazy(() => import("./pages/UpworkFeed/UpworkFeed"));
+const UpworkFeedDetail = lazy(() => import("./pages/UpworkFeedDetail/UpworkFeedDetail"));
 
 function App() {
   const {themeSwitcher} = useTheme();
@@ -49,6 +50,10 @@ function App() {
                 <Route
                   index
                   element={<UpworkFeed />}
+                />
+                <Route
+                  path={AppRoutes.FeedIndex}
+                  element={<UpworkFeedDetail />}
                 />
               </Route>
             </Route>

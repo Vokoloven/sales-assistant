@@ -6,7 +6,7 @@
   height: 100vh;
 
   &Aside {
-    @include mobile {
+    @include mobileMax {
       padding: 0 16px;
     }
 
@@ -18,14 +18,14 @@
     padding: 0 60px;
 
     &Box {
-      @include mobile {
+      @include mobileMax {
         margin: 0 -8px;
       }
 
       margin: 0 -30px;
 
       &Outer {
-        @include mobile {
+        @include mobileMax {
           padding: 10px 4px;
         }
 
@@ -33,7 +33,7 @@
       }
 
       &Inner {
-        @include mobile {
+        @include mobileMax {
           padding: 10px 4px;
         }
         padding: 10px 15px;
@@ -50,7 +50,7 @@
   }
 
   &Form {
-    @include mobile {
+    @include mobileMax {
       padding: 10px 4px;
     }
 

@@ -19,7 +19,7 @@ body {
   color: $Gray800;
   background-color: $White;
   -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: color-mix(in srgb, var(--black) 0, transparent);
+  -webkit-tap-highlight-color: color-mix(in srgb, $Black 0, transparent);
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -44,8 +44,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin: 0;
   font-weight: 500;
   line-height: 1.2;
 }
@@ -152,12 +151,12 @@ sup {
 }
 
 a {
-  color: var(--activeColor);
+  color: $BlueA300;
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--activeColor);
+  color: $BlueA300;
   text-decoration: underline;
 }
 
@@ -169,7 +168,7 @@ a:not([href]):hover {
 
 a {
   &:focus-visible {
-    outline: 1px solid var(--activeColor);
+    outline: 1px solid $BlueA300;
   }
 }
 
