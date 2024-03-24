@@ -45,27 +45,83 @@ const UpworkFeedDetail = () => {
             className={styles.navBox}
             onClick={() => navigate(-1)}
           >
-            Upwork feed <span className={styles.navArrow}>&#8250;</span>
+            <span>Upwork feed</span>
+            <span className={styles.navArrow}>&#8250;</span>
           </div>
         </nav>
-        <h2 className={styles.title}>{data?.title}</h2>
-        <div className={styles.container}>
-          <div className={styles.containerOuter}>
-            <div className={styles.containerInner}>
-              <div className={styles.project}>
-                <h3 className={styles.projectTitle}>Project info</h3>
-                <div className={styles.projectInfo}>
-                  <div className={classnames(styles.projectInfoScore, styles[`${scoreHandler(data?.score)}`])}>
-                    {data?.score}
+        <div className={styles.title}>
+          <h2 className={styles.titleText}>{data?.title}</h2>
+        </div>
+        <div className={styles.wrapper}>
+          <div className={styles.container}>
+            <div className={styles.containerOuter}>
+              <div className={styles.containerInner}>
+                <div className={styles.containerInnerBox}>
+                  <h3 className={styles.containerInnerBoxTitle}>Project info</h3>
+                  <div className={styles.project}>
+                    <div className={classnames(styles.projectScore, styles[`${scoreHandler(data?.score)}`])}>
+                      <span>{data?.score}</span>
+                    </div>
+                    <div className={styles.projectTitle}>{data?.title}</div>
+                    <div className={styles.projectDate}>{format(new Date(data?.published), "MM/dd/yyyy HH:mm")}</div>
                   </div>
-                  <div className={styles.projectInfoTitle}>{data?.title}</div>
-                  <div className={styles.projectInfoDate}>{format(new Date(data?.published), "MM/dd/yyyy HH:mm")}</div>
+                  <div className={styles.projectDescription}>
+                    <ReactMarkdown remarkPlugins={[gfm]}>{data?.description}</ReactMarkdown>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          {data?.keywords && (
+            <div className={styles.container}>
+              <div className={styles.containerOuter}>
+                <div className={styles.containerInner}>
+                  <div className={styles.containerInnerBox}>
+                    <h3 className={styles.containerInnerBoxTitle}>Keywords</h3>
+                    <div className={styles.keywords}>
+                      <div className={styles.keywordsItems}>
+                        {data.keywords.map((keyword, index) => (
+                          <span key={index}>{keyword}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {data?.matchedCasesData && (
+            <div className={styles.container}>
+              <div className={styles.containerOuter}>
+                <div className={styles.containerInner}>
+                  <div className={styles.containerInnerBox}>
+                    <h3 className={styles.containerInnerBoxTitle}>Matched cases</h3>
+                    <div className={styles.matchedCases}>
+                      {data.matchedCasesData.map((matchedCase, index) => (
+                        <div
+                          className={styles.matchedCasesBox}
+                          key={index}
+                        >
+                          <a
+                            href={matchedCase.link}
+                            className={styles.matchedCasesTitle}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                          >
+                            {matchedCase.title}
+                          </a>
+                          <div className={styles.matchedCasesDescription}>
+                            <ReactMarkdown remarkPlugins={[gfm]}>{matchedCase.content}</ReactMarkdown>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-        {/* <ReactMarkdown remarkPlugins={[gfm]}>{data?.description}</ReactMarkdown> */}
       </>
     );
   return null;

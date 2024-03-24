@@ -34,7 +34,7 @@
     align-items: center;
     padding: 2px 8px;
 
-    @include mobile {
+    @include mobileMax {
       flex-direction: column;
       justify-content: center;
       gap: 8px;
@@ -45,7 +45,7 @@
     margin: 0;
     text-align: center;
 
-    @include mobile {
+    @include mobileMax {
       max-width: $mobileML;
     }
 
@@ -250,15 +250,15 @@
     justify-content: space-between;
     padding: 4px 2px;
 
-    @include mobile {
+    @include mobileMax {
       gap: 8px;
     }
 
-    @include tablet($tabletL) {
+    @include tabletMax($tabletL) {
       flex-direction: column;
     }
 
-    @include laptop($laptopSL) {
+    @include laptopMax($laptopSL) {
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -267,11 +267,11 @@
       display: flex;
       align-items: center;
 
-      @include mobile {
+      @include mobileMax {
         gap: 8px;
       }
 
-      @include tablet($tabletL) {
+      @include tabletMax($tabletL) {
         flex-wrap: wrap;
         flex-direction: column;
       }
@@ -290,7 +290,7 @@
             width: 1px;
             background-color: $Gray400;
 
-            @include laptop($laptopSL) {
+            @include laptopMax($laptopSL) {
               display: none;
             }
           }
@@ -350,7 +350,7 @@
       display: flex;
       justify-content: center;
 
-      @include mobile {
+      @include mobileMax {
         flex-direction: column;
         gap: 8px;
       }
@@ -359,7 +359,7 @@
     &BothSides {
       display: flex;
 
-      @include mobile {
+      @include mobileMax {
         display: none;
       }
     }

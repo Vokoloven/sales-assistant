@@ -14,95 +14,165 @@
   padding: 4px 0;
 
   &Box {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+
     cursor: pointer;
+
+    & > span {
+      display: block;
+      @include ellipsis;
+    }
   }
 
   &Arrow {
     color: $GrayA400;
+    font-size: 20px;
   }
 }
 
 .title {
-  margin: 0;
   padding: 4px 0;
 
-  @include font($fs: 24px, $fw: 500, $lh: 32px);
+  &Text {
+    @include ellipsis;
+
+    @include font($fs: 24px, $fw: 500, $lh: 32px);
+  }
+}
+
+.wrapper {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 4px 0;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
 }
 
 .container {
+  max-width: 800px;
+  width: 100%;
+  border-radius: 16px;
+  background-color: $White;
+  padding: 8px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 
   &Outer {
-    padding: 2px 0;
-    max-width: 800px;
+    padding: 4px;
+    width: 100%;
   }
 
   &Inner {
-    padding: 2px 0;
+    padding: 4px;
+
+    &Box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+
+      &Title {
+        display: block;
+
+        @include ellipsis;
+
+        @include font($fs: 14px, $fw: 700, $lh: 20px, $fclr: $GrayA700);
+      }
+    }
   }
 }
 
 .project {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   gap: 8px;
+  align-items: center;
+  max-width: 100%;
 
-  &Title {
-    display: block;
+  &Score {
+    text-align: center;
 
-    @include ellipsis;
+    font-weight: 500;
 
-    @include font($fs: 14px, $fw: 700, $lh: 20px, $fclr: $GrayA700);
+    border-radius: 20px;
+    padding: 2px 8px;
+
+    & > span {
+      display: block;
+      @include ellipsis;
+    }
+
+    &.scorePink {
+      background-color: $ScorePink;
+    }
+    &.scoreOrange {
+      background-color: $ScoreOrange;
+    }
+    &.scoreYellow {
+      background-color: $ScoreYellow;
+    }
+    &.scoreGreen {
+      background-color: $ScoreGreen;
+    }
+    &.scoreBlue {
+      background-color: $ScoreBlue;
+    }
   }
 
-  &Info {
+  &Title {
+    flex: 1 1 auto;
+
+    @include ellipsis;
+    color: $BlueA200;
+  }
+
+  &Date {
+    flex-shrink: 0;
+
+    @include ellipsis;
+  }
+}
+
+.keywords {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+
+  &Items {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
-    align-items: center;
-    max-width: 100%;
 
-    &Score {
-      @include ellipsis;
-      flex: 1 0 auto;
-
-      font-weight: 500;
-
+    & > span {
+      color: $ABlack;
+      border-radius: 8px;
       padding: 2px 8px;
-      border-radius: 20px;
-
-      &.scorePink {
-        background-color: $ScorePink;
-      }
-      &.scoreOrange {
-        background-color: $ScoreOrange;
-      }
-      &.scoreYellow {
-        background-color: $ScoreYellow;
-      }
-      &.scoreGreen {
-        background-color: $ScoreGreen;
-      }
-      &.scoreBlue {
-        background-color: $ScoreBlue;
-      }
-    }
-
-    &Title {
+      background-color: $Gray600;
       @include ellipsis;
-      flex: 1 1 auto;
+    }
+  }
+}
 
+.matchedCases {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &Box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    border-bottom: 2px dashed $Gray400;
+  }
+
+  &Title {
+    text-decoration: underline;
+    &:hover {
       color: $BlueA200;
     }
-
-    &Date {
-      @include ellipsis;
-      flex: 1 0 auto;
-    }
+    @include font($lh: 24px, $fclr: $BlueA200);
   }
 }
 
@@ -111,33 +181,94 @@ html[data-theme="dark"] {
     color: $White;
   }
 
-  .project {
-    &Info {
-      &Score {
-        &.scorePink {
-          background-color: $ScoreAPink;
-        }
-        &.scoreOrange {
-          background-color: $ScoreAOrange;
-        }
-        &.scoreYellow {
-          background-color: $ScoreAYellow;
-        }
-        &.scoreGreen {
-          background-color: $ScoreAGreen;
-        }
-        &.scoreBlue {
-          background-color: $ScoreABlue;
+  .container {
+    background-color: $Black;
+
+    &Inner {
+      &Box {
+        &Title {
+          color: $Gray700;
         }
       }
     }
   }
 
+  .project {
+    &Score {
+      color: $White;
+
+      &.scorePink {
+        background-color: $ScoreAPink;
+      }
+      &.scoreOrange {
+        background-color: $ScoreAOrange;
+      }
+      &.scoreYellow {
+        background-color: $ScoreAYellow;
+      }
+      &.scoreGreen {
+        background-color: $ScoreAGreen;
+      }
+      &.scoreBlue {
+        background-color: $ScoreABlue;
+      }
+    }
+
+    &Title {
+      color: $BlueA600;
+    }
+
+    &Date {
+      color: $Gray700;
+    }
+
+    &Description {
+      color: $Gray700;
+    }
+  }
+
+  .keywords {
+    &Items {
+      & > span {
+        color: $White;
+        background-color: $Gray800;
+      }
+    }
+  }
+
+  .matchedCases {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &Box {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      border-bottom: 2px dashed $Gray400;
+    }
+
+    &Title {
+      text-decoration: underline;
+      &:hover {
+        color: $BlueA600;
+      }
+      @include font($lh: 24px, $fclr: $BlueA600);
+    }
+
+    &Description {
+      color: $Gray700;
+    }
+  }
+
   .nav {
-    color: $BlueA200;
+    color: $BlueA600;
   }
 
   .title {
-    color: $White;
+    &Text {
+      color: $White;
+    }
   }
 }
