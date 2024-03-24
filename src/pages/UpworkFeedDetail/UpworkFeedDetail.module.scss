@@ -9,18 +9,6 @@
   @include font($fs: 24px);
 }
 
-.error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &Reload {
-    display: block;
-    cursor: pointer;
-    @include font($fclr: $BlueA200);
-  }
-}
-
 .nav {
   color: $BlueA700;
   padding: 4px 0;
@@ -62,8 +50,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 8px;
 
   &Title {
+    display: block;
+
+    @include ellipsis;
+
     @include font($fs: 14px, $fw: 700, $lh: 20px, $fclr: $GrayA700);
   }
 
@@ -74,13 +67,40 @@
     max-width: 100%;
 
     &Score {
+      @include ellipsis;
+      flex: 1 0 auto;
+
+      font-weight: 500;
+
+      padding: 2px 8px;
+      border-radius: 20px;
+
+      &.scorePink {
+        background-color: $ScorePink;
+      }
+      &.scoreOrange {
+        background-color: $ScoreOrange;
+      }
+      &.scoreYellow {
+        background-color: $ScoreYellow;
+      }
+      &.scoreGreen {
+        background-color: $ScoreGreen;
+      }
+      &.scoreBlue {
+        background-color: $ScoreBlue;
+      }
     }
 
     &Title {
       @include ellipsis;
+      flex: 1 1 auto;
+
+      color: $BlueA200;
     }
 
     &Date {
+      @include ellipsis;
       flex: 1 0 auto;
     }
   }
@@ -91,11 +111,25 @@ html[data-theme="dark"] {
     color: $White;
   }
 
-  .error {
-    @include font($fclr: $White);
-
-    &Reload {
-      @include font($fclr: $BlueA700);
+  .project {
+    &Info {
+      &Score {
+        &.scorePink {
+          background-color: $ScoreAPink;
+        }
+        &.scoreOrange {
+          background-color: $ScoreAOrange;
+        }
+        &.scoreYellow {
+          background-color: $ScoreAYellow;
+        }
+        &.scoreGreen {
+          background-color: $ScoreAGreen;
+        }
+        &.scoreBlue {
+          background-color: $ScoreABlue;
+        }
+      }
     }
   }
 

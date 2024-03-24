@@ -31,12 +31,29 @@
   &Inner {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 2px 8px;
+
+    @include mobile {
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+    }
   }
 
   &Title {
     margin: 0;
     text-align: center;
+
+    @include mobile {
+      max-width: $mobileML;
+    }
+
+    @include ellipsis;
+  }
+
+  &Box {
+    max-width: 162px;
   }
 }
 
@@ -91,7 +108,10 @@
     display: flex;
     justify-content: space-between;
 
-    @include ellipsis;
+    & > span {
+      @include ellipsis;
+    }
+
     & + div {
       margin-bottom: 8px;
     }

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import classnames from "classnames";
 import {format} from "date-fns";
 import {useEffect, useMemo} from "react";
 import ReactMarkdown from "react-markdown";
@@ -6,17 +7,15 @@ import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import gfm from "remark-gfm";
 
-import {NotifyType} from "../../components/Notify/constants";
-import Notify from "../../components/Notify/Notify";
 import Spinner from "../../components/Spinner/Spinner";
 import {useGetFeedsDetailMutation} from "../../redux/api/upworkFeedsApi";
-import {STATUS_CODE} from "../../redux/utils";
+import {scoreHandler} from "../UpworkFeed/utils";
 
 import styles from "./UpworkFeedDetail.module.scss";
 
 const UpworkFeedDetail = () => {
   const {id} = useParams();
-  const [getFeedsDetail, {data: fetchedData, error, isLoading}] = useGetFeedsDetailMutation();
+  const [getFeedsDetail, {data: fetchedData, isLoading}] = useGetFeedsDetailMutation();
   const navigate = useNavigate();
 
   const data = useMemo(() => {
@@ -38,30 +37,6 @@ const UpworkFeedDetail = () => {
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
 
-  if (error) {
-    if ("status" in error && error.status === STATUS_CODE.UNAUTHORIZED) {
-      return (
-        <div>
-          <Notify
-            type={NotifyType.Error}
-            message={"Something went wrong"}
-          />
-          <div className={styles.error}>
-            Please try again later.&nbsp;
-            <span
-              onClick={() => {
-                getFeedsDetail({id});
-              }}
-              className={styles.errorReload}
-            >
-              Reload
-            </span>
-          </div>
-        </div>
-      );
-    }
-  }
-
   if (data)
     return (
       <>
@@ -80,7 +55,9 @@ const UpworkFeedDetail = () => {
               <div className={styles.project}>
                 <h3 className={styles.projectTitle}>Project info</h3>
                 <div className={styles.projectInfo}>
-                  <div className={styles.projectInfoScore}>{data?.score}</div>
+                  <div className={classnames(styles.projectInfoScore, styles[`${scoreHandler(data?.score)}`])}>
+                    {data?.score}
+                  </div>
                   <div className={styles.projectInfoTitle}>{data?.title}</div>
                   <div className={styles.projectInfoDate}>{format(new Date(data?.published), "MM/dd/yyyy HH:mm")}</div>
                 </div>

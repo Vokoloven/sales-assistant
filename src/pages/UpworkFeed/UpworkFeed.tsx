@@ -297,7 +297,7 @@ export const UpworkFeed = () => {
           <div className={styles.headerOuter}>
             <div className={styles.headerInner}>
               <h2 className={styles.headerTitle}>Upwork feed</h2>
-              <div>
+              <div className={styles.headerBox}>
                 <Button
                   text={"Refresh RSS"}
                   iconBefore={IconAppName.Refresh}
