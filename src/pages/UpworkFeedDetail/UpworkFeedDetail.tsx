@@ -28,6 +28,7 @@ const UpworkFeedDetail = () => {
   console.log(data);
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
+
   if (error) {
     if ("status" in error && error.status === STATUS_CODE.UNAUTHORIZED) {
       return (
@@ -62,7 +63,7 @@ const UpworkFeedDetail = () => {
           Upwork feed <span className={styles.navArrow}>&#8250;</span>
         </div>
       </nav>
-      <h2 className={styles.heading}>{data?.data?.title}</h2>
+      <h2 className={styles.title}>{data?.data?.title}</h2>
     </>
   );
 };

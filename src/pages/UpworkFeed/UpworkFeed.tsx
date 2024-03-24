@@ -265,6 +265,7 @@ export const UpworkFeed = () => {
   }, [currentPage, totalPages]);
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
+
   if (error) {
     if ("status" in error && error.status === STATUS_CODE.UNAUTHORIZED) {
       return (
@@ -288,6 +289,7 @@ export const UpworkFeed = () => {
       );
     }
   }
+
   if (data) {
     return (
       <>

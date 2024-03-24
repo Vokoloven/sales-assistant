@@ -9,6 +9,18 @@
   @include font($fs: 24px);
 }
 
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &Reload {
+    display: block;
+    cursor: pointer;
+    @include font($fclr: $BlueA200);
+  }
+}
+
 .nav {
   color: $BlueA700;
   padding: 4px 0;
@@ -23,7 +35,7 @@
   }
 }
 
-.heading {
+.title {
   margin: 0;
   padding: 4px 0;
 
@@ -35,11 +47,19 @@ html[data-theme="dark"] {
     color: $White;
   }
 
+  .error {
+    @include font($fclr: $White);
+
+    &Reload {
+      @include font($fclr: $BlueA700);
+    }
+  }
+
   .nav {
     color: $BlueA200;
   }
 
-  .heading {
+  .title {
     color: $White;
   }
 }
