@@ -9,8 +9,37 @@
   @include font($fs: 24px);
 }
 
+.nav {
+  color: $BlueA700;
+  padding: 4px 0;
+
+  &Box {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  &Arrow {
+    color: $GrayA400;
+  }
+}
+
+.heading {
+  margin: 0;
+  padding: 4px 0;
+
+  @include font($fs: 24px, $fw: 500, $lh: 32px);
+}
+
 html[data-theme="dark"] {
   .spinner {
+    color: $White;
+  }
+
+  .nav {
+    color: $BlueA200;
+  }
+
+  .heading {
     color: $White;
   }
 }

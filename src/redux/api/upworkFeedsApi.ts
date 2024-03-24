@@ -22,7 +22,7 @@ export const upworkFeedsApi = createApi({
         body: {...credentials},
       }),
     }),
-    getFeedsDetail: builder.query<IUpworkFeedDetailItemDTO, {id?: string}>({
+    getFeedsDetail: builder.mutation<{data: IUpworkFeedDetailItemDTO}, {id?: string}>({
       query: ({id}) => ({
         url: `${AppConfig.Feeds}/${id}`,
         method: HTTP_METHODS.GET,
@@ -31,4 +31,4 @@ export const upworkFeedsApi = createApi({
   }),
 });
 
-export const {useGetFeedsMutation, useGetFeedsDetailQuery} = upworkFeedsApi;
+export const {useGetFeedsMutation, useGetFeedsDetailMutation} = upworkFeedsApi;

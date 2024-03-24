@@ -19,7 +19,7 @@ body {
   color: $Gray800;
   background-color: $White;
   -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: color-mix(in srgb, var(--black) 0, transparent);
+  -webkit-tap-highlight-color: color-mix(in srgb, $Black 0, transparent);
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -152,12 +152,12 @@ sup {
 }
 
 a {
-  color: var(--activeColor);
+  color: $BlueA300;
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--activeColor);
+  color: $BlueA300;
   text-decoration: underline;
 }
 
@@ -169,7 +169,7 @@ a:not([href]):hover {
 
 a {
   &:focus-visible {
-    outline: 1px solid var(--activeColor);
+    outline: 1px solid $BlueA300;
   }
 }
 
