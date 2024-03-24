@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import classnames from "classnames";
 import {format} from "date-fns";
 import {useEffect, useMemo} from "react";
