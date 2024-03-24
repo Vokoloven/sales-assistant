@@ -42,6 +42,50 @@
   @include font($fs: 24px, $fw: 500, $lh: 32px);
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &Outer {
+    padding: 2px 0;
+    max-width: 800px;
+  }
+
+  &Inner {
+    padding: 2px 0;
+  }
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &Title {
+    @include font($fs: 14px, $fw: 700, $lh: 20px, $fclr: $GrayA700);
+  }
+
+  &Info {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    max-width: 100%;
+
+    &Score {
+    }
+
+    &Title {
+      @include ellipsis;
+    }
+
+    &Date {
+      flex: 1 0 auto;
+    }
+  }
+}
+
 html[data-theme="dark"] {
   .spinner {
     color: $White;

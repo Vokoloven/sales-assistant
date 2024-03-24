@@ -81,7 +81,7 @@ export const UpworkFeed = () => {
         header: capitalize(AccessorKey.Title),
         cell: (info) => <span>{info.getValue() as string}</span>,
         minSize: 200,
-        width: 200,
+        size: 200,
         className: AccessorKey.Title,
         isSorted: true,
       },
@@ -91,7 +91,7 @@ export const UpworkFeed = () => {
         header: capitalize(AccessorKey.Published),
         cell: (info) => info.getValue(),
         minSize: 140,
-        width: 140,
+        size: 140,
         className: AccessorKey.Published,
         isSorted: true,
         meta: {
@@ -107,7 +107,7 @@ export const UpworkFeed = () => {
           return keywords?.length ? keywords.map((keyword, index) => <span key={index}>{keyword}</span>) : "";
         },
         minSize: 200,
-        width: 200,
+        size: 200,
         className: AccessorKey.Keywords,
         meta: {filterComponent: KeywordsFilter},
       },
@@ -120,7 +120,7 @@ export const UpworkFeed = () => {
           return <span className={classnames(styles[`${scoreHandler(score)}`])}>{score}</span>;
         },
         minSize: 140,
-        width: 140,
+        size: 140,
         className: AccessorKey.Score,
         isSorted: true,
         meta: {filterComponent: ScoreFilter},
@@ -139,7 +139,7 @@ export const UpworkFeed = () => {
           }
         },
         minSize: 140,
-        width: 140,
+        size: 140,
         className: AccessorKey.Review,
         isSorted: true,
         meta: {filterComponent: ReactionFilter},
@@ -154,7 +154,7 @@ export const UpworkFeed = () => {
         ),
         cell: (info) => info.getValue(),
         minSize: 110,
-        width: 110,
+        size: 110,
         className: AccessorKey.MatchedCases,
       },
       {
@@ -167,7 +167,7 @@ export const UpworkFeed = () => {
         ),
         cell: (info) => info.getValue(),
         minSize: 110,
-        width: 110,
+        size: 110,
         className: AccessorKey.MatchedBlogs,
       },
     ],
