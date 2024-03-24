@@ -7,15 +7,18 @@ import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import gfm from "remark-gfm";
 
+import {NotifyType} from "../../components/Notify/constants";
+import Notify from "../../components/Notify/Notify";
 import Spinner from "../../components/Spinner/Spinner";
 import {useGetFeedsDetailMutation} from "../../redux/api/upworkFeedsApi";
+import {STATUS_CODE} from "../../redux/utils";
 import {scoreHandler} from "../UpworkFeed/utils";
 
 import styles from "./UpworkFeedDetail.module.scss";
 
 const UpworkFeedDetail = () => {
   const {id} = useParams();
-  const [getFeedsDetail, {data: fetchedData, isLoading}] = useGetFeedsDetailMutation();
+  const [getFeedsDetail, {data: fetchedData, error, isLoading}] = useGetFeedsDetailMutation();
   const navigate = useNavigate();
 
   const data = useMemo(() => {
@@ -36,6 +39,30 @@ const UpworkFeedDetail = () => {
   }, [id]);
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
+
+  if (error) {
+    if ("status" in error && error.status === STATUS_CODE.UNAUTHORIZED) {
+      return (
+        <div>
+          <Notify
+            type={NotifyType.Error}
+            message={"Something went wrong"}
+          />
+          <div className={styles.error}>
+            Please try again later.&nbsp;
+            <span
+              onClick={() => {
+                getFeedsDetail({id});
+              }}
+              className={styles.errorReload}
+            >
+              Reload
+            </span>
+          </div>
+        </div>
+      );
+    }
+  }
 
   if (data)
     return (
