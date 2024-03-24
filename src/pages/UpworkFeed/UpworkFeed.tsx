@@ -58,6 +58,14 @@ export const UpworkFeed = () => {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const handleClickBodyRow = <T,>(obj: T): void => {
+    if (obj && typeof obj === "object" && "id" in obj) {
+      const {id} = obj as {id: string};
+      navigate(id);
+    }
+  };
+
   const data = useMemo<IUpworkFeedItemDTO[]>(() => {
     if (fetchedData) {
       return fetchedData.data.items.items;
@@ -166,12 +174,6 @@ export const UpworkFeed = () => {
     [],
   );
 
-  const handleNavigate = (path: string): void => {
-    if (path) {
-      navigate(path);
-    }
-  };
-
   const table = useReactTable({
     data,
     columns,
@@ -189,7 +191,7 @@ export const UpworkFeed = () => {
     meta: {
       scoreOptions: fetchedData?.data?.scoreOptions,
       keywordsOptions: fetchedData?.data?.keywordsOptions,
-      handleNavigate,
+      handleClickBodyRow,
     },
   });
 

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import {Table as TanStackTable, flexRender} from "@tanstack/react-table";
 import type {FilterMeta, Column, Row} from "@tanstack/react-table";
 import {useVirtualizer} from "@tanstack/react-virtual";
@@ -21,6 +22,8 @@ interface ICustomFilterMeta extends FilterMeta {
   filterComponent: <T>(info: {column: Column<T, unknown>; table: TanStackTable<T>}) => JSX.Element;
 }
 
+type THandleClickDecorator = <T>(...args: T[]) => void;
+
 const handleSortIcon = (
   getIsSorted: () => false | Lowercase<KeyExtractor<typeof SortDirection>>,
 ): KeyExtractor<typeof IconAppName> => {
@@ -38,18 +41,11 @@ const handleSortIcon = (
   }
 };
 
-const handleClick = <T, U>(meta: T, obj: U): void | null => {
-  if (meta && typeof meta === "object") {
-    if ("handleNavigate" in meta) {
-      const {handleNavigate} = meta as {handleNavigate: (id: string) => void};
-      if (obj && typeof obj === "object" && "id" in obj) {
-        const {id} = obj as {id: string};
-        handleNavigate(id);
-      }
-    }
-  }
-  return null;
-};
+const handleClickDecorator =
+  <T,>(fn: THandleClickDecorator) =>
+  (...args: T[]) => {
+    return fn(...args);
+  };
 
 const Table = <T,>({table, styles}: IProps<T>) => {
   const {rows} = table.getRowModel();
@@ -136,6 +132,7 @@ const Table = <T,>({table, styles}: IProps<T>) => {
         >
           {virtualRows.map((virtualRow) => {
             const row = rows[virtualRow.index] as Row<T>;
+            const tableMeta = table.options?.meta;
 
             return (
               <tr
@@ -148,7 +145,11 @@ const Table = <T,>({table, styles}: IProps<T>) => {
                   transform: `translateY(${virtualRow.start}px)`,
                   width: "100%",
                 }}
-                onClick={() => handleClick(table.options.meta, row.original)}
+                onClick={() => {
+                  if (tableMeta && "handleClickBodyRow" in tableMeta) {
+                    handleClickDecorator(tableMeta.handleClickBodyRow as THandleClickDecorator)(row.original);
+                  }
+                }}
               >
                 {row.getVisibleCells().map((cell) => {
                   return (
