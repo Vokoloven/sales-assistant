@@ -18,7 +18,6 @@ import Table from "../../components/Table/Table";
 import {useAuth} from "../../hooks/useAuth";
 import {useRecoverUserQuery} from "../../redux/api/authApi";
 import {useGetFeedsMutation} from "../../redux/api/upworkFeedsApi";
-import {STATUS_CODE} from "../../redux/utils";
 import {SortDirection} from "../../submodules/enums/common/sort-direction.enum";
 import {ReviewType} from "../../submodules/enums/upwork-feed/review-type.enum";
 import type {UpworkFeedSearchBy} from "../../submodules/enums/upwork-feed/upwork-feed-search-by.enum";
@@ -26,6 +25,8 @@ import {UpworkFeedSortBy} from "../../submodules/enums/upwork-feed/upwork-feed-s
 import type {ISearchParameterDTO} from "../../submodules/interfaces/dto/common/isearch-parameter.interface";
 import type {IReviewDTO} from "../../submodules/interfaces/dto/upwork-feed/ireview.dto";
 import type {IUpworkFeedItemDTO} from "../../submodules/interfaces/dto/upwork-feed/iupwork-feed-item.dto";
+import {handleScoreColor} from "../utils/handleScoreColor";
+import {isErrorUnauthorized} from "../utils/isErrorUnauthorized";
 
 import {AccessorKey} from "./constants";
 import DateFilter from "./Filters/DateFilter";
@@ -34,7 +35,7 @@ import ReactionFilter from "./Filters/ReactionFilter";
 import ScoreFilter from "./Filters/ScoreFilter";
 import FooterSelect from "./Selects/FooterSelect/FooterSelect";
 import styles from "./UpworkFeed.module.scss";
-import {capitalize, scoreHandler} from "./utils";
+import {capitalize} from "./utils";
 
 type ColumnSort = {
   id: string;
@@ -50,9 +51,9 @@ type TSerachParameterDTO = ISearchParameterDTO<UpworkFeedSearchBy>[];
 
 export const UpworkFeed = () => {
   const navigate = useNavigate();
-  const [getFeeds, {isLoading, isError, error, data: fetchedData}] = useGetFeedsMutation();
+  const [getFeeds, {isLoading, error, data: fetchedData}] = useGetFeedsMutation();
+  useRecoverUserQuery(undefined, {skip: !isErrorUnauthorized(error)});
   const {isLogged} = useAuth();
-  useRecoverUserQuery(undefined, {skip: !isError});
   const [sorting, setSorting] = useState<ColumnSort[]>([]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
@@ -117,7 +118,7 @@ export const UpworkFeed = () => {
         cell: (info) => {
           const score = info.getValue() as number;
 
-          return <span className={classnames(styles[`${scoreHandler(score)}`])}>{score}</span>;
+          return <span className={classnames(styles[`${handleScoreColor(score)}`])}>{score}</span>;
         },
         minSize: 140,
         size: 140,
@@ -266,28 +267,26 @@ export const UpworkFeed = () => {
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
 
-  if (error) {
-    if ("status" in error && error.status === STATUS_CODE.UNAUTHORIZED) {
-      return (
-        <div>
-          <Notify
-            type={NotifyType.Error}
-            message={"Something went wrong"}
-          />
-          <div className={styles.error}>
-            Please try again later.&nbsp;
-            <span
-              onClick={() => {
-                getFeedsRequest({pagination, sorting, tableFilterValue});
-              }}
-              className={styles.errorReload}
-            >
-              Reload
-            </span>
-          </div>
+  if (isErrorUnauthorized(error)) {
+    return (
+      <div>
+        <Notify
+          type={NotifyType.Error}
+          message={"Something went wrong"}
+        />
+        <div className={styles.error}>
+          Please try again later.&nbsp;
+          <span
+            onClick={() => {
+              getFeedsRequest({pagination, sorting, tableFilterValue});
+            }}
+            className={styles.errorReload}
+          >
+            Reload
+          </span>
         </div>
-      );
-    }
+      </div>
+    );
   }
 
   if (data) {
