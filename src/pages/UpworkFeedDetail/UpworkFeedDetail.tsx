@@ -9,15 +9,17 @@ import gfm from "remark-gfm";
 import {NotifyType} from "../../components/Notify/constants";
 import Notify from "../../components/Notify/Notify";
 import Spinner from "../../components/Spinner/Spinner";
+import {useRecoverUserQuery} from "../../redux/api/authApi";
 import {useGetFeedsDetailMutation} from "../../redux/api/upworkFeedsApi";
-import {STATUS_CODE} from "../../redux/utils";
-import {scoreHandler} from "../UpworkFeed/utils";
+import {handleScoreColor} from "../utils/handleScoreColor";
+import {isErrorUnauthorized} from "../utils/isErrorUnauthorized";
 
 import styles from "./UpworkFeedDetail.module.scss";
 
 const UpworkFeedDetail = () => {
   const {id} = useParams();
   const [getFeedsDetail, {data: fetchedData, error, isLoading}] = useGetFeedsDetailMutation();
+  useRecoverUserQuery(undefined, {skip: !isErrorUnauthorized(error)});
   const navigate = useNavigate();
 
   const data = useMemo(() => {
@@ -39,28 +41,26 @@ const UpworkFeedDetail = () => {
 
   if (isLoading) return <div className={styles.spinner}>Loading...{<Spinner />}</div>;
 
-  if (error) {
-    if ("status" in error && error.status === STATUS_CODE.UNAUTHORIZED) {
-      return (
-        <div>
-          <Notify
-            type={NotifyType.Error}
-            message={"Something went wrong"}
-          />
-          <div className={styles.error}>
-            Please try again later.&nbsp;
-            <span
-              onClick={() => {
-                getFeedsDetail({id});
-              }}
-              className={styles.errorReload}
-            >
-              Reload
-            </span>
-          </div>
+  if (isErrorUnauthorized(error)) {
+    return (
+      <div>
+        <Notify
+          type={NotifyType.Error}
+          message={"Something went wrong"}
+        />
+        <div className={styles.error}>
+          Please try again later.&nbsp;
+          <span
+            onClick={() => {
+              getFeedsDetail({id});
+            }}
+            className={styles.errorReload}
+          >
+            Reload
+          </span>
         </div>
-      );
-    }
+      </div>
+    );
   }
 
   if (data)
@@ -85,7 +85,7 @@ const UpworkFeedDetail = () => {
                 <div className={styles.containerInnerBox}>
                   <h3 className={styles.containerInnerBoxTitle}>Project info</h3>
                   <div className={styles.project}>
-                    <div className={classnames(styles.projectScore, styles[`${scoreHandler(data?.score)}`])}>
+                    <div className={classnames(styles.projectScore, styles[`${handleScoreColor(data?.score)}`])}>
                       <span>{data?.score}</span>
                     </div>
                     <div className={styles.projectTitle}>{data?.title}</div>
