@@ -6,8 +6,8 @@ This project is Sales Assistant, designed to improve the sales process.
 
 To install and run the project on your machine, follow these steps:
 
-1. Clone the repository:
-   ```git clone https://github.com/Vokoloven/sales-assistant```
+1. Clone the repository:/
+   `git clone https://github.com/Vokoloven/sales-assistant`
 2. Navigate to the project directory:
    `cd sales-assistant`
 3. Install dependencies:
