@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {useRef} from "react";
 
 import Button from "../../Button/Button";
+import {ButtonStyle} from "../../Button/constants";
 import ButtonIcon from "../../ButtonIcon/ButtonIcon";
 import {ButtonIconStyle} from "../../ButtonIcon/constants";
 import {IconAppName} from "../../Icons/constants";
@@ -18,6 +20,21 @@ interface IProps {
 }
 
 const CreateChat = ({handleOpen, value, onChange, handleSubmit}: IProps) => {
+  const isFirstRender = useRef(true);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (!value) {
+      setErrorMessage("This input is required");
+    } else {
+      setErrorMessage("");
+    }
+  }, [value]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -36,18 +53,21 @@ const CreateChat = ({handleOpen, value, onChange, handleSubmit}: IProps) => {
         label={"Chat history name"}
         value={value}
         onChange={onChange}
+        errorMessage={errorMessage}
       />
       <div className={styles.buttons}>
-        <div>
+        <div className={styles.buttonsBox}>
           <Button
             text={"No, Keep it"}
             onClick={handleOpen}
           />
         </div>
-        <div>
+        <div className={styles.buttonsBox}>
           <Button
             text={"Yes, Create it"}
             onClick={handleSubmit}
+            style={ButtonStyle.Modal}
+            isDisabled={!value}
           />
         </div>
       </div>

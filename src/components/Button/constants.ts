@@ -17,4 +17,5 @@ export const ButtonStyle = {
   buttonTooltipMenuAlot: "TooltipMenuAlot",
   Pagiantion: "Pagination",
   PaginationActive: "PaginationActive",
+  Modal: "Modal",
 } as const;

@@ -21,7 +21,10 @@
   display: flex;
   justify-content: flex-end;
   gap: 16px;
-  align-self: flex-end;
+
+  & > &Box {
+    min-width: 0;
+  }
 }
 
 html[data-theme="dark"] {

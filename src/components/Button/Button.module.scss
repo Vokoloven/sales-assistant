@@ -149,6 +149,25 @@
   }
 }
 
+.buttonModal {
+  background-color: $BlueA200;
+  color: $White;
+  border: none;
+  padding: 12px;
+
+  &:disabled {
+    @include font($lh: 24px, $fclr: $White);
+    background-color: $BlueA300;
+  }
+
+  &:not(:disabled):hover {
+    background-color: $BlueA700;
+  }
+  &:not(:disabled):focus {
+    background-color: $BlueA700;
+  }
+}
+
 html[data-theme="dark"] {
   .button {
     @include darkColors($clr: $White);
@@ -223,6 +242,25 @@ html[data-theme="dark"] {
       &:not(:disabled):focus {
         outline: none;
       }
+    }
+  }
+
+  .buttonModal {
+    background-color: $BlueA700;
+    color: $Black;
+    border: none;
+    padding: 12px;
+
+    &:disabled {
+      @include font($lh: 24px, $fclr: $White);
+      background-color: $BlueA300;
+    }
+
+    &:not(:disabled):hover {
+      background-color: $BlueA600;
+    }
+    &:not(:disabled):focus {
+      background-color: $BlueA700;
     }
   }
 }
