@@ -8,13 +8,13 @@ To install and run the project on your machine, follow these steps:
 
 1. Clone the repository:\
    `git clone https://github.com/Vokoloven/sales-assistant`
-2. Navigate to the project directory:
+2. Navigate to the project directory:\
    `cd sales-assistant`
-3. Install dependencies:
+3. Install dependencies:\
    `npm install`
-4. Update Git submodules:
+4. Update Git submodules:\
    `git submodule update --init --recursive`
-5. Start the project:
+5. Start the project:\
    `npm start`
 6. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
