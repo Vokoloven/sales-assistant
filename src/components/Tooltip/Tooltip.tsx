@@ -67,7 +67,7 @@ const Tooltip = ({children, elements, open = false, setOpen, position = Position
             elements.map((element) => (
               <Button
                 key={element.id}
-                style={handleElementsLength(elements)}
+                buttonStyle={handleElementsLength(elements)}
                 text={element.text}
                 iconBefore={element.iconBefore}
                 onClick={handleOnClick(element.onClick)}

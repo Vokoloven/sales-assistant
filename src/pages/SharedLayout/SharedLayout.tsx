@@ -79,7 +79,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
               <div className={styles.sectionSidebarBoxInner}>
                 <Button
                   text={"Upwork feed"}
-                  style={ButtonStyle.Tooltip}
+                  buttonStyle={ButtonStyle.Tooltip}
                   iconBefore={IconAppName.Feed}
                   onClick={() => navigate(`/${AppRoutes.Feed}`)}
                 />
@@ -90,7 +90,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                 >
                   <Button
                     text={user?.email ?? ""}
-                    style={ButtonStyle.Tooltip}
+                    buttonStyle={ButtonStyle.Tooltip}
                     iconBefore={IconAppName.User}
                     iconAfter={IconAppName.ChevronRight}
                     onClick={() => setOpen((prevOpen) => !prevOpen)}

@@ -375,7 +375,7 @@ export const UpworkFeed = () => {
                     <Button
                       key={index}
                       text={page}
-                      style={currentPage === page ? ButtonStyle.PaginationActive : ButtonStyle.Pagiantion}
+                      buttonStyle={currentPage === page ? ButtonStyle.PaginationActive : ButtonStyle.Pagiantion}
                       onClick={() => table.setPageIndex(page - 1)}
                     />
                   ))}

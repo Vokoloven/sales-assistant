@@ -66,7 +66,7 @@ const CreateChat = ({handleOpen, value, onChange, handleSubmit}: IProps) => {
           <Button
             text={"Yes, Create it"}
             onClick={handleSubmit}
-            style={ButtonStyle.Modal}
+            buttonStyle={ButtonStyle.Modal}
             isDisabled={!value}
           />
         </div>
