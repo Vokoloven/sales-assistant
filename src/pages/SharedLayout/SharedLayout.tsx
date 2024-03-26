@@ -39,6 +39,10 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
     setOpenModal((prevOpen) => !prevOpen);
   };
 
+  const handleOpen = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
   const handleSubmit = () => {
     console.log(modalValue);
   };
@@ -93,7 +97,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                     buttonStyle={ButtonStyle.Tooltip}
                     iconBefore={IconAppName.User}
                     iconAfter={IconAppName.ChevronRight}
-                    onClick={() => setOpen((prevOpen) => !prevOpen)}
+                    onClick={handleOpen}
                   />
                 </Tooltip>
               </div>
@@ -119,6 +123,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                     size={ButtonSize.Small}
                     text="New Chat"
                     iconBefore={IconAppName.Cross}
+                    onClick={handleOpenModal}
                   />
                 </div>
               </div>
