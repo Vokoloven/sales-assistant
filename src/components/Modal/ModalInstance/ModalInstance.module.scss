@@ -1,0 +1,33 @@
+@import "../../../design/index.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  &Text {
+    @include ellipsis;
+
+    font-size: 24px;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  align-self: flex-end;
+}
+
+html[data-theme="dark"] {
+  .header {
+    &Text {
+      color: $Gray700;
+    }
+  }
+}
