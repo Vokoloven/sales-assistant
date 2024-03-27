@@ -1,4 +1,4 @@
-import {ReactNode, useRef, useEffect, useCallback} from "react";
+import {ReactNode, useRef, useEffect, useCallback, ElementRef} from "react";
 import {createPortal} from "react-dom";
 
 import {ModalProps} from "../components/Modal/Modal";
@@ -25,7 +25,7 @@ export const useModal = ({
   onModalOpen,
   isCloseModalOnClick = false,
 }: UseModalProps): UseModalResp => {
-  const ref = useRef<HTMLDialogElement | null>(null);
+  const ref = useRef<ElementRef<"dialog">>(null);
 
   const closeModal = () => {
     onModalClose && onModalClose();
