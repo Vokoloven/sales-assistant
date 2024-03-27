@@ -13,7 +13,8 @@ To install and run the project on your machine, follow these steps:
 3. Install dependencies:\
    `npm install`
 4. Update Git submodules:
-   > [!IMPORTANT] > `git submodule update --init --recursive`
+   > [!IMPORTANT]\
+   > `git submodule update --init --recursive`
 5. Start the project:\
    `npm start`
 6. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
