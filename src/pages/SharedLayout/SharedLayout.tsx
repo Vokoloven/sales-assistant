@@ -10,45 +10,47 @@ import {ButtonStyle, ButtonSize} from "../../components/Button/constants";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import {ButtonIconStyle} from "../../components/ButtonIcon/constants";
 import {IconAppName} from "../../components/Icons/constants";
-import Modal from "../../components/Modal/Modal";
 import CreateChat from "../../components/Modal/ModalInstance/CreateChat";
 import Tooltip from "../../components/Tooltip/Tooltip";
 import type {TElements} from "../../components/Tooltip/types/tooltip";
+import {useModal} from "../../hooks/useModal";
 import {ThemeConfig, getTheme} from "../../hooks/useTheme";
 import {selectUser} from "../../redux/slice/slice";
 import {logOut} from "../../redux/slice/slice";
 
 import styles from "./SharedLayout.module.scss";
 
-const modalCreateChat = document.getElementById("modal-create-chat") as HTMLDivElement;
+const portalDivElement = document.getElementById("modal-create-chat") as HTMLElement;
 
 const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
   const theme = getTheme();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const [collapsed, setCollapsed] = useState(true);
-  const [open, setOpen] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-  const [modalValue, setModalValue] = useState("");
+  const [openTooltip, setOpenTooltip] = useState(false);
+  const [createChat, setCreateChat] = useState<{name: string}>({name: ""});
   const navigate = useNavigate();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setModalValue(event.target.value);
-  };
-  const handleOpenModal = () => {
-    setOpenModal((prevOpen) => !prevOpen);
-  };
+  const handleChangeCreateChat = (e: React.ChangeEvent<HTMLInputElement>) => setCreateChat({name: e.target.value});
 
-  const handleOpen = () => {
-    setOpen((prevOpen) => !prevOpen);
+  const {modal, openModal, closeModal} = useModal({
+    children: (
+      <CreateChat
+        handleClose={() => closeModal()}
+        handleSubmit={() => console.log(createChat)}
+        onChange={handleChangeCreateChat}
+        value={createChat.name}
+      />
+    ),
+    isRenderInPortal: {domNode: portalDivElement},
+  });
+
+  const handleOpenTooltip = () => {
+    setOpenTooltip((prevOpen) => !prevOpen);
   };
 
   const handleCollapse = () => {
     setCollapsed((prevCollapsed) => !prevCollapsed);
-  };
-
-  const handleSubmit = () => {
-    console.log(modalValue);
   };
 
   const elements: TElements = [
@@ -72,7 +74,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                 <Button
                   text="New Chat"
                   iconBefore={IconAppName.Cross}
-                  onClick={handleOpenModal}
+                  onClick={() => openModal()}
                 />
               </div>
             </div>
@@ -93,15 +95,15 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                 />
                 <Tooltip
                   elements={elements}
-                  open={open}
-                  setOpen={setOpen}
+                  open={openTooltip}
+                  setOpen={setOpenTooltip}
                 >
                   <Button
                     text={user?.email ?? ""}
                     buttonStyle={ButtonStyle.Tooltip}
                     iconBefore={IconAppName.User}
                     iconAfter={IconAppName.ChevronRight}
-                    onClick={handleOpen}
+                    onClick={handleOpenTooltip}
                   />
                 </Tooltip>
               </div>
@@ -127,7 +129,6 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
                     size={ButtonSize.Small}
                     text="New Chat"
                     iconBefore={IconAppName.Cross}
-                    onClick={handleOpenModal}
                   />
                 </div>
               </div>
@@ -146,19 +147,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
           <Outlet />
         </div>
       </section>
-      <Modal
-        component={
-          <CreateChat
-            onChange={handleChange}
-            handleOpen={handleOpenModal}
-            value={modalValue}
-            handleSubmit={handleSubmit}
-          />
-        }
-        portal={{domeNode: modalCreateChat}}
-        isOpen={openModal}
-        handleClose={handleOpenModal}
-      />
+      {modal}
     </>
   );
 };

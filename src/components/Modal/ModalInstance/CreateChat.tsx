@@ -13,13 +13,13 @@ import Input from "../../Input/Input";
 import styles from "./ModalInstance.module.scss";
 
 interface IProps {
-  handleOpen: () => void;
+  handleClose: () => void;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: () => void;
 }
 
-const CreateChat = ({handleOpen, value, onChange, handleSubmit}: IProps) => {
+const CreateChat = ({handleClose, value, onChange, handleSubmit}: IProps) => {
   const isFirstRender = useRef(true);
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
@@ -42,7 +42,7 @@ const CreateChat = ({handleOpen, value, onChange, handleSubmit}: IProps) => {
         <ButtonIcon
           icon={IconAppName.Close}
           buttonIconStyle={ButtonIconStyle.Input}
-          onClick={handleOpen}
+          onClick={handleClose}
           ariaLabel={"Close"}
         />
       </div>
@@ -60,7 +60,7 @@ const CreateChat = ({handleOpen, value, onChange, handleSubmit}: IProps) => {
         <div className={styles.buttonsBox}>
           <Button
             text={"No, Keep it"}
-            onClick={handleOpen}
+            onClick={handleClose}
           />
         </div>
         <div className={styles.buttonsBox}>
