@@ -36,7 +36,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
     setModalValue(event.target.value);
   };
   const handleOpenModal = () => {
-    setOpenModal((prevOpen) => !prevOpen);
+    setOpenModal((prevOpenModal) => !prevOpenModal);
   };
 
   const handleOpen = () => {
@@ -45,6 +45,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
 
   const handleSubmit = () => {
     console.log(modalValue);
+    handleOpenModal();
   };
 
   const elements: TElements = [
