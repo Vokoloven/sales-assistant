@@ -43,6 +43,7 @@ const CreateChat = ({handleOpen, value, onChange, handleSubmit}: IProps) => {
           icon={IconAppName.Close}
           buttonIconStyle={ButtonIconStyle.Input}
           onClick={handleOpen}
+          ariaLabel={"Close"}
         />
       </div>
       <Input

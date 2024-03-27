@@ -43,6 +43,10 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
     setOpen((prevOpen) => !prevOpen);
   };
 
+  const handleCollapse = () => {
+    setCollapsed((prevCollapsed) => !prevCollapsed);
+  };
+
   const handleSubmit = () => {
     console.log(modalValue);
   };
@@ -110,7 +114,7 @@ const SharedLayout = ({themeSwitcher}: {themeSwitcher: () => void}) => {
               <div className={classnames(styles.sectionHeaderBoxOuter, {[`${styles.collapsed}`]: collapsed})}>
                 <div className={styles.sectionHeaderBoxInner}>
                   <ButtonIcon
-                    onClick={() => setCollapsed((prevCollapsed) => !prevCollapsed)}
+                    onClick={handleCollapse}
                     icon={collapsed ? IconAppName.Menu : IconAppName.CollapseMenu}
                     ariaLabel={"Menu toggler"}
                     buttonIconStyle={ButtonIconStyle.Header}
