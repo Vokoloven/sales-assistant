@@ -362,12 +362,14 @@ export const UpworkFeed = () => {
                     onClick={() => table.firstPage()}
                     disabled={!table.getCanPreviousPage()}
                     buttonIconStyle={ButtonIconStyle.FooterFeed}
+                    ariaLabel={"First Page"}
                   />
                   <ButtonIcon
                     icon={IconAppName.ChevronLeft}
                     onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
                     buttonIconStyle={ButtonIconStyle.FooterFeed}
+                    ariaLabel={"Previous Page"}
                   />
                 </div>
                 <div className={styles.footerInnerNumeratic}>
@@ -386,12 +388,14 @@ export const UpworkFeed = () => {
                     onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
                     buttonIconStyle={ButtonIconStyle.FooterFeed}
+                    ariaLabel={"Next Page"}
                   />
                   <ButtonIcon
                     icon={IconAppName.ChevronWithLineRight}
                     onClick={() => table.lastPage()}
                     disabled={!table.getCanNextPage()}
                     buttonIconStyle={ButtonIconStyle.FooterFeed}
+                    ariaLabel={"Last Page"}
                   />
                 </div>
                 <div className={styles.footerInnerBothSidesMobile}>
@@ -400,24 +404,28 @@ export const UpworkFeed = () => {
                     onClick={() => table.firstPage()}
                     disabled={!table.getCanPreviousPage()}
                     buttonIconStyle={ButtonIconStyle.FooterFeed}
+                    ariaLabel={"First Page"}
                   />
                   <ButtonIcon
                     icon={IconAppName.ChevronLeft}
                     onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
                     buttonIconStyle={ButtonIconStyle.FooterFeed}
+                    ariaLabel={"Previous Page"}
                   />
                   <ButtonIcon
                     icon={IconAppName.ChevronRight}
                     onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
                     buttonIconStyle={ButtonIconStyle.FooterFeed}
+                    ariaLabel={"Next Page"}
                   />
                   <ButtonIcon
                     icon={IconAppName.ChevronWithLineRight}
                     onClick={() => table.lastPage()}
                     disabled={!table.getCanNextPage()}
                     buttonIconStyle={ButtonIconStyle.FooterFeed}
+                    ariaLabel={"Last Page"}
                   />
                 </div>
               </div>
