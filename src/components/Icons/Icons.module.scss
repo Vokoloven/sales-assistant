@@ -35,6 +35,10 @@
   fill: $Dislike;
 }
 
+.close {
+  fill: $Black;
+}
+
 html[data-theme="dark"] {
   .icon {
     fill: $Gray600;
@@ -46,5 +50,9 @@ html[data-theme="dark"] {
 
   .sort {
     fill: $GrayA400;
+  }
+
+  .close {
+    fill: $White;
   }
 }

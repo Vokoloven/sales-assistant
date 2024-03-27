@@ -13,7 +13,7 @@ interface Button {
   onClick?: () => void;
   isDisabled?: boolean;
   type?: KeyExtractor<typeof ButtonType>;
-  style?: KeyExtractor<typeof ButtonStyle>;
+  buttonStyle?: KeyExtractor<typeof ButtonStyle>;
   size?: KeyExtractor<typeof ButtonSize>;
   iconBefore?: KeyExtractor<typeof IconAppName>;
   iconAfter?: KeyExtractor<typeof IconAppName>;
@@ -29,7 +29,7 @@ const Button = ({
   spinner,
   isLoading = false,
   isDisabled = false,
-  style,
+  buttonStyle,
   type = ButtonType.Button,
   size = ButtonSize.FillWidth,
 }: Button) => {
@@ -39,19 +39,19 @@ const Button = ({
   return (
     <button
       onClick={onClick}
-      className={classnames(styles.button, styles[`${size}`], styles[`button${style}`])}
+      className={classnames(styles.button, styles[`${size}`], styles[`button${buttonStyle}`])}
       type={type}
       disabled={isDisabled || isLoading}
     >
       {IconBefore && (
-        <div className={classnames(styles.buttonIconWrapper, styles[`button${style}IconWrapper`])}>
+        <div className={classnames(styles.buttonIconWrapper, styles[`button${buttonStyle}IconWrapper`])}>
           <IconBefore />
         </div>
       )}
       {isLoading ? spinner : null}
-      <span className={classnames(styles.buttonText, styles[`button${style}Text`])}>{text}</span>
+      <span className={classnames(styles.buttonText, styles[`button${buttonStyle}Text`])}>{text}</span>
       {IconAfter && (
-        <div className={classnames(styles.buttonIconWrapper, styles[`button${style}IconWrapper`])}>
+        <div className={classnames(styles.buttonIconWrapper, styles[`button${buttonStyle}IconWrapper`])}>
           <IconAfter />
         </div>
       )}

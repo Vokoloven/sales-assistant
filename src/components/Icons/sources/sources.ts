@@ -4,6 +4,7 @@ import type {TIconComponent} from "../types/icon";
 import {Chevron} from "./Chevron";
 import {ChevronSmall} from "./ChevronSmall";
 import {ChevronWithLine} from "./ChevronWithLine";
+import {Close} from "./Close";
 import {CollapseMenu} from "./CollapseMenu";
 import {Cross} from "./Cross";
 import {DeleteRounded} from "./DeleteRounded";
@@ -45,4 +46,5 @@ export const IconInstance: TIconInstance = {
   DeleteRounded,
   ChevronSmall,
   Refresh,
+  Close,
 };

@@ -18,6 +18,7 @@ export const IconInstanceName = {
   DeleteRounded: "DeleteRounded",
   ChevronSmall: "ChevronSmall",
   Refresh: "Refresh",
+  Close: "Close",
 } as const;
 
 export const IconAppName = {
@@ -44,4 +45,5 @@ export const IconAppName = {
   ClearInput: "ClearInput",
   ChevronSmallDown: "ChevronSmallDown",
   Refresh: "Refresh",
+  Close: "Close",
 } as const;
